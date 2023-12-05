@@ -9,32 +9,42 @@ class TiquetsDataMigration extends Migration
     public function up()
     {
         $this->forge->addField([
-            'deviceType'          => [
+            'device_type_id'          => [
+                'type'       => 'integer',
+                'constraint' => '16',
+                null => false,
+            ],
+            'device_type'          => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
                 null => false,
             ],
         ]);
-        $this->forge->addPrimaryKey('deviceType', true);
-        $this->forge->createTable('deviceType');
+        $this->forge->addPrimaryKey('device_type_id', true);
+        $this->forge->createTable('devicetype');
 
         $this->forge->addField([
+            'status_id'          => [
+                'type'       => 'integer',
+                'constraint' => '16',
+                null => false,
+            ],
             'status'          => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
                 null => false,
             ],
         ]);
-        $this->forge->addPrimaryKey('status', true);
-        $this->forge->createTable('statusId');
+        $this->forge->addPrimaryKey('status_id', true);
+        $this->forge->createTable('status');
 
         $this->forge->addField([
-            'ticketId'          => [
+            'ticket_id'          => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
                 null => false
             ],
-            'deviceType'       => [
+            'device_type_id'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
             ],
@@ -53,34 +63,36 @@ class TiquetsDataMigration extends Migration
                 'constraint' => '32',
                 'null' => false,
             ],
-            'emailOfPerson_center_g' => [
+            'email_person_center_g' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '64',
                 'null' => false,
             ],
-            'nameOfPerson_center_g' => [
+            'name_person_center_g' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '64',
                 'null' => false,
             ],
-            'dateOfLastModification' => [
+            'date_last_modification' => [
                 'type'       => 'date',
                 'null' => false,
             ], 
-            'registrationData' => [
+            'registration_data' => [
                 'type'       => 'date',
                 'null' => false,
             ], 
-            'status' => [
+            'status_id' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
                 'null' => false,
             ],
            
         ]);
-        $this->forge->addPrimaryKey('ticketid', true);
+        $this->forge->addPrimaryKey('ticket_id', true);
+        $this->forge->addForeignKey('status_id', 'status', 'status_id', true);
+        $this->forge->addForeignKey('device_type_id', 'devicetype', 'device_type_id', true);
         $this->forge->createTable('tickets');
-        $this->forge->addForeignKey('status', 'device_type', true);
+
     }
 
 
@@ -89,6 +101,6 @@ class TiquetsDataMigration extends Migration
     {
         $this->forge->dropTable('tickets');
         $this->forge->dropTable('status');
-        $this->forge->dropTable('device_type');
+        $this->forge->dropTable('devicetype');
     }
 }

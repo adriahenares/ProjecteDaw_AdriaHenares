@@ -9,38 +9,43 @@ class InterventionDataMigration extends Migration
     public function up()
     {
         $this->forge->addField([
+            'intervention_type_id'          => [
+                'type'       => 'integer',
+                'constraint' => '16',
+                null => false,
+            ],
             'interventionType'          => [
                 'type'       => 'VARCHAR',
                 'constraint' => '32',
                 null => false,
             ],
         ]);
-        $this->forge->addPrimaryKey('interventionType', true);
+        $this->forge->addPrimaryKey('intervention_type_id', true);
         $this->forge->createTable('interventionType');
 
 
         $this->forge->addField([
-            'interventionId'       => [
+            'intervention_id'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
                 null => false
             ],
-            'ticketId'          => [
+            'ticket_id'          => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
                 null => false
             ],
-            'professorId' => [
+            'professor_id' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
                 'null' => false,
             ],
-            'studentId' => [
+            'student_id' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
                 'null' => false,
             ],
-            'interventionType' => [
+            'intervention_type_id' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
                 'null' => false,
@@ -50,24 +55,27 @@ class InterventionDataMigration extends Migration
                 'constraint' => '128',
                 'null' => false,
             ],
-            'studentCourse' => [
+            'student_course' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '32',
                 'null' => false,
             ],
-            'studentStudies' => [
+            'student_studies' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '32',
                 'null' => false,
             ], 
-            'interventionDate' => [
+            'intervention_date' => [
                 'type'       => 'date',
                 'null' => false,
             ],  
         ]);
-        $this->forge->addPrimaryKey('interventionId', true);
+        $this->forge->addPrimaryKey('intervention_id', true);
+        $this->forge->addForeignKey('ticket_id', 'tickets', 'ticket_id','student_id','professor_id','intervention_type_id', true);
+        $this->forge->addForeignKey('student_id','students','student_id', true);
+        $this->forge->addForeignKey('professor_id','professor','professor_id', true);
+        $this->forge->addForeignKey('intervention_type_id','interventionType','intervention_type_id', true);
         $this->forge->createTable('interventions');
-        $this->forge->addForeignKey('ticketId','studentId','professorId','interventionType', true);
     }
 
 
