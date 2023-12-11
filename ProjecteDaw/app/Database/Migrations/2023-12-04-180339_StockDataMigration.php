@@ -33,7 +33,7 @@ class StockDataMigration extends Migration
                     ],
                     'price'          => [
                             'type'           => 'INT',
-                            'null'           => true,
+                            'null'           => false,
                     ],
                     'repair_center_code'          => [
                             'type'           => 'VARCHAR',
