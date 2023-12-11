@@ -9,7 +9,7 @@ class SSTTMigration extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_SSTT'          => [
+            'SSTT_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '4',
                     'auto_increment' => true,
@@ -35,7 +35,7 @@ class SSTTMigration extends Migration
                     'null'           => false,
             ],
         ]);
-        $this->forge->addKey('id_SSTT', true);
+        $this->forge->addKey('SSTT_id', true);
         $this->forge->createTable('SSTT');
     }
 

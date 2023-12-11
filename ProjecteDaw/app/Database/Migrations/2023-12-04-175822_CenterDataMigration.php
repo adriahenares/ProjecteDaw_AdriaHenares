@@ -9,7 +9,7 @@ class CenterDataMigration extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_region'          => [
+            'region_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '2',
                     'null'           => false,
@@ -20,11 +20,11 @@ class CenterDataMigration extends Migration
                     'null'           => false,
             ],
         ]);
-        $this->forge->addKey('id_region', true);
+        $this->forge->addKey('region_id', true);
         $this->forge->createTable('region');
 
         $this->forge->addField([
-            'id_town'          => [
+            'town_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '5',
                     'null'           => false,
@@ -35,11 +35,11 @@ class CenterDataMigration extends Migration
                     'null'           => false,
             ],
         ]);
-        $this->forge->addKey('id_town', true);
+        $this->forge->addKey('town_id', true);
         $this->forge->createTable('town');
 
         $this->forge->addField([
-            'id_center'          => [
+            'center_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '8',
                     'auto_increment' => true,
@@ -65,17 +65,17 @@ class CenterDataMigration extends Migration
                     'constraint'     => '32',
                     'null'           => false,
             ],
-            'id_town'          => [
+            'town_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '5',
                     'null'           => false,
             ],
-            'id_region'          => [
+            'region_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '2',
                     'null'           => false,
             ],
-            'id_SSTT'          => [
+            'SSTT_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '4',
                     'null'           => false,
@@ -90,11 +90,11 @@ class CenterDataMigration extends Migration
                     'constraint'     => '1',
             ],
         ]);
-        $this->forge->addKey('id_center', true);
+        $this->forge->addKey('center_id', true);
 
-        $this->forge->addForeignKey('id_town', 'town', 'id_town');
-        $this->forge->addForeignKey('id_region', 'region', 'id_region');
-        $this->forge->addForeignKey('id_SSTT', 'SSTT', 'id_SSTT'); 
+        $this->forge->addForeignKey('town_id', 'town', 'town_id');
+        $this->forge->addForeignKey('region_id', 'region', 'region_id');
+        $this->forge->addForeignKey('SSTT_id', 'SSTT', 'SSTT_id'); 
         $this->forge->createTable('center');
     }
 
