@@ -14,7 +14,7 @@ class InterventionDataMigration extends Migration
                 'constraint' => '16',
                 null => false,
             ],
-            'interventionType'          => [
+            'intervention_type'          => [
                 'type'       => 'VARCHAR',
                 'constraint' => '32',
                 null => false,
@@ -71,7 +71,7 @@ class InterventionDataMigration extends Migration
             ],  
         ]);
         $this->forge->addPrimaryKey('intervention_id', true);
-        $this->forge->addForeignKey('ticket_id', 'tickets', 'ticket_id','student_id','professor_id','intervention_type_id', true);
+        $this->forge->addForeignKey('ticket_id', 'tickets', 'ticket_id', true);
         $this->forge->addForeignKey('student_id','students','student_id', true);
         $this->forge->addForeignKey('professor_id','professor','professor_id', true);
         $this->forge->addForeignKey('intervention_type_id','interventionType','intervention_type_id', true);
