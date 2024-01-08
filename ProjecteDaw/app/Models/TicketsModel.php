@@ -38,9 +38,19 @@ class TicketsModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addTicket()
+    public function addTicket($ticket_id, $device_type_id, $fault_description, $g_center_code, $r_center_code, $email_person_center_g, $name_person_center_g, $date_last_modification, $registration_data, $status_id)
     {
         $data = [
+            'ticket_id' => $ticket_id,
+            'device_type_id' => $device_type_id,
+            'fault_description' => $fault_description,
+            'g_center_code' => $g_center_code,
+            'r_center_code' => $r_center_code,
+            'email_person_center_g' => $email_person_center_g,
+            'name_person_center_g' => $name_person_center_g,
+            'date_last_modification' => $date_last_modification,
+            'registration_data' => $registration_data,
+            'status_id' => $status_id
         ];
         $this->insert($data);
     }
