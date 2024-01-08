@@ -21,6 +21,7 @@ class CenterDataMigration extends Migration
             ],
         ]);
         $this->forge->addKey('region_id', true);
+        $this->forge->addKey('region_id', true);
         $this->forge->createTable('region');
 
         $this->forge->addField([
@@ -34,15 +35,20 @@ class CenterDataMigration extends Migration
                     'constraint'     => '64',
                     'null'           => false,
             ],
+            'region_id'          => [
+                'type'           => 'INT',
+                'constraint'     => '2',
+                'null'           => false,
+        ]
         ]);
         $this->forge->addKey('town_id', true);
+        $this->forge->addForeignKey('region_id', 'region', 'region_id');
         $this->forge->createTable('town');
 
         $this->forge->addField([
             'center_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '8',
-                    'auto_increment' => true,
                     'null'           => false,
             ],
             'name'          => [
@@ -70,14 +76,9 @@ class CenterDataMigration extends Migration
                     'constraint'     => '5',
                     'null'           => false,
             ],
-            'region_id'          => [
-                    'type'           => 'INT',
-                    'constraint'     => '2',
-                    'null'           => false,
-            ],
             'SSTT_id'          => [
-                    'type'           => 'INT',
-                    'constraint'     => '4',
+                    'type'           => 'BINARY',
+                    'constraint'     => '16',
                     'null'           => false,
             ],
             'active'          => [
@@ -88,20 +89,70 @@ class CenterDataMigration extends Migration
             'workshop'          => [
                     'type'           => 'TINYINT',
                     'constraint'     => '1',
+                    'null'           => false,
             ],
         ]);
         $this->forge->addKey('center_id', true);
+        $this->forge->addKey('center_id', true);
 
         $this->forge->addForeignKey('town_id', 'town', 'town_id');
-        $this->forge->addForeignKey('region_id', 'region', 'region_id');
         $this->forge->addForeignKey('SSTT_id', 'SSTT', 'SSTT_id'); 
         $this->forge->createTable('center');
+
+        $this->forge->addField([
+                'student_id'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => '16',
+                        'null'           => false,
+                ],
+                'email'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => '32',
+                        'null'           => false,
+                ],
+        ]);
+        $this->forge->addKey('student_id', true);
+        $this->forge->createTable('students');
+
+        $this->forge->addField([
+                'professor_id'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => '16',
+                        'null'           => false,
+                ],
+                'name'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => '32',
+                ],
+                'surnames'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => '64',
+                ],
+                'email'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => '32',
+                        'null'           => false,
+                ],
+                'repair_center_id'          => [
+                        'type'           => 'INT',
+                        'constraint'     => '8',
+                        'null'           => false,
+                ],
+        ]);
+        $this->forge->addKey('professor_id', true);
+        $this->forge->addKey('email', false, true);
+        $this->forge->addKey('name', false, true);
+        $this->forge->addForeignKey('repair_center_id', 'center', 'center_id'); 
+        $this->forge->createTable('professors');
     }
 
     public function down()
     {
-        $this->forge->dropTable('region');
-        $this->forge->dropTable('town');
         $this->forge->dropTable('center');
+        $this->forge->dropTable('town');
+        $this->forge->dropTable('region');
+
+        $this->forge->dropTable('students');
+        $this->forge->dropTable('professors');
     }
 }
