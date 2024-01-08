@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class InstituteModel extends Model
+class CenterModel extends Model
 {
-    protected $table            = 'institutes';
-    protected $primaryKey       = 'id';
+    protected $table            = 'center';
+    protected $primaryKey       = 'center_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
@@ -37,6 +37,4 @@ class InstituteModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    
 }

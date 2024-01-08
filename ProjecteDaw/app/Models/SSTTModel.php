@@ -6,8 +6,8 @@ use CodeIgniter\Model;
 
 class SSTTModel extends Model
 {
-    protected $table            = 'sstts';
-    protected $primaryKey       = 'id';
+    protected $table            = 'SSTT';
+    protected $primaryKey       = 'SSTT_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
@@ -37,4 +37,16 @@ class SSTTModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addIntervention($SSTT_id, $name, $address, $phone, $email)
+    {
+        $data = [
+            'SSTT_id' => $SSTT_id,
+            'name' => $name,
+            'address' => $address,
+            'phone' => $phone,
+            'email' => $email,
+        ];
+        $this->insert($data);
+    }
 }

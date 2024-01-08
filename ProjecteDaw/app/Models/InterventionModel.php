@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class InterventionModel extends Model
 {
     protected $table            = 'interventions';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'intervention_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
@@ -38,9 +38,19 @@ class InterventionModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addIntervention()
+    public function addIntervention($intervention_id, $ticket_id, $professor_id, $student_id, $intervention_type_id, $description,
+    $student_course, $student_studies, $intervention_date)
     {
         $data = [
+            'intervention_id' => $intervention_id,
+            'ticket_id' => $ticket_id,
+            'professor_id' => $professor_id,
+            'student_id' => $student_id,
+            'intervention_id' => $intervention_type_id,
+            'description' => $description,
+            'student_course' => $student_course,
+            'student_studies' => $student_studies,
+            'intervention_date' => $intervention_date,
         ];
         $this->insert($data);
     }
