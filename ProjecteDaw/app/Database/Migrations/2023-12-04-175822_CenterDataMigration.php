@@ -10,7 +10,6 @@ class CenterDataMigration extends Migration
     {
         $this->forge->addField([
             'region_id'          => [
-            'region_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '2',
                     'null'           => false,
@@ -48,7 +47,6 @@ class CenterDataMigration extends Migration
 
         $this->forge->addField([
             'center_id'          => [
-            'center_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '8',
                     'null'           => false,
@@ -73,7 +71,6 @@ class CenterDataMigration extends Migration
                     'constraint'     => '32',
                     'null'           => false,
             ],
-            'town_id'          => [
             'town_id'          => [
                     'type'           => 'INT',
                     'constraint'     => '5',
