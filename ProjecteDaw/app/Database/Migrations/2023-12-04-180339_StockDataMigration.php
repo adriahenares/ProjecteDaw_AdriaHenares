@@ -8,55 +8,63 @@ class StockDataMigration extends Migration
 {
     public function up()
     {
-            $this->forge->addField([
-                    'stock_id'          => [
-                            'type'           => 'INT',
-                            'constraint'     => 12,
-                            'null'           => false,
-                    ],
-                    'id_type_stock'          => [
-                            'type'           => 'INT',
-                            'null'           => false,
-                    ],
-                    'intervention_id'          => [
-                            'type'           => 'INT',
-                            'null'           => false,
-                    ],
-                    'id_center'          => [
-                            'type'           => 'INT',
-                            'constraint'     => 8,
-                            'null'           => false,
-                    ],
-                    'purchase_date'          => [
-                            'type'           => 'DATE',
-                            'null'           => false,
-                    ],
-                    'price'          => [
-                            'type'           => 'INT',
-                            'null'           => false,
-                    ],
-                    'repair_center_code'          => [
-                            'type'           => 'VARCHAR',
-                            'null'           => false,
-                    ],
-            ]);
-            $this->forge->addPrimaryKey('stock_id', true);
-            $this->forge->addKey('id_type_stock');
-    
-            $this->forge->addKey('intervention_id');
-    
-            $this->forge->addKey('id_center');
-    
-            $this->forge->createTable('stock');
-            $this->forge->addForeignKey('id_type_stock', 'type_stock', 'id_type_stock');
-            $this->forge->addForeignKey('intervention_id', 'intervention', 'intervention_id');
-            $this->forge->addForeignKey('id_center', 'center', 'id_center');
-    
-    
+        $this->forge->addField([
+                'stock_type_id'          => [
+                        'type'           => 'INT',
+                        'constraint'     => '4',
+                        'auto_increment' => true,
+                        'null'           => false,
+                ],
+                'name'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => '64',
+                        'null'           => false,
+                ],
+        ]);
+        $this->forge->addKey('stock_type_id', true);
+        $this->forge->createTable('stock_type');
+
+        $this->forge->addField([
+                'stock_id'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => '16',
+                        'null'           => false,
+                ],
+                'stock_type_id'          => [
+                        'type'           => 'INT',
+                        'constraint'     => '4',
+                        'null'           => false,
+                ],
+                'intervention_id'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => '16',
+                        'null'           => false,
+                ],
+                'center_id'          => [
+                        'type'           => 'INT',
+                        'constraint'     => '8',
+                        'null'           => false,
+                ],
+                'purchase_date'          => [
+                        'type'           => 'DATE',
+                        'null'           => false,
+                ],
+                'price'          => [
+                        'type'           => 'INT',
+                        'constraint'     => '8',
+                        'null'           => false,
+                ],
+        ]);
+        $this->forge->addKey('stock_id', true);
+        $this->forge->addForeignKey('stock_type_id', 'stock_type', 'stock_type_id');
+        $this->forge->addForeignKey('intervention_id', 'interventions', 'intervention_id');
+        $this->forge->addForeignKey('center_id', 'center', 'center_id');
+        $this->forge->createTable('stock');
     }
     
     public function down()
     {
-            $this->forge->dropTable('stock');
+        $this->forge->dropTable('stock');
+        $this->forge->dropTable('stock_type');
     }
 }

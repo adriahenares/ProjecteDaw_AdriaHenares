@@ -10,8 +10,9 @@ class InterventionDataMigration extends Migration
     {
         $this->forge->addField([
             'intervention_type_id'          => [
-                'type'       => 'integer',
-                'constraint' => '16',
+                'type'       => 'INT',
+                'constraint' => '4',
+                'auto_increment' => true,
                 null => false,
             ],
             'intervention_type'          => [
@@ -20,18 +21,19 @@ class InterventionDataMigration extends Migration
                 null => false,
             ],
         ]);
-        $this->forge->addPrimaryKey('intervention_type_id', true);
+        $this->forge->addKey('intervention_type_id', true);
         $this->forge->createTable('interventionType');
 
+        
 
         $this->forge->addField([
             'intervention_id'       => [
-                'type'       => 'VARCHAR',
+                'type'       => 'BINARY',
                 'constraint' => '16',
                 null => false
             ],
             'ticket_id'          => [
-                'type'       => 'VARCHAR',
+                'type'       => 'BINARY',
                 'constraint' => '16',
                 null => false
             ],
@@ -46,13 +48,12 @@ class InterventionDataMigration extends Migration
                 'null' => false,
             ],
             'intervention_type_id' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '16',
+                'type'       => 'INT',
+                'constraint' => '4',
                 'null' => false,
             ],
             'description' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
+                'type'       => 'TEXT',
                 'null' => false,
             ],
             'student_course' => [
@@ -70,10 +71,10 @@ class InterventionDataMigration extends Migration
                 'null' => false,
             ],  
         ]);
-        $this->forge->addPrimaryKey('intervention_id', true);
+        $this->forge->addKey('intervention_id', true);
         $this->forge->addForeignKey('ticket_id', 'tickets', 'ticket_id', true);
         $this->forge->addForeignKey('student_id','students','student_id', true);
-        $this->forge->addForeignKey('professor_id','professor','professor_id', true);
+        $this->forge->addForeignKey('professor_id','professors','professor_id', true);
         $this->forge->addForeignKey('intervention_type_id','interventionType','intervention_type_id', true);
         $this->forge->createTable('interventions');
     }

@@ -9,10 +9,9 @@ class SSTTMigration extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_SSTT'          => [
-                    'type'           => 'INT',
-                    'constraint'     => '4',
-                    'auto_increment' => true,
+            'SSTT_id'          => [
+                    'type'           => 'BINARY',
+                    'constraint'     => '16',
                     'null'           => false,
             ],
             'name'          => [
@@ -28,6 +27,7 @@ class SSTTMigration extends Migration
             'phone'          => [
                     'type'           => 'INT',
                     'constraint'     => 9,
+                    'null'           => false,
             ],
             'email'          => [
                     'type'           => 'VARCHAR',
@@ -35,7 +35,7 @@ class SSTTMigration extends Migration
                     'null'           => false,
             ],
         ]);
-        $this->forge->addKey('id_SSTT', true);
+        $this->forge->addKey('SSTT_id', true);
         $this->forge->createTable('SSTT');
     }
 
