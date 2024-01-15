@@ -8,6 +8,6 @@ class InstituteSeeder extends Seeder
 {
     public function run()
     {
-        
+        //
     }
 }
