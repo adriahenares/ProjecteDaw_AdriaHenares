@@ -77,8 +77,8 @@ class CenterDataMigration extends Migration
                     'null'           => false,
             ],
             'SSTT_id'          => [
-                    'type'           => 'BINARY',
-                    'constraint'     => '16',
+                    'type'           => 'INT',
+                    'constraint'     => '4',
                     'null'           => false,
             ],
             'active'          => [

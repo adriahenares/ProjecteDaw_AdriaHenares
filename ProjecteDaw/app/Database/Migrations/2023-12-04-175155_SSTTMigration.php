@@ -10,8 +10,8 @@ class SSTTMigration extends Migration
     {
         $this->forge->addField([
             'SSTT_id'          => [
-                    'type'           => 'BINARY',
-                    'constraint'     => '16',
+                    'type'           => 'INT',
+                    'constraint'     => '4',
                     'null'           => false,
             ],
             'name'          => [
