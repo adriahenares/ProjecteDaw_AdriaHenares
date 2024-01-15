@@ -12,7 +12,7 @@ class SSTTModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ["SSTT_id", "name", "address", "phone", "email"];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,7 +38,7 @@ class SSTTModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addIntervention($SSTT_id, $name, $address, $phone, $email)
+    public function addSSTT($SSTT_id, $name, $address, $phone, $email)
     {
         $data = [
             'SSTT_id' => $SSTT_id,

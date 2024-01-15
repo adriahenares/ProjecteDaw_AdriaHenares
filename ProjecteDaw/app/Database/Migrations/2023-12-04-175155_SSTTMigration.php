@@ -10,8 +10,8 @@ class SSTTMigration extends Migration
     {
         $this->forge->addField([
             'SSTT_id'          => [
-                    'type'           => 'BINARY',
-                    'constraint'     => '16',
+                    'type'           => 'INT',
+                    'constraint'     => '4',
                     'null'           => false,
             ],
             'name'          => [
@@ -22,17 +22,14 @@ class SSTTMigration extends Migration
             'address'          => [
                     'type'           => 'VARCHAR',
                     'constraint'     => '128',
-                    'null'           => false,
             ],
             'phone'          => [
                     'type'           => 'INT',
                     'constraint'     => 9,
-                    'null'           => false,
             ],
             'email'          => [
                     'type'           => 'VARCHAR',
                     'constraint'     => '64',
-                    'null'           => false,
             ],
         ]);
         $this->forge->addKey('SSTT_id', true);
