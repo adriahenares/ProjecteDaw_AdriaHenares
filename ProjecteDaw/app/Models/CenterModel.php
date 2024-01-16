@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class CenterModel extends Model
 {
-    protected $table            = 'center';
+    protected $table            = 'centers';
     protected $primaryKey       = 'center_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ["SSTT_id", "name", "address", "phone", "email", "town_id", "SSTT_id", "active", "workshop"];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,21 @@ class CenterModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addCenter($center_id, $name, $address, $phone, $email, $town_id, $SSTT_id, $active, $workshop)
+    {
+        $data = [
+            'center_id' => $center_id,
+            'name' => $name,
+            'address' => $address,
+            'phone' => $phone,
+            'email' => $email,
+            'town_id' => $town_id,
+            'SSTT_id' => $SSTT_id,
+            'active' => $active,
+            'workshop' => $workshop,
+        ];
+        $this->insert($data);
+    }
+
 }
