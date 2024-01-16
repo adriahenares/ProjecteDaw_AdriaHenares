@@ -10,7 +10,7 @@ class CenterSeeder extends Seeder
     public function run()
     {
         $model = new CenterModel();
-        $csvFile = fopen(WRITEPATH . "uploads\install\centers.csv", "r");
+        $csvFile = fopen(WRITEPATH . "uploads" . DIRECTORY_SEPARATOR . "install" . DIRECTORY_SEPARATOR . "centers.csv", "r");
         $firstline = true;
         while (($filedata = fgetcsv($csvFile, 0, ";")) !== FALSE) {
             var_dump($filedata);

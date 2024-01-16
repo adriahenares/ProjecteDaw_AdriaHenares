@@ -97,7 +97,7 @@ class CenterDataMigration extends Migration
 
         $this->forge->addForeignKey('town_id', 'towns', 'town_id');
         $this->forge->addForeignKey('SSTT_id', 'SSTT', 'SSTT_id'); 
-        $this->forge->createTable('center');
+        $this->forge->createTable('centers');
 
         $this->forge->addField([
                 'student_id'          => [
@@ -142,13 +142,13 @@ class CenterDataMigration extends Migration
         $this->forge->addKey('professor_id', true);
         $this->forge->addKey('email', false, true);
         $this->forge->addKey('name', false, true);
-        $this->forge->addForeignKey('repair_center_id', 'center', 'center_id'); 
+        $this->forge->addForeignKey('repair_center_id', 'centers', 'center_id'); 
         $this->forge->createTable('professors');
     }
 
     public function down()
     {
-        $this->forge->dropTable('center');
+        $this->forge->dropTable('centers');
         $this->forge->dropTable('towns');
         $this->forge->dropTable('regions');
 
