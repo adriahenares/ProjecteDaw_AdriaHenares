@@ -9,13 +9,8 @@ class TicketsController extends BaseController
 {
     public function viewTickets()
     {
-<<<<<<< Updated upstream
         $instance = new TicketsModel();
         $data = $instance->findAll();
         
-=======
-        // poner la data
-        return ('layout/');
->>>>>>> Stashed changes
     }
 }
