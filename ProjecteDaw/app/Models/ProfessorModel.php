@@ -38,3 +38,5 @@ class ProfessorModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 }
+
+//dubte
