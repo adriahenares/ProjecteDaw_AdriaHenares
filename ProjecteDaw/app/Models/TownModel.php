@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class RegionModel extends Model
+class TownModel extends Model
 {
-    protected $table            = 'regions';
-    protected $primaryKey       = 'region_id';
+    protected $table            = 'towns';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["region_id", "name"];
+    protected $allowedFields    = ["town_id", "name", "region_id"];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,12 +37,12 @@ class RegionModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function addRegion($region_id, $name)
+    public function addTown($town_id, $name, $region_id)
     {
         $data = [
-            'region_id' => $region_id,
-            'name' => $name
+            'town_id' => $town_id,
+            'name' => $name,
+            'region_id' => $region_id
         ];
         $this->insert($data);
     }

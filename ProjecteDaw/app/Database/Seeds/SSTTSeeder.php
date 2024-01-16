@@ -10,7 +10,7 @@ class SSTTSeeder extends Seeder
     public function run()
     {
         $model = new SSTTModel();
-        $csvFile = fopen(WRITEPATH . "uploads\install\SSTT.csv", "r");
+        $csvFile = fopen(WRITEPATH . "uploads" . DIRECTORY_SEPARATOR . "install" . DIRECTORY_SEPARATOR . "SSTT.csv", "r");
         $firstline = true;
         while (($filedata = fgetcsv($csvFile, 0, ";")) !== FALSE) {
             var_dump($filedata);
