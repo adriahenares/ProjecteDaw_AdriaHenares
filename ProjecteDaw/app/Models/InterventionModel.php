@@ -46,7 +46,7 @@ class InterventionModel extends Model
             'ticket_id' => $ticket_id,
             'professor_id' => $professor_id,
             'student_id' => $student_id,
-            'intervention_id' => $intervention_type_id,
+            'intervention_type_id' => $intervention_type_id,
             'description' => $description,
             'student_course' => $student_course,
             'student_studies' => $student_studies,
