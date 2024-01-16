@@ -22,7 +22,7 @@ class CenterDataMigration extends Migration
         ]);
         $this->forge->addKey('region_id', true);
         $this->forge->addKey('region_id', true);
-        $this->forge->createTable('region');
+        $this->forge->createTable('regions');
 
         $this->forge->addField([
             'town_id'          => [
@@ -42,8 +42,8 @@ class CenterDataMigration extends Migration
         ]
         ]);
         $this->forge->addKey('town_id', true);
-        $this->forge->addForeignKey('region_id', 'region', 'region_id');
-        $this->forge->createTable('town');
+        $this->forge->addForeignKey('region_id', 'regions', 'region_id');
+        $this->forge->createTable('towns');
 
         $this->forge->addField([
             'center_id'          => [
@@ -95,7 +95,7 @@ class CenterDataMigration extends Migration
         $this->forge->addKey('center_id', true);
         $this->forge->addKey('center_id', true);
 
-        $this->forge->addForeignKey('town_id', 'town', 'town_id');
+        $this->forge->addForeignKey('town_id', 'towns', 'town_id');
         $this->forge->addForeignKey('SSTT_id', 'SSTT', 'SSTT_id'); 
         $this->forge->createTable('center');
 
@@ -149,8 +149,8 @@ class CenterDataMigration extends Migration
     public function down()
     {
         $this->forge->dropTable('center');
-        $this->forge->dropTable('town');
-        $this->forge->dropTable('region');
+        $this->forge->dropTable('towns');
+        $this->forge->dropTable('regions');
 
         $this->forge->dropTable('students');
         $this->forge->dropTable('professors');
