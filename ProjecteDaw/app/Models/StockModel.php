@@ -37,4 +37,21 @@ class StockModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addStock($stock_id, $stock_type_id, $intervention_id, $center_id, $purchase_date, $price)
+    {
+        $data = [
+            'stock_id' => $stock_id,
+            'stock_type_id' => $stock_type_id,
+            'intervention_id' => $intervention_id,
+            'center_id' => $center_id,
+            'purchase_date' => $purchase_date,
+            'price' => $price
+        ];
+    }
+
+    public function retrieveData() 
+    {
+        return $this->findAll();
+    }
 }

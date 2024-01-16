@@ -38,19 +38,19 @@ class InterventionModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addIntervention($center_id, $name, $address, $phone, $email, $town_id,
-    $SSTT_id, $active, $workshop)
+    public function addIntervention($intervention_id, $ticket_id, $professor_id, $student_id, $intervention_type_id, $description,
+    $student_course, $student_studies, $intervention_date)
     {
         $data = [
-            'center_id' => $center_id,
-            'name' => $name,
-            'address' => $address,
-            'phone' => $phone,
-            'email' => $email,
-            'town_id' => $town_id,
-            'SSTT_id' => $SSTT_id,
-            'active' => $active,
-            'workshop' => $workshop,
+            'intervention_id' => $intervention_id,
+            'ticket_id' => $ticket_id,
+            'professor_id' => $professor_id,
+            'student_id' => $student_id,
+            'intervention_type_id' => $intervention_type_id,
+            'description' => $description,
+            'student_course' => $student_course,
+            'student_studies' => $student_studies,
+            'intervention_date' => $intervention_date,
         ];
         $this->insert($data);
     }

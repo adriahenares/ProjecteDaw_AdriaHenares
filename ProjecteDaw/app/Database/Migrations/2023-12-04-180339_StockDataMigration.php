@@ -58,7 +58,7 @@ class StockDataMigration extends Migration
         $this->forge->addKey('stock_id', true);
         $this->forge->addForeignKey('stock_type_id', 'stock_type', 'stock_type_id');
         $this->forge->addForeignKey('intervention_id', 'interventions', 'intervention_id');
-        $this->forge->addForeignKey('center_id', 'center', 'center_id');
+        $this->forge->addForeignKey('center_id', 'centers', 'center_id');
         $this->forge->createTable('stock');
     }
     
