@@ -1,4 +1,4 @@
-<?php echo $this->extend('layout/ticketsAll/tickets'); ?>
+<?php echo $this->extend('layouts/ticketsAll/tickets'); ?>
 
 <?php echo $this->section("view"); ?>
 <div>

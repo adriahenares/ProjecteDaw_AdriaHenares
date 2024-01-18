@@ -10,7 +10,7 @@ class TicketsController extends BaseController
     public function viewTickets()
     {
         $instance = new TicketsModel();
-        $data = $instance->findAll();
-        
+        $data['tickets'] = $instance->findAll();
+        return view ('Project/Tickets/viewTickets', $data);
     }
 }

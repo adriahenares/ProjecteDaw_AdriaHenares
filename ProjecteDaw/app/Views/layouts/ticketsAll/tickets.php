@@ -9,8 +9,7 @@
 </head>
 <body>
     <?php echo $this->renderSection("view") ?>
-
+    <br/>
     <?php echo $this->renderSection("create") ?>
-
 </body>
 </html>
