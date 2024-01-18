@@ -13,7 +13,6 @@ class TownSeeder extends Seeder
         $csvFile = fopen(WRITEPATH . "uploads" . DIRECTORY_SEPARATOR . "install" . DIRECTORY_SEPARATOR . "towns.csv", "r");
         $firstline = true;
         while (($filedata = fgetcsv($csvFile, 0, ";")) !== FALSE) {
-            var_dump($filedata);
             if (!$firstline) {
                 $data = [
                     'town_id' => $filedata[0],

@@ -13,7 +13,6 @@ class RegionSeeder extends Seeder
         $csvFile = fopen(WRITEPATH . "uploads" . DIRECTORY_SEPARATOR . "install" . DIRECTORY_SEPARATOR . "regions.csv", "r");
         $firstline = true;
         while (($filedata = fgetcsv($csvFile, 0, ";")) !== FALSE) {
-            var_dump($filedata);
             if (!$firstline) {
                 $data = [
                     'region_id' => $filedata[0],
