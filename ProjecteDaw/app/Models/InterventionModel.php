@@ -12,7 +12,7 @@ class InterventionModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [];//TODO: Afegir allowed fields quan s'hagi d'afegir dades
 
     // Dates
     protected $useTimestamps = false;
@@ -55,8 +55,10 @@ class InterventionModel extends Model
         $this->insert($data);
     }
 
-    public function retrieveData() 
-    {
-        return $this->findAll();
+    public function getInterventions($slug = false) {
+        if($slug === false) {
+            return $this->findAll();
+        }
+        return $this->where('intervention_id', $slug)->first();
     }
 }
