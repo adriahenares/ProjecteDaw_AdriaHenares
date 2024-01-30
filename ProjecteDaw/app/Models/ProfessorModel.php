@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class ProfessorModel extends Model
 {
     protected $table            = 'professors';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    protected $primaryKey       = 'professor_id';
+    protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [ 'professor_id' , 'name', 'surnames' , 'email' , 'repair_center_id'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,6 +37,12 @@ class ProfessorModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // Aleix
+    // obtenir el codi de centre reparador amb la id 
+    public function getGeneratingCodeById ($id) {
+        return $this->where('professor_id', $id)->first();
+    }
 }
 
 //dubte
