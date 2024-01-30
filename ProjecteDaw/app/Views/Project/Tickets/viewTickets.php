@@ -37,7 +37,7 @@
         </table>
     </div>
     <div>
-        <a class="m-1 w-100 btn btn-primary" href="">Crear Ticket</a>
+        <a class="m-1 w-50 btn btn-primary" href="<?php echo base_url('/addTickets')?>">Crear Ticket</a>
     </div>
 </div>
 <?php echo $this->endSection(); ?>
