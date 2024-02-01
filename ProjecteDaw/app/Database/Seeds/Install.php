@@ -14,5 +14,6 @@ class Install extends Seeder
         $this->call("CenterSeeder");
         $this->call("ProfessorSeeder");
         $this->call("StatusSeeder");
+        $this->call("DeviceTypeSeeder");
     }
 }
