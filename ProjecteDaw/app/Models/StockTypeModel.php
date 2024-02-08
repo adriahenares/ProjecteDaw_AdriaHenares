@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DeviceTypeModel extends Model
+class StockTypeModel extends Model
 {
-    protected $table            = 'devicetype';
-    protected $primaryKey       = 'device_type_id';
+    protected $table            = 'stocktype';
+    protected $primaryKey       = 'stock_type_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['device_type'];
+    protected $allowedFields    = ['name'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,9 +38,9 @@ class DeviceTypeModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addDeviceType($deviceType) {
+    public function addStockType($name) {
         $data = [
-            'device_type' => $deviceType
+            'name' => $name
         ];
     }
 
