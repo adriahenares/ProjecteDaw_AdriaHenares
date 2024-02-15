@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TicketsModel extends Model
+class TicketModel extends Model
 {
     protected $table = 'tickets';
     protected $primaryKey = 'ticket_id';

@@ -12,15 +12,12 @@ class StatusSeeder extends Seeder
         $model = new StatusModel();
 
         $model->save([
-            'status_id' => '',
             'status' => 'Be'
         ]);
         $model->save([
-            'status_id' => '',
             'status' => 'Decent'
         ]);
         $model->save([
-            'status_id' => '',
             'status' => 'Malament'
         ]);
     }

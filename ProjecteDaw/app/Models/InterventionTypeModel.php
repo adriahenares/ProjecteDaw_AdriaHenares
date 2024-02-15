@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DeviceTypeModel extends Model
+class InterventionTypeModel extends Model
 {
-    protected $table            = 'devicetype';
-    protected $primaryKey       = 'device_type_id';
+    protected $table            = 'interventiontype';
+    protected $primaryKey       = 'intervention_type_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['device_type'];
+    protected $allowedFields    = ['intervention_type'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,9 +38,9 @@ class DeviceTypeModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addDeviceType($deviceType) {
+    public function addInterventionType($interventionType) {
         $data = [
-            'device_type' => $deviceType
+            'intervention_type' => $interventionType
         ];
     }
 
