@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 //get per defecte tickets
-$routes->get('/', 'TicketsController::viewTickets');
+$routes->match(['get','post'],'/', 'TicketsController::viewTickets');
 $routes->get('/(:segment)/interventions', 'InterventionsController::viewInterventions');
 
 //get get addTickets

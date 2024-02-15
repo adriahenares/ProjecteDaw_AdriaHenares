@@ -6,7 +6,7 @@
         <h1>GESTIO DE TICKETS</h1>
         <!--<img src="" alt=""> logo empresa -->
     </div>
-    <div>
+    <!-- <div>
         <table>
             <thead>
                 <tr>
@@ -21,21 +21,24 @@
                     <th>Id status</th>
                 </tr>
             </thead>
-            <?php foreach ($tickets as $ticket) : ?>
-                <tr>
-                    <td><?php echo $ticket['ticket_id'] ?></td>
-                    <td><?php echo $ticket['device_type_id'] ?></td>
-                    <td><?php echo $ticket['fault_description'] ?></td>
-                    <td><?php echo $ticket['g_center_code'] ?></td>
-                    <td><?php echo $ticket['r_center_code'] ?></td>
-                    <td><?php echo $ticket['email_person_center_g'] ?></td>
-                    <td><?php echo $ticket['date_last_modification'] ?></td>
-                    <td><?php echo $ticket['registration_data'] ?></td>
-                    <td><?php echo $ticket['status_id'] ?></td>
-                </tr>
-            <?php endforeach; ?>
+            
         </table>
-    </div>
+    </div> -->
+    <?php //foreach ($tickets as $ticket) : ?>
+                <!-- <tr>
+                    <td><?php //echo $ticket['ticket_id'] ?></td>
+                    <td><?php //echo $ticket['device_type_id'] ?></td>
+                    <td><?php //echo $ticket['fault_description'] ?></td>
+                    <td><?php //echo $ticket['g_center_code'] ?></td>
+                    <td><?php //echo $ticket['r_center_code'] ?></td>
+                    <td><?php //echo $ticket['email_person_center_g'] ?></td>
+                    <td><?php //echo $ticket['date_last_modification'] ?></td>
+                    <td><?php //echo $ticket['registration_data'] ?></td>
+                    <td><?php //echo $ticket['status_id'] ?></td>
+                </tr> -->
+            <?php //endforeach; ?>
+    <?php $output?>
+    
     <div>
         <a class="m-1 w-50 btn btn-primary" href="<?php echo base_url('/addTickets')?>">Crear Ticket</a>
     </div>

@@ -5,14 +5,21 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\TicketsModel;
 use App\Models\ProfessorModel;
-
+use SIENSIS\KpaCrud\Libraries\KpaCrud;
 class TicketsController extends BaseController
 {
     public function viewTickets()
     {
-        $instance = new TicketsModel();
-        $data['tickets'] = $instance->findAll();
+        $crud = new KpaCrud();
+
+        $crud->setTable('tickets');
+        $crud->setPrimaryKey('ticket_id');
+        $data['output'] = $crud->render();
+        $crud->setColumns(['ticket_id', 'fault_description', 'registration_data']);
         return view('Project/Tickets/viewTickets', $data);
+        // $instance = new TicketsModel();
+        // $data['tickets'] = $instance->findAll();
+        // return view('Project/Tickets/viewTickets', $data);
     }
 
     public function addTickets()
