@@ -12,15 +12,15 @@ class TicketSeeder extends Seeder
         $model = new TicketModel();
 
         $model->save([            
-            'device_type_id' => '0', 
+            'device_type_id' => '1', 
             'fault_description' => '1`poiuhygtfrd', 
             'g_center_code' => '8000013', 
             'r_center_code' => '8000013', 
-            'email_person_center_g' => '8000013@xtec.cat', 
-            'name_person_center_g' => '8000013@xtec.cat', 
+            'email_person_center_g' => 'testprofessor@me.local', 
+            'name_person_center_g' => 'Alexander', 
             'date_last_modification' => '08/02/2024', 
             'registration_data' => '07/02/2024', 
-            'status_id' => '0'
+            'status_id' => '1'
         ]);
 
         // $model->save([            
