@@ -11,7 +11,8 @@ class TicketSeeder extends Seeder
     {
         $model = new TicketModel();
 
-        $model->save([            
+        $model->insert([
+            'ticket_id' => '821198ce-5c27-43',
             'device_type_id' => '1', 
             'fault_description' => '1`poiuhygtfrd', 
             'g_center_code' => '8000013', 

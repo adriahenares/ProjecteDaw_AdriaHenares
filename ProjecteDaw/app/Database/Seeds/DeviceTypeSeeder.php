@@ -11,13 +11,13 @@ class DeviceTypeSeeder extends Seeder
     {
         $model = new DeviceTypeModel();
 
-        $model->save([
+        $model->insert([
             'device_type' => 'Ordinador'
         ]);
-        $model->save([
+        $model->insert([
             'device_type' => 'Projector'
         ]);
-        $model->save([
+        $model->insert([
             'device_type' => 'Pantalla'
         ]);
     }

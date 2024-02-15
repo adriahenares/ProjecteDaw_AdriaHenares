@@ -12,13 +12,13 @@ class InterventionTypeSeeder extends Seeder
     {
         $model = new InterventionTypeModel();
 
-        $model->save([            
+        $model->insert([            
             'intervention_type' => 'Placa base'
         ]);
-        $model->save([            
+        $model->insert([            
             'intervention_type'  => 'Memòria RAM'
         ]);
-        $model->save([
+        $model->insert([
             'intervention_type'  => 'Gràfica'
         ]);
     }

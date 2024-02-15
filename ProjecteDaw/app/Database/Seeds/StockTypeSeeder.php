@@ -11,13 +11,13 @@ class StockTypeSeeder extends Seeder
     {
         $model = new StockTypeModel();
 
-        $model->save([            
+        $model->insert([            
             'name' => 'Placa base'
         ]);
-        $model->save([            
+        $model->insert([            
             'name'  => 'Memòria RAM'
         ]);
-        $model->save([
+        $model->insert([
             'name'  => 'Gràfica'
         ]);
     }

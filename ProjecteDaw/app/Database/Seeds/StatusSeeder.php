@@ -11,13 +11,13 @@ class StatusSeeder extends Seeder
     {
         $model = new StatusModel();
 
-        $model->save([
+        $model->insert([
             'status' => 'Be'
         ]);
-        $model->save([
+        $model->insert([
             'status' => 'Decent'
         ]);
-        $model->save([
+        $model->insert([
             'status' => 'Malament'
         ]);
     }

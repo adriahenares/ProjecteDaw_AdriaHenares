@@ -26,7 +26,7 @@ class StockDataMigration extends Migration
 
         $this->forge->addField([
                 'stock_id'          => [
-                        'type'           => 'BINARY',
+                        'type'           => 'VARCHAR',
                         'constraint'     => '16',
                         'null'           => false,
                 ],
@@ -36,7 +36,7 @@ class StockDataMigration extends Migration
                         'null'           => false,
                 ],
                 'intervention_id'          => [
-                        'type'           => 'BINARY',
+                        'type'           => 'VARCHAR',
                         'constraint'     => '16',
                         'null'           => false,
                 ],

@@ -8,7 +8,7 @@ class InterventionModel extends Model
 {
     protected $table            = 'interventions';
     protected $primaryKey       = 'intervention_id';
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;

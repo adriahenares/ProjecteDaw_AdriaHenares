@@ -8,7 +8,7 @@ class TicketModel extends Model
 {
     protected $table = 'tickets';
     protected $primaryKey = 'ticket_id';
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
