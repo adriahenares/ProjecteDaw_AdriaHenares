@@ -8,7 +8,7 @@ class StockModel extends Model
 {
     protected $table            = 'stock';
     protected $primaryKey       = 'stock_id';
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;

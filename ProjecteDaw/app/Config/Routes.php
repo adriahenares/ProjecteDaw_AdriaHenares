@@ -6,8 +6,9 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-//per defecte tickets
-$routes->get('/', 'TicketsController::viewTickets');
+//get per defecte tickets
+$routes->match(['get','post'],'/', 'TicketsController::viewTickets');
+$routes->get('/(:segment)/interventions', 'InterventionsController::viewInterventions');
 
 //tickets
 $routes->get('/viewTickets', 'TicketsController::viewTickets');

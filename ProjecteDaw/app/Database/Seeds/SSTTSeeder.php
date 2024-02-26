@@ -14,6 +14,8 @@ class SSTTSeeder extends Seeder
         $firstline = true;
         while (($filedata = fgetcsv($csvFile, 0, ";")) !== FALSE) {
             if (!$firstline) {
+
+                
                 $data = [
                     'SSTT_id' => $filedata[0],
                     'name'  => $filedata[1],

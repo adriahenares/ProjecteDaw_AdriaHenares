@@ -22,11 +22,11 @@ class StockDataMigration extends Migration
                 ],
         ]);
         $this->forge->addKey('stock_type_id', true);
-        $this->forge->createTable('stock_type');
+        $this->forge->createTable('stocktype');
 
         $this->forge->addField([
                 'stock_id'          => [
-                        'type'           => 'BINARY',
+                        'type'           => 'VARCHAR',
                         'constraint'     => '16',
                         'null'           => false,
                 ],
@@ -36,7 +36,7 @@ class StockDataMigration extends Migration
                         'null'           => false,
                 ],
                 'intervention_id'          => [
-                        'type'           => 'BINARY',
+                        'type'           => 'VARCHAR',
                         'constraint'     => '16',
                         'null'           => false,
                 ],
@@ -56,7 +56,7 @@ class StockDataMigration extends Migration
                 ],
         ]);
         $this->forge->addKey('stock_id', true);
-        $this->forge->addForeignKey('stock_type_id', 'stock_type', 'stock_type_id');
+        $this->forge->addForeignKey('stock_type_id', 'stocktype', 'stock_type_id');
         $this->forge->addForeignKey('intervention_id', 'interventions', 'intervention_id');
         $this->forge->addForeignKey('center_id', 'centers', 'center_id');
         $this->forge->createTable('stock');
@@ -65,6 +65,6 @@ class StockDataMigration extends Migration
     public function down()
     {
         $this->forge->dropTable('stock');
-        $this->forge->dropTable('stock_type');
+        $this->forge->dropTable('stocktype');
     }
 }

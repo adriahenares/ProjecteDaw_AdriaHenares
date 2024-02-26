@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class InterventionTypeModel extends Model
+class StockTypeModel extends Model
 {
-    protected $table            = 'interventiontype';
-    protected $primaryKey       = 'intervention_type_id';
+    protected $table            = 'stocktype';
+    protected $primaryKey       = 'stock_type_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['intervention_type_id','intervention_type'];
+    protected $allowedFields    = ['name'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,9 +38,9 @@ class InterventionTypeModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addInterventionType($interventionType) {
+    public function addStockType($name) {
         $data = [
-            'intervention_type' => $interventionType
+            'name' => $name
         ];
     }
 

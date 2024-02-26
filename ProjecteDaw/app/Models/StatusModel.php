@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class InterventionTypeModel extends Model
+class StatusModel extends Model
 {
-    protected $table            = 'interventiontype';
-    protected $primaryKey       = 'intervention_type_id';
+    protected $table            = 'status';
+    protected $primaryKey       = 'status_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['intervention_type_id','intervention_type'];
+    protected $allowedFields    = ['status_id', 'status'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,11 +37,10 @@ class InterventionTypeModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function addInterventionType($interventionType) {
+    
+    public function addStatus($status) {
         $data = [
-            'intervention_type' => $interventionType
+            'status' => $status
         ];
     }
-
 }

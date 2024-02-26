@@ -5,14 +5,21 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\TicketsModel;
 use App\Models\ProfessorModel;
-
+use SIENSIS\KpaCrud\Libraries\KpaCrud;
 class TicketsController extends BaseController
 {
     public function viewTickets()
     {
-        $instance = new TicketsModel();
-        $data['tickets'] = $instance->findAll();
+        $crud = new KpaCrud();
+
+        $crud->setTable('tickets');
+        $crud->setPrimaryKey('ticket_id');
+        $data['output'] = $crud->render();
+        $crud->setColumns(['ticket_id', 'fault_description', 'registration_data']);
         return view('Project/Tickets/viewTickets', $data);
+        // $instance = new TicketsModel();
+        // $data['tickets'] = $instance->findAll();
+        // return view('Project/Tickets/viewTickets', $data);
     }
 
     public function addTickets()
@@ -39,7 +46,7 @@ class TicketsController extends BaseController
         }
         $device_type_id = 0;
         $fault_description = $this->request->getPost('description');
-        $g_center_code = "";
+        $g_center_code = $this->request->getPost('generating_center');
         $r_center_code = $this->request->getPost('repair_center');
         $email_person_center_g = $this->request->getPost('email_person_contact');
         $name_person_center_g = $this->request->getPost('person_contact_center');
@@ -48,6 +55,7 @@ class TicketsController extends BaseController
         $status_id = 0;
         $instance->addTicket($idTicket, $device_type_id, $fault_description, $g_center_code, $r_center_code, $email_person_center_g,
         $name_person_center_g, $date_last_modification, $registration_data, $status_id);
-        return redirect()->to(base_url('/addTickets'));
+        
+
     }
 }
