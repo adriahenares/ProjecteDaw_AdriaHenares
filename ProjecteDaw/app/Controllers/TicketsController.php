@@ -14,8 +14,13 @@ class TicketsController extends BaseController
 
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
+        // $crud->setColumns(['ticket_id', 'fault_description', 'registration_data']);
+        // $crud->setColumnsInfo([                         // set columns/fields name
+        //     'id' => ['name'=>'Code'],
+        //     'title' => ['name'=>'News titular'],
+        //     'data_pub' => ['name'=>'Publication date','type'=>KpaCrud::DATETIME_FIELD_TYPE],
+        // ]);
         $data['output'] = $crud->render();
-        $crud->setColumns(['ticket_id', 'fault_description', 'registration_data']);
         return view('Project/Tickets/viewTickets', $data);
         // $instance = new TicketsModel();
         // $data['tickets'] = $instance->findAll();
@@ -32,7 +37,7 @@ class TicketsController extends BaseController
 
         $id = "testprofessor";
         $data['codeGenCenter'] = $instance->getGeneratingCodeById($id);
-        return view('Project/Tickets/createTickets', $data);
+        return view('Project/Tickets/viewTickets', $data);
     }
 
     public function addTickets_Post()
