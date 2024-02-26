@@ -13,5 +13,6 @@ class Install extends Seeder
         $this->call("TownSeeder");
         $this->call("CenterSeeder");
         $this->call('ProfessorSeeder');
+        $this->call('InterventionTypeSeeder');
     }
 }

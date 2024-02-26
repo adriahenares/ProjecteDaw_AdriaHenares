@@ -68,4 +68,10 @@ class TicketsModel extends Model
     {
         return $this->findAll();
     }
+
+    public function retrieveSpecificData($id)
+    {
+        return $this->where('ticket_id', $id)->first();
+    }
+
 }

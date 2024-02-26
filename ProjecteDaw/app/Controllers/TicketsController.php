@@ -48,5 +48,6 @@ class TicketsController extends BaseController
         $status_id = 0;
         $instance->addTicket($idTicket, $device_type_id, $fault_description, $g_center_code, $r_center_code, $email_person_center_g,
         $name_person_center_g, $date_last_modification, $registration_data, $status_id);
+        return redirect()->to(base_url('/addTickets'));
     }
 }
