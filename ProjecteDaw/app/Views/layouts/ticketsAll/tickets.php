@@ -11,5 +11,7 @@
     <?php echo $this->renderSection("view") ?>
     <br/>
     <?php echo $this->renderSection("create") ?>
+    <br/>
+
 </body>
 </html>
