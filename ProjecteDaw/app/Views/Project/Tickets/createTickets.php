@@ -1,10 +1,9 @@
-<?php
-
+<?php 
 use PhpParser\Node\Expr\Cast;
+echo $this->extend('layouts/default/default');
 
-echo $this->extend('layouts/ticketsAll/tickets'); ?>
-
-<?php echo $this->section("create"); ?>
+echo $this->section("main_content");
+?>
 
 <div>
     <div id="header">

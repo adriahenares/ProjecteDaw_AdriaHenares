@@ -8,8 +8,8 @@
     <title>Tickets</title>
 </head>
 <body>
-    <?php echo $this->renderSection("view") ?>
-    <br/>
-    <?php echo $this->renderSection("create") ?>
+    <div>
+        <?php echo $this->renderSection("main_content") ?>
+    </div>
 </body>
 </html>
