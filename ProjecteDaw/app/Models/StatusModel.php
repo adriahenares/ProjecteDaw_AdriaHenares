@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class StockModel extends Model
+class StatusModel extends Model
 {
-    protected $table            = 'stock';
-    protected $primaryKey       = 'stock_id';
-    protected $useAutoIncrement = false;
+    protected $table            = 'status';
+    protected $primaryKey       = 'status_id';
+    protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['status_id', 'status'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,21 +37,10 @@ class StockModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function addStock($stock_id, $stock_type_id, $intervention_id, $center_id, $purchase_date, $price)
-    {
+    
+    public function addStatus($status) {
         $data = [
-            'stock_id' => $stock_id,
-            'stock_type_id' => $stock_type_id,
-            'intervention_id' => $intervention_id,
-            'center_id' => $center_id,
-            'purchase_date' => $purchase_date,
-            'price' => $price
+            'status' => $status
         ];
-    }
-
-    public function retrieveData() 
-    {
-        return $this->findAll();
     }
 }

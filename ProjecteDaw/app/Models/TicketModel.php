@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TicketsModel extends Model
+class TicketModel extends Model
 {
     protected $table = 'tickets';
     protected $primaryKey = 'ticket_id';
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = [];
+    protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'date_last_modification', 'registration_data', 'status_id'];
 
     // Dates
     protected $useTimestamps = false;
@@ -68,4 +68,10 @@ class TicketsModel extends Model
     {
         return $this->findAll();
     }
+
+    public function retrieveSpecificData($id)
+    {
+        return $this->where('ticket_id', $id)->first();
+    }
+
 }

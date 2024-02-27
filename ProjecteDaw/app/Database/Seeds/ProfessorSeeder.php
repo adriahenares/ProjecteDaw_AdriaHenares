@@ -11,7 +11,7 @@ class ProfessorSeeder extends Seeder
     {
         $model = new ProfessorModel();
 
-        $model->save([
+        $model->insert([
             'professor_id' => 'testprofessor',
             'name' => 'Alexander',
             'surnames' => 'Nilei Vostob',

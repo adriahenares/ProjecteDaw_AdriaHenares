@@ -42,7 +42,7 @@ class TiquetsDataMigration extends Migration
 
         $this->forge->addField([
             'ticket_id'          => [
-                'type'       => 'BINARY',
+                'type'       => 'VARCHAR',
                 'constraint' => '16',
                 'null' => false
             ],

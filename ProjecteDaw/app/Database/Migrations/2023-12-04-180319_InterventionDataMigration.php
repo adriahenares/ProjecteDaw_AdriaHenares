@@ -28,12 +28,12 @@ class InterventionDataMigration extends Migration
 
         $this->forge->addField([
             'intervention_id'       => [
-                'type'       => 'BINARY',
+                'type'       => 'VARCHAR',
                 'constraint' => '16',
                 null => false
             ],
             'ticket_id'          => [
-                'type'       => 'BINARY',
+                'type'       => 'VARCHAR',
                 'constraint' => '16',
                 null => false
             ],

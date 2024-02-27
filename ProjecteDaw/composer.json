@@ -11,7 +11,8 @@
     },
     "require": {
         "php": "^7.4 || ^8.0",
-        "codeigniter4/framework": "^4.0"
+        "codeigniter4/framework": "^4.0",
+        "siensis/kpacrud": "dev-master"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",

@@ -2,7 +2,7 @@
 
 use PhpParser\Node\Expr\Cast;
 
- echo $this->extend('layouts/ticketsAll/tickets'); ?>
+echo $this->extend('layouts/ticketsAll/tickets'); ?>
 
 <?php echo $this->section("create"); ?>
 
@@ -18,6 +18,7 @@ use PhpParser\Node\Expr\Cast;
 
     <div id="centres">
         <form action="<?php base_url("/addTickets") ?>" method="POST">
+            <?= csrf_field() ?>
             <div>
                 <label for="generating_center">Codi centre generador:</label>
                 <input type="number" id="generating_center" name="generating_center">
