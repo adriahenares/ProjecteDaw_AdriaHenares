@@ -1,6 +1,6 @@
-<?php echo $this->extend('layouts/ticketsAll/tickets'); ?>
+<?php echo $this->extend('layouts/default/default'); ?>
 
-<?php echo $this->section("view"); ?>
+<?php echo $this->section("main_content"); ?>
 <div>
     <div>
         <h1>GESTIO DE TICKETS</h1>

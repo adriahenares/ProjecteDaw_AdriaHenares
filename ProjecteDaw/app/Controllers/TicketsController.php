@@ -15,12 +15,14 @@ class TicketsController extends BaseController
 
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
-        // $crud->setColumns(['ticket_id', 'fault_description', 'registration_data']);
-        // $crud->setColumnsInfo([                         // set columns/fields name
-        //     'id' => ['name'=>'Code'],
-        //     'title' => ['name'=>'News titular'],
-        //     'data_pub' => ['name'=>'Publication date','type'=>KpaCrud::DATETIME_FIELD_TYPE],
-        // ]);
+        $crud->setColumns(['ticket_id', 'device_type_id', 'registration_data', 'date_last_modification', 'status_id']);
+        $crud->setColumnsInfo([                         // set columns/fields name
+            'ticket_id' => ['name'=>'Id'],
+            'device_type_id' => ['name'=>'Id tipus dispositiu'],
+            'registration_data' => ['name'=>'Data de registre','type'=>KpaCrud::DATETIME_FIELD_TYPE],
+            'date_last_modification' => ['name'=>'Data ultima modificació','type'=>KpaCrud::DATETIME_FIELD_TYPE],
+            'status_id' => ['name'=>'Id status'],
+        ]);
         $data['output'] = $crud->render();
         return view('Project/Tickets/viewTickets', $data);
         // $instance = new TicketsModel();

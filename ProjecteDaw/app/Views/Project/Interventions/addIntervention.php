@@ -1,6 +1,6 @@
-<?php echo $this->extend('layout'); ?>
+<?php echo $this->extend('layouts/default/default'); ?>
 
-<?php echo $this->section("addIntervention"); ?>
+<?php echo $this->section("main_content"); ?>
 
 <div>
     <div id="header">
