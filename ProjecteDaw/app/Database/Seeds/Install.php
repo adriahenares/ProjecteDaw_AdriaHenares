@@ -14,9 +14,11 @@ class Install extends Seeder
         $this->call("CenterSeeder");
         //temporals
         $this->call('ProfessorSeeder');
-        $this->call('InterventionTypeSeeder');
+        $this->call("StudentSeeder");
+        $this->call("InterventionTypeSeeder");
         $this->call("StatusSeeder");
         $this->call("DeviceTypeSeeder");
         $this->call("TicketSeeder");
+        $this->call("InterventionSeeder");
     }
 }

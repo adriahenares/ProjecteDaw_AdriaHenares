@@ -26,8 +26,8 @@ $routes->get('/login', 'SessionController::login');
 $routes->post('authetication/login', 'SessionController::login_post');
 
 //pagina intermitja entre tickets i intervencio
-$routes->get('/interventions/(:segment)', 'TicketsInterventionsController::viewIntermediary');
-
+$routes->get('/interventions/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
+///interventions/821198ce-5c27-43
 
 //intervencions  mirar despres el tema segment
 //$routes->get('/interventions/(:segment)/', 'InterventionsController::viewInterventions');

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\TicketsModel;
 use App\Models\ProfessorModel;
+use App\Models\TicketModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 class TicketsController extends BaseController
 {
@@ -42,7 +43,7 @@ class TicketsController extends BaseController
 
     public function addTickets_Post()
     {
-        $instance = new TicketsModel();
+        $instance = new TicketModel();
         // generacio number random uuid despres
         $numberOfDigits16 = 16;
         $idTicket = "";

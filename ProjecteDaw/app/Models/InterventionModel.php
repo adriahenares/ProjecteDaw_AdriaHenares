@@ -70,6 +70,6 @@ class InterventionModel extends Model
     }
 
     public function getSpecificInterventions($id) {
-        return $this->where('intervention_id', $id)->findAll();
+        return $this->where('ticket_id', $id)->findAll();
     }
 }

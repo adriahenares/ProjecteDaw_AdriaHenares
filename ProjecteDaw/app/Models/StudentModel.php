@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class StudentModel extends Model
 {
     protected $table            = 'students';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    protected $primaryKey       = 'student_id';
+    protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ["student_id","email"];
 
     // Dates
     protected $useTimestamps = false;

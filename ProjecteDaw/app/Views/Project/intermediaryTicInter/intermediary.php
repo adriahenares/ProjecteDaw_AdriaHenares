@@ -39,11 +39,16 @@
     <div>
         <table>
             <?php foreach ($interventions as $intervention) : ?>
-                <div>
-                    <p><?php echo $intervention['ticket_id']?></p>
-                </div>
+                <td>
+                    <a href="">
+                        <p><?php echo $intervention['ticket_id']; ?></p>
+                    </a>
+                </td>
             <?php endforeach; ?>
         </table>
+    </div>
+    <div>
+        <a href="/funcio add" class="btn btn-primary">Afegeix Intervencio</a>
     </div>
 </body>
 
