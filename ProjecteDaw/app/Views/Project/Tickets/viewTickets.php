@@ -4,7 +4,7 @@
 <div>
     <div>
         <h1><?= $title ?></h1>
-        <img src="/public/Logo.png" alt="Logo">
+        <img src="<?= base_url('Logo.png') ?>" alt="Logo" style="max-width: 128px">
     </div>
     <?= $output?>
     <div>
