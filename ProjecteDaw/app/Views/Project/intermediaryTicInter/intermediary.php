@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+echo $this->extend('layouts/default/default');
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
+echo $this->section("main_content");
+?>
+<div>
     <div>
         <table>
             <thead>
@@ -40,7 +36,7 @@
         <table>
             <?php foreach ($interventions as $intervention) : ?>
                 <td>
-                    <a href="">
+                    <a href="/a la intervencion">
                         <p><?php echo $intervention['ticket_id']; ?></p>
                     </a>
                 </td>
@@ -48,8 +44,7 @@
         </table>
     </div>
     <div>
-        <a href="/funcio add" class="btn btn-primary">Afegeix Intervencio</a>
+        <a href="<?php echo base_url("") ?>" class="btn btn-primary">Afegeix Intervencio</a>
     </div>
-</body>
-
-</html>
+</div>
+<?php echo $this->endSection(); ?>

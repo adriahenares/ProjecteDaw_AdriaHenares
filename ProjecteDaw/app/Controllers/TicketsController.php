@@ -3,38 +3,42 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\TicketsModel;
 use App\Models\ProfessorModel;
 use App\Models\TicketModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
+
 class TicketsController extends BaseController
 {
     public function viewTickets()
     {
+        helper('lang');
         $crud = new KpaCrud();
-
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
         $crud->setColumns(['ticket_id', 'device_type_id', 'registration_data', 'date_last_modification', 'status_id']);
-        $crud->setColumnsInfo([                         // set columns/fields name
-            'ticket_id' => ['name'=>'Id'],
-            'device_type_id' => ['name'=>'Id tipus dispositiu'],
-            'registration_data' => ['name'=>'Data de registre','type'=>KpaCrud::DATETIME_FIELD_TYPE],
-            'date_last_modification' => ['name'=>'Data ultima modificació','type'=>KpaCrud::DATETIME_FIELD_TYPE],
-            'status_id' => ['name'=>'Id status'],
+        $crud->setColumnsInfo([
+            'ticket_id' => ['name' => 'Id'],
+            'device_type_id' => ['name' => 'Id tipus dispositiu'],
+            'registration_data' => ['name' => 'Data de registre', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
+            'date_last_modification' => ['name' => 'Data ultima modificació', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
+            'status_id' => ['name' => 'Id status'],
         ]);
+        // preguntar
+        $crud->addItemLink('view', 'fa-file-o', base_url('/intervention/' . 'ticket_id'), 'Mostrar intervencions');
         $data['output'] = $crud->render();
+        $data = [
+            'output' => $crud->render(),
+            'title' => lang('ticketsLang.title'),
+        ];
+
         return view('Project/Tickets/viewTickets', $data);
-        // $instance = new TicketsModel();
-        // $data['tickets'] = $instance->findAll();
-        // return view('Project/Tickets/viewTickets', $data);
     }
 
     public function addTickets()
     {
         $instance = new ProfessorModel();
         $stringDate = date('d-m-Y');
-        $time= strtotime($stringDate);
+        $time = strtotime($stringDate);
         $date = date('Y-m-d', $time);
         $data['dateNow'] = $date;
 
@@ -61,9 +65,17 @@ class TicketsController extends BaseController
         $date_last_modification = $this->request->getPost('date_last_modification');
         $registration_data = $this->request->getPost('registration_data');
         $status_id = 0;
-        $instance->addTicket($idTicket, $device_type_id, $fault_description, $g_center_code, $r_center_code, $email_person_center_g,
-        $name_person_center_g, $date_last_modification, $registration_data, $status_id);
-        
-
+        $instance->addTicket(
+            $idTicket,
+            $device_type_id,
+            $fault_description,
+            $g_center_code,
+            $r_center_code,
+            $email_person_center_g,
+            $name_person_center_g,
+            $date_last_modification,
+            $registration_data,
+            $status_id
+        );
     }
 }

@@ -3,7 +3,7 @@
 <?php echo $this->section("main_content"); ?>
 <div>
     <div>
-        <h1>GESTIO DE TICKETS</h1>
+        <h1><?= $title ?></h1>
         <!--<img src="" alt=""> logo empresa -->
     </div>
     <?= $output?>
