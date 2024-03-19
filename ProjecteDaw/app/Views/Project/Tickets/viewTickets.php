@@ -4,7 +4,7 @@
 <div>
     <div>
         <h1><?= $title ?></h1>
-        <!--<img src="" alt=""> logo empresa -->
+        <img src="/public/Logo.png" alt="Logo">
     </div>
     <?= $output?>
     <div>

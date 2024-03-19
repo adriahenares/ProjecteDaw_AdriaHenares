@@ -24,7 +24,7 @@ class TicketsController extends BaseController
             'status_id' => ['name' => 'Id status'],
         ]);
         // preguntar
-        $crud->addItemLink('status_id', 'fa-file-o', base_url('/intervention/' . 'ticket_id'), 'Mostrar intervencions');
+        $crud->addItemLink('view', 'fa-file-o', base_url('/intervention/' . 'ticket_id'), 'Mostrar intervencions');
         $data['output'] = $crud->render();
         $data = [
             'output' => $crud->render(),
