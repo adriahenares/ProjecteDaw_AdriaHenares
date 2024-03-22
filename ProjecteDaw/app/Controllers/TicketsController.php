@@ -25,7 +25,6 @@ class TicketsController extends BaseController
         ]);
         // preguntar
         $crud->addItemLink('view', 'fa-file', base_url('/ticket/' . 'ticket_id'), 'Mostrar intervencions');
-        $data['output'] = $crud->render();
         $data = [
             'output' => $crud->render(),
             'title' => lang('ticketsLang.title'),
