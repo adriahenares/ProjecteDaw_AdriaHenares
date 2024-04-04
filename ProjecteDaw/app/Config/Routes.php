@@ -7,13 +7,12 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 //get per defecte tickets
-$routes->match(['get','post'],'/', 'TicketsController::viewTickets');
-$routes->get('/(:segment)/interventions', 'InterventionsController::viewInterventions');
+$routes->match(['get','post'],  '/', 'TicketsController::loadPage');
 
 //tickets
-$routes->get('/viewTickets', 'TicketsController::viewTickets');
+$routes->match(['get','post'], '/viewTickets', 'TicketsController::viewTickets');
 
-// addTickets
+// addTickets es pot borrar
 $routes->get('/addTickets', 'TicketsController::addTickets');
 $routes->post('/addTickets', 'TicketsController::addTickets_post');
 
@@ -31,6 +30,11 @@ $routes->get('/interventionsOfTicket/(:segment)', 'TicketsInterventionsControlle
 
 //iintervencio en concret
 $routes->get('/intervention/(:segment)/', 'InterventionsController::viewInterventions');
+
+//assignacio tickets
+$routes->match(['get','post'], '/assing', 'TicketsController::assingTickets');
+$routes->post('/myCustomPagePost', 'TicketsController::myCustomPagePost');
+
 
 
 

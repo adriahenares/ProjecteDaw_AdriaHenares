@@ -2,9 +2,9 @@
 
 <?php echo $this->section("main_content"); ?>
 <div>
-    <div>
+    <div class="d-flex">
         <h1><?= $title ?></h1>
-        <img src="<?= base_url('Logo.png') ?>" alt="Logo" style="max-width: 128px">
+        <img src="<?= base_url('Logo.png') ?>" alt="Logo" style="max-width: 64px">
     </div>
     <?= $output?>
     <div>

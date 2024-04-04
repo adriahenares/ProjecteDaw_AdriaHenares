@@ -37,10 +37,24 @@ class StatusModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-    
-    public function addStatus($status) {
+
+    public function addStatus($status)
+    {
         $data = [
             'status' => $status
         ];
+    }
+
+    public function getAllStatus()
+    {
+        $status = $this->select('status')->findAll();
+
+        $dataStatus = [];
+
+        foreach ($status as $dataLoop) {
+            $dataStatus[] = $dataLoop['status'];
+        }
+
+        return $dataStatus;
     }
 }
