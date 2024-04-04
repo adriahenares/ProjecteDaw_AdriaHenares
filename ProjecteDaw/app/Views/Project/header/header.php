@@ -1,4 +1,3 @@
-<?php echo $this->extend('layout/ticketsAll/tickets'); ?>
 <?php echo $this->section("header"); ?>
 
 <div class="header">
