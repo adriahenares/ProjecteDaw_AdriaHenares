@@ -8,6 +8,12 @@ use App\Models\TicketModel;
 
 class TicketsInterventionsController extends BaseController
 {
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function viewIntermediary($id)
     {
         // models
