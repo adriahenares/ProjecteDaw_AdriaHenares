@@ -10,23 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2 p-0">
-            <div class="d-flex flex-column h-100 justify-content-center">
-                <div class="start text-center" tabindex="0" id="start" aria-labelledby="offcanvasLabel" style="background-color: rgb(26,26,26);">
-                    <div class="header">
-                        <h4 class="title text-white mb-0">MENU</h4>
-                    </div>
-                    <div class="body">
-                        <div class="m-5">
-                            <a class="text-white text-decoration-none" href="<?php echo base_url('/') ?>">Tickets</a>
-                        </div>
-                        <div class="m-5">
-                            <a class="text-white text-decoration-none" href="<?php echo base_url('/add2fa') ?>">Inventario</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?= $this->include("layouts/partials/menu") ?>
         <div class="col-10">
             <?= $output ?>
             <div>
