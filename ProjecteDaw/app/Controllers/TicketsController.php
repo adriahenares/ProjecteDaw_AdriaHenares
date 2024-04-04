@@ -67,7 +67,8 @@ class TicketsController extends BaseController
                 'html_atts' => ["required",]
             ],
         ]);
-        $crud->addItemLink('view', 'fa-file-o', base_url('/interventionsOfTicket/'), 'Mostrar intervencions');
+        // preguntar
+        $crud->addItemLink('view', 'fa-file', base_url('/ticket/' . 'ticket_id'), 'Mostrar intervencions');
         $data = [
             'output' => $crud->render(),
             'title' => lang('ticketsLang.title'),

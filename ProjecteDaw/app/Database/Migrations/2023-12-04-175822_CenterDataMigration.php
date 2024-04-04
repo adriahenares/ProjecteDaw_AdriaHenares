@@ -137,7 +137,7 @@ class CenterDataMigration extends Migration
                         'type'           => 'INT',
                         'constraint'     => '8',
                         'null'           => false,
-                ],
+        ],
         ]);
         $this->forge->addKey('professor_id', true);
         $this->forge->addKey('email', false, true);
