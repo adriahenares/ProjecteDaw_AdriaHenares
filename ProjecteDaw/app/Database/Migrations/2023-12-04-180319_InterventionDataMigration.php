@@ -34,7 +34,7 @@ class InterventionDataMigration extends Migration
             ],
             'ticket_id'          => [
                 'type'       => 'VARCHAR',
-                'constraint' => '16',
+                'constraint' => '36',
                 null => false
             ],
             'professor_id' => [

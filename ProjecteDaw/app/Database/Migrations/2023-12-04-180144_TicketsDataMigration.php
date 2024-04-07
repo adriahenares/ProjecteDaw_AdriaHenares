@@ -43,7 +43,7 @@ class TiquetsDataMigration extends Migration
         $this->forge->addField([
             'ticket_id'          => [
                 'type'       => 'VARCHAR',
-                'constraint' => '16',
+                'constraint' => '36',
                 'null' => false
             ],
             'device_type_id'       => [
@@ -76,11 +76,11 @@ class TiquetsDataMigration extends Migration
                 'null' => false,
             ],
             'date_last_modification' => [
-                'type'       => 'date',
+                'type'       => 'DATETIME',
                 'null' => false,
             ], 
             'registration_data' => [
-                'type'       => 'date',
+                'type'       => 'DATETIME',
                 'null' => false,
             ], 
             'status_id' => [

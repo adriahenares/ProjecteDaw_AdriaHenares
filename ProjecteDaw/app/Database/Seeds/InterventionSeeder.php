@@ -14,7 +14,7 @@ class InterventionSeeder extends Seeder
 
         $model->insert([
             'intervention_id' => '827890ce-5c27-25',
-            'ticket_id' => '821198ce-5c27-43', 
+            'ticket_id' => '6cfdd8c4-d2ce-46b1-b91e-36e229f5238f', 
             'professor_id' => 'testprofessor', 
             'student_id' => '679612ce-5c27-43', 
             'intervention_type_id' => '1', 
