@@ -45,7 +45,9 @@ class TicketsController extends BaseController
         $crud = new KpaCrud();
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
-        $crud->setColumns(['ticket_id', 'device_type_id', 'registration_data', 'date_last_modification', 'status_id']);
+        $crud->setRelation('status_id', 'status', 'status_id', 'status');
+        $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
+        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'registration_data', 'date_last_modification', 'status__status']);
         $crud->setColumnsInfo([
             'ticket_id' => [
                 'name' => 'Identificador',
@@ -55,7 +57,7 @@ class TicketsController extends BaseController
                     'disabled'
                 ]
             ],
-            'device_type_id' => [
+            'devicetype__device_type' => [
                 'name' => 'Tipus de dispositiu'
             ],
             'fault_description' => [
@@ -95,7 +97,7 @@ class TicketsController extends BaseController
                 'type' => KpaCrud::DATETIME_FIELD_TYPE,
                 'default'=> date('Y-m-d h:m:s')
             ],
-            'status_id' => [
+            'status__status' => [
                 'name' => 'Estat',
                 // 'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
                 // 'options' => array_combine($statusNum, $status),
@@ -105,8 +107,7 @@ class TicketsController extends BaseController
         // preguntar
         $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket/'), 'Mostrar intervencions');
         // $crud->setConfig(["editable" => false, "removable" => false]);
-        $crud->setRelation('status_id', 'status', 'status_id', 'status');
-        $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
+
         $crud->setConfig('centerView');
         $data = [
             'output' => $crud->render(),

@@ -7,10 +7,10 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 //get per defecte tickets
-$routes->match(['get','post'],  '/', 'TicketsController::loadPage');
+$routes->match(['GET','POST'],  '/', 'TicketsController::loadPage');
 
 //tickets
-$routes->match(['get','post'], '/viewTickets', 'TicketsController::viewTickets');
+$routes->match(['GET','POST'], '/viewTickets', 'TicketsController::viewTickets');
 
 // addTickets es pot borrar
 $routes->get('/addTickets', 'TicketsController::addTickets');

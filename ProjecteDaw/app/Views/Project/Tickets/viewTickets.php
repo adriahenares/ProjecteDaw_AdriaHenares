@@ -3,10 +3,10 @@
 <div class="container-fluid p-0">
     <div class="row">
         <div class="col-12">
-            <div class="d-flex align-items-center">
-                <img src="<?= base_url('Logo.png') ?>" alt="Logo" style="max-width: 128px">
+            <div class="d-flex align-items-center bg-dark">
+                <img src="<?= base_url('Logo.png') ?>" alt="Logo" style="max-width: 80px">
                 <div>
-                    <h1><?= $title ?></h1>
+                    <h1 class="text-white text-center"><?= $title ?></h1>
                 </div>
             </div>
         </div>
