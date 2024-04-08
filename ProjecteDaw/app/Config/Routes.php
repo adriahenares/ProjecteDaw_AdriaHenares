@@ -32,8 +32,8 @@ $routes->get('/interventionsOfTicket/(:segment)', 'TicketsInterventionsControlle
 $routes->get('/intervention/(:segment)/', 'InterventionsController::viewInterventions');
 
 //assignacio tickets
-$routes->match(['get','post'], '/assing', 'TicketsController::assingTickets');
-$routes->post('/myCustomPagePost', 'TicketsController::myCustomPagePost');
+$routes->match(['get','post'], '/assing', 'TicketsController::assingTicketsView');
+$routes->post('/assingTicket', 'TicketsController::assingTicketPost');
 
 
 

@@ -1,4 +1,5 @@
 <?php
 return [
-    'title' => 'TICKETS MANAGMENT',
+    'titleG' => 'TICKETS MANAGMENT',
+    'titleA' => 'TICKETS ASSIGMENT',
 ];

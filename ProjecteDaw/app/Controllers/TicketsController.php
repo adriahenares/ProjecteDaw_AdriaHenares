@@ -68,36 +68,28 @@ class TicketsController extends BaseController
             ],
         ]);
         // preguntar
-        $crud->addItemLink('view', 'fa-file', base_url('/ticket/' . 'ticket_id'), 'Mostrar intervencions');
+        $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket/'), 'Mostrar intervencions');
         $data = [
             'output' => $crud->render(),
-            'title' => lang('ticketsLang.title'),
+            'title' => lang('ticketsLang.titleG'),
         ];
 
         return view('Project/Tickets/viewTickets', $data);
     }
 
-    public function assingTickets()
+    public function assingTicketsView()
     {
         $instanceC = new CenterModel();
         // variables per obtenir els selects
         //type device
 
         //center codes
-        $centerId = $instanceC->getAllCentersId();
         $crud = new KpaCrud();
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
         $crud->setColumns(['ticket_id', 'device_type_id', 'registration_data', 'date_last_modification', 'status_id']);
         $crud->setColumnsInfo([
             'ticket_id' => ['name' => 'Id'],
-            'r_center_code' => [
-                'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
-                'options' => array_combine($centerId, $centerId),
-                'html_atts' => ["required"],
-            ],
-            'email_person_center_g' => [],
-            'name_person_center_g'  => [],
             'registration_data' => ['name' => 'Data de registre', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
             'date_last_modification' => ['name' => 'Data ultima modificació', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
             'status_id' => ['name' => 'Id status'],
@@ -106,7 +98,7 @@ class TicketsController extends BaseController
 
         $data = [
             'output' => $crud->render(),
-            'title' => lang('ticketsLang.title'),
+            'title' => lang('ticketsLang.titleA'),
         ];
         return view('Project/Tickets/assingTickets', $data);
     }
@@ -117,8 +109,8 @@ class TicketsController extends BaseController
         $this->request->getUri()->stripQuery('customf');
         $this->request->getUri()->addQuery('customf', 'mpost');
 
-        $html = "<div>";
-        $html .= "<form method='post' action='" . base_url("/myCustomPagePost") . "'>";
+        $html = "<div class='container-fluid p-0'>";
+        $html .= "<form method='post' action='" . base_url("/assingTicket") . "'>";
         $html .= "<input type='hidden' name='ticket_id' value='" . $obj['ticket_id'] . "'>";
         $html .= csrf_field();
         $html .= "<h1>Assigna al institut</h1>";
@@ -135,21 +127,19 @@ class TicketsController extends BaseController
         $html .= "<div class='pt-2'><input type='submit' value='Envia'></div></form>";
         $html .= "</div>";
 
-        // You can load view info from view file and return to KpaCrud library
-        // $html = view('view_route/view_name');
-
         return $html;
     }
 
     // Create an invisible named function in KpaCrud to call after
 
-    public function myCustomPagePost()
+    public function assingTicketPost()
     {
-        /*
-        Do something with this->request->getPost information
-        */
+        $instanceT = new TicketModel();
         $valueId = $this->request->getPost("ticket_id");
-        $valueR = $this->request->getPost("idRepair");
+        $valueR = [
+            'r_center_code' => $this->request->getPost("idRepair"),
+        ];
+        $instanceT->assingTicket($valueId, $valueR);
         return redirect()->to(base_url('assing'));
     }
 }
