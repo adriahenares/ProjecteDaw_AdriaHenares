@@ -75,10 +75,8 @@ class TicketModel extends Model
     }
 
     public function assingTicket($id, $repairCenterId) {
-        $query = $this->where('ticket_id' == $id)->find();
+        $query = $this->where('ticket_id', $id)->find();
         if ($query != null) {
-            var_dump("hola");
-            die;
             // si no comprovar con insert
             $this->update($id, $repairCenterId);
         }

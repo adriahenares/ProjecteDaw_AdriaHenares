@@ -12,6 +12,9 @@
                 <div class="m-5">
                     <a class="text-white text-decoration-none" href="<?php echo base_url('/add2fa') ?>">Inventario</a>
                 </div>
+                <div>
+                    <a class="text-white text-decoration-none" href="<?php echo base_url('/assing') ?>">Assigna Tickets</a>
+                </div>
             </div>
         </div>
     </div>

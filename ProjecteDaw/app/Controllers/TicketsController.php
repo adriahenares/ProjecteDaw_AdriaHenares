@@ -133,8 +133,7 @@ class TicketsController extends BaseController
             'date_last_modification' => ['name' => 'Data ultima modificació', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
             'status_id' => ['name' => 'Id status'],
         ]);
-        $crud->addItemFunction('mailing', 'fa-paper-plane', array($this, 'assingTicket'), "Send mail");
-
+        $crud->addItemLink('view', 'fa-file', base_url('/assingTicket/'), 'Mostrar intervencions');
         $data = [
             'output' => $crud->render(),
             'title' => lang('ticketsLang.titleA'),
@@ -142,43 +141,21 @@ class TicketsController extends BaseController
         return view('Project/Tickets/assingTickets', $data);
     }
 
-    public function assingTicket($obj)
+    public function assingTicket($id)
     {
-
-        $this->request->getUri()->stripQuery('customf');
-        $this->request->getUri()->addQuery('customf', 'mpost');
-
-        $html = "<div class='container-fluid p-0'>";
-        $html .= "<form method='post' action='" . base_url("/assingTicket") . "'>";
-        $html .= "<input type='hidden' name='ticket_id' value='" . $obj['ticket_id'] . "'>";
-        $html .= csrf_field();
-        $html .= "<h1>Assigna al institut</h1>";
-        $html .= "	<div style=\"margin-top:20px\" class=\"border bg-light\">";
-        $html .= "		<div class=\"d-grid\" style=\"margin-top:20px\">";
-        $html .= "			<div class=\"p-2 \">";
-        $html .= "				<label>centre a assignar</label>";
-        $html .= "				<div class=\"form-control bg-light \">";
-        $html .= "                  <input type='text' name='idRepair'>";
-        $html .= "				</div>";
-        $html .= "			</div>";
-        $html .= "		</div>";
-        $html .= "	</div>";
-        $html .= "<div class='pt-2'><input type='submit' value='Envia'></div></form>";
-        $html .= "</div>";
-
-        return $html;
+        $data['id'] = $id;
+        return view('Project/Tickets/assingTicketsTrue', $data);
     }
 
     // Create an invisible named function in KpaCrud to call after
 
-    public function assingTicketPost()
+    public function assingTicketPost($id)
     {
         $instanceT = new TicketModel();
-        $valueId = $this->request->getPost("ticket_id");
         $valueR = [
             'r_center_code' => $this->request->getPost("idRepair"),
         ];
-        $instanceT->assingTicket($valueId, $valueR);
+        $instanceT->assingTicket($id, $valueR);
         return redirect()->to(base_url('assing'));
     }
 }
