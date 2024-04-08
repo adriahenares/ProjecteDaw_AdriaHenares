@@ -103,7 +103,7 @@ class TicketsController extends BaseController
             ],
         ]);
         // preguntar
-        $crud->addItemLink('view', 'fa-file', base_url('/ticket/' . 'ticket_id'), 'Mostrar intervencions');
+        $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket/'), 'Mostrar intervencions');
         // $crud->setConfig(["editable" => false, "removable" => false]);
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
         $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
