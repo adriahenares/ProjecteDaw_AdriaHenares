@@ -10,7 +10,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
         <?= $this->include("layouts/partials/menu") ?>
         <div class="col-10">
             <?= $output ?>
