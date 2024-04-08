@@ -1,8 +1,7 @@
 <div class="col-md-2 d-flex flex-column">
     <div class="d-flex justify-content-start align-items-start">
-        <div class="start" tabindex="0" id="start" aria-labelledby="offcanvasLabel "
-            style="background-color: rgb(26,26,26);">
-            <div class="header">
+        <div class="start bg-dark" tabindex="0" id="start" aria-labelledby="offcanvasLabel ">
+            <div class="header m-5">
                 <h4 class="title text-white mb-0">MENU</h4>
             </div>
             <div class="body">
