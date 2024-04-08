@@ -4,6 +4,7 @@ namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 use App\Models\TicketModel;
+use App\Libraries\UUID;
 
 class TicketSeeder extends Seeder
 {
@@ -12,7 +13,7 @@ class TicketSeeder extends Seeder
         $model = new TicketModel();
 
         $model->insert([
-            'ticket_id' => '821198ce-5c27-43',
+            'ticket_id' => '6cfdd8c4-d2ce-46b1-b91e-36e229f5238f',
             'device_type_id' => '1', 
             'fault_description' => '1`poiuhygtfrd', 
             'g_center_code' => '8000013', 

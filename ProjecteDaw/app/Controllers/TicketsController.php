@@ -8,6 +8,7 @@ use App\Models\ProfessorModel;
 use App\Models\StatusModel;
 use App\Models\TicketModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
+use App\Libraries\UUID;
 
 use function PHPSTORM_META\type;
 
@@ -46,8 +47,20 @@ class TicketsController extends BaseController
         $crud->setPrimaryKey('ticket_id');
         $crud->setColumns(['ticket_id', 'device_type_id', 'registration_data', 'date_last_modification', 'status_id']);
         $crud->setColumnsInfo([
-            'ticket_id' => ['name' => 'Id'],
-            'device_type_id' => ['name' => 'Id tipus dispositiu'],
+            'ticket_id' => [
+                'name' => 'Identificador',
+                'type' => KpaCrud::READONLY_FIELD_TYPE,
+                'default' => UUID::v4(),
+                'html_atts' => [
+                    'disabled'
+                ]
+            ],
+            'device_type_id' => [
+                'name' => 'Tipus de dispositiu'
+            ],
+            'fault_description' => [
+                'name' => 'Descripció'
+            ],
             'g_center_code' => [
                 'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
                 'options' => array_combine($centerId, $centerId),
@@ -58,17 +71,43 @@ class TicketsController extends BaseController
                 'options' => array_combine($centerId, $centerId),
                 'html_atts' => ["required",],
             ],
-            'registration_data' => ['name' => 'Data de registre', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
-            'date_last_modification' => ['name' => 'Data ultima modificació', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
+            'email_person_center_g' => [
+                'name' => 'Email generador',
+                'default' => 'testprofessor@me.local',
+                'html_atts' => [
+                    'disabled'
+                ]
+            ],
+            'name_person_center_g' => [
+                'name' => 'Nom generador',
+                'default' => 'Alexander',
+                'html_atts' => [
+                    'disabled'
+                ]
+            ],
+            'date_last_modification' => [
+                'name' => 'Data ultima modificació',
+                'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                'default'=> date('Y-m-d h:m:s')
+            ],
+            'registration_data' => [
+                'name' => 'Data de registre',
+                'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                'default'=> date('Y-m-d h:m:s')
+            ],
             'status_id' => [
-                'name' => 'Id status',
-                'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
-                'options' => array_combine($statusNum, $status),
-                'html_atts' => ["required",]
+                'name' => 'Estat',
+                // 'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
+                // 'options' => array_combine($statusNum, $status),
+                // 'html_atts' => ["required",]
             ],
         ]);
         // preguntar
-        $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket/'), 'Mostrar intervencions');
+        $crud->addItemLink('view', 'fa-file', base_url('/ticket/' . 'ticket_id'), 'Mostrar intervencions');
+        // $crud->setConfig(["editable" => false, "removable" => false]);
+        $crud->setRelation('status_id', 'status', 'status_id', 'status');
+        $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
+        $crud->setConfig('centerView');
         $data = [
             'output' => $crud->render(),
             'title' => lang('ticketsLang.titleG'),
