@@ -54,7 +54,7 @@ class TicketsController extends BaseController
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
         $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
         $crud->setRelation('email_person_center_g', 'professors', 'email', 'email');
-        $crud->setRelation('name_person_center_g', 'professors2', 'name', 'name');
+        //$crud->setRelation('name_person_center_g', 'professors2', 'name', 'name');
         $crud->setColumns(['ticket_id', 'devicetype__device_type', 'status__status']);
         // $crud->setColumns(['ticket_id', 'devicetype__device_type', 'registration_data', 'date_last_modification', 'status__status']);
         $crud->setColumnsInfo([
@@ -147,7 +147,7 @@ class TicketsController extends BaseController
             ]
         ]);
         // preguntar
-        $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket/'), 'Mostrar intervencions');
+        $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket'), 'Mostrar intervencions');
         // $crud->setConfig(["editable" => false, "removable" => false]);
 
         $crud->setConfig('centerView');

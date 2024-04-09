@@ -26,6 +26,9 @@
 
         <?= $this->include("layouts/partials/menu") ?>
         <div class="col-10 px-3 pt-2">
+            <div>
+                <a href="<?= base_url('/addTickets') ?>" class="btn btn-primary">Assigna</a>
+            </div>
             <?= $output ?>
         </div>
     </div>
