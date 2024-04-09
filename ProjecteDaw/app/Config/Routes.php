@@ -13,8 +13,8 @@ $routes->match(['GET','POST'],  '/', 'TicketsController::loadPage');
 $routes->match(['GET','POST'], '/viewTickets', 'TicketsController::viewTickets');
 
 // addTickets es pot borrar
-$routes->get('/addTickets', 'TicketsController::addTickets');
-$routes->post('/addTickets', 'TicketsController::addTickets_post');
+$routes->get('/addTickets', 'TicketsController::addTicket');
+$routes->post('/addTickets', 'TicketsController::addTicketPost');
 
 //registrar
 $routes->get('/register', 'SessionController::register');

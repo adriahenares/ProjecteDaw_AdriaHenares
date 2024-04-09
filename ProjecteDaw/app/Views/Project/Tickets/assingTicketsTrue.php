@@ -18,7 +18,13 @@
                     <div class="p-2">
                         <label>centre a assignar</label>
                         <div class="form-control bg-light">
-                            <input type='text' name='idRepair' id="idRepair">
+                            <select type='text' name='idRepair' id="idRepair">
+                                <?php
+                                foreach($centerId as $value) {
+                                   echo "<option value='". $value . "'>" . $value ."</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                 </div>

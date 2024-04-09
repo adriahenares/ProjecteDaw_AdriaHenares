@@ -44,4 +44,17 @@ class DeviceTypeModel extends Model
         ];
     }
 
+    public function getAllDevices()
+    {
+        $device = $this->select('device_type')->findAll();
+
+        $dataDevice = [];
+
+        foreach ($device as $dataLoop) {
+            $dataDevice[] = $dataLoop['device_type'];
+        }
+
+        return $dataDevice;
+    }
+
 }

@@ -9,6 +9,7 @@ use App\Models\StatusModel;
 use App\Models\TicketModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Libraries\UUID;
+use App\Models\DeviceTypeModel;
 
 use function PHPSTORM_META\type;
 
@@ -117,9 +118,53 @@ class TicketsController extends BaseController
         return view('Project/Tickets/viewTickets', $data);
     }
 
+    public function addTicket() {
+        $instanceDT = new DeviceTypeModel();
+        $instanceS = new StatusModel();
+        $data = [
+            'title' => lang('ticketsLang.titleG'),
+            'status' => $instanceS->getAllStatus(),
+            'device' => $instanceDT->getAllDevices(),
+        ];
+        return view('Project/Tickets/createTickets', $data);
+    }
+
+    public function addTicketPost() {
+        $instanceT = new TicketModel();
+        $uuid = new UUID();
+        //validation
+        //data
+        $date = date('Y-m-d H:i:s');
+        $data = [
+            'ticket_id' => $uuid::v4(),
+            'device_type_id' => $this->request->getPost('device'),
+            'fault_description' => $this->request->getPost('description'),
+            'g_center_code' => '8000013',
+            'r_center_code' => '0',
+            'email_person_center_g' => $this->request->getPost('email_person_contact'),
+            'name_person_center_g' => $this->request->getPost('person_contact_center'),
+            'date_last_modification' => $date,
+            'registration_data' => $date,
+            'status_id' => $this->request->getPost('status'),
+        ];
+        var_dump($data);
+        die;
+       /* $ticketId = $uuid::v4();
+        $deviceType = $this->request->getPost('device');
+        $fault = $this->request->getPost('description');
+        $g_centerCode = '8.000.013';
+        $r_centerCode = null;
+        $email = $this->request->getPost('email_person_contact');
+        $person = $this->request->getPost('person_contact_center');
+        $dateAdd = getdate();
+        $dateMod = getdate();
+        $status = $this->request->getPost('status'); */
+        $instanceT->insert($data);
+    }
+
+    //assignacio ticket
     public function assingTicketsView()
     {
-        $instanceC = new CenterModel();
         // variables per obtenir els selects
         //type device
 
@@ -142,13 +187,17 @@ class TicketsController extends BaseController
         return view('Project/Tickets/assingTickets', $data);
     }
 
+
+    //assignacio ticket
     public function assingTicket($id)
     {
+        $instanceC = new CenterModel();
+        $centerId = $instanceC->getAllCentersId();
         $data['id'] = $id;
+        $data['centerId'] = $centerId;
         return view('Project/Tickets/assingTicketsTrue', $data);
     }
 
-    // Create an invisible named function in KpaCrud to call after
 
     public function assingTicketPost($id)
     {
