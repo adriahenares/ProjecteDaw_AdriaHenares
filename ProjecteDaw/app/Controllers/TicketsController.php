@@ -181,15 +181,13 @@ class TicketsController extends BaseController
             'device_type_id' => $this->request->getPost('device'),
             'fault_description' => $this->request->getPost('description'),
             'g_center_code' => '8000013',
-            'r_center_code' => '0',
+            'r_center_code' => null,
             'email_person_center_g' => $this->request->getPost('email_person_contact'),
             'name_person_center_g' => $this->request->getPost('person_contact_center'),
-            'date_last_modification' => $date,
-            'registration_data' => $date,
             'status_id' => $this->request->getPost('status'),
         ];
-        var_dump($data);
-        die;
+        // var_dump($data);
+        // die;
        /* $ticketId = $uuid::v4();
         $deviceType = $this->request->getPost('device');
         $fault = $this->request->getPost('description');
@@ -213,11 +211,11 @@ class TicketsController extends BaseController
         $crud = new KpaCrud();
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
-        $crud->setColumns(['ticket_id', 'device_type_id', 'registration_data', 'date_last_modification', 'status_id']);
+        $crud->setColumns(['ticket_id', 'created_at', 'updated_at', 'status_id']);
         $crud->setColumnsInfo([
             'ticket_id' => ['name' => 'Id'],
-            'registration_data' => ['name' => 'Data de registre', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
-            'date_last_modification' => ['name' => 'Data ultima modificació', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
+            'created_at' => ['name' => 'Data de registre'],
+            'updated_at' => ['name' => 'Data ultima modificació'],
             'status_id' => ['name' => 'Id status'],
         ]);
         $crud->addItemLink('view', 'fa-file', base_url('/assingTicket/'), 'Mostrar intervencions');
