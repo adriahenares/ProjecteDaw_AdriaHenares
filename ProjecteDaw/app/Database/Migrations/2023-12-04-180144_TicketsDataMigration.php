@@ -75,20 +75,15 @@ class TiquetsDataMigration extends Migration
                 'constraint' => '32',
                 'null' => false,
             ],
-            'date_last_modification' => [
-                'type'       => 'DATETIME',
-                'null' => false,
-            ], 
-            'registration_data' => [
-                'type'       => 'DATETIME',
-                'null' => false,
-            ], 
             'status_id' => [
                 'type'       => 'INT',
                 'constraint' => '4',
                 'auto_increment' => false,
                 'null' => false,
-            ]
+            ],
+            'registration_data datetime default current_timestamp',
+            'deleted_at datetime default null',
+            'date_last_modification datetime default current_timestamp on update current_timestamp'
         ]);
 
         $this->forge->addKey('ticket_id', true);

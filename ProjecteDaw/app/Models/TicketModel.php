@@ -12,14 +12,18 @@ class TicketModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'date_last_modification', 'registration_data', 'status_id'];
+    protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'status_id'];
+    // protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'date_last_modification', 'registration_data', 'status_id'];
 
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat = 'datetime';
-    protected $createdField = 'created_at';
-    protected $updatedField = 'updated_at';
+    protected $createdField = 'registration_data';
+    protected $updatedField = 'date_last_modification';
     protected $deletedField = 'deleted_at';
+    // protected $createdField = 'created_at';
+    // protected $updatedField = 'updated_at';
+    // protected $deletedField = 'deleted_at';
 
     // Validation
     protected $validationRules = [];
@@ -46,8 +50,6 @@ class TicketModel extends Model
         $r_center_code,
         $email_person_center_g,
         $name_person_center_g,
-        $date_last_modification,
-        $registration_data,
         $status_id
     ) {
         $data = [
@@ -58,8 +60,6 @@ class TicketModel extends Model
             'r_center_code' => $r_center_code,
             'email_person_center_g' => $email_person_center_g,
             'name_person_center_g' => $name_person_center_g,
-            'date_last_modification' => $date_last_modification,
-            'registration_data' => $registration_data,
             'status_id' => $status_id
         ];
         $this->insert($data);

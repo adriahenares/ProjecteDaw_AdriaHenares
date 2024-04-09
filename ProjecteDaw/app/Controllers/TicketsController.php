@@ -9,6 +9,7 @@ use App\Models\StatusModel;
 use App\Models\TicketModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Libraries\UUID;
+use DateTime;
 
 use function PHPSTORM_META\type;
 
@@ -33,6 +34,11 @@ class TicketsController extends BaseController
         // variables per obtenir els selects
         //type device
 
+        // $date = date('Y-m-d H:i:s');
+        $date = date('Y-d-m H:i:s');
+
+
+
         //center codes
         $centerId = $instanceC->getAllCentersId();
         //status
@@ -47,7 +53,8 @@ class TicketsController extends BaseController
         $crud->setPrimaryKey('ticket_id');
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
         $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
-        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'registration_data', 'date_last_modification', 'status__status']);
+        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'status__status']);
+        // $crud->setColumns(['ticket_id', 'devicetype__device_type', 'registration_data', 'date_last_modification', 'status__status']);
         $crud->setColumnsInfo([
             'ticket_id' => [
                 'name' => 'Identificador',
@@ -88,14 +95,21 @@ class TicketsController extends BaseController
                 ]
             ],
             'date_last_modification' => [
-                'name' => 'Data ultima modificació',
-                'type' => KpaCrud::DATETIME_FIELD_TYPE,
-                'default'=> date('Y-m-d h:m:s')
+                // 'name' => 'Data ultima modificació',
+                    // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                // 'default'=> $date,
+                'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+                // 'type' => KpaCrud::READONLY_FIELD_TYPE
+                    // 'default'=> date('Y-m-d H:i:s'),
+                    // 'default'=> date('Y-m-d h:m:s')
+                
             ],
             'registration_data' => [
                 'name' => 'Data de registre',
-                'type' => KpaCrud::DATETIME_FIELD_TYPE,
-                'default'=> date('Y-m-d h:m:s')
+                // 'default'=> $date,
+                'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+                // 'default'=> date('Y-m-d h:m:s'),
+                
             ],
             'status__status' => [
                 'name' => 'Estat',
@@ -103,6 +117,9 @@ class TicketsController extends BaseController
                 // 'options' => array_combine($statusNum, $status),
                 // 'html_atts' => ["required",]
             ],
+            'deleted_at' => [
+                'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+            ]
         ]);
         // preguntar
         $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket/'), 'Mostrar intervencions');
