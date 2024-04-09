@@ -54,7 +54,7 @@ class TicketsController extends BaseController
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
         $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
         $crud->setRelation('email_person_center_g', 'professors', 'email', 'email');
-        $crud->setRelation('name_person_center_g', 'professors', 'name', 'name');
+        $crud->setRelation('name_person_center_g', 'professors2', 'name', 'name');
         $crud->setColumns(['ticket_id', 'devicetype__device_type', 'status__status']);
         // $crud->setColumns(['ticket_id', 'devicetype__device_type', 'registration_data', 'date_last_modification', 'status__status']);
         $crud->setColumnsInfo([
@@ -96,31 +96,54 @@ class TicketsController extends BaseController
                 //     'disabled'
                 // ]
             ],
-            'date_last_modification' => [
-                // 'name' => 'Data ultima modificació',
-                    // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
-                // 'default'=> $date,
-                'type' => KpaCrud::INVISIBLE_FIELD_TYPE
-                // 'type' => KpaCrud::READONLY_FIELD_TYPE
-                    // 'default'=> date('Y-m-d H:i:s'),
-                    // 'default'=> date('Y-m-d h:m:s')
-                
-            ],
-            'registration_data' => [
+            'created_at' => [
                 'name' => 'Data de registre',
-                // 'default'=> $date,
-                'type' => KpaCrud::INVISIBLE_FIELD_TYPE
-                // 'default'=> date('Y-m-d h:m:s'),
-                
+                'default' => date('Y-m-d h:m:s'),
+                'html_atts' => [
+                    'disabled'
+                ]
+                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
             ],
+            'updated_at' => [
+                'name' => 'Data ultima modificació',
+                'default' => date('Y-m-d h:m:s'),
+                'html_atts' => [
+                    'disabled'
+                ]
+                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+            ],
+            'deleted_at' => [
+                'name' => 'Data esborrar',
+                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                'default' => date('Y-m-d h:m:s'),
+                'html_atts' => [
+                    'disabled'
+                ]
+            ],
+            // 'date_last_modification' => [
+            //     // 'name' => 'Data ultima modificació',
+            //         // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+            //     // 'default'=> $date,
+            //     'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+            //     // 'type' => KpaCrud::READONLY_FIELD_TYPE
+            //         // 'default'=> date('Y-m-d H:i:s'),
+            //         // 'default'=> date('Y-m-d h:m:s')
+
+            // ],
+            // 'registration_data' => [
+            //     'name' => 'Data de registre',
+            //     // 'default'=> $date,
+            //     'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+            //     // 'default'=> date('Y-m-d h:m:s'),
+
+            // ],
             'status__status' => [
                 'name' => 'Estat',
                 // 'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
                 // 'options' => array_combine($statusNum, $status),
                 // 'html_atts' => ["required",]
-            ],
-            'deleted_at' => [
-                'type' => KpaCrud::INVISIBLE_FIELD_TYPE
             ]
         ]);
         // preguntar
