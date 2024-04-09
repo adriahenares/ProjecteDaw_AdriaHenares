@@ -34,6 +34,11 @@ class TicketsController extends BaseController
         // variables per obtenir els selects
         //type device
 
+        // $date = date('Y-m-d H:i:s');
+        $date = date('Y-d-m H:i:s');
+
+
+
         //center codes
         $centerId = $instanceC->getAllCentersId();
         //status
@@ -48,7 +53,10 @@ class TicketsController extends BaseController
         $crud->setPrimaryKey('ticket_id');
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
         $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
-        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'registration_data', 'date_last_modification', 'status__status']);
+        $crud->setRelation('email_person_center_g', 'professors', 'email', 'email');
+        $crud->setRelation('name_person_center_g', 'professors2', 'name', 'name');
+        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'status__status']);
+        // $crud->setColumns(['ticket_id', 'devicetype__device_type', 'registration_data', 'date_last_modification', 'status__status']);
         $crud->setColumnsInfo([
             'ticket_id' => [
                 'name' => 'Identificador',
@@ -76,34 +84,67 @@ class TicketsController extends BaseController
             ],
             'email_person_center_g' => [
                 'name' => 'Email generador',
-                'default' => 'testprofessor@me.local',
-                'html_atts' => [
-                    'disabled'
-                ]
+                // 'default' => 'testprofessor@me.local',
+                // 'html_atts' => [
+                //     'disabled'
+                // ]
             ],
             'name_person_center_g' => [
                 'name' => 'Nom generador',
-                'default' => 'Alexander',
+                // 'default' => 'Alexander',
+                // 'html_atts' => [
+                //     'disabled'
+                // ]
+            ],
+            'created_at' => [
+                'name' => 'Data de registre',
+                'default' => date('Y-m-d h:m:s'),
+                'html_atts' => [
+                    'disabled'
+                ]
+                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+            ],
+            'updated_at' => [
+                'name' => 'Data ultima modificació',
+                'default' => date('Y-m-d h:m:s'),
+                'html_atts' => [
+                    'disabled'
+                ]
+                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+            ],
+            'deleted_at' => [
+                'name' => 'Data esborrar',
+                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                'default' => date('Y-m-d h:m:s'),
                 'html_atts' => [
                     'disabled'
                 ]
             ],
-            'date_last_modification' => [
-                'name' => 'Data ultima modificació',
-                'type' => KpaCrud::DATETIME_FIELD_TYPE,
-                'default'=> date('Y-m-d h:m:s')
-            ],
-            'registration_data' => [
-                'name' => 'Data de registre',
-                'type' => KpaCrud::DATETIME_FIELD_TYPE,
-                'default'=> date('Y-m-d h:m:s')
-            ],
+            // 'date_last_modification' => [
+            //     // 'name' => 'Data ultima modificació',
+            //         // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+            //     // 'default'=> $date,
+            //     'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+            //     // 'type' => KpaCrud::READONLY_FIELD_TYPE
+            //         // 'default'=> date('Y-m-d H:i:s'),
+            //         // 'default'=> date('Y-m-d h:m:s')
+
+            // ],
+            // 'registration_data' => [
+            //     'name' => 'Data de registre',
+            //     // 'default'=> $date,
+            //     'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+            //     // 'default'=> date('Y-m-d h:m:s'),
+
+            // ],
             'status__status' => [
                 'name' => 'Estat',
                 // 'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
                 // 'options' => array_combine($statusNum, $status),
                 // 'html_atts' => ["required",]
-            ],
+            ]
         ]);
         // preguntar
         $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket/'), 'Mostrar intervencions');

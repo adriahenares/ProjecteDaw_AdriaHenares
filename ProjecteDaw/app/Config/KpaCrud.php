@@ -183,7 +183,7 @@ class KpaCrud extends \SIENSIS\KpaCrud\Config\KpaCrud
 
     public $centerView = [
         'policy' => 'default',
-        'editable' => false,
+        'editable' => true,
         'removable' => false,
 
         'sortable' => true,

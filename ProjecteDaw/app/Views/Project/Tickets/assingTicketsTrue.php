@@ -12,8 +12,10 @@
                     </div>
                 </div>
             </div>
+            
             <?= $this->include("layouts/partials/menu") ?>
-            <div class="col-10">
+
+            <div class="col-10 ps-2 pe-2 pt-2">
                 <div class="d-grid" style="margin-top:20px">
                     <div class="p-2">
                         <label>centre a assignar</label>

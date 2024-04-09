@@ -32,7 +32,7 @@ $routes->get('/interventionsOfTicket/(:segment)', 'TicketsInterventionsControlle
 $routes->get('/intervention/(:segment)/', 'InterventionsController::viewInterventions');
 
 //assignacio tickets
-$routes->match(['get','post'], '/assing', 'TicketsController::assingTicketsView');
+$routes->match(['GET','POST'], '/assing', 'TicketsController::assingTicketsView');
 $routes->get('/assingTicket/(:segment)', 'TicketsController::assingTicket/$1');
 $routes->post('/assingTicket/(:segment)', 'TicketsController::assingTicketPost/$1');
 

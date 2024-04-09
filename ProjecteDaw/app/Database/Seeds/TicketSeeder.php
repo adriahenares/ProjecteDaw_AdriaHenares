@@ -20,8 +20,6 @@ class TicketSeeder extends Seeder
             'r_center_code' => '8000013', 
             'email_person_center_g' => 'testprofessor@me.local', 
             'name_person_center_g' => 'Alexander', 
-            'date_last_modification' => '08/02/2024', 
-            'registration_data' => '07/02/2024', 
             'status_id' => '1'
         ]);
 
