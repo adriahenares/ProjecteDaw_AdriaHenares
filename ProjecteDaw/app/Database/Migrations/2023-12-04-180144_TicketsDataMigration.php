@@ -9,14 +9,14 @@ class TiquetsDataMigration extends Migration
     public function up()
     {
         $this->forge->addField([
-            'device_type_id'          => [
-                'type'       => 'INT',
+            'device_type_id' => [
+                'type' => 'INT',
                 'constraint' => '4',
                 'auto_increment' => true,
                 'null' => false,
             ],
-            'device_type'          => [
-                'type'       => 'VARCHAR',
+            'device_type' => [
+                'type' => 'VARCHAR',
                 'constraint' => '16',
                 'null' => false,
             ],
@@ -25,14 +25,14 @@ class TiquetsDataMigration extends Migration
         $this->forge->createTable('deviceType');
 
         $this->forge->addField([
-            'status_id'          => [
-                'type'       => 'INT',
+            'status_id' => [
+                'type' => 'INT',
                 'constraint' => '4',
                 'auto_increment' => true,
                 'null' => false,
             ],
-            'status'          => [
-                'type'       => 'VARCHAR',
+            'status' => [
+                'type' => 'VARCHAR',
                 'constraint' => '64',
                 'null' => false,
             ],
@@ -41,42 +41,53 @@ class TiquetsDataMigration extends Migration
         $this->forge->createTable('status');
 
         $this->forge->addField([
-            'ticket_id'          => [
-                'type'       => 'VARCHAR',
+            'ticket_id' => [
+                'type' => 'VARCHAR',
                 'constraint' => '36',
                 'null' => false
             ],
-            'device_type_id'       => [
-                'type'       => 'INT',
+            'device_type_id' => [
+                'type' => 'INT',
                 'constraint' => '4',
                 'auto_increment' => false,
             ],
             'fault_description' => [
-                'type'       => 'TEXT',
+                'type' => 'TEXT',
                 'null' => false,
             ],
             'g_center_code' => [
-                'type'       => 'INT',
+                'type' => 'INT',
                 'constraint' => '8',
                 'null' => false,
             ],
             'r_center_code' => [
-                'type'       => 'INT',
+                'type' => 'INT',
                 'constraint' => '8',
                 'null' => false,
             ],
             'email_person_center_g' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => '32',
                 'null' => false,
             ],
             'name_person_center_g' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => '32',
                 'null' => false,
             ],
+            'registration_data datetime default current_timestamp',
+            'date_last_modification datetime default current_timestamp on update current_timestamp',
+            // 'date_last_modification' => [
+            //     'type' => 'DATETIME',
+            //     'null' => false,
+            // ],
+
+            // 'registration_data' => [
+            //     'type' => 'DATETIME',
+            //     'null' => false,
+            // ],
             'status_id' => [
-                'type'       => 'INT',
+                'type' => 'INT',
                 'constraint' => '4',
                 'auto_increment' => false,
                 'null' => false,
