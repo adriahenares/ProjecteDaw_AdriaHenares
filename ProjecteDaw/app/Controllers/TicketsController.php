@@ -53,6 +53,8 @@ class TicketsController extends BaseController
         $crud->setPrimaryKey('ticket_id');
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
         $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
+        $crud->setRelation('email_person_center_g', 'professors', 'email', 'email');
+        $crud->setRelation('name_person_center_g', 'professors', 'name', 'name');
         $crud->setColumns(['ticket_id', 'devicetype__device_type', 'status__status']);
         // $crud->setColumns(['ticket_id', 'devicetype__device_type', 'registration_data', 'date_last_modification', 'status__status']);
         $crud->setColumnsInfo([
@@ -82,17 +84,17 @@ class TicketsController extends BaseController
             ],
             'email_person_center_g' => [
                 'name' => 'Email generador',
-                'default' => 'testprofessor@me.local',
-                'html_atts' => [
-                    'disabled'
-                ]
+                // 'default' => 'testprofessor@me.local',
+                // 'html_atts' => [
+                //     'disabled'
+                // ]
             ],
             'name_person_center_g' => [
                 'name' => 'Nom generador',
-                'default' => 'Alexander',
-                'html_atts' => [
-                    'disabled'
-                ]
+                // 'default' => 'Alexander',
+                // 'html_atts' => [
+                //     'disabled'
+                // ]
             ],
             'date_last_modification' => [
                 // 'name' => 'Data ultima modificació',
