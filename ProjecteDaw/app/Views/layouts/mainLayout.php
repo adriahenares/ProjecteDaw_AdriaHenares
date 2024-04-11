@@ -71,28 +71,32 @@
             <img src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
         </div>
-        <div class="col-2 h-100 bgc-1 c-5" style="height: 100%;"><!--TODO: col-2 no me agrade -->
-            <div class="col-12 menuButton">
-                <h5 class="py-2">
-                    <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
-                    Tickets
-                </h5>
+
+        <div class="row">
+            <div class="col-2 h-100 bgc-1 c-5" style="height: 100%;"><!--TODO: col-2 no me agrade / ficaria un col o col-auto-->
+                <div class="col-12 menuButton">
+                    <h5 class="py-2">
+                        <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
+                        Tickets
+                    </h5>
+                </div>
+                <div class="col-12">
+                    <h5 class="py-2">
+                        <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
+                        Tickets
+                    </h5>
+                </div>
+                <div class="col-12">
+                    <h5 class="py-2">
+                        <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
+                        Tickets
+                    </h5>
+                </div>
             </div>
-            <div class="col-12">
-                <h5 class="py-2">
-                    <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
-                    Tickets
-                </h5>
+
+            <div class="col-10">
+                <?php echo $this->renderSection("main_content") ?>
             </div>
-            <div class="col-12">
-                <h5 class="py-2">
-                    <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
-                    Tickets
-                </h5>
-            </div>
-        </div>
-        <div class="col-10">
-            <?php echo $this->renderSection("main_content") ?>
         </div>
     </div>
 </body>
