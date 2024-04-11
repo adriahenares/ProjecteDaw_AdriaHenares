@@ -7,8 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 //get per defecte tickets
-$routes->match(['GET','POST'],  '/', 'TicketsController::loadPage');
-
+$routes->match(['GET','POST'], '/ssttView', 'TicketsController::ssttView');
 //tickets
 $routes->match(['GET','POST'], '/viewTickets', 'TicketsController::viewTickets');
 
@@ -35,12 +34,4 @@ $routes->get('/intervention/(:segment)/', 'InterventionsController::viewInterven
 $routes->match(['GET','POST'], '/assing', 'TicketsController::assingTicketsView');
 $routes->get('/assingTicket/(:segment)', 'TicketsController::assingTicket/$1');
 $routes->post('/assingTicket/(:segment)', 'TicketsController::assingTicketPost/$1');
-
-
-
-
-
-
-
-
-
+// $routes->addRedirect('/', '/ssttView');

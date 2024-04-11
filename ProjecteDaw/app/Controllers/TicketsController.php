@@ -15,10 +15,6 @@ use function PHPSTORM_META\type;
 
 class TicketsController extends BaseController
 {
-    public function loadPage()
-    {
-        return redirect()->to(base_url('/viewTickets'));
-    }
     /** 
      * Funcio per veure tots el tickets 
      * 
@@ -26,6 +22,22 @@ class TicketsController extends BaseController
      * 
      * @return obj;
      */
+    public function ssttView() {
+        $crud = new KpaCrud();
+        $crud->setTable('tickets');
+        $crud->setPrimaryKey('ticket_id');
+        $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
+        $crud->setRelation('g_center_code', 'centers', 'center_id', 'name');
+        $crud->setRelation('status_id', 'status', 'status_id', 'status');
+        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'fault_description', 'centers__name', 'status__status']);
+        $crud->setConfig('ssttView');
+        $data = [
+            'output' => $crud->render(),
+            'title' => lang('ticketsLang.titleG'),
+        ];
+        
+        return view('ssttView/ssttView', $data);
+    }
     public function viewTickets()
     {
         helper('lang');
