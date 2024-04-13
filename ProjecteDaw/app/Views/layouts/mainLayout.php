@@ -55,46 +55,49 @@
 
         .menuButton {
             cursor: pointer;
-            transition: background-color 1s ease-out;
+            transition: background-color 275ms ease-out;
+            color: #F5F5F5;
+            text-decoration: none;
         }
-
         .menuButton :hover {
             background-color: #C00000;
+            text-decoration: none;
+            color: #F5F5F5;
         }
     </style>
 </head>
 
 <body>
     <!-- <body class="m-0 p-0"> -->
-    <div class="contain-fluid vh-100">
-        <div class="col-12 px-5 bgc-1 py-3">
+    <div class="contain-fluid " >
+        <div class="col-12 px-5 bgc-1 py-3 " style="height: 8vh;">
             <img src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
         </div>
 
-        <div class="row">
-            <div class="col-2 h-100 bgc-1 c-5" style="height: 100%;"><!--TODO: col-2 no me agrade / ficaria un col o col-auto-->
+        <div class="row " style="height: 92vh; width: 100vw">
+            <div class="col-2 bgc-1 c-5 p-0 m-0 h-100"><!--TODO: col-2 no me agrade / ficaria un col o col-auto-->
                 <div class="col-12 menuButton">
-                    <h5 class="py-2">
-                        <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
+                    <a class="py-2 ms-2 c-5 fs-5 w-100" style="text-decoration: none; ">
+                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Tickets
-                    </h5>
+                    </a>
                 </div>
-                <div class="col-12">
-                    <h5 class="py-2">
-                        <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
+                <div class="col-12 menuButton">
+                    <a class="py-2 ms-2 c-5 fs-5 w-100" style="text-decoration: none; ">
+                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Tickets
-                    </h5>
+                    </a>
                 </div>
-                <div class="col-12">
-                    <h5 class="py-2">
-                        <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
+                <div class="col-12 menuButton">
+                    <a class="py-2 ms-2 c-5 fs-5 w-100" style="text-decoration: none; ">
+                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Tickets
-                    </h5>
+                    </a>
                 </div>
             </div>
 
-            <div class="col-10">
+            <div class="col-10 p-0 ps-2 pt-2" style="height: 80vh;">
                 <?php echo $this->renderSection("main_content") ?>
             </div>
         </div>
