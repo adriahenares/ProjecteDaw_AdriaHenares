@@ -12,16 +12,16 @@ $session = \Config\Services::session();  // Config és opcional
 
 class SessionController extends BaseController
 {
-    /* funcionalitat de registre
-    public function register()
+    //funcionalitat de registre sstt
+    public function loginNormal()
     {
         helper('form');
-        return view("authentication/register");
+        return view("authentication/register/register");
     }
 
 
 
-    public function register_post()
+    public function login_post_Normal()
     {
         // validacions complexes
         $validationRules = [
@@ -59,22 +59,10 @@ class SessionController extends BaseController
         ];
 
         if ($this->validate($validationRules)) {
-            if ($this->request->getPost('inputCaptcha') != session()->getFlashdata('textCaptcha')) {
-                session()->setFlashdata('error', 'Completa el Captcha');
-                return redirect()->back()->withInput();
-            }
+
             if ($this->request->getPost('password') == $this->request->getPost('passConfirm')) {
-                $model = new UserModel();
-                $uuid = UUID::v4();
-                $name = $this->request->getPost('name');
-                $email = $this->request->getPost('mail');
-                $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                $code2fa = "";
-                $role = ['user'];
-                $model->addUser($uuid, $name, $email, $pass, $code2fa, $role);
-                return redirect()->to(base_url("add2fa"));
-                // /captcha poner i ya funcionaria
             } else {
+                session()->setFlashdata('error', 'els camps email, nom, pass son obligatoris emplena');
                 return redirect()->back()->withInput();
             }
         } else {
@@ -85,10 +73,69 @@ class SessionController extends BaseController
     }
 
     //login
-    public function login()
+    public function google_login()
     {
-        helper('form');
-        return view("authentication/login");
+         {
+            $client = new \Google\Client();
+            //$client->setAuthConfig('/path/to/client_credentials.json');
+
+            $client->setClientId('216671585995-4knv971ddku8t6uqlleariq04qs2n27c.apps.googleusercontent.com'); //Define your ClientID
+            $client->setClientSecret('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'); //Define your Client Secret Key
+
+            $client->setRedirectUri('http://localhost:80/viewTickets'); //Define your Redirect Uri
+
+            //$client->addScope(\Google\Service\Drive::DRIVE_METADATA_READONLY);
+            $client->addScope(\Google\Service\Oauth2::USERINFO_EMAIL);
+            $client->addScope(\Google\Service\Oauth2::USERINFO_PROFILE);
+            $client->addScope(\Google\Service\Oauth2::OPENID);
+            //$client->addScope('profile');
+            $client->setAccessType('offline');
+
+            //$data['titol'] = "GSuite login";
+            $client->addScope('email');
+            if (isset($_GET["code"])) {
+                var_dump(isset($_GET["code"]));
+                die;
+                $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+
+                if (!isset($token["error"])) {
+                    $client->setAccessToken($token['access_token']);
+
+                    session()->set('access_token', $token['access_token']);
+
+                    $oauth2 = new \Google\Service\Oauth2($client);
+
+                    $userInfo = $oauth2->userinfo->get();
+
+                    // echo "getMail: " . $userInfo->getEmail(); // adreça xtec
+                    // echo "<br>";
+                    // echo "getGivenName: " . $userInfo->getGivenName(); // nom
+                    // echo "<br>";
+                    // echo "getFamilyName: " . $userInfo->getFamilyName(); //cognoms
+                    // echo "<br>";
+                    // echo "getName: " . $userInfo->getName(); //nom complet
+                    // echo "<br>";
+                    // echo "<img src='". $userInfo->getPicture()."'>";
+                    // dd($userInfo);
+                    $data['mail'] = $userInfo->getEmail();
+                    $data['nom'] = $userInfo->getGivenName();
+                    $data['cognoms'] = $userInfo->getFamilyName();
+                    $data['nomComplet'] = $userInfo->getName();
+                    $data['usrFoto'] = $userInfo->getPicture();
+                    session()->set('user_data', $data);
+                }
+            }
+            $login_button = '';
+
+            if (!session()->get('access_token')) {
+                $login_button = '<a href="' . $client->createAuthUrl() . '">LOGIN WITH GOOGLE</a>';
+                $data['login_button'] = $login_button;
+                return view('authentication/login/login', $data);
+            } else {
+                //redirect a la pagina que vols si esta autenticat
+                return view('Project/Tickets/viewTickets', $data);
+            }
+        }
     }
 
     // funcio que s'executa al intentar fer login
@@ -115,33 +162,6 @@ class SessionController extends BaseController
             ];
 
         if ($this->validate($validationRules)) {
-
-            //$model = new UserModel();
-
-            $email = $this->request->getPost('mail');
-            $password = $this->request->getPost('pass');
-
-            $user = $model->getUserByMail($email);
-
-            if ($user == true) {
-                if (password_verify((string)$password, $user['password'])) {
-                    $sessionRole = $model->findRolesOfUser($user['idUser']);
-                    $sessionData = [
-                        // mod con values bien
-                        'id' => $user['idUser'],
-                        'name' => $user['name'],
-                        'role' => $sessionRole,
-                    ];
-                    session()->set($sessionData);
-                    return redirect()->to(base_url('/feed'));
-                } else {
-                    session()->setFlashdata('error', 'Failed');
-                    return redirect()->back()->withInput();
-                }
-            } else {
-                session()->setFlashdata('error', 'Failed');
-                return redirect()->back()->withInput();
-            }
         } else {
             session()->setFlashdata('error', 'Failed');
             return redirect()->back()->withInput();
@@ -154,5 +174,7 @@ class SessionController extends BaseController
         session()->destroy();
         return redirect()->to(base_url('/feed'));
     }
-    */
+
+    //register de alumnes 
+    
 }

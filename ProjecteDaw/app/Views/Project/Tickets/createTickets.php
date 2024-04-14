@@ -19,14 +19,6 @@ echo $this->section("main_content");
             <form action="<?php base_url("/addTickets") ?>" method="POST">
                 <?= csrf_field() ?>
                 <div class="form-group">
-                    <label for="person_contact_center" class="">Persona contacte centre:</label>
-                    <input type="text" class="form-control" name="person_contact_center" id="person_contact_center">
-                </div>
-                <div class="form-group">
-                    <label for="email_person_contact">Correu persona contacte:</label>
-                    <input type="text" class="form-control" name="email_person_contact" id="email_person_contact">
-                </div>
-                <div class="form-group">
                     <label for="description">Descripció</label>
                     <textarea class="form-control" name="description" id="description" cols="30" rows="3"></textarea>
                 </div>
@@ -36,23 +28,35 @@ echo $this->section("main_content");
                         <?php
                         $valueN = 1;
                         foreach ($device as $value) {
-                            echo "<option value='". $valueN. "'>". $value ."</option>";
+                            echo "<option value='" . $valueN . "'>" . $value . "</option>";
                             $valueN++;
-                        }  
+                        }
                         ?>
                     </select>
                 </div>
                 <div>
-                    <label for="status">Status</label>
-                    <select class="form-control" name="status" id="status">
+                    <label for="center_g">Centre generador</label>
+                    <select class="form-control" name="center_g" id="center_g">
                         <?php
-                        $valueN = 1;
-                        foreach ($status as $value) {
-                            echo "<option value='". $valueN . "'>". $value ."</option>";
-                            $valueN++;
-                        }  
+                        echo "<option value='0' selected ></option>";
+                        foreach ($center as $value) {
+                            echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
+                        }
                         ?>
                     </select>
+                </div>
+                <div>
+                    <input type="text" id="search1" placeholder="Busca...">
+                </div>
+                <div>
+                    <label for="center_r">Centre reparador</label>
+                    <select class="form-control" name="center_r" id="center_r">
+                        <?php
+                        echo "<option value='0' selected ></option>";
+                        foreach ($center as $value) {
+                            echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
                 <div>
@@ -63,5 +67,24 @@ echo $this->section("main_content");
         </div>
     </div>
 </div>
-</div>
+<script>
+    const search1 = document.getElementById('search1');
+    const select1 = document.getElementById('center_r');
+    //const search2 = document.getElementById('search2');
+    const select2 = document.getElementById('center_g');
+    search1.addEventListener('input', filterR)
+
+    function filterR() {
+        var textToFilter = search1.value.toUpperCase();
+        var options = select1.options;
+        for (var i = 0; i < options.length; i++) {
+            var txtValue = options[i].text.toUpperCase();
+            if (txtValue.indexOf(textToFilter) > -1) {
+                options[i].style.display = "";
+            } else {
+                options[i].style.display = "none";
+            }
+        }
+    }
+</script>
 <?php echo $this->endSection(); ?>

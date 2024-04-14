@@ -66,10 +66,9 @@ class InterventionDataMigration extends Migration
                 'constraint' => '32',
                 'null' => false,
             ], 
-            'intervention_date' => [
-                'type'       => 'date',
-                'null' => false,
-            ],  
+            'created_at datetime default current_timestamp',
+            'updated_at datetime default current_timestamp on update current_timestamp',
+            'deleted_at datetime'
         ]);
         $this->forge->addKey('intervention_id', true);
         $this->forge->addForeignKey('ticket_id', 'tickets', 'ticket_id', true);

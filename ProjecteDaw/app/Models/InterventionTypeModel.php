@@ -44,4 +44,16 @@ class InterventionTypeModel extends Model
         ];
     }
 
+    public function getAllInterTypes() {
+        $interTypeArr = $this->select('intervention_type')->findAll();
+
+        $interString = [];
+
+        foreach ($interTypeArr as $dataLoop) {
+            $interString[] = $dataLoop['intervention_type'];
+        }
+
+        return $interString;
+    }
+
 }

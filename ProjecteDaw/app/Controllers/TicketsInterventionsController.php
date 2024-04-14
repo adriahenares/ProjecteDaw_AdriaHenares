@@ -20,38 +20,24 @@ class TicketsInterventionsController extends BaseController
     {
         //calls
         $modelTicket = new TicketModel();
-        $uuid = new UUID();
         //functions
         $ticket = $modelTicket->retrieveSpecificData($id);
-        $idInter = UUID::v4();
         //kpaCrud
         $crud = new KpaCrud();
         $crud->setTable('interventions');
         $crud->setPrimaryKey('intervention_id');
-        $crud->setColumns(['description', 'intervention_type_id', 'student_course', 'student_studies', 'intervention_date']);
+        $crud->setColumns(['description', 'intervention_type_id', 'student_course', 'student_studies', 'created_at']);
         $crud->setColumnsInfo([
-            'intervention_id' => ['default' => $idInter],
-            'ticket_id' => ['default' => $ticket['ticket_id']],
             'description' => ['name' => 'descripció'],
             'intervention_type_Id' => ['name' => 'tipus intervencio'],
-            'student_course' => [
-                'name' => 'N curs',
-                'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
-                'options' => ["1" => "1", "2" => "2"],
-                'html_atts' => [
-                    "required",
-                ],
-            ],
-            'student_studies' => [
-                'name' => 'nombre Curs',
-                'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
-                'options' => ["DAM" => "DAM", "DAW" => "DAW", "ASIX" => "ASIX"],
-                'html_atts' => [
-                    "required",
-                ],
-            ],
-            'intervention_date' => ['name' => 'data de intervenció', 'type' => KpaCrud::DATETIME_FIELD_TYPE],
+            'student_course' => ['name' => 'N curs'],
+            'student_studies' => ['name' => 'nombre Curs'],
+            'created_at' => ['name' => 'Data creació'],
         ]);
+        $crud->setConfig('centerView');
+        $crud->addItemLink('del', 'fa-mail', base_url('/updateIntervention'), 'Modificar Intervencio');
+        $crud->addItemLink('view', 'fa-file', base_url('/delIntervention'), 'Eliminar Intervencio');
+        // falta filtrar per intervencio
         $data = [
             'output' => $crud->render(),
             'title' => lang('ticketsLang.titleG'),
