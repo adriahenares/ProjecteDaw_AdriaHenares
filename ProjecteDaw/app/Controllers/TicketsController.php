@@ -15,10 +15,6 @@ use function PHPSTORM_META\type;
 
 class TicketsController extends BaseController
 {
-    public function loadPage()
-    {
-        return redirect()->to(base_url('/viewTickets'));
-    }
     /** 
      * Funcio per veure tots el tickets 
      * 
@@ -26,6 +22,61 @@ class TicketsController extends BaseController
      * 
      * @return obj;
      */
+    public function ssttView()
+    {
+        $crud = new KpaCrud();
+        $crud->setTable('tickets');
+        $crud->setPrimaryKey('ticket_id');
+        $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
+        $crud->setRelation('g_center_code', 'centers', 'center_id', 'name');
+        $crud->setRelation('r_center_code', 'centers2', 'center_id', 'name');
+        $crud->setRelation('status_id', 'status', 'status_id', 'status');
+        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'fault_description', 'centers__name', 'centers2__name', 'created_at', 'status__status']);
+        $crud->setColumnsInfo([
+            'ticket_id' => [
+                'name' => 'Identificador',
+                'type' => KpaCrud::READONLY_FIELD_TYPE,
+                'default' => UUID::v4(),
+                'html_atts' => [
+                    'disabled'
+                ]
+            ],
+            'devicetype__device_type' => [
+                'name' => 'Tipus de dispositiu'
+            ],
+            'fault_description' => [
+                'name' => 'Descripció'
+            ],
+            'centers__name' => [
+                'name' => 'Institut generador',
+            ],
+            'centers2__name' => [
+                'name' => 'Institut reparador',
+            ],
+            'name_person_center_g' => [
+                'name' => 'Nom generador',
+            ],
+            'created_at' => [
+                'name' => 'Data de creació',
+                'default' => date('Y-m-d h:m:s'),
+                'html_atts' => [
+                    'disabled'
+                ]
+                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+            ],
+            'status__status' => [
+                'name' => 'Estat',
+            ]
+        ]);
+        $crud->setConfig('ssttView');
+        $data = [
+            'output' => $crud->render(),
+            'title' => lang('ticketsLang.titleG'),
+        ];
+
+        return view('ssttView/ssttView', $data);
+    }
     public function viewTickets()
     {
         helper('lang');

@@ -12,13 +12,13 @@ class StatusSeeder extends Seeder
         $model = new StatusModel();
 
         $model->insert([
-            'status' => 'Be'
+            'status' => 'Pendent'
         ]);
         $model->insert([
-            'status' => 'Decent'
+            'status' => 'En process'
         ]);
         $model->insert([
-            'status' => 'Malament'
+            'status' => 'Acabat'
         ]);
     }
 }
