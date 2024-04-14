@@ -5,7 +5,7 @@
   }
 </style>
 
-<?= $this->extend('layouts/default/default'); ?>
+<?= $this->extend('layouts/mainLayout'); ?>
 <?= $this->section("main_content"); ?>
 
 <?= $output ?>

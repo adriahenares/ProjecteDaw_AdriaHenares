@@ -100,15 +100,6 @@
             <div class="col-10 p-0 ps-2 pt-2" style="height: 80vh;">
                 <?php echo $this->renderSection("main_content") ?>
             </div>
-            <div class="col-12 menuButton">
-                <h5 class="py-3 mb-0">
-                    <i class="fa-solid fa-ticket-simple ms-3 me-2"></i>
-                    Tickets
-                </h5>
-            </div>
-        </div>
-        <div class="col-10">
-            <?php echo $this->renderSection("main_content") ?>
         </div>
     </div>
 </body>
