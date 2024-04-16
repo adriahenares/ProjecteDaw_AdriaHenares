@@ -26,7 +26,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'cors'          => \App\Filters\CorsFilter::class,
-
+        'sessionVal'    => \App\Filters\SessionValidateFilter::class,
     ];
 
     /**

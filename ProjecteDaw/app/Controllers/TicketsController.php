@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CenterModel;
-use App\Models\ProfessorModel;
 use App\Models\StatusModel;
 use App\Models\TicketModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
@@ -29,9 +28,9 @@ class TicketsController extends BaseController
         $crud->setPrimaryKey('ticket_id');
         $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
         $crud->setRelation('g_center_code', 'centers', 'center_id', 'name');
-        $crud->setRelation('r_center_code', 'centers2', 'center_id', 'name');
+        //$crud->setRelation('r_center_code', 'centers2', 'center_id', 'name');
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
-        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'fault_description', 'centers__name', 'centers2__name', 'created_at', 'status__status']);
+        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'fault_description', 'centers__name', /* 'centers2__name'*/ 'created_at', 'status__status']);
         $crud->setColumnsInfo([
             'ticket_id' => [
                 'name' => 'Identificador',
@@ -50,9 +49,9 @@ class TicketsController extends BaseController
             'centers__name' => [
                 'name' => 'Institut generador',
             ],
-            'centers2__name' => [
+            /*'centers2__name' => [
                 'name' => 'Institut reparador',
-            ],
+            ], */
             'name_person_center_g' => [
                 'name' => 'Nom generador',
             ],

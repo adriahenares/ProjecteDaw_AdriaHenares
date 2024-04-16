@@ -4,21 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class LoginsModel extends Model
+class UsersInRoleModel extends Model
 {
-    protected $table            = 'logins';
-    protected $primaryKey       = 'email';
-    protected $useAutoIncrement = false;
+    protected $table            = 'usersinrole';
+    protected $primaryKey       = 'id';
+    protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['email', 'password'];
-
-    protected bool $allowEmptyInserts = false;
-    protected bool $updateOnlyChanged = true;
-
-    protected array $casts = [];
-    protected array $castHandlers = [];
+    protected $allowedFields    = ['email', 'idRole'];
 
     // Dates
     protected $useTimestamps = false;
@@ -43,10 +37,4 @@ class LoginsModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-
-    public function getUserByMail($email)
-    {
-        return $this->where('email', $email)->first();
-    }
 }

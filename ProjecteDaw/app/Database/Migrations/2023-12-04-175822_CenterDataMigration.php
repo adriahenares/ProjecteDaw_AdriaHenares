@@ -109,6 +109,7 @@ class CenterDataMigration extends Migration
                         'type'           => 'VARCHAR',
                         'constraint'     => '32',
                         'null'           => false,
+                        'unique'         => true,
                 ],
         ]);
         $this->forge->addKey('student_id', true);

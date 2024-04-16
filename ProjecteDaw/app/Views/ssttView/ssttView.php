@@ -9,4 +9,5 @@
 <?= $this->section("main_content"); ?>
 
 <?= $output ?>
+
 <?= $this->endSection(); ?>
