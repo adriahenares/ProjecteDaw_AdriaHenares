@@ -24,7 +24,7 @@ class InterventionDataMigration extends Migration
         $this->forge->addKey('intervention_type_id', true);
         $this->forge->createTable('interventionType');
 
-        
+
 
         $this->forge->addField([
             'intervention_id'       => [
@@ -65,17 +65,20 @@ class InterventionDataMigration extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '32',
                 'null' => false,
-            ], 
+            ],
             'intervention_date' => [
                 'type'       => 'date',
                 'null' => false,
-            ],  
+            ],
+            'created_at datetime default current_timestamp',
+            'updated_at datetime default current_timestamp on update current_timestamp',
+            'deleted_at datetime default null',
         ]);
         $this->forge->addKey('intervention_id', true);
         $this->forge->addForeignKey('ticket_id', 'tickets', 'ticket_id', true);
-        $this->forge->addForeignKey('student_id','students','student_id', true);
-        $this->forge->addForeignKey('professor_id','professors','professor_id', true);
-        $this->forge->addForeignKey('intervention_type_id','interventionType','intervention_type_id', true);
+        $this->forge->addForeignKey('student_id', 'students', 'student_id', true);
+        $this->forge->addForeignKey('professor_id', 'professors', 'professor_id', true);
+        $this->forge->addForeignKey('intervention_type_id', 'interventionType', 'intervention_type_id', true);
         $this->forge->createTable('interventions');
     }
 
@@ -87,4 +90,3 @@ class InterventionDataMigration extends Migration
         $this->forge->dropTable('interventionType');
     }
 }
-

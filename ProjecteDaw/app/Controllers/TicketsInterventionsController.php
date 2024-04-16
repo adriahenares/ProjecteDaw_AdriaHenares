@@ -60,6 +60,6 @@ class TicketsInterventionsController extends BaseController
 
         // obtenim el el ticket en especific i les intervencions associades a aquells
 
-        return view('Project/intermediaryTicInter/intermediary.php', $data);
+        return view('Project/intermediaryTicInter/intermediary', $data);
     }
 }

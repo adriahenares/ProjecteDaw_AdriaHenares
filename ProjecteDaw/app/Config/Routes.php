@@ -25,7 +25,7 @@ $routes->get('/login', 'SessionController::login');
 $routes->post('authetication/login', 'SessionController::login_post');
 
 //pagina intermitja entre tickets i intervencio
-$routes->get('/interventionsOfTicket/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
+$routes->match(['GET','POST'], '/interventionsOfTicket/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
 ///interventions/821198ce-5c27-43
 
 //iintervencio en concret

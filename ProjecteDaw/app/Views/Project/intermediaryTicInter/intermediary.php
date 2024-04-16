@@ -40,8 +40,8 @@ echo $this->section("main_content");
                             <td><?php echo $ticket['g_center_code'] ?></td>
                             <td><?php echo $ticket['r_center_code'] ?></td>
                             <td><?php echo $ticket['email_person_center_g'] ?></td>
-                            <td><?php echo $ticket['date_last_modification'] ?></td>
-                            <td><?php echo $ticket['registration_data'] ?></td>
+                            <td><?php echo $ticket['updated_at'] ?></td>
+                            <td><?php echo $ticket['created_at'] ?></td>
                             <td><?php echo $ticket['status_id'] ?></td>
                         </tr>
                     </table>
