@@ -78,12 +78,12 @@
         <div class="row " style="height: 92vh; width: 100vw">
             <div class="col-2 bgc-1 c-5 p-0 m-0 h-100"><!--TODO: col-2 no me agrade / ficaria un col o col-auto-->
                 <div class="col-12 menuButton">
-                    <a class="py-2 ms-2 c-5 fs-5 w-100" style="text-decoration: none; ">
+                    <a href="<?= site_url('/viewTickets') ?>" class="py-2 ms-2 c-5 fs-5 w-100" style="text-decoration: none; ">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Tickets
                     </a>
                 </div>
-                <div class="col-12 menuButton">
+                <div href="<?= site_url('/assing') ?>" class="col-12 menuButton">
                     <a class="py-2 ms-2 c-5 fs-5 w-100" style="text-decoration: none; ">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Assign
