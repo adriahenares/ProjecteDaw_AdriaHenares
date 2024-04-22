@@ -82,8 +82,8 @@ class TiquetsDataMigration extends Migration
                 'null' => false,
             ],
             'created_at timestamp default 0',
-            'deleted_at timestamp null default null',
             'updated_at timestamp default current_timestamp on update current_timestamp',
+            'deleted_at timestamp null default null',
         ]);
 
         $this->forge->addKey('ticket_id', true);

@@ -106,6 +106,12 @@
                         Tickets
                     </a>
                 </div> -->
+                <div class="col-12 menuButton">
+                    <a class="py-2 ms-2 c-5 fs-5 w-100" href="<?= base_url('/authentication/validateStudents') ?>" style="text-decoration: none; ">
+                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
+                        Tickets
+                    </a>
+                </div>
             </div>
 
             <div class="col-10 p-0 ps-2 pt-2" style="height: 80vh;">

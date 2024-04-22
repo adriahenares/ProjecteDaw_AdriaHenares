@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class InterventionTypeModel extends Model
+class UsersInRoleModel extends Model
 {
-    protected $table            = 'interventiontype';
-    protected $primaryKey       = 'intervention_type_id';
+    protected $table            = 'usersinrole';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['intervention_type_id','intervention_type'];
+    protected $allowedFields    = ['email', 'idRole'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,23 +37,4 @@ class InterventionTypeModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function addInterventionType($interventionType) {
-        $data = [
-            'intervention_type' => $interventionType
-        ];
-    }
-
-    public function getAllInterTypes() {
-        $interTypeArr = $this->select('intervention_type')->findAll();
-
-        $interString = [];
-
-        foreach ($interTypeArr as $dataLoop) {
-            $interString[] = $dataLoop['intervention_type'];
-        }
-
-        return $interString;
-    }
-
 }

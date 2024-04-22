@@ -20,5 +20,6 @@ class Install extends Seeder
         $this->call("DeviceTypeSeeder");
         $this->call("TicketSeeder");
         $this->call("InterventionSeeder");
+        $this->call("LoginsSeeder");
     }
 }

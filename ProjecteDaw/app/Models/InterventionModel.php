@@ -12,11 +12,11 @@ class InterventionModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['intervention_id','ticket_id','professor_id','student_id','intervention_type_id','description','student_course','student_studies','intervention_date'];
+    protected $allowedFields    = ['intervention_id','ticket_id','professor_id','student_id','intervention_type_id','description','student_course','student_studies'];
     //TODO: Afegir allowed fields quan s'hagi d'afegir dades
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

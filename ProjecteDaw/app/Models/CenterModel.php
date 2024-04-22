@@ -55,14 +55,8 @@ class CenterModel extends Model
     }
 
     public function getAllCentersId() {
-        $centerIdArr = $this->select('center_id')->findAll();
+        $centerArr = $this->findAll();
 
-        $centerIdString = [];
-
-        foreach ($centerIdArr as $dataLoop) {
-            $centerIdString[] = $dataLoop['center_id'];
-        }
-
-        return $centerIdString;
+        return $centerArr;
     }
 }

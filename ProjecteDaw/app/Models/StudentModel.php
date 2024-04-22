@@ -37,4 +37,13 @@ class StudentModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function verify_mail($mail) {
+        $query = $this->where('email', $mail)->first();
+        if ($query != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

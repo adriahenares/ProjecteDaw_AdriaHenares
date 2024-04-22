@@ -21,7 +21,6 @@ class InterventionSeeder extends Seeder
             'description' => 'testeo prueba', 
             'student_course' => '2', 
             'student_studies' => 'DAM', 
-            'intervention_date' => '07/02/2024', 
         ]);
     }
 }
