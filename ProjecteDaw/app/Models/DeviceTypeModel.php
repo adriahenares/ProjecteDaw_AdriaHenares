@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class DeviceTypeModel extends Model
 {
-    protected $table            = 'devicetype';
+    protected $table            = 'deviceType';
     protected $primaryKey       = 'device_type_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

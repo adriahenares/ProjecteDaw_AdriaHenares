@@ -52,11 +52,11 @@ class TicketsController extends BaseController
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
-        $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
+        $crud->setRelation('device_type_id', 'deviceType', 'device_type_id', 'device_type');
         $crud->setRelation('email_person_center_g', 'professors', 'email', 'email');
         //$crud->setRelation('name_person_center_g', 'professors2', 'name', 'name');
-        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'status__status']);
-        // $crud->setColumns(['ticket_id', 'devicetype__device_type', 'registration_data', 'date_last_modification', 'status__status']);
+        $crud->setColumns(['ticket_id', 'deviceType__device_type', 'status__status']);
+        // $crud->setColumns(['ticket_id', 'deviceType__device_type', 'registration_data', 'date_last_modification', 'status__status']);
         $crud->setColumnsInfo([
             'ticket_id' => [
                 'name' => 'Identificador',
@@ -66,7 +66,7 @@ class TicketsController extends BaseController
                     'disabled'
                 ]
             ],
-            'devicetype__device_type' => [
+            'deviceType__device_type' => [
                 'name' => 'Tipus de dispositiu'
             ],
             'fault_description' => [
