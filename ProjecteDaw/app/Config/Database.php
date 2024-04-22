@@ -26,10 +26,10 @@ class Database extends Config
      */
     public array $default = [
         'DSN'          => '',
-        'hostname'     => '85.214.28.48',
-        'username'     => 'tekplus',
-        'password'     => '?Xac9056n',
-        'database'     => 'kpatek4_tekplus',
+        'hostname'     => 'localhost',//85.214.28.48
+        'username'     => 'root',//tekplus
+        'password'     => '',//?Xac9056n
+        'database'     => 'projectedaw2023-2024',//kpatek4_tekplus
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,
