@@ -97,8 +97,18 @@ class TicketsController extends BaseController
         for ($i = 0; $i < count($status); $i++) {
             $statusNum[$i] = $i;
         }
-        //KpaCrud
+
         $crud = new KpaCrud();
+        /**
+         * Retorno true o false depent de la pag on estem, per mostrar o no el boto de add ticket
+         */
+        if ($crud->isEditMode()){
+            $data['badd']=false;
+        }else{
+            $data['badd']=true;
+        }
+        
+        //KpaCrud
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
@@ -185,16 +195,30 @@ class TicketsController extends BaseController
                 // 'html_atts' => ["required",]
             ]
         ]);
+
+      
+
+
         // preguntar
         $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket'), 'Mostrar intervencions');
-        $crud->addItemLink('del', 'fa-mail', base_url('/delTicket'), 'Eliminar intervenció');
+        // $crud->addItemFunction('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar intervenció');
+        $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar intervenció');
+
+        // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
+
+
+       
+
         // $crud->setConfig(["editable" => false, "removable" => false]);
 
         $crud->setConfig('centerView');
-        $data = [
-            'output' => $crud->render(),
-            'title' => lang('ticketsLang.titleG'),
-        ];
+        // $data = [    
+        //     'output' => $crud->render(),
+        //     'title' => lang('ticketsLang.titleG'),
+        // ];
+
+        $data['output'] = $crud->render();
+        $data['title'] = lang('ticketsLang.titleG');
 
         return view('Project/Tickets/viewTickets', $data);
     }
@@ -254,7 +278,7 @@ class TicketsController extends BaseController
             'device_type_id' => ['name' => 'Id dispositiu'],
             'status_id' => ['name' => 'Id status'],
         ]);
-        $crud->addItemLink('view', 'fa-file', base_url('/assingTicket/'), 'Mostrar intervencions');
+        $crud->addItemLink('view', 'fa-file', base_url('/assingTicket'), 'Mostrar intervencions');
         $crud->setConfig('centerView');
         // $crud->addWhere('r_center_code != null');
         $data = [
@@ -293,6 +317,7 @@ class TicketsController extends BaseController
     //deleteTicket
     public function deleteTicket($ticket)
     {
+        // securitzar
         $instanceT = new TicketModel();
         $instanceT->delete($ticket);
         return redirect()->back()->withInput();

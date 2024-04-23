@@ -86,35 +86,42 @@
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
         </div>
 
-        <div class="row " style="height: 92vh; width: 100vw; ">
-            <div class="col-2 bgc-1 c-5 p-0 m-0 h-100 " style="display: fixed;">
-                <div class="col-12 menuButton mt-4 mb-2 w-100">
-                    <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-2 c-5 fs-5 col-12 w-100" style="text-decoration: none;">
+        <div class="row " style="height: 92vh; width: 100vw;">
+
+            <div class="bgc-1 c-5 p-0 m-0 h-100 " style="position: fixed; top: 8vh; width: 12vw;">
+
+                <div class=" menuButton mt-4 mb-3">
+                    <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none; width: 100vw;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Tickets
                     </a>
                 </div>
-                <div class="col-12 menuButton mt-1 mb-2 w-100">
-                    <a href="<?= base_url('/assing') ?>" class="py-2 ms-2 c-5 fs-5 w-100" style="text-decoration: none;">
+
+                <div class=" menuButton mt-1 mb-3 w-100">
+                    <a href="<?= base_url('/assing') ?>" class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Assign
                     </a>
                 </div>
-                <!-- <div class="col-12 menuButton">
-                    <a class="py-2 ms-2 c-5 fs-5 w-100" style="text-decoration: none; ">
+
+                <div class="menuButton mt-1 mb-3 w-100">
+                    <a class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none; ">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
-                        Tickets
-                    </a>
-                </div> -->
-                <div class="col-12 menuButton">
-                    <a class="py-2 ms-2 c-5 fs-5 w-100" href="<?= base_url('/authentication/validateStudents') ?>" style="text-decoration: none; ">
-                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
-                        Tickets
+                        Log in
                     </a>
                 </div>
+
+
+                <!-- <div class="menuButton mt-1 mb-3 w-100">
+                    <a class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none; ">
+                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
+                        Log out
+                    </a>
+                </div> -->
+
             </div>
 
-            <div class="col-10 p-0 ps-2 pt-2" style="height: 80vh;">
+            <div class=" p-0 ps-2 pt-2" style="height: 92vh; position: fixed;  left: 11vw; overflow-y: auto; width: 89vw;">
                 <?php echo $this->renderSection("main_content") ?>
             </div>
         </div>

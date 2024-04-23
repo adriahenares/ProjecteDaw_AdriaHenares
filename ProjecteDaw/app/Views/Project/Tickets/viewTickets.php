@@ -3,17 +3,25 @@
         height: 110px;
         /* width:  100vw; */
     }
+
+    .text-danger{
+        color: red !important;
+    }
+
 </style>
 
 <?= $this->extend('layouts/mainLayout'); ?>
 
+
 <?= $this->section("main_content"); ?>
 
-<!-- <div class="col-10 px-3 pt-2"> -->
-    <div>
-        <a href="<?= base_url('/addTickets') ?>" class="btn btn-primary">Afegir Ticket</a>
-    </div>
-    <?= $output ?>
-<!-- </div> -->
+    <?php  use function App\Controllers\bAdd;?>
 
+    <?php if ($badd):?>
+        <div>
+            <a href="<?= base_url('/addTickets') ?>" class="btn btn-primary">Afegir Ticket</a>
+        </div>
+    <?php endif ?>
+
+    <?= $output ?>
 <?= $this->endSection(); ?>

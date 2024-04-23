@@ -11,6 +11,9 @@ $routes->match(['GET','POST'], '/ssttView', 'TicketsController::ssttView');
 //tickets
 $routes->match(['GET','POST'], '/viewTickets', 'TicketsController::viewTickets');
 
+
+
+
 // addTickets 
 $routes->get('/addTickets', 'TicketsController::addTicket');
 $routes->post('/addTickets', 'TicketsController::addTicketPost');
@@ -53,4 +56,6 @@ $routes->post('/addIntervention', 'InterventionsController::addIntervention_post
 $routes->post('/updateIntervention/(:segment)', 'InterventionsController::updateIntervention/$1');
 
 
-// $routes->addRedirect('/', '/ssttView');
+$routes->match(['GET','POST'], '/', 'TicketsController::viewTickets');
+
+// $routes->addRedirect('/', '/viewTickets');

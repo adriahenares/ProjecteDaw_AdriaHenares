@@ -9,8 +9,8 @@
 
 <?= $this->section("main_content"); ?>
 
-<div>
-    <a href="<?= base_url('/assingTicket') ?>" class="btn btn-primary">Assigna</a>
-</div>
+<!-- <div>
+    <a href="<? base_url('assingTicket') ?>" class="btn btn-primary">Assigna</a>
+</div> -->
 <?= $output ?>
 <?= $this->endSection(); ?>
