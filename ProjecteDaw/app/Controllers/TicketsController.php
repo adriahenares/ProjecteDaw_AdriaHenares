@@ -200,7 +200,7 @@ class TicketsController extends BaseController
 
 
         // preguntar
-        $crud->addItemLink('view', 'fa-file', base_url('/interventionsOfTicket'), 'Mostrar intervencions');
+        $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Mostrar intervencions');
         // $crud->addItemFunction('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar intervenció');
         $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar intervenció');
 

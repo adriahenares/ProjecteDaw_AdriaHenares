@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <div class="container-fluid" style="background-color: lightskyblue;">
+    <div class="container-fluid">
         <div class="row justify-content-center align-items-center min-vh-100">
-            <div class="col-md-5 p-4" style="background-color: lightgrey;">
+            <div class="col-md-5 p-4" style="background-color: lightgrey; border-radius: 20px">
                 <?php echo $this->renderSection("auth") ?>
             </div>
         </div>
