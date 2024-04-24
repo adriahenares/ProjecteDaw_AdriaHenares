@@ -16,42 +16,48 @@
 
                     <div class="row">
                         <div class="col-6">
-                            <h5>Id device</h5> 
+                            <h5 style="font-weight: bold;">Id device</h5> 
                             <br>
                             <p><?php echo $ticket['device_type_id'] ?></p>
                             <br>
                         </div>  
 
                         <div class="col-6">
-                            <h5>email centre generador</h5> 
+                            <h5 style="font-weight: bold;">Centre generador</h5> 
                             <br>
                             <p><?php echo $ticket['email_person_center_g'] ?></p>
                             <br>
                         </div>
 
+                        <hr/>
+                        
                         <div class="col-12">
-                            <h5>Descripció</h5>
+                            <h5 style="font-weight: bold;">Descripció</h5>
                             <br>
                             <p><?php echo $ticket['fault_description'] ?></p>
                             <br>
                         </div>
 
+                        <hr/>
+
                         <div class="col-6">
-                            <h5>data registre</h5>
+                            <h5 style="font-weight: bold;">Data creació</h5>
                             <br>
                             <p><?php echo $ticket['created_at'] ?></p>
                             <br>
                         </div>
 
                         <div class="col-6">
-                            <h5>data ultima modificacio</h5>
+                            <h5 style="font-weight: bold;">Ultima modificació</h5>
                             <br>
                             <p><?php echo $ticket['updated_at'] ?></p>
                             <br>
                         </div>
 
-                        <div class="col-12">
-                            <h5>Id status</h5>
+                        <hr/>
+
+                        <div class="col-6">
+                            <h5 style="font-weight: bold;" >Status</h5>
                             <br>
                             <p><?php echo $ticket['status_id'] ?></p>
                             <br>
