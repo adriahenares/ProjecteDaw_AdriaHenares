@@ -76,6 +76,12 @@
             text-decoration: none;
             color: #F5F5F5;
         } */
+
+        .menuButton a {
+            width: 12vw; 
+            display: block;
+        }
+
     </style>
 </head>
 
@@ -91,7 +97,7 @@
             <div class="bgc-1 c-5 p-0 m-0 h-100 " style="position: fixed; top: 8vh; width: 12vw;">
 
                 <div class=" menuButton mt-4 mb-3">
-                    <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none; width: 100vw;">
+                    <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Tickets
                     </a>
