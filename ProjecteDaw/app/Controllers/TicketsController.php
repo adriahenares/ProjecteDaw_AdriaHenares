@@ -260,6 +260,7 @@ class TicketsController extends BaseController
             'status_id' => '1',
         ];
         $instanceT->insert($data);
+        return redirect()->to('viewTickets');
     }
 
     //assignacio ticket
