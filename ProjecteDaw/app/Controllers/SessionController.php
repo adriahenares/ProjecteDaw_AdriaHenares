@@ -17,6 +17,10 @@ $session = \Config\Services::session();  // Config és opcional
 class SessionController extends BaseController
 {
     //funcionalitat de registre sstt
+    public function redirectToLogin() {
+        return redirect()->to('loginAuth');
+    }
+
     public function loginNormal()
     {
         helper('form');
