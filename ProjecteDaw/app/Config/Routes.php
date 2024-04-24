@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
-$routes->get('/', 'SessionController::redirectToLogin');
+
 //get per defecte tickets
 $routes->match(['GET','POST'], '/ssttView', 'TicketsController::ssttView');
 //tickets
@@ -60,3 +60,5 @@ $routes->post('/addIntervention', 'InterventionsController::addIntervention_post
 $routes->post('/updateIntervention/(:segment)', 'InterventionsController::updateIntervention/$1');
 
 $route['default_controller'] = 'TicketsController::ssttView';
+
+$routes->get('/', 'SessionController::redirectToLogin');
