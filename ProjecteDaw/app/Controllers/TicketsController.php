@@ -254,7 +254,7 @@ class TicketsController extends BaseController
             'device_type_id' => ['name' => 'Id dispositiu'],
             'status_id' => ['name' => 'Id status'],
         ]);
-        $crud->addItemLink('view', 'fa-file', base_url('/assingTicket/'), 'Mostrar intervencions');
+        $crud->addItemLink('view', 'fa-file', base_url('/assingTicket'), 'Mostrar intervencions');
         $crud->setConfig('centerView');
         // $crud->addWhere('r_center_code != null');
         $data = [
@@ -264,7 +264,7 @@ class TicketsController extends BaseController
         return view('Project/Tickets/assingTickets', $data);
     }
 
-    //assignacio ticket
+    //assignacio ticket sespecific
     public function assingTicket($id)
     {
         $instanceC = new CenterModel();

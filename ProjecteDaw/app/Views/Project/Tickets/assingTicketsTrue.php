@@ -23,7 +23,7 @@
                             <select type='text' name='idRepair' id="idRepair">
                                 <?php
                                 foreach($centerId as $value) {
-                                   echo "<option value='". $value . "'>" . $value ."</option>";
+                                   echo "<option value='". $value['center_id'] . "'>" . $value['name'] ."</option>";
                                 }
                                 ?>
                             </select>

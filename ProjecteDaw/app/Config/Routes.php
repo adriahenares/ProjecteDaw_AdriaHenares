@@ -25,6 +25,8 @@ $routes->post('/loginAuth', 'SessionController::login_post_Normal');
 //iniciar sessio profe, alum
 $routes->get('/login', 'SessionController::google_login');
 
+//validar el centre
+$routes->post('/validateCenter', 'SessionController::validateCenter');
 //register de alumnes
 $routes->get('/validateStudents', 'SessionController::validateStudents');
 $routes->post('/validateStudents', 'SessionController::validateStudents_post');
@@ -52,5 +54,4 @@ $routes->get('/delIntervention/(:segment)', 'InterventionsController::delInterve
 $routes->post('/addIntervention', 'InterventionsController::addIntervention_post');
 $routes->post('/updateIntervention/(:segment)', 'InterventionsController::updateIntervention/$1');
 
-
-// $routes->addRedirect('/', '/ssttView');
+$route['default_controller'] = 'TicketsController::ssttView';
