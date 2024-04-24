@@ -15,10 +15,10 @@ class TicketSeeder extends Seeder
         $model->insert([
             'ticket_id' => '6cfdd8c4-d2ce-46b1-b91e-36e229f5238f',
             'device_type_id' => '1', 
-            'fault_description' => '1`poiuhygtfrd', 
+            'fault_description' => 'L\'ordinador no s\'encen i anava molt lent.', 
             'g_center_code' => '8000013', 
             'r_center_code' => '8000013', 
-            'email_person_center_g' => 'testprofessor@me.local', 
+            'email_person_center_g' => 'anilei@xtec.cat', 
             'name_person_center_g' => 'Alexander', 
             'status_id' => '1'
         ]);

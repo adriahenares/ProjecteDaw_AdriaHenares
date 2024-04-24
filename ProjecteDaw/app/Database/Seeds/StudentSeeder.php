@@ -13,7 +13,7 @@ class StudentSeeder extends Seeder
 
         $model->insert([
             'student_id' => '679612ce-5c27-43',
-            'email' => "test@gmail.com",
+            'email' => "faixala@inscaparrella.cat",
         ]);
     }
 }
