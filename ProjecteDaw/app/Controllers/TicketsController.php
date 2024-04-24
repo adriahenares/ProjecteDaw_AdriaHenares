@@ -306,7 +306,7 @@ class TicketsController extends BaseController
             'r_center_code' => $this->request->getPost("idRepair"),
         ];
         $instanceT->assingTicket($id, $valueR);
-        return redirect()->to(base_url('assing'));
+        return redirect()->to('assing');
     }
 
     //updateTicket

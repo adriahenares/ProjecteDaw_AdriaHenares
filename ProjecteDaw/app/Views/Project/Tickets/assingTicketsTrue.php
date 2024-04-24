@@ -10,6 +10,8 @@
 <?= $this->section("main_content"); ?>
 
 <form method='post' action="<?= base_url("/assingTicket/" . $id) ?>">
+    <?= csrf_field() ?>
+
     <div>
         <h1>Assigna Ticket</h1>
     </div>
