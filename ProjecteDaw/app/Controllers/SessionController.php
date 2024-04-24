@@ -65,7 +65,7 @@ class SessionController extends BaseController
                     $sessionData = [
                         'email' => $user['email'],
                         //atribut per verificar que el usuari no es professor ni alumne
-                        'nonTraditional' => '1',
+                        'nonTraditional' => 1,
                     ];
                     session()->set($sessionData);
                     return redirect()->to('/viewTickets');
@@ -119,17 +119,23 @@ class SessionController extends BaseController
                 //validacions
                 $pos = strpos($data['mail'], '@');
                 $mailLast = substr($data['mail'], $pos);
-                if ($mailLast == '@gmail.com' || $instanceSt->verify_mail($data['mail']) == true) {
+                if ($mailLast == '@xtec.cat' || $instanceSt->verify_mail($data['mail']) == true) {
                     $data['nom'] = $userInfo->getGivenName();
                     $data['cognoms'] = $userInfo->getFamilyName();
                     $data['nomComplet'] = $userInfo->getName();
                     //comprovem la extensio del correu per veure si es alumne o professor
-                    if ($mailLast == '@gmail.com' && $instanceProfessor->verifyProfessor($data['mail']) == false) {  
-                       $userVerification = true;
+                    if ($mailLast == '@xtec.cat') {
+                        //si ets un professor atribut nonTraditional a 0 per identificar que es un professor
+                        $data['nonTraditional'] = 0;
+                        if ($instanceProfessor->verifyProfessor($data['mail']) == false) {
+                            $userVerification = true;
+                        }
                     }
-                    //l'usuari es un professor
+
+                   
+                    //l'usuari es un professor 
                     if ($userVerification == true ) {
-                        
+                        // creacio de les variables per professor 
                         $pos = strpos($data['nomComplet'], ' ');
                         $surnames = substr($data['nomComplet'], $pos);
                         $uuid = UUID::v4();
@@ -141,7 +147,6 @@ class SessionController extends BaseController
                             'repair_center_id' => null
                         ];
                         $instanceProfessor->insert($dataProf);
-                        session()->setFlashdata('tokenTmp', false);
                     }
                     session()->set('sessionData', $data);
                 } else {
