@@ -36,7 +36,7 @@ class TicketsInterventionsController extends BaseController
         ]);
         $crud->setConfig('centerView');
         $crud->addItemLink('del', 'fa-mail', base_url('/updateIntervention'), 'Modificar Intervencio');
-        $crud->addItemLink('view', 'fa-file', base_url('/delIntervention'), 'Eliminar Intervencio');
+        // $crud->addItemLink('view', 'fa-file', base_url('/delIntervention'), 'Eliminar Intervencio');
         // falta filtrar per intervencio
         $data = [
             'output' => $crud->render(),

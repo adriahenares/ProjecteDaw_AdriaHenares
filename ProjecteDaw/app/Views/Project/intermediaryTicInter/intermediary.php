@@ -91,7 +91,7 @@
                 
                 <div class="col-7 h-100">
                     <div class="d-flex justify-content-end mb-2">
-                        <a class="btn" style="background-color: #0DCAF0;"  href="<?= base_url('/addIntervention/' . $ticket['ticket_id'])?>"><i class="fa fa-plus" aria-hidden="true"></i> Afegeix</a>
+                        <!-- <a class="btn" style="background-color: #0DCAF0;"  href="<?= base_url('/addIntervention/' . $ticket['ticket_id'])?>"><i class="fa fa-plus" aria-hidden="true"></i> Afegeix</a> -->
                     </div>
                     <?= $output ?>
                 </div>
