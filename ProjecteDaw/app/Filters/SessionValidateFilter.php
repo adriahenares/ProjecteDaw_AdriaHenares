@@ -25,8 +25,20 @@ class SessionValidateFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if(!isset(session()->sessionData['mail'])) {
-            redirect()->to(base_url('/login'));
+        // modificar filtre validate code
+        if (!isset(session()->sessionData['mail'])) {
+            $client = new \Google\Client();
+            $token = session()->get('acces_token');
+            if ($token != null) {
+                $client->revokeToken($token);
+                // Limpiar los datos de la sesión
+                session()->unset_userdata('access_token');
+                session()->unset_userdata('sessionData');
+                session()->destroy();
+            } else {
+                session()->destroy();
+            }
+            return redirect()->back()->withInput();
         }
     }
 

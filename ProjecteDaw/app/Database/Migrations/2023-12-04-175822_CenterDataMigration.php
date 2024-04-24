@@ -118,7 +118,7 @@ class CenterDataMigration extends Migration
         $this->forge->addField([
                 'professor_id'          => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => '16',
+                        'constraint'     => '36',
                         'null'           => false,
                 ],
                 'name'          => [
@@ -137,7 +137,7 @@ class CenterDataMigration extends Migration
                 'repair_center_id'          => [
                         'type'           => 'INT',
                         'constraint'     => '8',
-                        'null'           => false,
+                        'null'           => true,
         ],
         ]);
         $this->forge->addKey('professor_id', true);

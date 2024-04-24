@@ -289,7 +289,7 @@ class TicketsController extends BaseController
         return view('Project/Tickets/assingTickets', $data);
     }
 
-    //assignacio ticket
+    //assignacio ticket sespecific
     public function assingTicket($id)
     {
         $instanceC = new CenterModel();

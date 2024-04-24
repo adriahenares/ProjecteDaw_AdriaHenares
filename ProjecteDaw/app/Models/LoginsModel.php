@@ -49,4 +49,8 @@ class LoginsModel extends Model
     {
         return $this->where('email', $email)->first();
     }
+
+    public function findIfUserInRole($id, $roleToSearch) {
+        $query = $this->where();
+    }
 }

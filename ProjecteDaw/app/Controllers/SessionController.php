@@ -4,9 +4,11 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Libraries\UUID;
+use App\Models\CenterModel;
 //use App\Models\; tabla login
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Models\LoginsModel;
+use App\Models\ProfessorModel;
 use App\Models\StudentModel;
 use Google\Service\Classroom\Student;
 
@@ -82,6 +84,8 @@ class SessionController extends BaseController
     public function google_login()
     {
         $instanceSt = new StudentModel();
+        $instanceProfessor = new ProfessorModel();
+        $instanceC = new CenterModel();
         $client = new \Google\Client();
         //$client->setAuthConfig('/path/to/client_credentials.json');
 
@@ -96,7 +100,8 @@ class SessionController extends BaseController
         $client->addScope(\Google\Service\Oauth2::OPENID);
         //$client->addScope('profile');
         $client->setAccessType('offline');
-
+        //variariable per trobar si alumne o professor
+        $userVerification = false;
         //$data['titol'] = "GSuite login";
         $client->addScope('email');
         if (isset($_GET["code"])) {
@@ -110,17 +115,34 @@ class SessionController extends BaseController
                 $oauth2 = new \Google\Service\Oauth2($client);
 
                 $userInfo = $oauth2->userinfo->get();
-
                 $data['mail'] = $userInfo->getEmail();
                 //validacions
-                $toFind = "@";
-                $pos = strpos($data['mail'], $toFind);
+                $pos = strpos($data['mail'], '@');
                 $mailLast = substr($data['mail'], $pos);
-                if ($mailLast == '@xtec.cat' || $instanceSt->verify_mail($data['mail']) == true) {
+                if ($mailLast == '@gmail.com' || $instanceSt->verify_mail($data['mail']) == true) {
                     $data['nom'] = $userInfo->getGivenName();
                     $data['cognoms'] = $userInfo->getFamilyName();
                     $data['nomComplet'] = $userInfo->getName();
-                    $data['usrFoto'] = $userInfo->getPicture();
+                    //comprovem la extensio del correu per veure si es alumne o professor
+                    if ($mailLast == '@gmail.com' && $instanceProfessor->verifyProfessor($data['mail']) == false) {  
+                       $userVerification = true;
+                    }
+                    //l'usuari es un professor
+                    if ($userVerification == true ) {
+                        
+                        $pos = strpos($data['nomComplet'], ' ');
+                        $surnames = substr($data['nomComplet'], $pos);
+                        $uuid = UUID::v4();
+                        $dataProf = [
+                            'professor_id' => $uuid,
+                            'name' => $data['nom'],
+                            'surnames' => $surnames,
+                            'email' => $data['mail'],
+                            'repair_center_id' => null
+                        ];
+                        $instanceProfessor->insert($dataProf);
+                        session()->setFlashdata('tokenTmp', false);
+                    }
                     session()->set('sessionData', $data);
                 } else {
                     $this->logOut_function();
@@ -139,39 +161,25 @@ class SessionController extends BaseController
             $data['login_button'] = $login_button;
             return view("authentication/login/login", $data);
         } else {
+            if ($userVerification == true) {
+                session()->setFlashdata('id', $uuid);
+                $dataView['center'] =  $instanceC->getAllCentersId();
+                return view('authentication/register/validateCenter', $dataView);
+            } else {
+                return redirect()->to(base_url('/viewTickets'));
+            }
             //redirect a la pagina que vols si esta autenticat
-            return redirect()->to(base_url('/ssttView'));
         }
     }
 
-    // funcio que s'executa al intentar fer login
-    public function login_post()
-    {
-        // validacions complexes
-        $validationRules =
-            [
-                'mail' => [
-                    'label'  => 'eMail usuari',
-                    'rules'  => 'required|valid_email',
-                    'errors' => [
-                        'required' => 'eMail es un camp obligatori',
-                        'valid_email' => 'No és un mail valid',
-                    ],
-                ],
-                'pass' => [
-                    'label'  => 'Contrasenya usuari',
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'La clau és un camp obligatori',
-                    ],
-                ],
-            ];
-
-        if ($this->validate($validationRules)) {
-        } else {
-            session()->setFlashdata('error', 'Failed');
-            return redirect()->back()->withInput();
-        }
+    public function validateCenter() {
+        $instanceProfessor = new ProfessorModel();
+        $center = $this->request->getPost('center_r');
+        $data = [
+            'repair_center_id' => $center,
+        ];
+        $instanceProfessor->update(session()->getFlashdata('id'),$data);
+        return redirect()->to('/viewTickets');
     }
 
     //register de alumnes 

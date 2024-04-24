@@ -43,6 +43,15 @@ class ProfessorModel extends Model
     public function getGeneratingCodeById ($id) {
         return $this->where('professor_id', $id)->first();
     }
+
+    public function verifyProfessor ($email) {
+        $verify = false;
+        $query = $this->where('email', $email)->first();
+        if ($query != null) {
+            $verify = true;
+        }
+        return $verify;
+    }
 }
 
 //dubte
