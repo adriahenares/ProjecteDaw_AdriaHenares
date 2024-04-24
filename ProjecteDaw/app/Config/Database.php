@@ -28,7 +28,7 @@ class Database extends Config
         'DSN'          => '',
         'hostname'     => '85.214.28.48',//'localhost, 85.214.28.48
         'username'     => 'tekplus' ,//'root',//tekplus
-        'password'     => '?Xac9056n',//'', ?Xac9056n
+        'password'     => '1r~771eiS',//'', ?Xac9056n  // 1r~771eiS
         'database'     => 'projectedaw2023-2024',//kpatek4_tekplus
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
