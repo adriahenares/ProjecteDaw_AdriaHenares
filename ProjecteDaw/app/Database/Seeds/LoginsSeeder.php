@@ -25,8 +25,8 @@ class LoginsSeeder extends Seeder
         }
         //users
         $dataUsers = [
-                'email' => 'admin@gmail.com',
-                'password' => password_hash('1234', PASSWORD_DEFAULT),
+                'email' => 'sstt@xtec.cat',
+                'password' => password_hash('123456', PASSWORD_DEFAULT),
         ];
         $isntanceL->insert($dataUsers);
         //userInRole

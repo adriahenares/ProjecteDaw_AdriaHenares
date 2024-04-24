@@ -12,10 +12,10 @@ class ProfessorSeeder extends Seeder
         $model = new ProfessorModel();
 
         $model->insert([
-            'professor_id' => 'testprofessor',
+            'professor_id' => 'cd597db3-a6cb-4cb7-9b1d-848b04a158ff',
             'name' => 'Alexander',
             'surnames' => 'Nilei Vostob',
-            'email'  => 'testprofessor@me.local',
+            'email'  => 'anilei@xtec.cat',
             'repair_center_id' => '8000712',
         ]);
     }
