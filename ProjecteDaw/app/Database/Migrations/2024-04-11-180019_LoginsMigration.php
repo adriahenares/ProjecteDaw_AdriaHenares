@@ -31,7 +31,7 @@ class LoginsMigration extends Migration
             ],
             'password' => [
                 'type' => 'VARCHAR',
-                'constraint' => '32',
+                'constraint' => '128',
                 'null' => false,
             ],
         ]);

@@ -45,20 +45,24 @@ class SessionController extends BaseController
 
         if ($this->validate($validationRules)) {
             $instance = new LoginsModel();
-
+            
             $email = $this->request->getPost('mail');
             $password = $this->request->getPost('pass');
-
+            
             $user = $instance->getUserByMail($email);
             if ($user == true) {
+                d($user['password']);
+                d($password[0]);
+                d(password_verify((string)$password, $user['password']));
                 if (password_verify((string)$password, $user['password'])) {
+                    d('asdda');
                     $sessionData = [
                         'email' => $user['email'],
                         //atribut per verificar que el usuari no es professor ni alumne
                         'nonTraditional' => '1',
                     ];
                     session()->set($sessionData);
-                    return redirect()->to(base_url('Project/Tickets/viewTickets'));
+                    return redirect()->to('/viewTickets');
                 }
             } else {
                 session()->setFlashdata('error', 'Failed');
