@@ -18,7 +18,7 @@
             <div class="col-10 ps-2 pe-2 pt-2">
                 <div class="d-grid" style="margin-top:20px">
                     <div class="p-2">
-                        <label>centre a assignar</label>
+                        <label>centre a assignar *</label>
                         <div class="form-control bg-light">
                             <select type='text' name='idRepair' id="idRepair">
                                 <?php
