@@ -70,7 +70,7 @@ class InterventionDataMigration extends Migration
                 'type'       => 'date',
                 'null' => false,
             ],
-            'created_at timestamp default 0',
+            'created_at timestamp default current_timestamp',//SSTT: Ficar-ho a 0
             'deleted_at timestamp null default null',
             'updated_at timestamp default current_timestamp on update current_timestamp',
         ]);
