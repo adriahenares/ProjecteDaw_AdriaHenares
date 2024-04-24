@@ -110,12 +110,12 @@
                     </a>
                 </div>
 
-                <div class="menuButton mt-1 mb-3 w-100">
-                    <a class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none; ">
+                <!-- <div class="menuButton mt-1 mb-3 w-100">
+                    <a href="<? base_url('/loginAuth') ?>" class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none; ">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Log in
                     </a>
-                </div>
+                </div> -->
 
 
                 <!-- <div class="menuButton mt-1 mb-3 w-100">
