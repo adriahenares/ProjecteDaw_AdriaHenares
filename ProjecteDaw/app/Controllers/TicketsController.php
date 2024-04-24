@@ -246,14 +246,13 @@ class TicketsController extends BaseController
         $name = 'Alexander';
         $email = 'testprofessor@me.local';
         //if si es sessio o no
-        $gCenter = "8000013";
         // cambiar per sessions amb el login 
         $data = [
             'ticket_id' => $uuid::v4(),
             'device_type_id' => $this->request->getPost('device'),
             'fault_description' => $this->request->getPost('description'),
-            'g_center_code' => $gCenter,
-            'r_center_code' => null,
+            'g_center_code' => $this->request->getPost('center_g'),
+            'r_center_code' => $this->request->getPost('center_r'),
             'email_person_center_g' => $email,
             'name_person_center_g' => $name,
             // status estandard

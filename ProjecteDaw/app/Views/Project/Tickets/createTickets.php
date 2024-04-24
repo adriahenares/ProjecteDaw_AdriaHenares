@@ -29,7 +29,6 @@ echo $this->section("main_content");
                     <label for="center_g">Centre generador</label>
                     <select class="form-control" name="center_g" id="center_g">
                         <?php
-                        echo "<option value='0' selected ></option>";
                         foreach ($center as $value) {
                             echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                         }
