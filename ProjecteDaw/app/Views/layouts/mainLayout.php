@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/68a68b86d2.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <title>Tickets</title>
+    <title><?= lang('ticketsLang.tickets')?></title>
     <style>
         * {
             font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -92,21 +92,35 @@
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
         </div>
 
+<<<<<<< Updated upstream
         <div class="row " style="height: 92vh; width: 100vw;">
 
             <div class="bgc-1 c-5 p-0 m-0 h-100 " style="position: fixed; top: 8vh; width: 12vw;">
 
                 <div class=" menuButton mt-4 mb-3">
                     <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
+=======
+        <div class="row " style="height: 92vh; width: 100vw; ">
+            <div class="col-2 bgc-1 c-5 p-0 m-0 h-100 " style="display: fixed;">
+                <div class="col-12 menuButton mt-4 mb-2 w-100">
+                <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-2 c-5 fs-5 col-12 w-100" style="text-decoration: none;">
+>>>>>>> Stashed changes
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
-                        Tickets
+                        <?= lang('ticketsLang.tickets')?>
                     </a>
                 </div>
+<<<<<<< Updated upstream
 
                 <div class=" menuButton mt-1 mb-3 w-100">
                     <a href="<?= base_url('/assing') ?>" class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Assignar
+=======
+                <div class="col-12 menuButton mt-1 mb-2 w-100">
+                <a href="<?= base_url('/assing') ?>" class="py-2 ms-2 c-5 fs-5 w-100" style="text-decoration: none;">
+                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
+                        <?= lang('ticketsLang.assign')?>
+>>>>>>> Stashed changes
                     </a>
                 </div>
 
@@ -121,7 +135,11 @@
                 <!-- <div class="menuButton mt-1 mb-3 w-100">
                     <a class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none; ">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
+<<<<<<< Updated upstream
                         Log out
+=======
+                        <?= lang('ticketsLang.tickets')?>
+>>>>>>> Stashed changes
                     </a>
                 </div> -->
 
