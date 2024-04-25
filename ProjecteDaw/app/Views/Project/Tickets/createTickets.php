@@ -36,7 +36,7 @@ echo $this->section("main_content");
                 </div>
                 <div>
                     <label for="center_g">Centre generador</label>
-                    <select class="form-control" name="center_g" id="center_g">
+                    <select class="form-control" name="center_g" id="center_g" placeholder="busca...">
                         <?php
                         echo "<option value='0' selected ></option>";
                         foreach ($center as $value) {
@@ -50,7 +50,7 @@ echo $this->section("main_content");
                 </div>
                 <div>
                     <label for="center_r">Centre reparador</label>
-                    <select class="form-control" name="center_r" id="center_r">
+                    <select class="form-control" name="center_r" id="center_r" placeholder="busca...">
                         <?php
                         echo "<option value='0' selected ></option>";
                         foreach ($center as $value) {
@@ -68,7 +68,7 @@ echo $this->section("main_content");
     </div>
 </div>
 <script>
-    const search1 = document.getElementById('search1');
+    /*const search1 = document.getElementById('search1');
     const select1 = document.getElementById('center_r');
     //const search2 = document.getElementById('search2');
     const select2 = document.getElementById('center_g');
@@ -85,6 +85,6 @@ echo $this->section("main_content");
                 options[i].style.display = "none";
             }
         }
-    }
+    }*/
 </script>
 <?php echo $this->endSection(); ?>
