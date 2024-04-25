@@ -214,8 +214,8 @@ class KpaCrud extends \SIENSIS\KpaCrud\Config\KpaCrud
 
     public $ssttView = [
         'policy' => 'default',
-        'editable' => false,
-        'removable' => true,
+        'editable' => true,
+        'removable' => false,
 
         'sortable' => true,
         'filterable' => true,
@@ -225,7 +225,7 @@ class KpaCrud extends \SIENSIS\KpaCrud\Config\KpaCrud
         'defaultPageSize' =>   10,
         'rememberState' =>   false,
 
-        'add_button' =>  true,
+        'add_button' =>  false,
         'show_button' => false,
         'recycled_button' =>  false,
         'exportXLS' =>   true,

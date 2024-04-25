@@ -9,7 +9,7 @@
 
 <?= $this->section("main_content"); ?>
 
-<form method='post' action="<?= base_url("/assingTicket/" . $id) ?>">
+<form method='post' action="<?= base_url("/assignTicket/" . $id) ?>">
     <?= csrf_field() ?>
 
     <div>
