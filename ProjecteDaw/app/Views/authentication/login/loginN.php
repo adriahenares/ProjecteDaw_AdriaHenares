@@ -13,7 +13,7 @@
 
     <div class="m-2">
         <label for="pass" class="form-label">Password:</label>
-        <input type="password" name="pass" id="pass" class="form-control" placeholder="pass" value="<?= old('pass') ?>">
+        <input type="password" name="pass" id="pass" class="form-control" placeholder="Contrasenya" value="<?= old('pass') ?>">
     </div>
     <div class="m-2 text-center">
         <input type="submit" class="btn btn-primary w-100" value="Login">

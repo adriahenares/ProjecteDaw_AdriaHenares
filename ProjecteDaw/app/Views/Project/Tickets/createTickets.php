@@ -1,21 +1,12 @@
 <?php
-echo $this->extend('layouts/default/default');
+ $this->extend('layouts/mainLayout');
 
 echo $this->section("main_content");
 ?>
 
-<div class="container-fluid p-0">
+<div class="container-fluid p-0 m-0 ">
     <div class="row">
-        <div class="col-12">
-            <div class="d-flex align-items-center bg-dark">
-                <img src="<?= base_url('Logo.png') ?>" alt="Logo" style="max-width: 80px">
-                <div>
-                    <h1 class="text-white text-center"><?= $title ?></h1>
-                </div>
-            </div>
-        </div>
-        <?= $this->include("layouts/partials/menu") ?>
-        <div id="centres" class="col-10">
+        <div id="centres">
             <form action="<?php base_url("/addTickets") ?>" method="POST">
                 <?= csrf_field() ?>
                 <div class="form-group">
@@ -38,7 +29,6 @@ echo $this->section("main_content");
                     <label for="center_g">Centre generador</label>
                     <select class="form-control" name="center_g" id="center_g">
                         <?php
-                        echo "<option value='0' selected ></option>";
                         foreach ($center as $value) {
                             echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                         }

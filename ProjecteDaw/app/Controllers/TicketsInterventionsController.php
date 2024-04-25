@@ -26,7 +26,7 @@ class TicketsInterventionsController extends BaseController
         $crud = new KpaCrud();
         $crud->setTable('interventions');
         $crud->setPrimaryKey('intervention_id');
-        $crud->setColumns(['description', 'intervention_type_id', 'student_course', 'student_studies', 'created_at']);
+        $crud->setColumns(['description', 'intervention_type_id', 'created_at']);
         $crud->setColumnsInfo([
             'description' => ['name' => 'descripció'],
             'intervention_type_Id' => ['name' => 'tipus intervencio'],
@@ -36,7 +36,7 @@ class TicketsInterventionsController extends BaseController
         ]);
         $crud->setConfig('centerView');
         $crud->addItemLink('del', 'fa-mail', base_url('/updateIntervention'), 'Modificar Intervencio');
-        $crud->addItemLink('view', 'fa-file', base_url('/delIntervention'), 'Eliminar Intervencio');
+        // $crud->addItemLink('view', 'fa-file', base_url('/delIntervention'), 'Eliminar Intervencio');
         // falta filtrar per intervencio
         $data = [
             'output' => $crud->render(),

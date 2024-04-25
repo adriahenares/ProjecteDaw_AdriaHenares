@@ -6,10 +6,15 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+
+
 //get per defecte tickets
 $routes->match(['GET','POST'], '/ssttView', 'TicketsController::ssttView');
 //tickets
 $routes->match(['GET','POST'], '/viewTickets', 'TicketsController::viewTickets');
+
+
+
 
 // addTickets 
 $routes->get('/addTickets', 'TicketsController::addTicket');
@@ -55,3 +60,5 @@ $routes->post('/addIntervention', 'InterventionsController::addIntervention_post
 $routes->post('/updateIntervention/(:segment)', 'InterventionsController::updateIntervention/$1');
 
 $route['default_controller'] = 'TicketsController::ssttView';
+
+$routes->get('/', 'SessionController::redirectToLogin');

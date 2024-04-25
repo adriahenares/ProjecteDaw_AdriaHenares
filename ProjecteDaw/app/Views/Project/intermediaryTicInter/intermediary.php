@@ -1,25 +1,73 @@
-<?php
-echo $this->extend('layouts/default/default');
-echo $this->section("main_content");
-?>
-<div class="container-fluid p-0">
-    <div class="row">
+<style>
+    #header {
+        height: 110px;
+        /* width:  100vw; */
+    }
+</style>
 
-        <div class="col-12">
-            <div class="d-flex align-items-center">
-                <img src="<?= base_url('Logo.png') ?>" alt="Logo" style="max-width: 128px">
-                <div>
-                    <h1><?= $title ?></h1>
-                </div>
-            </div>
-        </div>
+<?= $this->extend('layouts/mainLayout'); ?>
 
-        <?= $this->include("layouts/partials/menu") ?>
-        
-        <div class="col-10 ps-2 pe-2 pt-2">
-            <div>
-                <div>
-                    <table>
+<<?= $this->section("main_content"); ?>
+
+        <!-- overflow -->
+        <div class="row m-0 p-0">
+
+                <div class="col-5">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 style="font-weight: bold;">Id device</h5> 
+                            <br>
+                            <p><?php echo $ticket['device_type_id'] ?></p>
+                            <br>
+                        </div>  
+
+                        <div class="col-6">
+                            <h5 style="font-weight: bold;">Centre generador</h5> 
+                            <br>
+                            <p><?php echo $ticket['email_person_center_g'] ?></p>
+                            <br>
+                        </div>
+
+                        <hr/>
+                        
+                        <div class="col-12">
+                            <h5 style="font-weight: bold;">Descripció</h5>
+                            <br>
+                            <p><?php echo $ticket['fault_description'] ?></p>
+                            <br>
+                        </div>
+
+                        <hr/>
+
+                        <div class="col-6">
+                            <h5 style="font-weight: bold;">Data creació</h5>
+                            <br>
+                            <p><?php echo $ticket['created_at'] ?></p>
+                            <br>
+                        </div>
+
+                        <div class="col-6">
+                            <h5 style="font-weight: bold;">Ultima modificació</h5>
+                            <br>
+                            <p><?php echo $ticket['updated_at'] ?></p>
+                            <br>
+                        </div>
+
+                        <hr/>
+
+                        <div class="col-6">
+                            <h5 style="font-weight: bold;" >Status</h5>
+                            <br>
+                            <p><?php echo $ticket['status_id'] ?></p>
+                            <br>
+                        </div>
+                        
+                    </div>
+
+
+
+                    <!-- <table>
                         <thead>
                             <tr>
                                 <th>Id device</th>
@@ -31,21 +79,27 @@ echo $this->section("main_content");
                             </tr>
                         </thead>
                         <tr>
-                            <td><?php echo $ticket['device_type_id'] ?></td>
-                            <td><?php echo $ticket['fault_description'] ?></td>
-                            <td><?php echo $ticket['email_person_center_g'] ?></td>
-                            <td><?php echo $ticket['created_at'] ?></td>
-                            <td><?php echo $ticket['updated_at'] ?></td>
-                            <td><?php echo $ticket['status_id'] ?></td>
+                            <td><?php  $ticket['device_type_id'] ?></td>
+                            <td><?php  $ticket['fault_description'] ?></td>
+                            <td><?php  $ticket['email_person_center_g'] ?></td>
+                            <td><?php  $ticket['created_at'] ?></td>
+                            <td><?php  $ticket['updated_at'] ?></td>
+                            <td><?php  $ticket['status_id'] ?></td>
                         </tr>
-                    </table>
+                    </table> -->
                 </div>
-                <a class="btn btn-primary" href="<?= base_url('/addIntervention/' . $ticket['ticket_id'])?>">Afegeix Intervencio</a>
-                <div>
+                
+                <div class="col-7 h-100">
+                    <div class="d-flex justify-content-end mb-2">
+                        <!-- <a class="btn" style="background-color: #0DCAF0;"  href="<?= base_url('/addIntervention/' . $ticket['ticket_id'])?>"><i class="fa fa-plus" aria-hidden="true"></i> Afegeix</a> -->
+                    </div>
                     <?= $output ?>
                 </div>
-            </div>
+
+
         </div>
     </div>
 </div>
-<?php echo $this->endSection(); ?>
+
+
+<?= $this->endSection(); ?>

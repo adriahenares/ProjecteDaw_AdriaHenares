@@ -13,10 +13,10 @@ class InterventionTypeSeeder extends Seeder
         $model = new InterventionTypeModel();
 
         $model->save([
-            'intervention_type' => 'no bloquejant'
+            'intervention_type' => 'No bloquejant'
         ]);
         $model->save([
-            'intervention_type' => 'bloquejant'
+            'intervention_type' => 'Bloquejant'
         ]);
     }
 }

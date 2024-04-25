@@ -39,7 +39,7 @@ class InterventionDataMigration extends Migration
             ],
             'professor_id' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '16',
+                'constraint' => '36',
                 'null' => false,
             ],
             'student_id' => [
@@ -70,7 +70,7 @@ class InterventionDataMigration extends Migration
                 'type'       => 'date',
                 'null' => false,
             ],
-            'created_at timestamp default current_timestamp',
+            'created_at timestamp default 0',//SSTT: Ficar-ho a 0
             'deleted_at timestamp null default null',
             'updated_at timestamp default current_timestamp on update current_timestamp',
         ]);
