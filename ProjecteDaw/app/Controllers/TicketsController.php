@@ -239,6 +239,19 @@ class TicketsController extends BaseController
     {
         $instanceT = new TicketModel();
         $uuid = new UUID();
+        $validationRules = [
+            'textCrear' => [
+                'label' => 'text a crear',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'camp requerit',
+                ],
+            ],
+        ];
+        if ($this->validate($validationRules)) {
+        
+        }
+
         //validation
         //data
         // si ets SSTT el g_center_code es obligatori
