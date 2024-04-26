@@ -141,37 +141,69 @@ class TicketsController extends BaseController
         $instanceT = new TicketModel();
         $uuid = new UUID();
         $validationRules = [
-            'textCrear' => [
-                'label' => 'text a crear',
+            'device' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'camp requerit',
+                ],
+            ],
+            'center_g' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'camp requerit',
+                ],
+            ],
+            'center_r' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'camp requerit',
+                ],
+            ],
+            'email' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'camp requerit',
+                ],
+            ],
+            'name' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'camp requerit',
                 ],
             ],
         ];
-        if ($this->validate($validationRules)) {
-        
+        //validacio temporal
+        $email =$this->request->getPost('email');
+        $name = $this->request->getPost('name');
+        if ($email != 'anilei@xtec.cat') {
+            session()->setFlashdata('error', 'el email: ' . $email . ' no esta a la base de dades, en desenvolupament');
+            return redirect()->back()->withInput();
         }
-
+        if ($name != 'Alexander') {
+            session()->setFlashdata('error', 'el nom: ' . $name . ' no esta a la base de dades, en desenvolupament');
+            return redirect()->back()->withInput();
+        }
         //validation
-        //data
-        // si ets SSTT el g_center_code es obligatori
-        // name email gCenter es sessio si ets professor 
-        //if si es sessio o no
-        // cambiar per sessions amb el login 
-        $data = [
-            'ticket_id' => $uuid::v4(),
-            'device_type_id' => $this->request->getPost('device'),
-            'fault_description' => $this->request->getPost('description'),
-            'g_center_code' => $this->request->getPost('center_g'),
-            'r_center_code' => $this->request->getPost('center_r'),
-            'email_person_center_g' => $this->request->getPost('email'),
-            'name_person_center_g' => $this->request->getPost('name'),
-            // status estandard
-            'status_id' => '1',
-        ];
-        $instanceT->insert($data);
-        return redirect()->to('viewTickets');
+        if ($this->validate($validationRules)) {
+            // si ets SSTT el g_center_code es obligatori
+            // name email gCenter es sessio si ets professor 
+            $data = [
+                'ticket_id' => $uuid::v4(),
+                'device_type_id' => $this->request->getPost('device'),
+                'fault_description' => $this->request->getPost('description'),
+                'g_center_code' => $this->request->getPost('center_g'),
+                'r_center_code' => $this->request->getPost('center_r'),
+                'email_person_center_g' => $this->request->getPost('email'),
+                'name_person_center_g' => $this->request->getPost('name'),
+                // status estandard
+                'status_id' => '1',
+            ];
+            $instanceT->insert($data);
+            return redirect()->to('viewTickets');
+        } else {
+            session()->setFlashdata('error', 'error camp obligatori');
+            return redirect()->back()->withInput();
+        }
     }
 
     //assignacio ticket

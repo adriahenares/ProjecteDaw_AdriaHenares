@@ -45,10 +45,6 @@ echo $this->section("main_content");
                         ?>
                     </select>
                 </div>
-                <!-- <div>
-                    <input type="text" id="search1" placeholder="Busca...">
-                </div> -->
-
                 <div class="col-6 mt-4 mb-5">
                     <label for="center_r" class=" bold fs-5">Centre reparador</label>
                     <select class="form-control form-select" name="center_r" id="center_r">
@@ -61,22 +57,22 @@ echo $this->section("main_content");
                 </div>
                 <div class="form-group col-6 my-4 ">
                     <label for="email" class=" bold fs-5">Correu Professor </label>
-                    <input type="text" class="form-control" name="email" id="email"></input>
+                    <input type="text" class="form-control" name="email" id="email" value="anilei@xtec.cat"></input>
                 </div>
                 <div class="form-group col-6 my-4 ">
                     <label for="name" class=" bold fs-5">Nom Professor </label>
-                    <input type="text" class="form-control" name="name" id="name"></input>
+                    <input type="text" class="form-control" name="name" id="name" value="Alexander"></input>
+                </div>
+                <div>
+                    <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
                 </div>
                 <div class="col-12 bottom-center pe-0 ">
-
                     <button type="submit" class="btn btn-primary bold">Guardar</button>
-                    <a href="<?= base_url("/viewTickets") ?>" class="btn btn-light btn-block " >Cancelar</a>
+                    <a href="<?= base_url("/viewTickets") ?>" class="btn btn-light btn-block ">Cancelar</a>
 
                 </div>
             </div>
         </form>
-
-
     </div>
 </div>
 <script>
