@@ -60,7 +60,14 @@ echo $this->section("main_content");
                         ?>
                     </select>
                 </div>
-
+                <div class="form-group col-6 my-4 ">
+                    <label for="email" class=" bold fs-5">Correu Professor </label>
+                    <input type="text" class="form-control" name="email" id="email"></input>
+                </div>
+                <div class="form-group col-6 my-4 ">
+                    <label for="name" class=" bold fs-5">Nom Professor </label>
+                    <input type="text" class="form-control" name="name" id="name"></input>
+                </div>
                 <div class="col-12 bottom-center pe-0 ">
 
                     <button type="submit" class="btn btn-primary bold">Guardar</button>

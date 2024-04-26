@@ -144,8 +144,6 @@ class TicketsController extends BaseController
         //data
         // si ets SSTT el g_center_code es obligatori
         // name email gCenter es sessio si ets professor 
-        $name = 'Alexander';
-        $email = 'testprofessor@me.local';
         //if si es sessio o no
         // cambiar per sessions amb el login 
         $data = [
@@ -154,8 +152,8 @@ class TicketsController extends BaseController
             'fault_description' => $this->request->getPost('description'),
             'g_center_code' => $this->request->getPost('center_g'),
             'r_center_code' => $this->request->getPost('center_r'),
-            'email_person_center_g' => $email,
-            'name_person_center_g' => $name,
+            'email_person_center_g' => $this->request->getPost('email'),
+            'name_person_center_g' => $this->request->getPost('name'),
             // status estandard
             'status_id' => '1',
         ];

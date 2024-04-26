@@ -85,7 +85,7 @@
                 <div class="col-12">
                     <h5 style="font-weight: bold;">Estat</h5>
                     <br>
-                    <p class="text-justify"><?php echo $ticket['status_id'] ?></p>
+                    <p class="text-justify"><?= $status ?></p>
                     <br>
                 </div>
 
