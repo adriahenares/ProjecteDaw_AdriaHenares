@@ -155,9 +155,9 @@ class KpaCrud extends \SIENSIS\KpaCrud\Config\KpaCrud
         'editable' => false,
         'removable' => false,
 
-        'sortable' => true,
-        'filterable' => true,
-        'paging' =>     true,
+        'sortable' => false,
+        'filterable' => false,
+        'paging' =>     false,
         'numerate' =>   false,
         'pagingType' =>   'full_numbers',
         'defaultPageSize' =>   10,
@@ -207,8 +207,8 @@ class KpaCrud extends \SIENSIS\KpaCrud\Config\KpaCrud
 
         'showTimestamps' =>   false,
         'useTimestamps' =>   false,
-        'createdField' =>   'registration_data',
-        'updatedField' =>   'date_last_modification',
+        'createdField' =>   'created_at',
+        'updatedField' =>   'updated_at',
         'deletedField' =>  'deleted_at',
     ];
 
@@ -238,8 +238,8 @@ class KpaCrud extends \SIENSIS\KpaCrud\Config\KpaCrud
 
         'showTimestamps' =>   false,
         'useTimestamps' =>   false,
-        'createdField' =>   'registration_data',
-        'updatedField' =>   'date_last_modification',
+        'createdField' =>   'created_at',
+        'updatedField' =>   'updated_at',
         'deletedField' =>  'deleted_at',
     ];
 

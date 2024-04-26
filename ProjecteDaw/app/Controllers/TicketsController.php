@@ -118,7 +118,8 @@ class TicketsController extends BaseController
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
         $crud->setConfig('ssttView');
         $data['output'] = $crud->render();
-        $data['title'] = lang('ticketsLang.titleG');
+        // $data['title'] = lang('ticketsLang.titleG');
+        // $data['title'] = '';
 
         return view('Project/Tickets/viewTickets', $data);
     }

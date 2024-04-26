@@ -78,17 +78,74 @@
         } */
 
         .menuButton a {
-            width: 12vw; 
+            width: 12vw;
             display: block;
         }
 
+        .bottom-center {
+            /* position: absolute;
+            bottom: 90; */
+            background-color: #6C757C;
+            width: 99.4%;
+            margin-left: 4px;
+            height: 71px;
+            line-height: 71px;
+        }
+
+        .titleForm {
+            font-size: 32px;
+            margin-bottom: 5px;
+            background: #6C757C;
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: white;
+            padding-left: 10px;
+            height: 72px;
+            line-height: 72px;
+        }
+
+        .btnCancelar {
+            background-color: #F9FAFB;
+            height: 39px;
+        }
+
+        .btnSave {
+            background-color: #1E5ED7;
+            max-height: 39px;
+        }
+
+        .centres {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .formAdd {
+            background-color: #F8F9FA;
+        }
+
+        #centres {
+            height: 100%;
+        }
+        #assign {
+            height: 100%;
+        }
+
+        .select{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
     <div class="contain-fluid ">
-        <div class="col-12 ps-3 pe-5 bgc-1 py-3 " style="height: 8vh;">
-            <img src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
+        <div class="col-12  bgc-1 pt-2 ps-2" style="height: 8vh;">
+            <!-- <div class="col-12 ps-3 pe-5 bgc-1 py-3 " style="height: 8vh;"> -->
+            <img class="ms-4 mt-4 " src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 34px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
         </div>
 
@@ -97,7 +154,7 @@
             <div class="bgc-1 c-5 p-0 m-0 h-100 " style="position: fixed; top: 8vh; width: 12vw;">
 
                 <div class=" menuButton mt-4 mb-3">
-                    <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
+                    <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Tickets
                     </a>
@@ -127,7 +184,7 @@
 
             </div>
 
-            <div class=" p-0 ps-2 pt-2" style="height: 92vh; position: fixed;  left: 11vw; overflow-y: auto; width: 89vw;">
+            <div class="mx-4 my-2 p-3 " style="height:91vh; position: fixed; left: 11vw; overflow-y: auto; width: 87vw;">
                 <?php echo $this->renderSection("main_content") ?>
             </div>
         </div>

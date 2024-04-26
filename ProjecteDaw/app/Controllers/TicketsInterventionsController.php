@@ -34,8 +34,9 @@ class TicketsInterventionsController extends BaseController
             'student_studies' => ['name' => 'nombre Curs'],
             'created_at' => ['name' => 'Data creació'],
         ]);
-        $crud->setConfig('centerView');
-        $crud->addItemLink('del', 'fa-mail', base_url('/updateIntervention'), 'Modificar Intervencio');
+        // $crud->setConfig('centerView');
+        $crud->setConfig('onlyView');
+        // $crud->addItemLink('del', 'fa-mail', base_url('/updateIntervention'), 'Modificar Intervencio');
         // $crud->addItemLink('view', 'fa-file', base_url('/delIntervention'), 'Eliminar Intervencio');
         // falta filtrar per intervencio
         $data = [
