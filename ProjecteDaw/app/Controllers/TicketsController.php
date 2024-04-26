@@ -21,61 +21,6 @@ class TicketsController extends BaseController
      * 
      * @return obj;
      */
-    public function ssttView()
-    {
-        $crud = new KpaCrud();
-        $crud->setTable('tickets');
-        $crud->setPrimaryKey('ticket_id');
-        $crud->setRelation('device_type_id', 'devicetype', 'device_type_id', 'device_type');
-        $crud->setRelation('g_center_code', 'centers', 'center_id', 'name');
-        //$crud->setRelation('r_center_code', 'centers2', 'center_id', 'name');
-        $crud->setRelation('status_id', 'status', 'status_id', 'status');
-        $crud->setColumns(['ticket_id', 'devicetype__device_type', 'fault_description', 'centers__name', /* 'centers2__name'*/ 'created_at', 'status__status']);
-        $crud->setColumnsInfo([
-            'ticket_id' => [
-                'name' => 'Identificador',
-                'type' => KpaCrud::READONLY_FIELD_TYPE,
-                'default' => UUID::v4(),
-                'html_atts' => [
-                    'disabled'
-                ]
-            ],
-            'devicetype__device_type' => [
-                'name' => 'Tipus de dispositiu'
-            ],
-            'fault_description' => [
-                'name' => 'Descripció'
-            ],
-            'centers__name' => [
-                'name' => 'Institut generador',
-            ],
-            /*'centers2__name' => [
-                'name' => 'Institut reparador',
-            ], */
-            'name_person_center_g' => [
-                'name' => 'Nom generador',
-            ],
-            'created_at' => [
-                'name' => 'Data de creació',
-                'default' => date('Y-m-d h:m:s'),
-                'html_atts' => [
-                    'disabled'
-                ]
-                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
-                // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
-            ],
-            'status__status' => [
-                'name' => 'Estat',
-            ]
-        ]);
-        $crud->setConfig('ssttView');
-        $data = [
-            'output' => $crud->render(),
-            'title' => lang('ticketsLang.titleG'),
-        ];
-
-        return view('ssttView/ssttView', $data);
-    }
     public function viewTickets()
     {
         helper('lang');
@@ -83,11 +28,6 @@ class TicketsController extends BaseController
         $instanceC = new CenterModel();
         // variables per obtenir els selects
         //type device
-
-        // $date = date('Y-m-d H:i:s');
-        $date = date('Y-d-m H:i:s');
-
-
 
         //center codes
         $centerId = $instanceC->getAllCentersId();
@@ -102,12 +42,11 @@ class TicketsController extends BaseController
         /**
          * Retorno true o false depent de la pag on estem, per mostrar o no el boto de add ticket
          */
-        if ($crud->isEditMode()){
-            $data['badd']=false;
-        }else{
-            $data['badd']=true;
+        if ($crud->isEditMode()) {
+            $data['badd'] = false;
+        } else {
+            $data['badd'] = true;
         }
-        
         //KpaCrud
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
@@ -115,8 +54,9 @@ class TicketsController extends BaseController
         $crud->setRelation('device_type_id', 'deviceType', 'device_type_id', 'device_type');
         $crud->setRelation('email_person_center_g', 'professors', 'email', 'email');
         //$crud->setRelation('name_person_center_g', 'professors2', 'name', 'name');
-        $crud->setColumns(['ticket_id', 'deviceType__device_type', 'status__status']);
-        // $crud->setColumns(['ticket_id', 'deviceType__device_type', 'registration_data', 'date_last_modification', 'status__status']);
+        $crud->setRelation('g_center_code', 'centers', 'center_id', 'name');
+        $crud->setRelation('r_center_code', 'centers2', 'center_id', 'name');
+        $crud->setColumns(['ticket_id', 'deviceType__device_type', 'fault_description', 'centers__name', 'centers2__name', 'created_at', 'status__status']);
         $crud->setColumnsInfo([
             'ticket_id' => [
                 'name' => 'Identificador',
@@ -132,19 +72,17 @@ class TicketsController extends BaseController
             'fault_description' => [
                 'name' => 'Descripció'
             ],
+            'centers__name' => [
+                'name' => 'Institut generador',
+            ],
+            'centers2__name' => [
+                'name' => 'Institut reparador',
+            ],
             'email_person_center_g' => [
                 'name' => 'Email generador',
-                // 'default' => 'testprofessor@me.local',
-                // 'html_atts' => [
-                //     'disabled'
-                // ]
             ],
             'name_person_center_g' => [
                 'name' => 'Nom generador',
-                // 'default' => 'Alexander',
-                // 'html_atts' => [
-                //     'disabled'
-                // ]
             ],
             'created_at' => [
                 'name' => 'Data de registre',
@@ -161,64 +99,27 @@ class TicketsController extends BaseController
                 'html_atts' => [
                     'disabled'
                 ]
-                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
-                // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
             ],
             'deleted_at' => [
                 'name' => 'Data esborrar',
-                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
                 'html_atts' => [
                     'disabled'
                 ]
             ],
-            // 'date_last_modification' => [
-            //     // 'name' => 'Data ultima modificació',
-            //         // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
-            //     // 'default'=> $date,
-            //     'type' => KpaCrud::INVISIBLE_FIELD_TYPE
-            //     // 'type' => KpaCrud::READONLY_FIELD_TYPE
-            //         // 'default'=> date('Y-m-d H:i:s'),
-            //         // 'default'=> date('Y-m-d h:m:s')
-
-            // ],
-            // 'registration_data' => [
-            //     'name' => 'Data de registre',
-            //     // 'default'=> $date,
-            //     'type' => KpaCrud::INVISIBLE_FIELD_TYPE
-            //     // 'default'=> date('Y-m-d h:m:s'),
-
-            // ],
             'status__status' => [
                 'name' => 'Estat',
-                // 'type' => KpaCrud::DROPDOWN_FIELD_TYPE,
-                // 'options' => array_combine($statusNum, $status),
-                // 'html_atts' => ["required",]
             ]
         ]);
 
-      
-
-
-        // preguntar
         $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Mostrar intervencions');
-        // $crud->addItemFunction('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar intervenció');
-        $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar intervenció');
+        $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar ticket');
+        $crud->addItemLink('assign', 'fa fa-arrow-right', base_url('/assignTicket'), 'Assignar');
 
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
-
-
-       
-
-        // $crud->setConfig(["editable" => false, "removable" => false]);
-
-        $crud->setConfig('centerView');
-        // $data = [    
-        //     'output' => $crud->render(),
-        //     'title' => lang('ticketsLang.titleG'),
-        // ];
-
+        $crud->setConfig('ssttView');
         $data['output'] = $crud->render();
-        $data['title'] = lang('ticketsLang.titleG');
+        // $data['title'] = lang('ticketsLang.titleG');
+        // $data['title'] = '';
 
         return view('Project/Tickets/viewTickets', $data);
     }
@@ -243,8 +144,6 @@ class TicketsController extends BaseController
         //data
         // si ets SSTT el g_center_code es obligatori
         // name email gCenter es sessio si ets professor 
-        $name = 'Alexander';
-        $email = 'testprofessor@me.local';
         //if si es sessio o no
         // cambiar per sessions amb el login 
         $data = [
@@ -253,8 +152,8 @@ class TicketsController extends BaseController
             'fault_description' => $this->request->getPost('description'),
             'g_center_code' => $this->request->getPost('center_g'),
             'r_center_code' => $this->request->getPost('center_r'),
-            'email_person_center_g' => $email,
-            'name_person_center_g' => $name,
+            'email_person_center_g' => $this->request->getPost('email'),
+            'name_person_center_g' => $this->request->getPost('name'),
             // status estandard
             'status_id' => '1',
         ];
@@ -263,55 +162,31 @@ class TicketsController extends BaseController
     }
 
     //assignacio ticket
-    public function assingTicketsView()
-    {
-        // variables per obtenir els selects
-        //type device
-
-        //center codes
-        $crud = new KpaCrud();
-        $crud->setTable('tickets');
-        $crud->setPrimaryKey('ticket_id');
-        $crud->setColumns(['ticket_id', 'device_type_id', 'created_at', 'updated_at', 'status_id']);
-        $crud->setColumnsInfo([
-            'ticket_id' => ['name' => 'Id'],
-            'device_type_id' => ['name' => 'Id dispositiu'],
-            'status_id' => ['name' => 'Id status'],
-        ]);
-        $crud->addItemLink('view', 'fa fa-arrow-right', base_url('/assingTicket'), 'Assignar');
-        $crud->setConfig('centerView');
-        // $crud->addWhere('r_center_code != null');
-        $data = [
-            'output' => $crud->render(),
-            'title' => lang('ticketsLang.titleA'),
-        ];
-        return view('Project/Tickets/assingTickets', $data);
-    }
 
     //assignacio ticket sespecific
-    public function assingTicket($id)
+    public function assignTicket($id)
     {
         $instanceC = new CenterModel();
         $centerId = $instanceC->getAllCentersId();
         $data['id'] = $id;
         $data['centerId'] = $centerId;
-        return view('Project/Tickets/assingTicketsTrue', $data);
+        return view('Project/Tickets/assignTicketsTrue', $data);
     }
 
-    public function assingTicketPost($id)
+    public function assignTicketPost($id)
     {
         $instanceT = new TicketModel();
         $valueR = [
             'r_center_code' => $this->request->getPost("idRepair"),
         ];
-        $instanceT->assingTicket($id, $valueR);
-        return redirect()->to('assing');
+        $instanceT->assignTicket($id, $valueR);
+        return redirect()->to('assign');
     }
 
     //updateTicket
     public function updateTicket()
     {
-        return redirect()->to(base_url('assing'));
+        return redirect()->to(base_url('assign'));
     }
 
     //deleteTicket

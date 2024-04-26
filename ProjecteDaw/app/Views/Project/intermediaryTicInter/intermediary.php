@@ -7,99 +7,109 @@
 
 <?= $this->extend('layouts/mainLayout'); ?>
 
-<<?= $this->section("main_content"); ?>
+<<?= $this->section("main_content"); ?> <!-- overflow -->
 
-        <!-- overflow -->
-        <div class="row m-0 p-0">
-
-                <div class="col-5">
-
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 style="font-weight: bold;">Id device</h5> 
-                            <br>
-                            <p><?php echo $ticket['device_type_id'] ?></p>
-                            <br>
-                        </div>  
-
-                        <div class="col-6">
-                            <h5 style="font-weight: bold;">Centre generador</h5> 
-                            <br>
-                            <p><?php echo $ticket['email_person_center_g'] ?></p>
-                            <br>
-                        </div>
-
-                        <hr/>
-                        
-                        <div class="col-12">
-                            <h5 style="font-weight: bold;">Descripció</h5>
-                            <br>
-                            <p><?php echo $ticket['fault_description'] ?></p>
-                            <br>
-                        </div>
-
-                        <hr/>
-
-                        <div class="col-6">
-                            <h5 style="font-weight: bold;">Data creació</h5>
-                            <br>
-                            <p><?php echo $ticket['created_at'] ?></p>
-                            <br>
-                        </div>
-
-                        <div class="col-6">
-                            <h5 style="font-weight: bold;">Ultima modificació</h5>
-                            <br>
-                            <p><?php echo $ticket['updated_at'] ?></p>
-                            <br>
-                        </div>
-
-                        <hr/>
-
-                        <div class="col-6">
-                            <h5 style="font-weight: bold;" >Status</h5>
-                            <br>
-                            <p><?php echo $ticket['status_id'] ?></p>
-                            <br>
-                        </div>
-                        
-                    </div>
+    <div class="row m-0 p-0">
 
 
+        <div class="col-3">
 
-                    <!-- <table>
-                        <thead>
-                            <tr>
-                                <th>Id device</th>
-                                <th>descripcio</th>
-                                <th>email centre generador</th>
-                                <th>data registre</th>
-                                <th>data ultima modificacio</th>
-                                <th>Id status</th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td><?php  $ticket['device_type_id'] ?></td>
-                            <td><?php  $ticket['fault_description'] ?></td>
-                            <td><?php  $ticket['email_person_center_g'] ?></td>
-                            <td><?php  $ticket['created_at'] ?></td>
-                            <td><?php  $ticket['updated_at'] ?></td>
-                            <td><?php  $ticket['status_id'] ?></td>
-                        </tr>
-                    </table> -->
+            <?php if ($ticket['device_type_id'] == 1) : ?>
+                <div class="mb-5 mt-2 text-center">
+                    <img src="<?= base_url('images/ordinador.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
                 </div>
-                
-                <div class="col-7 h-100">
-                    <div class="d-flex justify-content-end mb-2">
-                        <!-- <a class="btn" style="background-color: #0DCAF0;"  href="<?= base_url('/addIntervention/' . $ticket['ticket_id'])?>"><i class="fa fa-plus" aria-hidden="true"></i> Afegeix</a> -->
-                    </div>
-                    <?= $output ?>
+            <?php elseif ($ticket['device_type_id'] == 2) : ?>
+                <div class="mb-2 text-center mt-0">
+                    <img src="<?= base_url('images/projector.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
+                </div>
+            <?php elseif ($ticket['device_type_id'] == 3) : ?>
+                <div class="mb-3 text-center">
+                    <img src="<?= base_url('images/pantalla.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
+                </div>
+            <?php endif ?>
+
+            <div class="col-12 mb-4 mt-3">
+
+                <h5 style="font-weight: bold;"> Ticket id: <?= explode("-", $ticket['ticket_id'])[4] ?> </h5>
+
+            </div>
+
+            <div class="row border rounded-3 mb-4 pt-2">
+
+                <div class="col-12">
+                    <h5 style="font-weight: bold;">Descripció</h5>
+                    <br>
+                    <p class="text-justify"><?php echo $ticket['fault_description'] ?></p>
+                    <br>
                 </div>
 
 
+                <!-- <div class="col-12 p-3">
+                        <h5 style="font-weight: bold;">Dispositiu</h5>
+                        <br>
+                        <p class="text-justify"><?php $ticket['device_type_id'] ?></p>
+                        <br>
+                    </div> -->
+
+                <!-- <hr/> -->
+
+                <div class="col-12">
+                    <h5 style="font-weight: bold;">Centre generador</h5>
+                    <br>
+                    <p class="text-justify"><?php echo $ticket['email_person_center_g'] ?></p>
+                    <br>
+                </div>
+
+                <!-- <hr/> -->
+
+
+
+                <!-- <hr/> -->
+
+                <div class="col-12">
+                    <h5 style="font-weight: bold;">Data creació</h5>
+                    <br>
+                    <p class="text-justify"><?php echo $ticket['created_at'] ?></p>
+                    <br>
+                </div>
+                <!-- <hr/> -->
+                <div class="col-12">
+                    <h5 style="font-weight: bold;">Ultima modificació</h5>
+                    <br>
+                    <p class="text-justify"><?php echo $ticket['updated_at'] ?></p>
+                    <br>
+                </div>
+
+                <!-- <hr/> -->
+
+                <div class="col-12">
+                    <h5 style="font-weight: bold;">Estat</h5>
+                    <br>
+                    <p class="text-justify"><?= $status ?></p>
+                    <br>
+                </div>
+
+
+
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <div class="col-9 h-100 ps-4 mt-5 ">
+
+            <div class="col-12 mb-3 ">
+
+                <h3 style="font-weight: bold;"> Intervencions </h3>
+
+            </div>
+            <!-- <div class="d-flex justify-content-end mb-2"> -->
+            <!-- <a class="btn" style="background-color: #0DCAF0;"  href="<? base_url('/addIntervention/' . $ticket['ticket_id']) ?>"><i class="fa fa-plus" aria-hidden="true"></i> Afegeix</a> -->
+            <!-- </div> -->
+            <?= $output ?>
         </div>
     </div>
-</div>
 
 
-<?= $this->endSection(); ?>
+
+
+    <?= $this->endSection(); ?>
