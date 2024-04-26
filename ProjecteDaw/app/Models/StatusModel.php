@@ -57,4 +57,16 @@ class StatusModel extends Model
 
         return $dataStatus;
     }
+
+    public function getStatus($id)
+    {
+        $this->select('status');
+        $this->where('status_id', $id);
+        $query = $this->get();
+        if ($query->getNumRows() > 0) {
+            return $query->getResult()[0]->status;
+        } else {
+            return null;
+        }
+    }
 }

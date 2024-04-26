@@ -71,7 +71,7 @@ class TicketModel extends Model
         return $this->where('ticket_id', $id)->first();
     }
 
-    public function assingTicket($id, $repairCenterId)
+    public function assignTicket($id, $repairCenterId)
     {
         $query = $this->where('ticket_id', $id)->find();
         if ($query != null) {

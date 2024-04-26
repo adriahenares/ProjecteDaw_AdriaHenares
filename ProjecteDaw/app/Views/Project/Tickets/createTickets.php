@@ -1,33 +1,43 @@
 <?php
- $this->extend('layouts/mainLayout');
+$this->extend('layouts/mainLayout');
 
 echo $this->section("main_content");
 ?>
 
-<div class="container-fluid p-0 m-0 ">
-    <div class="row">
-        <div id="centres">
-            <form action="<?php base_url("/addTickets") ?>" method="POST">
-                <?= csrf_field() ?>
-                <div class="form-group">
-                    <label for="description">Descripció</label>
+
+
+<div class="container-fluid mt-3">
+    <div id="centres" class="border">
+
+        <div>
+            <h3 class="titleForm mt-0"> Afegir Ticket </h3>
+        </div>
+
+        <form action="<?php base_url("/addTickets") ?>" method="POST" class="formAdd p-2 pb-0">
+
+            <?= csrf_field() ?>
+
+            <div class="row ">
+                <div class="form-group col-6 my-4 ">
+                    <label for="description" class=" bold fs-5">Descripció </label>
                     <textarea class="form-control" name="description" id="description" cols="30" rows="3"></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="device">Dispositiu</label>
-                    <select class="form-control" name="device" id="device">
+
+                <div class="form-group col-6 my-4">
+                    <label for="device" class=" bold fs-5">Dispositiu</label>
+                    <select class="form-control form-select" name="device" id="device">
                         <?php
                         $valueN = 1;
                         foreach ($device as $value) {
-                            echo "<option value='" . $valueN . "'>" . $value . "</option>";
+                            echo "<option value='" . $valueN . "'>" . $value . " </option>";
                             $valueN++;
                         }
                         ?>
                     </select>
                 </div>
-                <div>
-                    <label for="center_g">Centre generador</label>
-                    <select class="form-control" name="center_g" id="center_g">
+                <div class="col-6 mt-4 mb-5">
+                    <label for="center_g" class=" bold fs-5">Centre generador</label>
+                    <select class="form-control form-select" name="center_g" id="center_g">
                         <?php
                         foreach ($center as $value) {
                             echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
@@ -35,12 +45,13 @@ echo $this->section("main_content");
                         ?>
                     </select>
                 </div>
-                <div>
+                <!-- <div>
                     <input type="text" id="search1" placeholder="Busca...">
-                </div>
-                <div>
-                    <label for="center_r">Centre reparador</label>
-                    <select class="form-control" name="center_r" id="center_r">
+                </div> -->
+
+                <div class="col-6 mt-4 mb-5">
+                    <label for="center_r" class=" bold fs-5">Centre reparador</label>
+                    <select class="form-control form-select" name="center_r" id="center_r">
                         <?php
                         echo "<option value='0' selected ></option>";
                         foreach ($center as $value) {
@@ -49,12 +60,24 @@ echo $this->section("main_content");
                         ?>
                     </select>
                 </div>
-                <div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="<?= base_url("/viewTickets") ?>" class="btn btn-secondary">Cancelar</a>
+                <div class="form-group col-6 my-4 ">
+                    <label for="email" class=" bold fs-5">Correu Professor </label>
+                    <input type="text" class="form-control" name="email" id="email"></input>
                 </div>
-            </form>
-        </div>
+                <div class="form-group col-6 my-4 ">
+                    <label for="name" class=" bold fs-5">Nom Professor </label>
+                    <input type="text" class="form-control" name="name" id="name"></input>
+                </div>
+                <div class="col-12 bottom-center pe-0 ">
+
+                    <button type="submit" class="btn btn-primary bold">Guardar</button>
+                    <a href="<?= base_url("/viewTickets") ?>" class="btn btn-light btn-block " >Cancelar</a>
+
+                </div>
+            </div>
+        </form>
+
+
     </div>
 </div>
 <script>
