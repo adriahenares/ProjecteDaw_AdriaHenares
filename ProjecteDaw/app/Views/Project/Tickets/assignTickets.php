@@ -10,7 +10,7 @@
 <?= $this->section("main_content"); ?>
 
 <!-- <div>
-    <a href="<? base_url('assingTicket') ?>" class="btn btn-primary">Assigna</a>
+    <a href="<? base_url('assignTicket') ?>" class="btn btn-primary">Assigna</a>
 </div> -->
 <?= $output ?>
 <?= $this->endSection(); ?>

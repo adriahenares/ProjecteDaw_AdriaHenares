@@ -9,12 +9,8 @@ use CodeIgniter\Router\RouteCollection;
 
 
 //get per defecte tickets
-$routes->match(['GET','POST'], '/ssttView', 'TicketsController::ssttView');
 //tickets
 $routes->match(['GET','POST'], '/viewTickets', 'TicketsController::viewTickets');
-
-
-
 
 // addTickets 
 $routes->get('/addTickets', 'TicketsController::addTicket');
@@ -41,15 +37,13 @@ $routes->get('/logout', 'SessionController::logout');
 
 //pagina intermitja entre tickets i intervencio
 $routes->match(['GET','POST'], '/interventionsOfTicket/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
-///interventions/821198ce-5c27-43
 
 //iintervencio en concret
 $routes->get('/intervention/(:segment)/', 'InterventionsController::viewInterventions');
 
 //assignacio tickets
-$routes->match(['GET','POST'], '/assing', 'TicketsController::assingTicketsView');
-$routes->get('/assingTicket/(:segment)', 'TicketsController::assingTicket/$1');
-$routes->post('/assingTicket/(:segment)', 'TicketsController::assingTicketPost/$1');
+$routes->get('/assignTicket/(:segment)', 'TicketsController::assignTicket/$1');
+$routes->post('/assignTicket/(:segment)', 'TicketsController::assignTicketPost/$1');
 
 //crud Intervencions
 $routes->get('/addIntervention/(:segment)', 'InterventionsController::addIntervention/$1');
@@ -59,6 +53,6 @@ $routes->get('/delIntervention/(:segment)', 'InterventionsController::delInterve
 $routes->post('/addIntervention', 'InterventionsController::addIntervention_post');
 $routes->post('/updateIntervention/(:segment)', 'InterventionsController::updateIntervention/$1');
 
-$route['default_controller'] = 'TicketsController::ssttView';
+$route['default_controller'] = 'TicketsController::viewTickets';
 
 $routes->get('/', 'SessionController::redirectToLogin');
