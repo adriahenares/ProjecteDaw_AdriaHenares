@@ -39,7 +39,7 @@
                 <div class=" col-12 bottom-center pe-0 ">
                     <!-- <div class='pt-2'><input type='submit' value='Envia'></div> -->
                     <button type="submit" class="btn btn-primary bold">Guardar</button>
-                    <a href="<?= base_url("/viewTickets") ?>" class="btn btnCancelar ">Cancelar</a>
+                    <a href="<?= base_url("/viewTickets") ?>" class="btn btn-light btn-block  ">Cancelar</a>
                 </div>
 
             </div>
