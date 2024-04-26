@@ -145,7 +145,7 @@
     <div class="contain-fluid ">
         <div class="col-12  bgc-1 pt-2 ps-2" style="height: 8vh;">
             <!-- <div class="col-12 ps-3 pe-5 bgc-1 py-3 " style="height: 8vh;"> -->
-            <img class="ms-4 mt-4 " src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 34px">
+            <img class="ms-2 mt-2" src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
         </div>
 
