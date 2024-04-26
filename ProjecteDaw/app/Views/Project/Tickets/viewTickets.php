@@ -26,7 +26,8 @@
                 btn.innerHTML = '<i class="fa-solid fa-plus"></i> Afegir';
                 let div = document.getElementsByClassName('d-flex')[0];
                 div.appendChild(btn);
-                // document.getElementById('data-list-tickets_info').style.display = 'none';
+                //console.log(document.getElementsByClassName('dataTables_info'));
+                //document.getElementsByClassName('dataTables_info')[0] = 'none';
             });
         </script>
     <?php endif ?>
