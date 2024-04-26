@@ -1,5 +1,5 @@
 <?php
- $this->extend('layouts/mainLayout');
+$this->extend('layouts/mainLayout');
 
 echo $this->section("main_content");
 ?>
@@ -27,7 +27,7 @@ echo $this->section("main_content");
                 </div>
                 <div>
                     <label for="center_g">Centre generador</label>
-                    <select class="form-control" name="center_g" id="center_g" placeholder="busca...">
+                    <select name="center_g" id="center_g" placeholder="busca...">
                         <?php
                         foreach ($center as $value) {
                             echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
@@ -36,13 +36,9 @@ echo $this->section("main_content");
                     </select>
                 </div>
                 <div>
-                    <input type="text" id="search1" placeholder="Busca...">
-                </div>
-                <div>
                     <label for="center_r">Centre reparador</label>
-                    <select class="form-control" name="center_r" id="center_r" placeholder="busca...">
+                    <select name="center_r" id="center_r" placeholder="busca...">
                         <?php
-                        echo "<option value='0' selected ></option>";
                         foreach ($center as $value) {
                             echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                         }
@@ -58,6 +54,11 @@ echo $this->section("main_content");
     </div>
 </div>
 <script>
+    $(document).ready(function() {
+        $('select').selectize({
+            sortField: 'text'
+        });
+    });
     /*const search1 = document.getElementById('search1');
     const select1 = document.getElementById('center_r');
     //const search2 = document.getElementById('search2');
