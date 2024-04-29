@@ -13,7 +13,7 @@
     <div id="assign" class="border">
 
         <div>
-            <h3 class="titleForm mt-0">Assigna Ticket</h3>
+            <h3 class="titleForm mt-0"><?= lang('ticketsLang.assign_ticket')?></h3>
         </div>
 
         <form method='post' class="formAdd p-2 pb-0" action="<?= base_url("/assignTicket/" . $id) ?>">
@@ -22,13 +22,13 @@
             <div class="row ">
 
                 <div class="col-12 px-4 mt-4">
-                    <label for="device" class=" bold fs-5 mb-3 ps-1">Centre Reparador</label>
+                    <label for="device" class=" bold fs-5 mb-3 ps-1"><?= lang('ticketsLang.repair_center')?></label>
                 </div>
 
                 <div class="form-group col-12 px-4 mb-5 mt-2 ">
                     <select class="form-control  form-select" name='idRepair' id="idRepair">
                         <?php
-                        echo "<option value=''  default hidden>Escull centre...</option>";
+                        echo "<option value=''  default hidden>".  lang('ticketsLang.choose_center') ."</option>";
                         foreach ($centerId as $value) {
                             echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                         }
@@ -39,8 +39,8 @@
 
                 <div class=" col-12 bottom-center pe-0 ">
                     <!-- <div class='pt-2'><input type='submit' value='Envia'></div> -->
-                    <button type="submit" class="btn btn-primary bold">Guardar</button>
-                    <a href="<?= base_url("/viewTickets") ?>" class="btn btn-light btn-block  ">Cancelar</a>
+                    <button type="submit" class="btn btn-primary bold"><?= lang('ticketsLang.save')?></button>
+                    <a href="<?= base_url("/viewTickets") ?>" class="btn btn-light btn-block  "><?= lang('ticketsLang.cancel')?></a>
                 </div>
 
             </div>

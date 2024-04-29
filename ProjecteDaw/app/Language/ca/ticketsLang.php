@@ -8,7 +8,7 @@ return [
     'assign_ticket' => 'Assigna Ticket',
     'assign_center' => 'Centre a assignar',
     'send' => 'Envia',
-    'center' => 'Centre',
+    'centers' => 'Centres',
     'add' => 'Afegir',
     'add_ticket' => 'Afegir Tiquet',
     'description' => 'Descripció',
@@ -18,5 +18,8 @@ return [
     'teacher_email' => 'Correu professor',
     'teacher_name' => 'Nom professor',
     'save' => 'Desa',
-    'cancel' => 'Cancelar'
+    'cancel' => 'Cancelar',
+    'choose_center' => 'Escull centre',
+    'export' => 'Exportar',
+    'print' => 'Imprimir'
 ];

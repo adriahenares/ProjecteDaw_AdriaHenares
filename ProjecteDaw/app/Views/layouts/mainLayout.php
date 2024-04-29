@@ -178,7 +178,7 @@
                 <div class=" menuButton mt-2 mb-3 ">
                     <a class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
                         <i class="fa-solid fa-building-columns ms-4 me-2"></i>
-                        Centres
+                        <?= lang('ticketsLang.centers')?>
                     </a>
                 </div>
 
