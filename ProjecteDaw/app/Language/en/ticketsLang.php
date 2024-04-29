@@ -18,5 +18,8 @@ return [
     'teacher_email' => 'Teacher Email',
     'teacher_name' => 'Teacher Name',
     'save' => 'Save',
-    'cancel' => 'Cancel'
+    'cancel' => 'Cancel',
+    'choose_center' => 'Choose Center',
+    'export' => 'Export',
+    'print' => 'Print'
 ];

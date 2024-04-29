@@ -18,5 +18,8 @@ return [
     'teacher_email' => 'Correo profesor',
     'teacher_name' => 'Nombre profesor',
     'save' => 'Guardar',
-    'cancel' => 'Cancelar'
+    'cancel' => 'Cancelar',
+    'choose_center' => 'Eliga centro',
+    'export' => 'Exportar',
+    'print' => 'Imprimir'
 ];

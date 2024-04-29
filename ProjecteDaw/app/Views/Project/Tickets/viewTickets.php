@@ -26,8 +26,8 @@
                 btn.innerHTML = '<i class="fa-solid fa-plus"></i> <?= lang('ticketsLang.add')?>';
                 let div = document.getElementsByClassName('d-flex')[0];
                 div.appendChild(btn);
-                document.getElementById('list-btn-exportxls').innerHTML = '<i class="fa-solid fa-file-excel" aria-hidden="true" style="margin-right: 5px"></i>Exportar';
-                document.getElementById('list-btn-print').innerHTML = '<i class="fa-solid fa-print" aria-hidden="true" style="margin-right: 5px"></i>Imprimir';
+                document.getElementById('list-btn-exportxls').innerHTML = '<i class="fa-solid fa-file-excel" aria-hidden="true" style="margin-right: 5px"></i><?= lang('ticketsLang.export')?>';
+                document.getElementById('list-btn-print').innerHTML = '<i class="fa-solid fa-print" aria-hidden="true" style="margin-right: 5px"></i><?= lang('ticketsLang.print')?>';
                 //console.log(document.getElementsByClassName('dataTables_info'));
                 //document.getElementsByClassName('dataTables_info')[0] = 'none';
             });
