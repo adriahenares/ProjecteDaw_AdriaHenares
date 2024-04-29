@@ -73,10 +73,10 @@ class TicketsController extends BaseController
                 'name' => 'Descripció'
             ],
             'centers__name' => [
-                'name' => 'Institut generador',
+                'name' => 'Centre emissor',
             ],
             'centers2__name' => [
-                'name' => 'Institut reparador',
+                'name' => 'Centre reparador',
             ],
             'email_person_center_g' => [
                 'name' => 'Email generador',
@@ -111,9 +111,9 @@ class TicketsController extends BaseController
             ]
         ]);
 
-        $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Mostrar intervencions');
+        $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
+        $crud->addItemLink('assgin', 'fa-solid fa-school', base_url('/assignTicket'), 'Assignar');
         $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar ticket');
-        $crud->addItemLink('assign', 'fa fa-arrow-right', base_url('/assignTicket'), 'Assignar');
 
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
         $crud->setConfig('ssttView');

@@ -27,6 +27,7 @@ echo $this->section("main_content");
                     <label for="device" class=" bold fs-5">Dispositiu</label>
                     <select class="form-control form-select" name="device" id="device">
                         <?php
+                        echo "<option value='' default hidden>Escull dispositiu...</option>";
                         $valueN = 1;
                         foreach ($device as $value) {
                             echo "<option value='" . $valueN . "'>" . $value . " </option>";
@@ -36,9 +37,10 @@ echo $this->section("main_content");
                     </select>
                 </div>
                 <div class="col-6 mt-4 mb-5">
-                    <label for="center_g" class=" bold fs-5">Centre generador</label>
+                    <label for="center_g" class=" bold fs-5">Centre emissor</label>
                     <select class="form-control form-select" name="center_g" id="center_g">
                         <?php
+                        echo "<option value='' default hidden>Escull centre...</option>";
                         foreach ($center as $value) {
                             echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                         }
@@ -49,6 +51,7 @@ echo $this->section("main_content");
                     <label for="center_r" class=" bold fs-5">Centre reparador</label>
                     <select class="form-control form-select" name="center_r" id="center_r">
                         <?php
+                        echo "<option value='' default hidden>Escull centre...</option>";
                         foreach ($center as $value) {
                             echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                         }
@@ -56,11 +59,11 @@ echo $this->section("main_content");
                     </select>
                 </div>
                 <div class="form-group col-6 my-4 ">
-                    <label for="email" class=" bold fs-5">Correu Professor </label>
+                    <label for="email" class=" bold fs-5">Correu Professor Emissor </label>
                     <input type="text" class="form-control" name="email" id="email" value="anilei@xtec.cat"></input>
                 </div>
                 <div class="form-group col-6 my-4 ">
-                    <label for="name" class=" bold fs-5">Nom Professor </label>
+                    <label for="name" class=" bold fs-5">Nom Professor Emissor </label>
                     <input type="text" class="form-control" name="name" id="name" value="Alexander"></input>
                 </div>
                 <div>

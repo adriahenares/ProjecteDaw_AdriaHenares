@@ -4,19 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/68a68b86d2.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Tickets</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
-        integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
-        integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
     <style>
         * {
             font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -157,10 +151,15 @@
             <!-- <div class="col-12 ps-3 pe-5 bgc-1 py-3 " style="height: 8vh;"> -->
             <img class="ms-4 mt-4" src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
-            <div class="mr-4"
-                style="float: right; height: 100%; vertical-align: middle; display: flex; align-content: center; flex-wrap: wrap">
+            <div class="mr-4" style="float: right; height: 100%; vertical-align: middle; display: flex; align-content: center; flex-wrap: wrap">
+                <a style="text-decoration: none;">
+                    <i class="fa-solid fa-language c-5 fa-xl me-4"></i>
+                </a>
+                <a style="text-decoration: none;">
+                    <i class="fa-regular fa-circle-user c-5 fa-xl me-4"></i>
+                </a>
                 <a href="<?= base_url('/logout') ?>" style="text-decoration: none;">
-                    <i class="fa-solid fa-right-from-bracket c-5 fa-xl"></i>
+                    <i class="fa-solid fa-right-from-bracket c-5 fa-xl me-3"></i>
                 </a>
             </div>
 
@@ -170,18 +169,18 @@
 
             <div class="bgc-1 c-5 p-0 m-0 h-100 " style="position: fixed; top: 8vh; width: 12vw;">
 
-                <div class=" menuButton mt-4 mb-3">
+                <div class=" menuButton mt-5 mb-3">
                     <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         Tickets
                     </a>
                 </div>
-                <!-- <div class=" menuButton mt-1 mb-3 w-100">
-                    <a href="<? base_url('/assign') ?>" class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none;">
-                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
-                        Assignar
+                <div class=" menuButton mt-2 mb-3 ">
+                    <a class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
+                        <i class="fa-solid fa-building-columns ms-4 me-2"></i>
+                        Centres
                     </a>
-                </div> -->
+                </div>
 
                 <!-- <div class="menuButton mt-1 mb-3 w-100">
                     <a href="<? base_url('/loginAuth') ?>" class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none; ">
@@ -200,8 +199,7 @@
 
             </div>
 
-            <div class="mx-4 my-2 p-3 "
-                style="height:91vh; position: fixed; left: 11vw; overflow-y: auto; width: 87vw;">
+            <div class="mx-4 my-2 p-3 " style="height:91vh; position: fixed; left: 11vw; overflow-y: auto; width: 87vw;">
                 <?php echo $this->renderSection("main_content") ?>
             </div>
         </div>

@@ -54,7 +54,7 @@
                 <!-- <hr/> -->
 
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Centre generador</h5>
+                    <h5 style="font-weight: bold;">Centre emissor</h5>
                     <br>
                     <p class="text-justify"><?php echo $ticket['email_person_center_g'] ?></p>
                     <br>

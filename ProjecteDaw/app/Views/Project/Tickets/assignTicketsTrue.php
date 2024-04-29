@@ -28,12 +28,13 @@
                 <div class="form-group col-12 px-4 mb-5 mt-2 ">
                     <select class="form-control  form-select" name='idRepair' id="idRepair">
                         <?php
+                        echo "<option value=''  default hidden>Escull centre...</option>";
                         foreach ($centerId as $value) {
                             echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                         }
                         ?>
                     </select>
-                    
+
                 </div>
 
                 <div class=" col-12 bottom-center pe-0 ">
@@ -49,3 +50,11 @@
 </div>
 
 <?= $this->endSection(); ?>
+
+<script>
+    $(document).ready(function() {
+        $('select').selectize({
+            sortField: 'text'
+        });
+    });
+</script>
