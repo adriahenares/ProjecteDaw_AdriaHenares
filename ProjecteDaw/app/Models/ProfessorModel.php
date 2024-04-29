@@ -44,6 +44,7 @@ class ProfessorModel extends Model
         return $this->where('professor_id', $id)->first();
     }
 
+    //verifica si el pr
     public function verifyProfessor ($email) {
         $verify = false;
         $query = $this->where('email', $email)->first();
@@ -52,6 +53,15 @@ class ProfessorModel extends Model
         }
         return $verify;
     }
+    // obtenir un profesor en especific
+    public function obtainProfessor($email) {
+        return $this->where('email', $email)->first();
+
+    }
+    public function obtainAllProfessors() {
+        $professorArr = $this->findAll();
+        return $professorArr;
+
+    }
 }
 
-//dubte

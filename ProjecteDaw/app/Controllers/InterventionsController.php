@@ -20,15 +20,6 @@ class InterventionsController extends BaseController
         return view('Project/interventions/addIntervention', $data);
     }
 
-    //falta
-    public function updateIntervention($ticket) {
-        session()->setFlashdata('idTicket',$ticket);
-        $data = [
-            'title' => lang('ticketsLang.titleG'),
-        ];
-        return view('Project/interventions/updateIntervention', $data);
-    }
-
     public function addIntervention_post() {
         $instanceI = new InterventionModel();
         $uuid = new UUID();
@@ -44,9 +35,16 @@ class InterventionsController extends BaseController
             'student_course' => $this->request->getPost('cicle'),
             'student_studies' => $this->request->getPost('course'),
         ];
-        var_dump($data);
-        die;
         $instanceI->insert($data);
+    }
+
+    //falta
+    public function updateIntervention($ticket) {
+        session()->setFlashdata('idTicket',$ticket);
+        $data = [
+            'title' => lang('ticketsLang.titleG'),
+        ];
+        return view('Project/interventions/updateIntervention', $data);
     }
 
 
@@ -57,7 +55,6 @@ class InterventionsController extends BaseController
 
     //falta
     public function delIntervention($ticket) {
-        var_dump("hola");
-        die;
+       
     }
 }
