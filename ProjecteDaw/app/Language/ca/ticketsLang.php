@@ -7,5 +7,6 @@ return [
     'assign' => 'Assignar',
     'assign_ticket' => 'Assigna Ticket',
     'assign_center' => 'Centre a assignar',
-    'send' => 'Envia'
+    'send' => 'Envia',
+    'center' => 'Centre'
 ];
