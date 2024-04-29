@@ -60,11 +60,11 @@ echo $this->section("main_content");
                 </div>
                 <div class="form-group col-6 my-4 ">
                     <label for="email" class=" bold fs-5"><?= lang('ticketsLang.teacher_email')?> </label>
-                    <input type="text" class="form-control" name="email" id="email"></input>
+                    <input type="text" class="form-control" name="email" id="email" value="anilei@xtec.cat"></input>
                 </div>
                 <div class="form-group col-6 my-4 ">
                     <label for="name" class=" bold fs-5"><?= lang('ticketsLang.teacher_name')?></label>
-                    <input type="text" class="form-control" name="name" id="name"></input>
+                    <input type="text" class="form-control" name="name" id="name" value="Alexander"></input>
                 </div>
                 <div class="col-12 bottom-center pe-0 ">
 

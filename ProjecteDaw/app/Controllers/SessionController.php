@@ -57,17 +57,10 @@ class SessionController extends BaseController
             
             $user = $instance->getUserByMail($email);
             if ($user == true) {
-                d($user['password']);
-                d($password[0]);
-                d(password_verify((string)$password, $user['password']));
                 if (password_verify((string)$password, $user['password'])) {
-                    d('asdda');
-                    $sessionData = [
-                        'email' => $user['email'],
-                        //atribut per verificar que el usuari no es professor ni alumne
-                        'nonTraditional' => 1,
-                    ];
-                    session()->set($sessionData);
+                    // sessions
+                    session()->set('mail', $email);
+                    session()->set('idSessionUser', 1);
                     return redirect()->to('/viewTickets');
                 }
             } else {
@@ -116,23 +109,25 @@ class SessionController extends BaseController
 
                 $userInfo = $oauth2->userinfo->get();
                 $data['mail'] = $userInfo->getEmail();
+                // sessions
+                session()->set('mail', $data['mail']);
                 //validacions
                 $pos = strpos($data['mail'], '@');
                 $mailLast = substr($data['mail'], $pos);
                 if ($mailLast == '@xtec.cat' || $instanceSt->verify_mail($data['mail']) == true) {
+                    //dades
                     $data['nom'] = $userInfo->getGivenName();
-                    $data['cognoms'] = $userInfo->getFamilyName();
                     $data['nomComplet'] = $userInfo->getName();
+                    //comprovem quin tipus d'usuari es
+                    $valueSession = $instanceProfessor->checkIfProfessorOrStudent($data['mail']);
+                    session()->set('idSessionUser', $valueSession);
                     //comprovem la extensio del correu per veure si es alumne o professor
                     if ($mailLast == '@xtec.cat') {
-                        //si ets un professor atribut nonTraditional a 0 per identificar que es un professor
-                        $data['nonTraditional'] = 0;
+                        // verifiquem que el professor a estat no ja a la plataforma
                         if ($instanceProfessor->verifyProfessor($data['mail']) == false) {
                             $userVerification = true;
                         }
                     }
-
-                   
                     //l'usuari es un professor 
                     if ($userVerification == true ) {
                         // creacio de les variables per professor 
@@ -148,7 +143,7 @@ class SessionController extends BaseController
                         ];
                         $instanceProfessor->insert($dataProf);
                     }
-                    session()->set('sessionData', $data);
+
                 } else {
                     $this->logOut_function();
                     session()->setFlashdata('error', 'error, conta no valida');

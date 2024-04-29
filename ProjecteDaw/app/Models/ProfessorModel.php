@@ -63,5 +63,22 @@ class ProfessorModel extends Model
         return $professorArr;
 
     }
+    // funcio per comprovar si es estudiant o professor 
+    public function checkIfProfessorOrStudent($email) {
+        // comprovacio professors
+        $data = $this->where('email', $email)->first();
+        if ($data != null) {
+            $valueSession = 2;
+            return $valueSession;
+        }
+        //comprovacio estudiants
+        $instance = new StudentModel();
+        $data = $instance->where('email', $email)->first();
+        if ($data != null) {
+            $valueSession = 3;
+            return $valueSession;
+        }
+        return 0;
+    }
 }
 
