@@ -23,7 +23,7 @@
                 btn.classList.add('btn', 'btn-info');
                 btn.id = 'list-btn-print';
                 btn.style.marginLeft = '5px';
-                btn.innerHTML = '<i class="fa-solid fa-plus"></i> Afegir';
+                btn.innerHTML = '<i class="fa-solid fa-plus"></i> <?= lang('ticketsLang.add')?>';
                 let div = document.getElementsByClassName('d-flex')[0];
                 div.appendChild(btn);
                 document.getElementById('list-btn-exportxls').innerHTML = '<i class="fa-solid fa-file-excel" aria-hidden="true style="margin-right: 5px"></i>Exportar';
