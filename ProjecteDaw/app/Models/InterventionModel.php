@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use DateTime;
 
 class InterventionModel extends Model
 {
@@ -12,7 +13,7 @@ class InterventionModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['intervention_id','ticket_id','professor_id','student_id','intervention_type_id','description','student_course','student_studies'];
+    protected $allowedFields    = ['intervention_id', 'ticket_id', 'professor_id', 'student_id', 'intervention_type_id', 'description', 'student_course', 'student_studies', 'deleted_at'];
     //TODO: Afegir allowed fields quan s'hagi d'afegir dades
 
     // Dates
@@ -69,7 +70,16 @@ class InterventionModel extends Model
         return $this->findAll();
     }
 
-    public function getSpecificInterventions($id) {
+    public function getSpecificInterventions($id)
+    {
         return $this->where('ticket_id', $id)->findAll();
+    }
+
+    public function deleteInterventionsByTicketId($id)
+    {
+        helper('date');
+        $this->where('ticket_id', $id);
+        $this->set('deleted_at', date('Y-m-d H:i:s', now('GMT+2')));
+        $this->update();
     }
 }

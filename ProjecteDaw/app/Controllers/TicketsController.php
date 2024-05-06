@@ -9,6 +9,7 @@ use App\Models\TicketModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Libraries\UUID;
 use App\Models\DeviceTypeModel;
+use App\Models\InterventionModel;
 
 use function PHPSTORM_META\type;
 
@@ -114,7 +115,7 @@ class TicketsController extends BaseController
         $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
         $crud->addItemLink('assgin', 'fa-solid fa-school', base_url('/assignTicket'), 'Assignar');
         $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar ticket');
-
+        $crud->addWhere('deleted_at');
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
         $crud->setConfig('ssttView');
         $data['output'] = $crud->render();
@@ -238,8 +239,15 @@ class TicketsController extends BaseController
     public function deleteTicket($ticket)
     {
         // securitzar
+        $interventionModel = new InterventionModel();
+        $interventionModel->deleteInterventionsByTicketId($ticket);
         $instanceT = new TicketModel();
-        $instanceT->delete($ticket);
+        // dd($ticket);
+        $instanceT->deleteTicket($ticket);
+        
+        // dd($arr);
+        // dd($interventionModel->getSpecificInterventions($ticket));
+
         return redirect()->back()->withInput();
     }
 }
