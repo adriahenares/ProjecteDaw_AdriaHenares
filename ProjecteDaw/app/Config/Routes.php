@@ -6,8 +6,6 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-
-
 //get per defecte tickets
 //tickets
 $routes->match(['GET','POST'], '/viewTickets', 'TicketsController::viewTickets');
@@ -55,4 +53,17 @@ $routes->post('/updateIntervention/(:segment)', 'InterventionsController::update
 
 $route['default_controller'] = 'TicketsController::viewTickets';
 
+//stock
+$routes->MATCH(['GET','POST'], '/viewStock', 'StockController::viewStock');
+//add
+$routes->get('/addStock', 'StockController::addStock');
+$routes->post('/addStock', 'StockController::addStock_post');
+//del
+$routes->get('/delStock/(:segment)', 'StockController::deleteStock/$1');
+
+
+
 $routes->get('/', 'SessionController::redirectToLogin');
+
+//AJAX
+$routes->get('/emailCenter/(:segment)', 'Gets::emailByCenter/$1');

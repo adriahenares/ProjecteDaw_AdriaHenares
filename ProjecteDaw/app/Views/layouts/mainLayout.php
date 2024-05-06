@@ -169,16 +169,22 @@
 
             <div class="bgc-1 c-5 p-0 m-0 h-100 " style="position: fixed; top: 8vh; width: 12vw;">
 
-                <div class=" menuButton mt-5 mb-3">
+                <div class="menuButton mt-5 mb-3">
                     <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         <?= lang('ticketsLang.Tickets')?>
                     </a>
                 </div>
-                <div class=" menuButton mt-2 mb-3 ">
+                <div class="menuButton mt-2 mb-3 ">
                     <a class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
                         <i class="fa-solid fa-building-columns ms-4 me-2"></i>
                         <?= lang('ticketsLang.centers')?>
+                    </a>
+                </div>
+                <div class="menuButton mt-2 mb-3 ">
+                    <a href="<?= base_url('/viewStock') ?>" class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
+                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
+                        Stock
                     </a>
                 </div>
 

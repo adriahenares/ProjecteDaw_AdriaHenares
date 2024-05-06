@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Libraries\UUID;
 use CodeIgniter\Model;
 
 class StockModel extends Model
@@ -12,7 +13,7 @@ class StockModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['stock_id','stock_type_id','description','intervention_id','center_id','purchase_date','price'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,20 +39,26 @@ class StockModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addStock($stock_id, $stock_type_id, $intervention_id, $center_id, $purchase_date, $price)
+    public function addStock($description, $stock_type_id, $center_id, $price)
     {
         $data = [
-            'stock_id' => $stock_id,
+            'stock_id' => UUID::v4(),
             'stock_type_id' => $stock_type_id,
-            'intervention_id' => $intervention_id,
+            'description' => $description,
+            'intervention_id' => null,
             'center_id' => $center_id,
-            'purchase_date' => $purchase_date,
+            'purchase_date' => date('Y-m-d'),
             'price' => $price
         ];
+        $this->insert($data);
     }
 
-    public function retrieveData() 
+    public function retrieveData()
     {
         return $this->findAll();
+    }
+
+    public function retrieveSpecificItem($stock) {
+        return $this->where('stock_id', $stock)->first();
     }
 }

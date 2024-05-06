@@ -9,6 +9,7 @@ use App\Models\TicketModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Libraries\UUID;
 use App\Models\DeviceTypeModel;
+use App\Models\ProfessorModel;
 
 use function PHPSTORM_META\type;
 
@@ -128,11 +129,19 @@ class TicketsController extends BaseController
     {
         $instanceDT = new DeviceTypeModel();
         $instanceC = new CenterModel();
+        $instanceP = new ProfessorModel();
         $data = [
             'title' => lang('ticketsLang.titleG'),
             'device' => $instanceDT->getAllDevices(),
-            'center' => $instanceC->getAllCentersId(),
         ];
+        //especific de cada vista
+        $testUser = 1; //cambia per la session d'usuari que validi quin usuari es 
+        if ($testUser == 1) {
+            $data['center'] =  $instanceC->getAllCentersId();
+        } else if ($testUser == 2) {
+            $professor = $instanceP->obtainProfessor('anilei@xtec.cat'); //session per mail 
+            session()->setFlashdata('idCenter',$professor['repair_center_id']);
+        }
         return view('Project/Tickets/createTickets', $data);
     }
 
@@ -186,13 +195,22 @@ class TicketsController extends BaseController
         //validation
         if ($this->validate($validationRules)) {
             // si ets SSTT el g_center_code es obligatori
-            // name email gCenter es sessio si ets professor 
+            // name email gCenter es sessio si ets professor
+            $testUser = 1; //canvia per seesion
+            //SSTT
+            if ($testUser == 1) {
+                $centerG =  $this->request->getPost('center_g');
+                $centerR =  $this->request->getPost('center_r');
+            } else if ($testUser == 2) {
+                $centerG = 1; //sessio (flash)
+                $centerR = null;
+            }
             $data = [
                 'ticket_id' => $uuid::v4(),
                 'device_type_id' => $this->request->getPost('device'),
                 'fault_description' => $this->request->getPost('description'),
-                'g_center_code' => $this->request->getPost('center_g'),
-                'r_center_code' => $this->request->getPost('center_r'),
+                'g_center_code' => $centerG,
+                'r_center_code' => $centerR,
                 'email_person_center_g' => $this->request->getPost('email'),
                 'name_person_center_g' => $this->request->getPost('name'),
                 // status estandard

@@ -58,6 +58,7 @@ class ProfessorModel extends Model
         return $this->where('email', $email)->first();
 
     }
+  
     public function obtainAllProfessors() {
         $professorArr = $this->findAll();
         return $professorArr;
@@ -80,5 +81,11 @@ class ProfessorModel extends Model
         }
         return 0;
     }
+
+    //funcio que al passarli la id ens retorna el professors de aquells centres
+    public function getProfessorsByCenterId ($id) {
+        return $this->where('repair_center_id', $id)->findAll();
+    }
+
 }
 
