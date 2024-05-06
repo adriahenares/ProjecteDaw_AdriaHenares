@@ -133,7 +133,7 @@ class StockController extends BaseController
     }
 
     public function updateStock() {
-
+        return view('Project/stock/updateStock');
     }
 
     public function updateStock_post() {

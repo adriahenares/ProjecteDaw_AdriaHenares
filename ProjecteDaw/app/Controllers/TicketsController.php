@@ -9,6 +9,7 @@ use App\Models\TicketModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Libraries\UUID;
 use App\Models\DeviceTypeModel;
+use App\Models\InterventionModel;
 use App\Models\ProfessorModel;
 
 use function PHPSTORM_META\type;
@@ -156,25 +157,7 @@ class TicketsController extends BaseController
                     'required' => 'camp requerit',
                 ],
             ],
-            'center_g' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'camp requerit',
-                ],
-            ],
-            'center_r' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'camp requerit',
-                ],
-            ],
-            'email' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'camp requerit',
-                ],
-            ],
-            'name' => [
+            'description' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'camp requerit',
@@ -182,7 +165,7 @@ class TicketsController extends BaseController
             ],
         ];
         //validacio temporal
-        $email =$this->request->getPost('email');
+        /*$email =$this->request->getPost('email');
         $name = $this->request->getPost('name');
         if ($email != 'anilei@xtec.cat') {
             session()->setFlashdata('error', 'el email: ' . $email . ' no esta a la base de dades, en desenvolupament');
@@ -191,13 +174,13 @@ class TicketsController extends BaseController
         if ($name != 'Alexander') {
             session()->setFlashdata('error', 'el nom: ' . $name . ' no esta a la base de dades, en desenvolupament');
             return redirect()->back()->withInput();
-        }
+        }*/
         //validation
         if ($this->validate($validationRules)) {
             // si ets SSTT el g_center_code es obligatori
             // name email gCenter es sessio si ets professor
             $testUser = 1; //canvia per seesion
-            //SSTT
+            //SSTT sessions !!
             if ($testUser == 1) {
                 $centerG =  $this->request->getPost('center_g');
                 $centerR =  $this->request->getPost('center_r');
@@ -255,7 +238,13 @@ class TicketsController extends BaseController
     //deleteTicket
     public function deleteTicket($ticket)
     {
-        // securitzar
+        // fet i validat 
+        $instanceI = new InterventionModel();
+        $Interventions = $instanceI->getSpecificInterventions($ticket);
+        if ($Interventions != null) {
+            session()->setFlashdata('error', 'no es pot borrar el ticket');
+            return redirect()->back();
+        }
         $instanceT = new TicketModel();
         $instanceT->delete($ticket);
         return redirect()->back()->withInput();

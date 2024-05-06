@@ -194,6 +194,7 @@ class SessionController extends BaseController
                 'name' => 'email',
             ],
         ]);
+        $crud->setConfig('ssttView');
         $data['output'] = $crud->render();
         return view('authentication/register/validateStudents', $data);
     }
