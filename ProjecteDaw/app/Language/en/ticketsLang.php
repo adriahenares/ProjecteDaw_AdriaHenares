@@ -21,5 +21,15 @@ return [
     'cancel' => 'Cancel',
     'choose_center' => 'Choose Center',
     'export' => 'Export',
-    'print' => 'Print'
+    'print' => 'Print',
+    'teacher' => 'Teacher',
+    'student' => 'Student',
+    'intervention_type' => 'Intervention Type',
+    'FP' => 'Professional Training',
+    'course' => 'Course',
+    'center_contact' => 'Center Contact',
+    'center_contact_email' => 'Center Contact Email',
+    'creation_data' => 'Creation Data',
+    'state' => 'State',
+    'intervention' => 'Intervention'
 ];

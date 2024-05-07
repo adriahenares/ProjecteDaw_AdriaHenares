@@ -37,7 +37,7 @@
             <div class="row border rounded-3 mb-4 pt-2">
 
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Descripció</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.description')?></h5>
                     <br>
                     <p class="text-justify"><?php echo $ticket['fault_description'] ?></p>
                     <br>
@@ -54,7 +54,7 @@
                 <!-- <hr/> -->
 
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Centre emissor</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.issuing_center')?></h5>
                     <br>
                     <p class="text-justify"><?php echo $ticket['email_person_center_g'] ?></p>
                     <br>
@@ -67,14 +67,14 @@
                 <!-- <hr/> -->
 
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Data creació</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.creation_data')?></h5>
                     <br>
                     <p class="text-justify"><?php echo $ticket['created_at'] ?></p>
                     <br>
                 </div>
                 <!-- <hr/> -->
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Ultima modificació</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.last_modification')?></h5>
                     <br>
                     <p class="text-justify"><?php echo $ticket['updated_at'] ?></p>
                     <br>
@@ -83,7 +83,7 @@
                 <!-- <hr/> -->
 
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Estat</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.state')?></h5>
                     <br>
                     <p class="text-justify"><?= $status ?></p>
                     <br>
@@ -99,7 +99,7 @@
 
             <div class="col-12 mb-3 ">
 
-                <h3 style="font-weight: bold;"> Intervencions </h3>
+                <h3 style="font-weight: bold;"> <?= lang('ticketsLang.intervention')?> </h3>
 
             </div>
             <!-- <div class="d-flex justify-content-end mb-2"> -->
@@ -108,8 +108,6 @@
             <?= $output ?>
         </div>
     </div>
-
-
 
 
     <?= $this->endSection(); ?>

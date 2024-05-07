@@ -21,5 +21,16 @@ return [
     'cancel' => 'Cancelar',
     'choose_center' => 'Eliga centro',
     'export' => 'Exportar',
-    'print' => 'Imprimir'
+    'print' => 'Imprimir',
+    'teacher' => 'Profesor',
+    'student' => 'Estudiante',
+    'intervention_type' => 'Tipos intervención',
+    'FP' => 'Ciclo formativo',
+    'course' => 'Curso',
+    'center_contact' => 'Persona contacto centro',
+    'center_contact_email' => 'Correo persona contacto',
+    'creation_data' => 'Fecha creación',
+    'last_modification' => 'Ultima modificación',
+    'state' => 'Estado',
+    'intervention' => 'Intervención'
 ];
