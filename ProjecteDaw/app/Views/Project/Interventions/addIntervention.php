@@ -1,5 +1,5 @@
 <?php
-echo $this->extend('layouts/default/default');
+$this->extend('layouts/mainLayout');
 
 echo $this->section("main_content");
 ?>
@@ -10,11 +10,10 @@ echo $this->section("main_content");
             <div class="d-flex align-items-center bg-dark">
                 <img src="<?= base_url('Logo.png') ?>" alt="Logo" style="max-width: 80px">
                 <div>
-                    <h1 class="text-white text-center"><?= $title ?></h1>
+                    <h1 class="text-white text-center"><?= lang('ticketsLang.add_intervention')?></h1>
                 </div>
             </div>
         </div>
-        <?= $this->include("layouts/partials/menu") ?>
         <div id="centres" class="col-10">
             <form action="<?= base_url("/addIntervention") ?>" method="POST">
                 <?= csrf_field() ?>
@@ -46,8 +45,6 @@ echo $this->section("main_content");
                     <label for="cicle"><?= lang('ticketsLang.FP')?></label>
                     <select class="form-control" name="cicle" id="cicle">
                         <?php
-                            echo "<option value='DAM'>DAM</option>";
-                            echo "<option value='DAW'>DAW</option>";
                             echo "<option value='ASIX'>ASIX</option>"; 
                         ?>
                     </select>
@@ -66,7 +63,7 @@ echo $this->section("main_content");
                     <a href="<?= base_url("/interventionsOfTicket/" . session()->getFlashdata("idTicket")) ?>" class="btn btn-secondary"><?= lang('ticketsLang.cancel')?></a>
                 </div>
             </form>
-        </div>ñ
+        </div>
     </div>
 </div>
 </div>

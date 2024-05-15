@@ -17,7 +17,8 @@ class InterventionsController extends BaseController
             'interTypes' => $instanceIT->getAllInterTypes(),
             'title' => lang('ticketsLang.titleG'),
         ];
-        return view('Project/interventions/addIntervention', $data);
+        
+        return view('Project/Interventions/addIntervention', $data);
     }
 
     public function addIntervention_post() {

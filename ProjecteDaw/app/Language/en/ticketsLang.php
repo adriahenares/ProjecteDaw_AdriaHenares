@@ -31,5 +31,6 @@ return [
     'center_contact_email' => 'Center Contact Email',
     'creation_data' => 'Creation Data',
     'state' => 'State',
-    'intervention' => 'Intervention'
+    'intervention' => 'Intervention',
+    'add_intervention' => "Add Intervention",
 ];

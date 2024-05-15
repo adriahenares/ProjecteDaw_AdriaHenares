@@ -1,8 +1,5 @@
-<?php
-echo $this->extend('layouts/default/default');
 
-echo $this->section("main_content");
-?>
+<?= $this->section("main_content");?>
 
 <div class="container-fluid p-0">
     <div class="row">
@@ -14,7 +11,7 @@ echo $this->section("main_content");
                 </div>
             </div>
         </div>
-        <?= $this->include("layouts/partials/menu") ?>
+        <?= $this->include("layouts/mainLayout") ?>
         <div id="centres" class="col-10">
             <form action="<?php base_url("/addTickets") ?>" method="POST">
                 <?= csrf_field() ?>
