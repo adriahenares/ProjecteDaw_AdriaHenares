@@ -21,7 +21,7 @@ echo $this->section("main_content");
                     <textarea class="form-control" name="description" id="description" cols="30" rows="3"></textarea>
                 </div>
                 <div class="form-group col-6 my-4">
-                    <label for="type_device" class=" bold fs-5">Tipus peça</label>
+                    <label for="type_piece" class=" bold fs-5">Tipus peça</label>
                     <select class="form-control form-select" name="type_piece" id="type_piece">
                         <?php
                         echo "<option value='' default hidden>Escull el tipus...</option>";

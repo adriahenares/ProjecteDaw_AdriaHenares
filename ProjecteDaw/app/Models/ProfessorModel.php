@@ -44,7 +44,7 @@ class ProfessorModel extends Model
         return $this->where('professor_id', $id)->first();
     }
 
-    //verifica si el pr
+    //verifica si el professor esta a la taula professor
     public function verifyProfessor ($email) {
         $verify = false;
         $query = $this->where('email', $email)->first();

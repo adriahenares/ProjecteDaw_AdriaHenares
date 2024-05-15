@@ -55,8 +55,8 @@ class StockController extends BaseController
                 'name' => 'preu (unitari)',
             ],
         ]);
-
-        $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delStock'), 'Eliminar item');
+        $crud->addItemLink('updateStock', 'fa-solid fa-school', base_url('updateStock'), 'Update stock');
+        $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delStock'), 'Eliminar stock');
 
         $crud->setConfig('ssttView');
         $data['output'] = $crud->render();
@@ -68,7 +68,8 @@ class StockController extends BaseController
         return view('Project/stock/viewStock', $data);
     }
 
-    public function addStock() {
+    public function addStock()
+    {
         $instanceST = new StockTypeModel();
         $instanceC = new CenterModel();
         $data['types'] = $instanceST->retrieveAllTypes();
@@ -76,7 +77,8 @@ class StockController extends BaseController
         return view('Project/stock/createStock', $data);
     }
 
-    public function addStock_post() {
+    public function addStock_post()
+    {
         $validationRules = [
             'description' => [
                 'rules' => 'required',
@@ -125,30 +127,103 @@ class StockController extends BaseController
             }
             return redirect()->to(base_url('/viewStock'));
         } else {
-            var_dump("hola");
-            die;
             session()->setFlashdata('error', 'dades insuficients');
             return redirect()->back()->withInput();
         }
     }
 
-    public function updateStock() {
-        return view('Project/stock/updateStock');
+    public function updateStock($id)
+    {
+        $instance = new StockModel();
+        $instanceST = new StockTypeModel();
+        $instanceC = new CenterModel();
+        $updateLevel = $instance->checkIfInterventionAssigned($id);
+        //el stock en especific
+        $data['stock'] = $instance->retrieveSpecificItem($id);
+        // types
+        $data['types'] = $instanceST->retrieveAllTypes();
+        //center
+        $data['center'] =  $instanceC->getAllCentersId();
+        if ($updateLevel == true) {
+            //tiquet assignat
+            session()->setFlashdata("level", 1);
+        } else {
+            //tiquet no assignat
+            session()->setFlashdata("level", 0);
+        }
+        return view('Project/stock/updateStock', $data);
     }
 
-    public function updateStock_post() {
+    public function updateStock_post($id)
+    {
+        if (session()->getFlashdata("level") == 1) {
 
-    }    
+        }
+        if (session()->getFlashdata("level") == 0) {
+            $validationRules = [
+                'description' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'camp requerit',
+                    ],
+                ],
+                'type_piece' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'camp requerit',
+                    ],
+                ],
+                'price' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'camp requerit',
+                    ],
+                ],
+                'center' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'camp requerit',
+                    ],
+                ],
+                'number_units' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'camp requerit',
+                    ],
+                ],
+            ];
+            //validation
+            if ($this->validate($validationRules)) {
+                $instanceS = new StockModel();
+                $description = $this->request->getPost('description');
+                $typePiece = $this->request->getPost('type_piece');
+                $price = $this->request->getPost('price');
+                $center = $this->request->getPost('center');
+                $numberItems = $this->request->getPost('number_units');
+                if ($numberItems <= 0) {
+                    $numberItems = 1;
+                }
+                for ($i = 0; $i < $numberItems; $i++) {
+                    $instanceS->addStock($description, $typePiece, $center, $price);
+                }
+            } else {
+                session()->setFlashdata('error', 'dades insuficients');
+                return redirect()->back()->withInput();
+            }
+        }
+        return redirect()->back()->withInput();
+    }
 
-    public function deleteStock($stock) {
+    public function deleteStock($stock)
+    {
         $instanceS = new StockModel();
         $item = $instanceS->retrieveSpecificItem($stock);
         if ($item['intervention_id'] != null) {
             session()->setFlashdata('error', 'no es pot eliminar un ticket assignat');
             redirect()->back();
         }
+        //fe soft delete
         $instanceS->delete($stock);
         return redirect()->back();
     }
-    
 }

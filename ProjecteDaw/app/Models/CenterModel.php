@@ -59,7 +59,22 @@ class CenterModel extends Model
         return $centerArr;
     }
 
+    //funcio API 
     public function putEmailOfCenter($id) {
         return $this->where('center_id', $id)->first();
+    }
+
+    public function verifyCenter ($email) {
+        $verify = false;
+        $query = $this->where('email', $email)->first();
+        if ($query != null) {
+            $verify = true;
+        }
+        return $verify;
+    }
+
+    //obtenim el centre  per email
+    public function obtainCenterByEmail($email) {
+        return $this->where('email', $email)->first();
     }
 }
