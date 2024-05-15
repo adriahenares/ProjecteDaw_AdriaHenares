@@ -29,7 +29,7 @@ class InterventionDataMigration extends Migration
         $this->forge->addField([
             'intervention_id'       => [
                 'type'       => 'VARCHAR',
-                'constraint' => '16',
+                'constraint' => '36',
                 null => false
             ],
             'ticket_id'          => [

@@ -44,4 +44,8 @@ class StockTypeModel extends Model
         ];
     }
 
+    public function retrieveAllTypes() {
+        return $this->findAll();
+    }
+
 }

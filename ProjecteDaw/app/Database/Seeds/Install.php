@@ -21,5 +21,7 @@ class Install extends Seeder
         $this->call("TicketSeeder");
         $this->call("InterventionSeeder");
         $this->call("LoginsSeeder");
+        $this->call("StockTypeSeeder");
+        $this->call("StockSeeder");
     }
 }

@@ -56,7 +56,10 @@ class CenterModel extends Model
 
     public function getAllCentersId() {
         $centerArr = $this->findAll();
-
         return $centerArr;
+    }
+
+    public function putEmailOfCenter($id) {
+        return $this->where('center_id', $id)->first();
     }
 }

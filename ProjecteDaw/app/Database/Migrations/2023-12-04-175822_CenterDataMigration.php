@@ -141,8 +141,6 @@ class CenterDataMigration extends Migration
         ],
         ]);
         $this->forge->addKey('professor_id', true);
-        $this->forge->addKey('email', false, true);
-        $this->forge->addKey('name', false, true);
         $this->forge->addForeignKey('repair_center_id', 'centers', 'center_id'); 
         $this->forge->createTable('professors');
     }

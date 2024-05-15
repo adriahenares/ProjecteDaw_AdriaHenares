@@ -91,8 +91,8 @@ class TiquetsDataMigration extends Migration
         $this->forge->addForeignKey('device_type_id', 'deviceType', 'device_type_id');
         $this->forge->addForeignKey('g_center_code', 'centers', 'center_id');
         $this->forge->addForeignKey('r_center_code', 'centers', 'center_id');
-        $this->forge->addForeignKey('email_person_center_g', 'professors', 'email');
-        $this->forge->addForeignKey('name_person_center_g', 'professors', 'name', true);
+        //$this->forge->addForeignKey('email_person_center_g', 'professors', 'email');
+        //$this->forge->addForeignKey('name_person_center_g', 'professors', 'name', true);
 
         $this->forge->createTable('tickets');
     }
