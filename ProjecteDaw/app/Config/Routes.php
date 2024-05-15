@@ -58,12 +58,18 @@ $routes->MATCH(['GET','POST'], '/viewStock', 'StockController::viewStock');
 //add
 $routes->get('/addStock', 'StockController::addStock');
 $routes->post('/addStock', 'StockController::addStock_post');
+//update
+$routes->get('/updateStock/(:segment)', 'StockController::updateStock/$1');
+$routes->post('/updateStock/(:segment)', 'StockController::updateStock_post/$1');
 //del
 $routes->get('/delStock/(:segment)', 'StockController::deleteStock/$1');
 
-
-
 $routes->get('/', 'SessionController::redirectToLogin');
-
 //AJAX
 $routes->get('/emailCenter/(:segment)', 'Gets::emailByCenter/$1');
+
+//les sessions son 1 SSTT 2 centres / 3 professors / centre 4 Alumne 
+//sessions: 
+//mail: el mail de literal qualsevol usuari
+//idSessionUser: el rol del usuari, previament descrit 
+//idCenter: la id del centre del usuari excepte SSTT que no tenen centre assignat

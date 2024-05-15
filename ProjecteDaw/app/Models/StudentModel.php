@@ -12,7 +12,7 @@ class StudentModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["student_id","email"];
+    protected $allowedFields    = ["student_id","email","student_center_id"];
 
     // Dates
     protected $useTimestamps = false;
@@ -45,5 +45,9 @@ class StudentModel extends Model
         } else {
             return false;
         }
+    }
+
+    public function obtainStByMail($email) {
+        return $this->where("email", $email)->first();
     }
 }

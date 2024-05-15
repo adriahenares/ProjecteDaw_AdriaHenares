@@ -53,12 +53,25 @@ class StockModel extends Model
         $this->insert($data);
     }
 
+    //Aleix
     public function retrieveData()
     {
         return $this->findAll();
     }
-
+    //Aleix
     public function retrieveSpecificItem($stock) {
         return $this->where('stock_id', $stock)->first();
+    }
+
+    //Aleix
+    public function checkIfInterventionAssigned($id) {
+        $stock = $this->where("stock_id", $id)->first();
+        $assigned = false;
+        if ($stock['intervention_id'] == null) {
+            $assigned = false;
+        } else {
+            $assigned = true;
+        }
+        return $assigned;
     }
 }
