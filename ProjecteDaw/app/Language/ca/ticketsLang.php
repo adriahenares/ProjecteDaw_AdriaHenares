@@ -32,5 +32,6 @@ return [
     'creation_data' => 'Data creació',
     'last_modification' => 'Ultima modificació',
     'state' => 'Estat',
-    'intervention' => 'Intervenció'
+    'intervention' => 'Intervenció',
+    'add_intervention' => "Agregar Intervenció"
 ];

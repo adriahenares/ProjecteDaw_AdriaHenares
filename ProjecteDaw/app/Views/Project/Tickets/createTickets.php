@@ -4,8 +4,6 @@ $this->extend('layouts/mainLayout');
 echo $this->section("main_content");
 ?>
 
-
-
 <div class="container-fluid mt-3">
     <div id="centres" class="border">
 
