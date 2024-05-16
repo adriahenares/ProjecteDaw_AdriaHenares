@@ -23,10 +23,11 @@ $routes->get('/delTicket/(:segment)', 'TicketsController::deleteTicket/$1');
 
 //Iniciar seesio SSTT
 $routes->get('/loginAuth', 'SessionController::loginNormal');
-$routes->post('/loginAuth', 'SessionController::login_post_Normal');
 
 //iniciar sessio profe, alum
 $routes->get('/login', 'SessionController::google_login');
+$routes->post('/loginAuth', 'SessionController::login_post_Normal');
+
 
 //validar el centre
 $routes->post('/validateCenter', 'SessionController::validateCenter');

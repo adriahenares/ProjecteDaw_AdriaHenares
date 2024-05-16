@@ -1,51 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<?= $this->extend('layouts/authLayout/auth.php'); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<?= $this->section("auth"); ?>
+<div class="container-fluid mt-3">
+    <div id="assign" class="border">
 
-<body>
-    <form action="<?= base_url('/validateCenter') ?>" method="post">
-    <?= csrf_field(); ?>
         <div>
-            <input type="text" id="search1" placeholder="Busca...">
+            <h3 class="mt-0"> <?= lang('ticketsLang.centers') ?></h3>
         </div>
         <div>
-            <label for="center_r">Centre reparador</label>
-            <select class="form-control" name="center_r" id="center_r">
-                <?php
-                echo "<option value='0' selected ></option>";
-                foreach ($center as $value) {
-                    echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
-                }
-                ?>
-            </select>
+            <form action="<?= base_url('/validateCenter') ?>" method="post">
+                <?= csrf_field(); ?>
+                <div>
+                    <label for="center_r"></label>
+                    <select class="form-control" name="center_r" id="center_r">
+                        <?php
+                        echo "<option value=''  default hidden>".  lang('ticketsLang.choose_center') ."</option>";
+                        foreach ($center as $value) {
+                            echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class=" col-12 bottom-center pe-0 ">
+                    <button type="submit" class="btn btn-primary bold"><?= lang('ticketsLang.save')?></button>
+                </div>
+            </form>
         </div>
-        <input type="submit" value="Envia">
-    </form>
-</body>
 
-</html>
+    </div>
+</div>
 <script>
-    const search1 = document.getElementById('search1');
-    const select1 = document.getElementById('center_r');
-    //const search2 = document.getElementById('search2');
-    const select2 = document.getElementById('center_g');
-    search1.addEventListener('input', filterR)
-
-    function filterR() {
-        var textToFilter = search1.value.toUpperCase();
-        var options = select1.options;
-        for (var i = 0; i < options.length; i++) {
-            var txtValue = options[i].text.toUpperCase();
-            if (txtValue.indexOf(textToFilter) > -1) {
-                options[i].style.display = "";
-            } else {
-                options[i].style.display = "none";
-            }
-        }
-    }
+    $(document).ready(function() {
+        // s'inicialitza els select amb selectize
+        $('select').selectize({
+            sortField: 'text'
+        });
+    });
 </script>
+<?= $this->endSection() ?>

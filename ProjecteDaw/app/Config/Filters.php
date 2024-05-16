@@ -26,7 +26,11 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'cors'          => \App\Filters\CorsFilter::class,
-        'sessionVal'    => \App\Filters\SessionValidateFilter::class,
+        'UserLogged'    => \App\Filters\IsLoggedFilter::class,
+        'UserNotLogged' => \App\Filters\IsNotLoggedFilter::class,
+        'OnlySSTT'      => \App\Filters\IsSSTTFilter::class,
+        'OnlyProfessor' => \App\Filters\IsProfessorFilter::class,
+        'NotStudent'    => \App\Filters\IsNotAlumneFilter::class,
     ];
 
     /**

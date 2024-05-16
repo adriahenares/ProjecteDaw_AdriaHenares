@@ -1,36 +1,35 @@
-<html>
+<?php echo $this->extend('layouts/authLayout/auth.php'); ?>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Login with Google in Codeigniter</title>
-  <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport' />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-
-</head>
-
-<body>
-  <div class="container">
-    <div>
-      <a class="btn btn-primary" href="<?= base_url("/loginAuth") ?>">Login Admin</a>
-    </div>
-    <br />
-    <h2 align="center">Login using Google Account with Codeigniter</h2>
-    <br />
-    <div class="panel panel-default">
-      <?php
-      if (isset($login_button)) {
-        echo '<div align="center">' . $login_button . '</div>';
-      }
-      ?>
-    </div>
-      <?php if (session()->has('error')) : ?>
-        <div>
-          <?= session()->getFlashdata('error') ?>
+<?php echo $this->section("auth"); ?>
+<div class="container-fluid">
+    <form action="<?= base_url('/loginAuth') ?>" method="post">
+        <?= csrf_field(); ?>
+        <div class="m-2">
+            <label for="mail" class="form-label"> <?= lang('loginLang.email') ?></label>
+            <input type="text" name="mail" id="mail" class="form-control" placeholder="example@gmail.com" value="<?= old('mail') ?>">
         </div>
-      <?php endif; ?>
-  </div>
-</body>
 
-</html>
+        <div class="m-2">
+            <label for="pass" class="form-label"> <?= lang('loginLang.password') ?></label>
+            <input type="password" name="pass" id="pass" class="form-control" placeholder="<?= lang('loginLang.password') ?>" value="<?= old('pass') ?>">
+        </div>
+        <div class="m-2 text-center">
+            <input type="submit" class="btn btn-primary w-100" value=" <?= lang('loginLang.login_button') ?>">
+        </div>
+    </form>
+    <div class="container">
+        <div class="panel panel-default">
+            <?php
+            if (isset($login_button)) {
+                echo  $login_button;
+            }
+            ?>
+        </div>
+        <div class="m-2 text-center">
+            <div classs="m-3 text-center" style="color:red">
+                <?= session()->getFlashdata('error'); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php echo $this->endSection(); ?>
