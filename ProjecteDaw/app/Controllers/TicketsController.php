@@ -105,7 +105,7 @@ class TicketsController extends BaseController
                 'name' => 'Estat',
             ]
         ]);
-        $crud->setConfig('ssttView');
+        $crud->setConfig('ssttView');        //sessions links
         $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
         $data['add'] = true;
         $role = session()->get('role');
