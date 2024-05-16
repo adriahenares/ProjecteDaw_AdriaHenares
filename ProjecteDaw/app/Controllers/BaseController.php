@@ -59,7 +59,7 @@ abstract class BaseController extends Controller
         if (isset(session()->lang)) {
             $this->request->setlocale(session()->lang);
         } else {
-            $this->request->setlocale('ca');
+            $this->request->setlocale('en');
         }
     }
 

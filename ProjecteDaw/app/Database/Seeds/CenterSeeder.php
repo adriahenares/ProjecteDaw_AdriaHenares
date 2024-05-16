@@ -23,7 +23,8 @@ class CenterSeeder extends Seeder
                     'town_id'  => $filedata[5],
                     'SSTT_id'  => $filedata[6],
                     'active'  => $filedata[7],
-                    'workshop'  => $filedata[8]
+                    'workshop'  => $filedata[8],
+                    'language' => "ca"
 
                 ];
                 $model->insert($data);

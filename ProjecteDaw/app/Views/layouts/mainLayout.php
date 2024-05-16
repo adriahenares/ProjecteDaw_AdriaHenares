@@ -152,9 +152,8 @@
             <img class="ms-4 mt-4" src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
             <div class="mr-4" style="float: right; height: 100%; vertical-align: middle; display: flex; align-content: center; flex-wrap: wrap">
-                <a style="text-decoration: none;">
-                    <i class="fa-solid fa-language c-5 fa-xl me-4"></i>
-                </a>
+                <a style="text-decoration: none;" onclick="<?= session()->set('lang', 'es') ?>"  href="<?= base_url('changeLang/es')?>">ES</a>
+                <a style="text-decoration: none;" onclick="<?= session()->set('lang', 'ca') ?>" href="<?= base_url('changeLang/ca')?>">CA</a>
                 <a style="text-decoration: none;">
                     <i class="fa-regular fa-circle-user c-5 fa-xl me-4"></i>
                 </a>

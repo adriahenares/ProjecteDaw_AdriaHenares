@@ -12,7 +12,7 @@ class SSTTModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["SSTT_id", "name", "address", "phone", "email"];
+    protected $allowedFields    = ["SSTT_id", "name", "address", "phone", "email","language"];
 
     // Dates
     protected $useTimestamps = false;
@@ -48,5 +48,9 @@ class SSTTModel extends Model
             'email' => $email,
         ];
         $this->insert($data);
+    }
+
+    public function updateLang($lang){
+        return $this->update(session()->get('mail'), ['language'->$lang]);
     }
 }

@@ -9,6 +9,7 @@ use App\Models\CenterModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Models\LoginsModel;
 use App\Models\ProfessorModel;
+use App\Models\SSTTModel;
 use App\Models\StudentModel;
 // use Google\Service\Classroom\Student;
 
@@ -258,4 +259,26 @@ class SessionController extends BaseController
             session()->destroy();
         }
     }
+
+    public function changeLang(){
+
+        $lang = session()->get('lang');
+        dd($lang);
+
+        if(session()->get('role') == 'Student'){
+            $model = new StudentModel();
+            $model->updateLang($lang);
+        }else if(session()->get('role') == 'Center'){
+            $model = new CenterModel();
+            $model->updateLang($lang);
+        }else if(session()->get('role') == 'SSTT'){
+            $model = new SSTTModel();
+            $model->updateLang($lang);
+        }else if(session()->get('role') == 'Professor'){
+            $model = new ProfessorModel();
+            $model->updateLang($lang);
+        }
+
+    }
+
 }

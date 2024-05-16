@@ -91,6 +91,11 @@ class CenterDataMigration extends Migration
                                 'constraint'     => '1',
                                 'null'           => false,
                         ],
+                        'language'          => [
+                                'type'           => 'VARCHAR',
+                                'constraint'     => '2',
+                                'null'           => false,
+                        ],
                 ]);
                 $this->forge->addKey('center_id', true);
                 $this->forge->addKey('center_id', true);
@@ -113,6 +118,11 @@ class CenterDataMigration extends Migration
                                 'type'           => 'INT',
                                 'constraint'     => '8',
                                 'null'           => true,
+                        ],
+                        'language'          => [
+                                'type'           => 'VARCHAR',
+                                'constraint'     => '2',
+                                'null'           => false,
                         ],
                 ]);
                 $this->forge->addKey('student_id', true);
@@ -142,6 +152,11 @@ class CenterDataMigration extends Migration
                                 'type'           => 'INT',
                                 'constraint'     => '8',
                                 'null'           => true,
+                        ],
+                        'language'          => [
+                                'type'           => 'VARCHAR',
+                                'constraint'     => '2',
+                                'null'           => false,
                         ],
                 ]);
                 $this->forge->addKey('professor_id', true);

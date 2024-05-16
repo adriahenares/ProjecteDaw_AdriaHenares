@@ -12,7 +12,7 @@ class StudentModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["student_id","email","student_center_id"];
+    protected $allowedFields    = ["student_id","email","student_center_id","language"];
 
     // Dates
     protected $useTimestamps = false;
@@ -50,4 +50,9 @@ class StudentModel extends Model
     public function obtainStByMail($email) {
         return $this->where("email", $email)->first();
     }
+
+    public function updateLang($lang){
+        return $this->update(session()->get('mail'), ['language'->$lang]);
+    }
+
 }
