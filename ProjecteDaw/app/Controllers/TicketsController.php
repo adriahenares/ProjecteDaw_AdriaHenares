@@ -121,6 +121,7 @@ class TicketsController extends BaseController
                 $crud->addWhere("r_center_code", session()->idCenter);
             }
         }
+        
         if ($role == 'Student' || $role == 'Professor' || $role == 'Center') {
             $crud->addWhere("r_center_code", session()->idCenter);
         }

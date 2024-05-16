@@ -194,7 +194,7 @@
                 <div class="menuButton mt-2 mb-3 ">
                     <a href="<?= base_url('/validateStudents') ?>" class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
-                        Studiant
+                        <?= lang('ticketsLang.student') ?>
                     </a>
                 </div>
 
