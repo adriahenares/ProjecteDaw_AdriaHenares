@@ -22,13 +22,7 @@ class SessionController extends BaseController
     //funcionalitat de registre sstt
     public function redirectToLogin()
     {
-        return redirect()->to('loginAuth');
-    }
-
-    public function loginNormal()
-    {
-        helper('form');
-        return view("authentication/login/loginN");
+        return redirect()->to('login');
     }
 
     public function login_post_Normal()
@@ -169,7 +163,7 @@ class SessionController extends BaseController
                     $this->logOut_function();
                     session()->setFlashdata('error', 'error, conta no valida');
                     $login_button = '';
-                    $login_button = '<a href="' . $client->createAuthUrl() . '">LOGIN WITH GOOGLE</a>';
+                    $login_button = '<a href="' . $client->createAuthUrl() . '" class="btn btn-primary text-center" >LOGIN WITH GOOGLE</a>';
                     $data['login_button'] = $login_button;
                     return view("authentication/login/login", $data);
                 }
@@ -178,7 +172,10 @@ class SessionController extends BaseController
 
         if (!session()->get('access_token')) {
             $login_button = '';
-            $login_button = '<a href="' . $client->createAuthUrl() . '">LOGIN WITH GOOGLE</a>';
+            $login_button = '<a href="' . $client->createAuthUrl() . '" class="btn w-100 position-relative" 
+            style="  border: 2px solid blue; background-color: white;">
+            <img src="' . base_url("images/google.jpg") . '" style=" left: 8px; width: 22px; height: 22px;">
+            LOGIN WITH GOOGLE</a>';
             $data['login_button'] = $login_button;
             return view("authentication/login/login", $data);
         } else {
@@ -272,21 +269,22 @@ class SessionController extends BaseController
         }
     }
 
-    public function changeLang($lang){
+    public function changeLang($lang)
+    {
 
         // $lang = session()->get('lang');
         // dd($lang);
 
-        if(session()->get('role') == 'Student'){
+        if (session()->get('role') == 'Student') {
             $model = new StudentModel();
             $model->updateLang($lang);
-        }else if(session()->get('role') == 'Center'){
+        } else if (session()->get('role') == 'Center') {
             $model = new CenterModel();
             $model->updateLang($lang);
-        }else if(session()->get('role') == 'SSTT'){
+        } else if (session()->get('role') == 'SSTT') {
             $model = new SSTTModel();
             $model->updateLang($lang);
-        }else if(session()->get('role') == 'Professor'){
+        } else if (session()->get('role') == 'Professor') {
             $model = new ProfessorModel();
             $model->updateLang($lang);
         }
@@ -295,7 +293,5 @@ class SessionController extends BaseController
         $this->request->setlocale($lang);
         // d($this->request->getlocale());
         return redirect()->to('viewTickets');
-
     }
-
 }
