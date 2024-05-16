@@ -47,7 +47,7 @@ class TicketsController extends BaseController
         $crud->setPrimaryKey('ticket_id');
         $crud->setRelation('status_id', 'status', 'status_id', 'status');
         $crud->setRelation('device_type_id', 'deviceType', 'device_type_id', 'device_type');
-        $crud->setRelation('email_person_center_g', 'professors', 'email', 'email');
+        //$crud->setRelation('email_person_center_g', 'professors', 'email', 'email');
         //$crud->setRelation('name_person_center_g', 'professors2', 'name', 'name');
         $crud->setRelation('g_center_code', 'centers', 'center_id', 'name');
         $crud->setRelation('r_center_code', 'centers2', 'center_id', 'name');
