@@ -118,13 +118,11 @@ class TicketsController extends BaseController
             if ($role == 'Student') {
                 $crud->setConfig(['editable' => false]);
                 $data['add'] = false;
-                d('student');
                 $crud->addWhere("r_center_code", session()->idCenter);
             }
         }
         
         if ($role == 'Student' || $role == 'Professor' || $role == 'Center') {
-            dd('asd');
             $crud->addWhere("r_center_code", session()->idCenter);
         }
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary

@@ -253,7 +253,7 @@ class SessionController extends BaseController
     public function logout()
     {
         $this->logOut_function();
-        return redirect()->to(base_url('/loginAuth'));
+        return redirect()->to(base_url('/login'));
     }
 
     public function logOut_function()

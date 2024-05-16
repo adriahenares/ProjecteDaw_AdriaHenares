@@ -22,7 +22,7 @@ $routes->post('/addTickets', 'TicketsController::addTicketPost');
 $routes->get('/delTicket/(:segment)', 'TicketsController::deleteTicket/$1');
 
 //Iniciar seesio SSTT
-$routes->get('/loginAuth', 'SessionController::loginNormal');
+// $routes->get('/loginAuth', 'SessionController::loginNormal');
 
 //iniciar sessio profe, alum
 $routes->get('/login', 'SessionController::google_login');
