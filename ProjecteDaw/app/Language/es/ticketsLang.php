@@ -8,7 +8,7 @@ return [
     'assign_ticket' => 'Asigna Ticket',
     'assign_center' => 'Centro a asignar',
     'send' => 'Envia',
-    'center' => 'Centros',
+    'centers' => 'Centros',
     'add' => 'Agregar',
     'add_ticket' => 'Agregar Ticket',
     'description' => 'Descripción',

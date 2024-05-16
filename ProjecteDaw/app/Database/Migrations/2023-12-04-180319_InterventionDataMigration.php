@@ -66,10 +66,6 @@ class InterventionDataMigration extends Migration
                 'constraint' => '32',
                 'null' => false,
             ],
-            'intervention_date' => [
-                'type'       => 'date',
-                'null' => false,
-            ],
             'created_at timestamp default current_timestamp',//SSTT: Ficar-ho a 0
             'deleted_at timestamp null default null',
             'updated_at timestamp default current_timestamp on update current_timestamp',

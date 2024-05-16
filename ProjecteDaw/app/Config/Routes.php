@@ -10,6 +10,10 @@ use CodeIgniter\Router\RouteCollection;
 //tickets
 $routes->match(['GET','POST'], '/viewTickets', 'TicketsController::viewTickets');
 
+// change Language
+$routes->get('/changeLang/(:segment)', 'SessionController::changeLang/$1');
+
+
 // addTickets 
 $routes->get('/addTickets', 'TicketsController::addTicket');
 $routes->post('/addTickets', 'TicketsController::addTicketPost');

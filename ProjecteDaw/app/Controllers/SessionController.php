@@ -271,4 +271,31 @@ class SessionController extends BaseController
             session()->destroy();
         }
     }
+
+    public function changeLang($lang){
+
+        // $lang = session()->get('lang');
+        // dd($lang);
+
+        if(session()->get('role') == 'Student'){
+            $model = new StudentModel();
+            $model->updateLang($lang);
+        }else if(session()->get('role') == 'Center'){
+            $model = new CenterModel();
+            $model->updateLang($lang);
+        }else if(session()->get('role') == 'SSTT'){
+            $model = new SSTTModel();
+            $model->updateLang($lang);
+        }else if(session()->get('role') == 'Professor'){
+            $model = new ProfessorModel();
+            $model->updateLang($lang);
+        }
+
+        session()->set('lang', $lang);
+        $this->request->setlocale($lang);
+        // d($this->request->getlocale());
+        return redirect()->to('viewTickets');
+
+    }
+
 }

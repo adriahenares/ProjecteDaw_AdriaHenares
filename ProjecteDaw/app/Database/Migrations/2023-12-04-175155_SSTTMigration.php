@@ -31,6 +31,11 @@ class SSTTMigration extends Migration
                     'type'           => 'VARCHAR',
                     'constraint'     => '64',
             ],
+            'language'          => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '2',
+                'null'           => false,
+        ],
         ]);
         $this->forge->addKey('SSTT_id', true);
         $this->forge->createTable('SSTT');

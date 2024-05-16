@@ -8,7 +8,7 @@ return [
     'assign_ticket' => 'Assign Ticket',
     'assign_center' => 'Center to be assigned',
     'send' => 'Send',
-    'center' => 'Centers',
+    'centers' => 'Centers',
     'add' => 'Add',
     'add_ticket' => 'Add Ticket',
     'description' => 'Description',

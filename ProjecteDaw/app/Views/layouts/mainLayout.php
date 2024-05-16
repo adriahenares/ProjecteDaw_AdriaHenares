@@ -147,18 +147,22 @@
 
 <body>
     <div class="contain-fluid ">
+
         <div class="col-12 bgc-1" style="height: 8vh;">
             <!-- <div class="col-12 ps-3 pe-5 bgc-1 py-3 " style="height: 8vh;"> -->
             <img class="ms-4 mt-4" src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
-            <div class="mr-4" style="float: right; height: 100%; vertical-align: middle; display: flex; align-content: center; flex-wrap: wrap">
-                <a style="text-decoration: none;">
-                    <i class="fa-solid fa-language c-5 fa-xl me-4"></i>
-                </a>
-                <a style="text-decoration: none;">
+            <div class="mr-4 " style="float: right; height: 100%; vertical-align: middle; display: flex; align-content: center; align-content: center; gap: 20px; align-items: center;">
+            
+            <!--  TODO: fer ifs -->
+            
+            <a style="text-decoration: none;" class="me-2"  href="<?= base_url('changeLang/es')?>"><img style="border-radius: 10px; width: 24px;"  src="<?= base_url('images/spain.png') ?>"  /></a>
+                <p class="me-2" style="color: white;" >|</p>
+                <a style="text-decoration: none;" class="me-3" href="<?= base_url('changeLang/ca')?>"><img src="<?= base_url('images/catalunya.png') ?>"  width="24px" /></a>
+                <a style="text-decoration: none; ">
                     <i class="fa-regular fa-circle-user c-5 fa-xl me-4"></i>
                 </a>
-                <a href="<?= base_url('/logout') ?>" style="text-decoration: none;">
+                <a href="<?= base_url('/logout') ?>" style="text-decoration: none; ">
                     <i class="fa-solid fa-right-from-bracket c-5 fa-xl me-3"></i>
                 </a>
             </div>

@@ -12,7 +12,7 @@ class ProfessorModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [ 'professor_id' , 'name', 'surnames' , 'email' , 'repair_center_id'];
+    protected $allowedFields    = [ 'professor_id' , 'name', 'surnames' , 'email' , 'repair_center_id',"language"];
 
     // Dates
     protected $useTimestamps = false;
@@ -85,6 +85,16 @@ class ProfessorModel extends Model
     //funcio que al passarli la id ens retorna el professors de aquells centres
     public function getProfessorsByCenterId ($id) {
         return $this->where('repair_center_id', $id)->findAll();
+    }
+
+    public function updateLang($lang){
+
+        $data = [
+            'language' => $lang
+        ];
+
+        // return $this->update(session()->get('mail'), ['language'->$lang]);
+        return $this->where('email', session()->get('mail'))->set($data)->update();
     }
 
 }
