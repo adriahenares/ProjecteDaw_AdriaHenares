@@ -84,8 +84,8 @@ echo $this->section("main_content");
         });
     });
 </script>
-<?php //if($testUser == 1): ?>
-<!-- <script>
+<?php if(session()->get('role') == 'SSTT'): ?>
+<script>
     $(document).ready(function() {
         const selectGen = $('#center_g')[0].selectize;
         const name = document.getElementById('name');
@@ -113,6 +113,6 @@ echo $this->section("main_content");
             }
         });
     });
-</script> -->
-<?php //endif; ?>
+</script>
+<?php endif; ?>
 <?php echo $this->endSection(); ?>
