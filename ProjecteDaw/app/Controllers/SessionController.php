@@ -268,10 +268,10 @@ class SessionController extends BaseController
         }
     }
 
-    public function changeLang(){
+    public function changeLang($lang){
 
-        $lang = session()->get('lang');
-        dd($lang);
+        // $lang = session()->get('lang');
+        // dd($lang);
 
         if(session()->get('role') == 'Student'){
             $model = new StudentModel();
@@ -286,6 +286,11 @@ class SessionController extends BaseController
             $model = new ProfessorModel();
             $model->updateLang($lang);
         }
+
+        session()->set('lang', $lang);
+        $this->request->setlocale($lang);
+        // d($this->request->getlocale());
+        return redirect()->to('viewTickets');
 
     }
 

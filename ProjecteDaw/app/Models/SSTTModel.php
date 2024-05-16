@@ -46,11 +46,18 @@ class SSTTModel extends Model
             'address' => $address,
             'phone' => $phone,
             'email' => $email,
+            'lenguage' => 'ca'
         ];
         $this->insert($data);
     }
 
     public function updateLang($lang){
-        return $this->update(session()->get('mail'), ['language'->$lang]);
+        
+        $data = [
+            'language' => $lang
+        ];
+
+        // return $this->update(session()->get('mail'), ['language'->$lang]);
+        return $this->where('email', session()->get('mail'))->set($data)->update();
     }
 }

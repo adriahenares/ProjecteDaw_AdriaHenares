@@ -52,7 +52,12 @@ class StudentModel extends Model
     }
 
     public function updateLang($lang){
-        return $this->update(session()->get('mail'), ['language'->$lang]);
+        $data = [
+            'language' => $lang
+        ];
+
+        // return $this->update(session()->get('mail'), ['language'->$lang]);
+        return $this->where('email', session()->get('mail'))->set($data)->update();
     }
 
 }
