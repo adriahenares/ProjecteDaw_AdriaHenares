@@ -6,17 +6,10 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class SessionValidateFilter implements FilterInterface
+class IsNotAlumneFilter implements FilterInterface
 {
     /**
-     * Do whatever processing this filter needs to do.
-     * By default it should not return anything during
-     * normal execution. However, when an abnormal state
-     * is found, it should return an instance of
-     * CodeIgniter\HTTP\Response. If it does, script
-     * execution will end and that Response will be
-     * sent back to the client, allowing for error pages,
-     * redirects, etc.
+     * Comprove que poden accedir tots els usuaris excepte Alumnes
      *
      * @param RequestInterface $request
      * @param array|null       $arguments
@@ -25,20 +18,12 @@ class SessionValidateFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        // modificar filtre validate code
-        if (!isset(session()->sessionData['mail'])) {
-            $client = new \Google\Client();
-            $token = session()->get('acces_token');
-            if ($token != null) {
-                $client->revokeToken($token);
-                // Limpiar los datos de la sesión
-                session()->unset_userdata('access_token');
-                session()->unset_userdata('sessionData');
-                session()->destroy();
-            } else {
-                session()->destroy();
-            }
+        if (!isset(session()->mail) || !isset(session()->idCenter)) {
             return redirect()->back()->withInput();
+        } else {
+            if (isset(session()->role) == true && session()->role != "Student") {
+                return redirect()->back()->withInput();
+            }
         }
     }
 

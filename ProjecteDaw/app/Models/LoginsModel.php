@@ -64,4 +64,13 @@ class LoginsModel extends Model
         $query = $this->where();
     }
 
+    public function userExists($email)
+    {
+        $this->where('email', $email);
+        $query = $this->get();
+        if ($query->getNumRows() > 0) {
+            return true;
+        }
+        return false;
+    }
 }

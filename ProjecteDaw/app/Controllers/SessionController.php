@@ -56,10 +56,9 @@ class SessionController extends BaseController
 
             $email = (string) $this->request->getPost('mail');
             $password = $this->request->getPost('pass');
-
-            $user = $instance->getUserByMail($email);
-            $role = $instance->getRoleByEmail($email);
-            if ($user == true) {
+            if ($instance->userExists($email)) {
+                $user = $instance->getUserByMail($email);
+                $role = $instance->getRoleByEmail($email);
                 if (password_verify((string)$password, $user['password'])) {
                     //sstt
                     session()->set('mail', $email);
@@ -67,11 +66,16 @@ class SessionController extends BaseController
                     // session()->set('idSessionUser', 1);
                     $pos = strpos($email, '@');
                     $mailType = substr($email, $pos);
-                    if($mailType == 'gmail.com') {
+                    if ($mailType == 'gmail.com') {
                         $studentsModel = new StudentModel();
                         $studentInfo = $studentsModel->obtainStByMail($email);
+                        session()->set('id', $studentInfo['student_id']);
                         session()->set('idCenter', $studentInfo['student_center_id']);
                         session()->set('lang', $studentInfo['language']);
+                    } else {
+                        $ssttModel = new SSTTModel();
+                        $ssttInfo = $ssttModel->getSSTTByEmail($email);
+                        session()->set('id', $ssttInfo['SSTT_id']);
                     }
                     return redirect()->to('/viewTickets');
                 }
@@ -235,8 +239,8 @@ class SessionController extends BaseController
             $data = [
                 'student_id' => UUID::v4(),
                 'email' => $this->request->getPost('mail'),
-                'center_id' => session()->idCenter,
-
+                'student_center_id' => session()->idCenter,
+                'language' => 'ca'
             ];
             $instanceSt->insert($data);
             return redirect()->to(base_url('validateStudents'));

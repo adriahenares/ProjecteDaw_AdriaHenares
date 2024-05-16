@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use DateTime;
 
 class TicketModel extends Model
 {
@@ -12,7 +13,7 @@ class TicketModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'status_id'];
+    protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'status_id', 'deleted_at'];
     // protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'date_last_modification', 'registration_data', 'status_id'];
 
     // Dates
@@ -79,5 +80,16 @@ class TicketModel extends Model
             // si no comprovar con insert
             $this->update($id, $repairCenterId);
         }
+    }
+    public function deleteTicket($id)
+    {
+        helper('date');
+        
+        // $data = [
+        //     'deleted_at' => 
+        // ];
+        $this->where('ticket_id', $id);
+        $this->set('deleted_at', date('Y-m-d H:i:s', now('GMT+2')));
+        $this->update();
     }
 }

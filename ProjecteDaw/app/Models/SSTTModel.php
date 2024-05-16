@@ -60,4 +60,7 @@ class SSTTModel extends Model
         // return $this->update(session()->get('mail'), ['language'->$lang]);
         return $this->where('email', session()->get('mail'))->set($data)->update();
     }
+    public function getSSTTByEmail($email) {
+        return $this->where("email", $email)->first();
+    }
 }

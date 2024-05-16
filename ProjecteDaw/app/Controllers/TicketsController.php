@@ -105,7 +105,7 @@ class TicketsController extends BaseController
                 'name' => 'Estat',
             ]
         ]);
-        $crud->setConfig('ssttView');
+        $crud->setConfig('ssttView');        //sessions links
         $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
         $data['add'] = true;
         $role = session()->get('role');
@@ -148,7 +148,7 @@ class TicketsController extends BaseController
             $data['repairCenters'] = $instanceC->getAllRepairingCenters();
             // dd($data['repairCenters']);
         } else if ($role == 'Professor') {
-            $professor = $instanceP->obtainProfessor('anilei@xtec.cat'); //session per mail 
+            $professor = $instanceP->obtainProfessor(session()->get('mail')); //session per mail 
             session()->setFlashdata('idCenter', $professor['repair_center_id']);
         }
         return view('Project/Tickets/createTickets', $data);
@@ -254,7 +254,12 @@ class TicketsController extends BaseController
             return redirect()->back();
         }
         $instanceT = new TicketModel();
-        $instanceT->delete($ticket);
+        // dd($ticket);
+        $instanceT->deleteTicket($ticket);
+        
+        // dd($arr);
+        // dd($interventionModel->getSpecificInterventions($ticket));
+
         return redirect()->back()->withInput();
     }
 }
