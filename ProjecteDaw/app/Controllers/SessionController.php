@@ -10,7 +10,7 @@ use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Models\LoginsModel;
 use App\Models\ProfessorModel;
 use App\Models\StudentModel;
-use Google\Service\Classroom\Student;
+// use Google\Service\Classroom\Student;
 
 $session = \Config\Services::session();  // Config és opcional
 
@@ -52,16 +52,18 @@ class SessionController extends BaseController
 
         if ($this->validate($validationRules)) {
             $instance = new LoginsModel();
-
+            
             $email = $this->request->getPost('mail');
             $password = $this->request->getPost('pass');
 
             $user = $instance->getUserByMail($email);
+            $role = $instance->getRoleByEmail($email);
             if ($user == true) {
                 if (password_verify((string)$password, $user['password'])) {
-                    // sessions
+                    //sstt
                     session()->set('mail', $email);
-                    session()->set('idSessionUser', 1);
+                    session()->set('role', $instance->getRoleByEmail($email));
+                    // session()->set('idSessionUser', 1);
                     return redirect()->to('/viewTickets');
                 }
             } else {
@@ -110,26 +112,22 @@ class SessionController extends BaseController
 
                 $userInfo = $oauth2->userinfo->get();
                 $data['mail'] = $userInfo->getEmail();
-                // sessions
                 session()->set('mail', $data['mail']);
-                //validacions
                 $pos = strpos($data['mail'], '@');
                 $mailLast = substr($data['mail'], $pos);
-                if ($mailLast == '@xtec.cat' || $instanceSt->verify_mail($data['mail']) == true) {
-                    //dades
+                if ($mailLast == '@xtec.cat') {
                     $data['nom'] = $userInfo->getGivenName();
                     $data['nomComplet'] = $userInfo->getName();
                     //diverses comrprovacions
                     //verificacio que es o centre o professor
-                    if ($mailLast == '@xtec.cat') {
                         // si el email esta a la taula centre es un centre
-                        if ($instanceC->verifyCenter($data['mail'] == true)) {
+                        if ($instanceC->verifyCenter($data['mail']) == true) {
                             $center = $instanceC->obtainCenterByEmail($data['mail']);
-                            session()->set('idSessionUser', 2);
+                            session()->set('role', 'Center');
                             session()->set('idCenter', $center['center_id']);
                             //obtenim el codi del centre
                         } else {
-                            session()->set('idSessionUser', 3);
+                            session()->set('role', 'Professor');
                             // si no esta el email a centre es un professor i  veriquem si esta el email a la taula professors, si no esta s'afegeix
                             if ($instanceProfessor->verifyProfessor($data['mail']) == false) {
                                 $professorTrue = true;
@@ -138,12 +136,7 @@ class SessionController extends BaseController
                                session()->set('idCenter', $prof['repair_center_id']);
                             }
                         }
-                    } else {
-                        //estudiant ja previament verificat
-                        $st = $instanceSt->obtainStByMail($data['mail']);
-                        session()->set('idSessionUser', 4);
-                        session()->set('idCenter', $st['center_id']);
-                    }
+
                     //l'usuari es un professor 
                     if ($professorTrue == true) {
                         // creacio de les variables per professor 

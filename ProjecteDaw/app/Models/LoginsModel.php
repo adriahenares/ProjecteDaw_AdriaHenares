@@ -50,7 +50,18 @@ class LoginsModel extends Model
         return $this->where('email', $email)->first();
     }
 
-    public function findIfUserInRole($id, $roleToSearch) {
+    public function getRoleByEmail($mail)
+    {
+        $userRoleModel = new UsersInRoleModel();
+        $userRoleId = $userRoleModel->getRoleByEmail($mail)['idRole'];
+        $roleModel = new RolesModel();
+        $role = $roleModel->getRoleById($userRoleId)['role'];
+        return $role;
+    }
+
+    public function findIfUserInRole($id, $roleToSearch)
+    {
         $query = $this->where();
     }
+
 }

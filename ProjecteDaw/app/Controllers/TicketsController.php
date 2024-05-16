@@ -30,7 +30,7 @@ class TicketsController extends BaseController
         $instanceC = new CenterModel();
         // variables per obtenir els selects
         //type device
-
+        d(session()->get('role'));
         //center codes
         $centerId = $instanceC->getAllCentersId();
         //status
@@ -44,11 +44,6 @@ class TicketsController extends BaseController
         /**
          * Retorno true o false depent de la pag on estem, per mostrar o no el boto de add ticket
          */
-        if ($crud->isEditMode()) {
-            $data['badd'] = false;
-        } else {
-            $data['badd'] = true;
-        }
         //KpaCrud
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
@@ -112,15 +107,30 @@ class TicketsController extends BaseController
                 'name' => 'Estat',
             ]
         ]);
-
+        $crud->setConfig('ssttView');
         $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
-        $crud->addItemLink('assgin', 'fa-solid fa-school', base_url('/assignTicket'), 'Assignar');
-        $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar ticket');
+        $data['add'] = true;
+        $role = session()->get('role');
+        if ($role == 'Admin' || $role == 'SSTT' || $role == 'Center') {
+            $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar ticket');
+            if ($role != 'Center') {
+                $crud->addItemLink('assign', 'fa-solid fa-school', base_url('/assignTicket'), 'Assignar');
+            }
+        } else {
+            if ($role == 'Student') {
+                $crud->setConfig(['editable'=>false]);
+                $data['add'] = false;
+            }
+        }
+
+
+
+
+
         if (session()->idsessionUser == 2 || session()->idsessionUser == 3 || session()->idsessionUser == 4) {
             $crud->addWhere ("r_center_code", session()->idCenter);
         }
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
-        $crud->setConfig('ssttView');
         $data['output'] = $crud->render();
         // $data['title'] = lang('ticketsLang.titleG');
         // $data['title'] = '';

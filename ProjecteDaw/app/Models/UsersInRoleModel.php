@@ -37,4 +37,8 @@ class UsersInRoleModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getRoleByEmail($email) {
+        return $this->where('email', $email)->first();
+    }
 }
