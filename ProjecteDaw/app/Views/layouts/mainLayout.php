@@ -152,16 +152,20 @@
             <!-- <div class="col-12 ps-3 pe-5 bgc-1 py-3 " style="height: 8vh;"> -->
             <img class="ms-4 mt-4" src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
-            <div class="mr-4 " style="float: right; height: 100%; vertical-align: middle; display: flex; align-content: center; align-content: center; gap: 20px; align-items: center;">
+            <div class="mr-4" style="float: right; height: 100%; vertical-align: middle; display: flex; align-content: center; gap: 15px; align-items: center;">
             
             <!--  TODO: fer ifs -->
             
-            <a style="text-decoration: none;" class="me-2"  href="<?= base_url('changeLang/es')?>"><img style="border-radius: 10px; width: 24px;"  src="<?= base_url('images/spain.png') ?>"  /></a>
-                <p class="me-2" style="color: white;" >|</p>
-                <a style="text-decoration: none;" class="me-3" href="<?= base_url('changeLang/ca')?>"><img src="<?= base_url('images/catalunya.png') ?>"  width="24px" /></a>
-                <a style="text-decoration: none; ">
+            <a class="m-0" style="text-decoration: none;<?php if(session()->get('lang') == 'es') echo 'border:  5px solid white; border-radius: 35px;'; ?>" class="me-2"  href="<?= base_url('changeLang/es')?>"><img style="border-radius: 10px; width: 26px;"  src="<?= base_url('images/spain.png') ?>"  /></a>
+                <h3 class="me-2" style="color: white;" >|</h3>
+                <a class="m-0" style="text-decoration: none;<?php if(session()->get('lang') == 'ca') echo 'border: 5px solid white; border-radius: 35px;'; ?>" class="me-3" href="<?= base_url('changeLang/ca')?>"><img style="border-radius: 10px; width: 26px;"src="<?= base_url('images/catalunya.png') ?>" /></a>
+                
+                <h3 class="me-2" style="color: white;" >|</h3>
+                <a class="m-0" style="text-decoration: none;<?php if(session()->get('lang') == 'en') echo 'border: 5px solid white; border-radius: 25px;'; ?>" class="me-3" href="<?= base_url('changeLang/en')?>"><img style="border-radius: 15px; width: 26px;" class="m-0" src="<?= base_url('images/uk.png') ?>" /></a>
+                
+                <!-- <a style="text-decoration: none; ">
                     <i class="fa-regular fa-circle-user c-5 fa-xl me-4"></i>
-                </a>
+                </a> -->
                 <a href="<?= base_url('/logout') ?>" style="text-decoration: none; ">
                     <i class="fa-solid fa-right-from-bracket c-5 fa-xl me-3"></i>
                 </a>
@@ -174,22 +178,22 @@
             <div class="bgc-1 c-5 p-0 m-0 h-100 " style="position: fixed; top: 8vh; width: 12vw;">
 
                 <div class="menuButton mt-5 mb-3">
-                    <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
+                    <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
                         <?= lang('ticketsLang.Tickets')?>
                     </a>
                 </div>
                 <?php if (session()->get('role') == 'Professor' || session()->get('role') == 'Center') :?>
                 <div class="menuButton mt-2 mb-3 ">
-                    <a href="<?= base_url('/viewStock') ?>" class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
-                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
-                        Stock
+                    <a href="<?= base_url('/viewStock') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
+                        <i class="fa-solid fa-boxes-stacked ms-4 me-2"></i>
+                        <?= lang('ticketsLang.stock')?>
                     </a>
                 </div>
                 <div class="menuButton mt-2 mb-3 ">
-                    <a href="<?= base_url('/validateStudents') ?>" class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
-                        <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
-                        <?= lang('ticketsLang.student') ?>
+                    <a href="<?= base_url('/validateStudents') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
+                        <i class="fa-solid fa-user ms-4 me-2"></i>
+                        <?= lang('ticketsLang.student')?>
                     </a>
                 </div>
                 <?php endif; ?>

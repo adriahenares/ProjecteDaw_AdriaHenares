@@ -44,5 +44,6 @@ return [
     'CreatedAt' => 'Data de creación',
     'UpdatedAt' => 'Data ultima modificación',
     'DeletedAt' => 'Data d\'eliminación',
-    'Status' => 'Estat'
+    'Status' => 'Estat',
+    'stock' => "Inventario"
 ];

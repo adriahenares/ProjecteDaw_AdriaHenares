@@ -34,6 +34,7 @@ return [
     'state' => 'Estat',
     'intervention' => 'Intervenció',
     'add_intervention' => "Agregar Intervenció",
+    'stock' => "Inventari",
     'ID' => 'Identificador',
     'DeviceType' => 'Tipus de dispositiu',
     'Description' => 'Descripció',

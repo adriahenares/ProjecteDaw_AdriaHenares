@@ -296,7 +296,9 @@ class SessionController extends BaseController
         session()->set('lang', $lang);
         $this->request->setlocale($lang);
         // d($this->request->getlocale());
-        return redirect()->to('viewTickets');
+        // return redirect()->to('viewTickets');
+
+        return redirect()->to(previous_url());
 
     }
 

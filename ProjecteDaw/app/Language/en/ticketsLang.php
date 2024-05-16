@@ -43,5 +43,6 @@ return [
     'CreatedAt' => 'Created at',
     'UpdatedAt' => 'Updated at',
     'DeletedAt' => 'Deleted at',
-    'Status' => 'Status'
+    'Status' => 'Status',
+    'stock' => "Stock"
 ];
