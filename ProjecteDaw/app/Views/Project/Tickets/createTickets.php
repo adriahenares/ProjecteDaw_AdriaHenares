@@ -60,7 +60,7 @@ echo $this->section("main_content");
                 <?php endif; ?>
                 <div class="form-group col-6 my-4 ">
                     <label for="email" class=" bold fs-5"><?= lang('ticketsLang.teacher_email') ?> </label>
-                    <input type="text" class="form-control" name="email" id="email"></input> <!--Correu per sessio-->
+                    <input type="text" class="form-control" name="email" id="email" value="<?php if(session()->get('role') == 'Professor') {echo session()->get('mail');} ?>"></input> <!--Correu per sessio-->
                 </div>
                 <div class="form-group col-6 my-4 ">
                     <label for="name" class=" bold fs-5"><?= lang('ticketsLang.teacher_name') ?></label> <!--Nom per sessio-->

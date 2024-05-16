@@ -63,10 +63,11 @@ class SessionController extends BaseController
                     //sstt
                     session()->set('mail', $email);
                     session()->set('role', $instance->getRoleByEmail($email));
+                    d(session()->get('role'));
                     // session()->set('idSessionUser', 1);
                     $pos = strpos($email, '@');
                     $mailType = substr($email, $pos);
-                    if ($mailType == 'gmail.com') {
+                    if ($mailType != '@gencat.cat') {
                         $studentsModel = new StudentModel();
                         $studentInfo = $studentsModel->obtainStByMail($email);
                         session()->set('id', $studentInfo['student_id']);
@@ -128,7 +129,7 @@ class SessionController extends BaseController
                 session()->set('mail', $data['mail']);
                 $pos = strpos($data['mail'], '@');
                 $mailLast = substr($data['mail'], $pos);
-                if ($mailLast == '@xtec.cat') {
+                if ($mailLast == '@gmail.com') {
                     $data['nom'] = $userInfo->getGivenName();
                     $data['nomComplet'] = $userInfo->getName();
                     //diverses comrprovacions
@@ -161,7 +162,8 @@ class SessionController extends BaseController
                             'name' => $data['nom'],
                             'surnames' => $surnames,
                             'email' => $data['mail'],
-                            'repair_center_id' => null
+                            'repair_center_id' => null,
+                            'language' => 'ca'
                         ];
                         $instanceProfessor->insert($dataProf);
                     }

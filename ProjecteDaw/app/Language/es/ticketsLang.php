@@ -33,5 +33,16 @@ return [
     'last_modification' => 'Ultima modificación',
     'state' => 'Estado',
     'intervention' => 'Intervención',
-    'add_intervention' => 'Afegir Intervenció'
+    'add_intervention' => 'Añadir intervencion',
+    'ID' => 'Identificador',
+    'DeviceType' => 'Tipos de dispositiu',
+    'Description' => 'Descripción',
+    'EmitterCenter' => 'Centro emisor',
+    'RepairCenter' => 'Centro reparador',
+    'GeneratorMail' => 'Email professor generador',
+    'GeneratorName' => 'Nombre professor generador',
+    'CreatedAt' => 'Data de creación',
+    'UpdatedAt' => 'Data ultima modificación',
+    'DeletedAt' => 'Data d\'eliminación',
+    'Status' => 'Estat'
 ];

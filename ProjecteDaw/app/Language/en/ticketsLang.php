@@ -33,4 +33,15 @@ return [
     'state' => 'State',
     'intervention' => 'Intervention',
     'add_intervention' => "Add Intervention",
+    'ID' => 'Identificator',
+    'DeviceType' => 'Dispositive Type',
+    'Description' => 'Description',
+    'EmitterCenter' => 'Emitter center',
+    'RepairCenter' => 'Repair center',
+    'GeneratorMail' => 'Generator teacher email',
+    'GeneratorName' => 'Generator teacher name',
+    'CreatedAt' => 'Created at',
+    'UpdatedAt' => 'Updated at',
+    'DeletedAt' => 'Deleted at',
+    'Status' => 'Status'
 ];

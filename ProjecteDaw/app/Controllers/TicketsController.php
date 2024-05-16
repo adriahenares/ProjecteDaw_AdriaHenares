@@ -54,7 +54,7 @@ class TicketsController extends BaseController
         $crud->setColumns(['ticket_id', 'deviceType__device_type', 'fault_description', 'centers__name', 'centers2__name', 'created_at', 'status__status']);
         $crud->setColumnsInfo([
             'ticket_id' => [
-                'name' => 'Identificador',
+                'name' => lang('ticketsLang.ID'),
                 'type' => KpaCrud::READONLY_FIELD_TYPE,
                 'default' => UUID::v4(),
                 'html_atts' => [
@@ -62,25 +62,25 @@ class TicketsController extends BaseController
                 ]
             ],
             'deviceType__device_type' => [
-                'name' => 'Tipus de dispositiu'
+                'name' => lang('ticketsLang.DeviceType')
             ],
             'fault_description' => [
-                'name' => 'Descripció'
+                'name' => lang('ticketsLang.Description')
             ],
             'centers__name' => [
-                'name' => 'Centre emissor',
+                'name' => lang('ticketsLang.EmitterCenter'),
             ],
             'centers2__name' => [
-                'name' => 'Centre reparador',
+                'name' => lang('ticketsLang.RepairCenter'),
             ],
             'email_person_center_g' => [
-                'name' => 'Email generador',
+                'name' => lang('ticketsLang.GeneratorMail'),
             ],
             'name_person_center_g' => [
-                'name' => 'Nom generador',
+                'name' => lang('ticketsLang.GeneratorName'),
             ],
             'created_at' => [
-                'name' => 'Data de registre',
+                'name' => lang('ticketsLang.CreatedAt'),
                 'default' => date('Y-m-d h:m:s'),
                 'html_atts' => [
                     'disabled'
@@ -89,14 +89,14 @@ class TicketsController extends BaseController
                 // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
             ],
             'updated_at' => [
-                'name' => 'Data ultima modificació',
+                'name' => lang('ticketsLang.UpdatedAt'),
                 'default' => date('Y-m-d h:m:s'),
                 'html_atts' => [
                     'disabled'
                 ]
             ],
             'deleted_at' => [
-                'name' => 'Data esborrar',
+                'name' => lang('ticketsLang.UpdatedAt'),
                 'html_atts' => [
                     'disabled'
                 ]
@@ -118,10 +118,12 @@ class TicketsController extends BaseController
             if ($role == 'Student') {
                 $crud->setConfig(['editable' => false]);
                 $data['add'] = false;
+                d('student');
                 $crud->addWhere("r_center_code", session()->idCenter);
             }
         }
         if ($role == 'Student' || $role == 'Professor' || $role == 'Center') {
+            dd('asd');
             $crud->addWhere("r_center_code", session()->idCenter);
         }
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
@@ -234,7 +236,7 @@ class TicketsController extends BaseController
             'r_center_code' => $this->request->getPost("idRepair"),
         ];
         $instanceT->assignTicket($id, $valueR);
-        return redirect()->to('assign');
+        return redirect()->to('viewTickets');
     }
 
     //updateTicket

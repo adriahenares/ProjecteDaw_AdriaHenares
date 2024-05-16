@@ -179,12 +179,7 @@
                         <?= lang('ticketsLang.Tickets')?>
                     </a>
                 </div>
-                <div class="menuButton mt-2 mb-3 ">
-                    <a class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
-                        <i class="fa-solid fa-building-columns ms-4 me-2"></i>
-                        <?= lang('ticketsLang.centers')?>
-                    </a>
-                </div>
+                <?php if (session()->get('role') == 'Professor' || session()->get('role') == 'Center') :?>
                 <div class="menuButton mt-2 mb-3 ">
                     <a href="<?= base_url('/viewStock') ?>" class="py-2 ms-1 c-5 fs-4" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
@@ -197,6 +192,7 @@
                         Studiant
                     </a>
                 </div>
+                <?php endif; ?>
 
                 <!-- <div class="menuButton mt-1 mb-3 w-100">
                     <a href="<? base_url('/loginAuth') ?>" class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none; ">
