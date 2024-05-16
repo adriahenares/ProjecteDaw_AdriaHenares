@@ -148,7 +148,7 @@ class TicketsController extends BaseController
             $data['repairCenters'] = $instanceC->getAllRepairingCenters();
             // dd($data['repairCenters']);
         } else if ($role == 'Professor') {
-            $professor = $instanceP->obtainProfessor('anilei@xtec.cat'); //session per mail 
+            $professor = $instanceP->obtainProfessor(session()->get('mail')); //session per mail 
             session()->setFlashdata('idCenter', $professor['repair_center_id']);
         }
         return view('Project/Tickets/createTickets', $data);

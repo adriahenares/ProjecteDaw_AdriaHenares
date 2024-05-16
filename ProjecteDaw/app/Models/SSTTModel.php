@@ -49,4 +49,7 @@ class SSTTModel extends Model
         ];
         $this->insert($data);
     }
+    public function getSSTTByEmail($email) {
+        return $this->where("email", $email)->first();
+    }
 }

@@ -25,7 +25,7 @@ class LoginsSeeder extends Seeder
         }
         //users
         $dataUsers = [
-            'email' => 'sstt@gencat.cat',
+            'email' => 'st_lleida.educacio@gencat.cat',
             'password' => password_hash('123456', PASSWORD_DEFAULT),
         ];
 
