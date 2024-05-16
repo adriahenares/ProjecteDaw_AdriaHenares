@@ -58,6 +58,12 @@ class CenterModel extends Model
         $centerArr = $this->findAll();
         return $centerArr;
     }
+    public function getAllRepairingCenters() {
+        $this->where('workshop', 1);
+        $this->where('active', 1);
+        $query = $this->get();
+        return $query->getResult();
+    }    
 
     //funcio API 
     public function putEmailOfCenter($id) {

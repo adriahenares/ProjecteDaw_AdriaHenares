@@ -1,6 +1,5 @@
 <?php
 $this->extend('layouts/mainLayout');
-$testUser = 2;
 echo $this->section("main_content");
 ?>
 
@@ -35,7 +34,7 @@ echo $this->section("main_content");
                     </select>
                 </div>
                 <!--Començament de les variables-->
-                <?php if($testUser == 1): ?>
+                <?php if($role == 'SSTT'): ?>
                 <div class="col-6 mt-4 mb-5">
                     <label for="center_g" class=" bold fs-5"><?= lang('ticketsLang.issuing_center') ?></label>
                     <select name="center_g" id="center_g">
@@ -52,8 +51,8 @@ echo $this->section("main_content");
                     <select class="form-control form-select" name="center_r" id="center_r">
                         <?php
                         echo "<option value='' default hidden>Escull centre...</option>";
-                        foreach ($center as $value) {
-                            echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
+                        foreach ($repairCenters as $value) {
+                            echo "<option value='" . $value->center_id . "'>" . $value->name . "</option>";
                         }
                         ?>
                     </select>
@@ -61,7 +60,7 @@ echo $this->section("main_content");
                 <?php endif; ?>
                 <div class="form-group col-6 my-4 ">
                     <label for="email" class=" bold fs-5"><?= lang('ticketsLang.teacher_email') ?> </label>
-                    <input type="text" class="form-control" disabled=true name="email" id="email"></input> <!--Correu per sessio-->
+                    <input type="text" class="form-control" name="email" id="email"></input> <!--Correu per sessio-->
                 </div>
                 <div class="form-group col-6 my-4 ">
                     <label for="name" class=" bold fs-5"><?= lang('ticketsLang.teacher_name') ?></label> <!--Nom per sessio-->
@@ -85,8 +84,8 @@ echo $this->section("main_content");
         });
     });
 </script>
-<?php if($testUser == 1): ?>
-<script>
+<?php //if($testUser == 1): ?>
+<!-- <script>
     $(document).ready(function() {
         const selectGen = $('#center_g')[0].selectize;
         const name = document.getElementById('name');
@@ -114,6 +113,6 @@ echo $this->section("main_content");
             }
         });
     });
-</script>
-<?php endif; ?>
+</script> -->
+<?php //endif; ?>
 <?php echo $this->endSection(); ?>

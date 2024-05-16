@@ -53,8 +53,8 @@ class SessionController extends BaseController
 
         if ($this->validate($validationRules)) {
             $instance = new LoginsModel();
-            
-            $email = $this->request->getPost('mail');
+
+            $email = (string) $this->request->getPost('mail');
             $password = $this->request->getPost('pass');
 
             $user = $instance->getUserByMail($email);
@@ -65,6 +65,14 @@ class SessionController extends BaseController
                     session()->set('mail', $email);
                     session()->set('role', $instance->getRoleByEmail($email));
                     // session()->set('idSessionUser', 1);
+                    $pos = strpos($email, '@');
+                    $mailType = substr($email, $pos);
+                    if($mailType == 'gmail.com') {
+                        $studentsModel = new StudentModel();
+                        $studentInfo = $studentsModel->obtainStByMail($email);
+                        session()->set('idCenter', $studentInfo['student_center_id']);
+                        session()->set('lang', $studentInfo['language']);
+                    }
                     return redirect()->to('/viewTickets');
                 }
             } else {
@@ -121,22 +129,22 @@ class SessionController extends BaseController
                     $data['nomComplet'] = $userInfo->getName();
                     //diverses comrprovacions
                     //verificacio que es o centre o professor
-                        // si el email esta a la taula centre es un centre
-                        if ($instanceC->verifyCenter($data['mail']) == true) {
-                            $center = $instanceC->obtainCenterByEmail($data['mail']);
-                            session()->set('role', 'Center');
-                            session()->set('idCenter', $center['center_id']);
-                            //obtenim el codi del centre
+                    // si el email esta a la taula centre es un centre
+                    if ($instanceC->verifyCenter($data['mail']) == true) {
+                        $center = $instanceC->obtainCenterByEmail($data['mail']);
+                        session()->set('role', 'Center');
+                        session()->set('idCenter', $center['center_id']);
+                        //obtenim el codi del centre
+                    } else {
+                        session()->set('role', 'Professor');
+                        // si no esta el email a centre es un professor i  veriquem si esta el email a la taula professors, si no esta s'afegeix
+                        if ($instanceProfessor->verifyProfessor($data['mail']) == false) {
+                            $professorTrue = true;
                         } else {
-                            session()->set('role', 'Professor');
-                            // si no esta el email a centre es un professor i  veriquem si esta el email a la taula professors, si no esta s'afegeix
-                            if ($instanceProfessor->verifyProfessor($data['mail']) == false) {
-                                $professorTrue = true;
-                            } else {
-                               $prof = $instanceProfessor->obtainProfessor($data['mail']);
-                               session()->set('idCenter', $prof['repair_center_id']);
-                            }
+                            $prof = $instanceProfessor->obtainProfessor($data['mail']);
+                            session()->set('idCenter', $prof['repair_center_id']);
                         }
+                    }
 
                     //l'usuari es un professor 
                     if ($professorTrue == true) {

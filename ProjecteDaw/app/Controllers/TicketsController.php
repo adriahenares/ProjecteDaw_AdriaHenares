@@ -12,8 +12,6 @@ use App\Models\DeviceTypeModel;
 use App\Models\InterventionModel;
 use App\Models\ProfessorModel;
 
-use function PHPSTORM_META\type;
-
 class TicketsController extends BaseController
 {
     /** 
@@ -30,7 +28,7 @@ class TicketsController extends BaseController
         $instanceC = new CenterModel();
         // variables per obtenir els selects
         //type device
-        d(session()->get('role'));
+        // d(session()->get('role'));
         //center codes
         $centerId = $instanceC->getAllCentersId();
         //status
@@ -118,17 +116,13 @@ class TicketsController extends BaseController
             }
         } else {
             if ($role == 'Student') {
-                $crud->setConfig(['editable'=>false]);
+                $crud->setConfig(['editable' => false]);
                 $data['add'] = false;
+                $crud->addWhere("r_center_code", session()->idCenter);
             }
         }
-
-
-
-
-
-        if (session()->idsessionUser == 2 || session()->idsessionUser == 3 || session()->idsessionUser == 4) {
-            $crud->addWhere ("r_center_code", session()->idCenter);
+        if ($role == 'Student' || $role == 'Professor' || $role == 'Center') {
+            $crud->addWhere("r_center_code", session()->idCenter);
         }
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
         $data['output'] = $crud->render();
@@ -147,12 +141,15 @@ class TicketsController extends BaseController
             'device' => $instanceDT->getAllDevices(),
         ];
         //especific de cada vista
-        $testUser = 1; //cambia per la session d'usuari que validi quin usuari es 
-        if ($testUser == 1) {
+        $role = session()->get('role');
+        $data['role'] = $role;
+        if ($role == 'SSTT') {
             $data['center'] =  $instanceC->getAllCentersId();
-        } else if ($testUser == 2) {
+            $data['repairCenters'] = $instanceC->getAllRepairingCenters();
+            // dd($data['repairCenters']);
+        } else if ($role == 'Professor') {
             $professor = $instanceP->obtainProfessor('anilei@xtec.cat'); //session per mail 
-            session()->setFlashdata('idCenter',$professor['repair_center_id']);
+            session()->setFlashdata('idCenter', $professor['repair_center_id']);
         }
         return view('Project/Tickets/createTickets', $data);
     }
