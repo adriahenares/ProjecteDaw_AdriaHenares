@@ -10,8 +10,7 @@ use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Libraries\UUID;
 use App\Models\DeviceTypeModel;
 use App\Models\InterventionModel;
-
-use function PHPSTORM_META\type;
+use App\Models\ProfessorModel;
 
 class TicketsController extends BaseController
 {
@@ -29,7 +28,7 @@ class TicketsController extends BaseController
         $instanceC = new CenterModel();
         // variables per obtenir els selects
         //type device
-
+        // d(session()->get('role'));
         //center codes
         $centerId = $instanceC->getAllCentersId();
         //status
@@ -43,11 +42,6 @@ class TicketsController extends BaseController
         /**
          * Retorno true o false depent de la pag on estem, per mostrar o no el boto de add ticket
          */
-        if ($crud->isEditMode()) {
-            $data['badd'] = false;
-        } else {
-            $data['badd'] = true;
-        }
         //KpaCrud
         $crud->setTable('tickets');
         $crud->setPrimaryKey('ticket_id');
@@ -111,17 +105,29 @@ class TicketsController extends BaseController
                 'name' => 'Estat',
             ]
         ]);
-
-        $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
-        $crud->addItemLink('assgin', 'fa-solid fa-school', base_url('/assignTicket'), 'Assignar');
-        $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar ticket');
-        $crud->addWhere('deleted_at');
-        // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
         $crud->setConfig('ssttView');
+        $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
+        $data['add'] = true;
+        $role = session()->get('role');
+        if ($role == 'Admin' || $role == 'SSTT' || $role == 'Center') {
+            $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar ticket');
+            if ($role != 'Center') {
+                $crud->addItemLink('assign', 'fa-solid fa-school', base_url('/assignTicket'), 'Assignar');
+            }
+        } else {
+            if ($role == 'Student') {
+                $crud->setConfig(['editable' => false]);
+                $data['add'] = false;
+                $crud->addWhere("r_center_code", session()->idCenter);
+            }
+        }
+        if ($role == 'Student' || $role == 'Professor' || $role == 'Center') {
+            $crud->addWhere("r_center_code", session()->idCenter);
+        }
+        // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
         $data['output'] = $crud->render();
         // $data['title'] = lang('ticketsLang.titleG');
         // $data['title'] = '';
-
         return view('Project/Tickets/viewTickets', $data);
     }
 
@@ -129,11 +135,22 @@ class TicketsController extends BaseController
     {
         $instanceDT = new DeviceTypeModel();
         $instanceC = new CenterModel();
+        $instanceP = new ProfessorModel();
         $data = [
             'title' => lang('ticketsLang.titleG'),
             'device' => $instanceDT->getAllDevices(),
-            'center' => $instanceC->getAllCentersId(),
         ];
+        //especific de cada vista
+        $role = session()->get('role');
+        $data['role'] = $role;
+        if ($role == 'SSTT') {
+            $data['center'] =  $instanceC->getAllCentersId();
+            $data['repairCenters'] = $instanceC->getAllRepairingCenters();
+            // dd($data['repairCenters']);
+        } else if ($role == 'Professor') {
+            $professor = $instanceP->obtainProfessor(session()->get('mail')); //session per mail 
+            session()->setFlashdata('idCenter', $professor['repair_center_id']);
+        }
         return view('Project/Tickets/createTickets', $data);
     }
 
@@ -148,25 +165,7 @@ class TicketsController extends BaseController
                     'required' => 'camp requerit',
                 ],
             ],
-            'center_g' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'camp requerit',
-                ],
-            ],
-            'center_r' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'camp requerit',
-                ],
-            ],
-            'email' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'camp requerit',
-                ],
-            ],
-            'name' => [
+            'description' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'camp requerit',
@@ -174,7 +173,7 @@ class TicketsController extends BaseController
             ],
         ];
         //validacio temporal
-        $email =$this->request->getPost('email');
+        /*$email =$this->request->getPost('email');
         $name = $this->request->getPost('name');
         if ($email != 'anilei@xtec.cat') {
             session()->setFlashdata('error', 'el email: ' . $email . ' no esta a la base de dades, en desenvolupament');
@@ -183,17 +182,26 @@ class TicketsController extends BaseController
         if ($name != 'Alexander') {
             session()->setFlashdata('error', 'el nom: ' . $name . ' no esta a la base de dades, en desenvolupament');
             return redirect()->back()->withInput();
-        }
+        }*/
         //validation
         if ($this->validate($validationRules)) {
             // si ets SSTT el g_center_code es obligatori
-            // name email gCenter es sessio si ets professor 
+            // name email gCenter es sessio si ets professor
+            $testUser = 1; //canvia per seesion
+            //SSTT sessions !!
+            if ($testUser == 1) {
+                $centerG =  $this->request->getPost('center_g');
+                $centerR =  $this->request->getPost('center_r');
+            } else if ($testUser == 2) {
+                $centerG = 1; //sessio (flash)
+                $centerR = null;
+            }
             $data = [
                 'ticket_id' => $uuid::v4(),
                 'device_type_id' => $this->request->getPost('device'),
                 'fault_description' => $this->request->getPost('description'),
-                'g_center_code' => $this->request->getPost('center_g'),
-                'r_center_code' => $this->request->getPost('center_r'),
+                'g_center_code' => $centerG,
+                'r_center_code' => $centerR,
                 'email_person_center_g' => $this->request->getPost('email'),
                 'name_person_center_g' => $this->request->getPost('name'),
                 // status estandard
@@ -238,9 +246,13 @@ class TicketsController extends BaseController
     //deleteTicket
     public function deleteTicket($ticket)
     {
-        // securitzar
-        $interventionModel = new InterventionModel();
-        $interventionModel->deleteInterventionsByTicketId($ticket);
+        // fet i validat 
+        $instanceI = new InterventionModel();
+        $Interventions = $instanceI->getSpecificInterventions($ticket);
+        if ($Interventions != null) {
+            session()->setFlashdata('error', 'no es pot borrar el ticket');
+            return redirect()->back();
+        }
         $instanceT = new TicketModel();
         // dd($ticket);
         $instanceT->deleteTicket($ticket);

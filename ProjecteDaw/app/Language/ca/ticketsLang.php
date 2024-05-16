@@ -21,5 +21,17 @@ return [
     'cancel' => 'Cancelar',
     'choose_center' => 'Escull centre',
     'export' => 'Exportar',
-    'print' => 'Imprimir'
+    'print' => 'Imprimir',
+    'teacher' => 'Professor',
+    'student' => 'Estudiant',
+    'intervention_type' => 'Tipus intervenció',
+    'FP' => 'Cicle Formatiu',
+    'course' => 'Curs',
+    'center_contact' => 'Persona contacte centre',
+    'center_contact_email' => 'Correu persona contacte',
+    'creation_data' => 'Data creació',
+    'last_modification' => 'Ultima modificació',
+    'state' => 'Estat',
+    'intervention' => 'Intervenció',
+    'add_intervention' => "Agregar Intervenció"
 ];

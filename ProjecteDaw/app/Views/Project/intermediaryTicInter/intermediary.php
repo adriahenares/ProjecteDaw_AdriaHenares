@@ -14,17 +14,20 @@
 
         <div class="col-3">
 
-            <?php if ($ticket['device_type_id'] == 1) : ?>
+            <?php if ($ticket['device_type_id'] == 1): ?>
                 <div class="mb-5 mt-2 text-center">
-                    <img src="<?= base_url('images/ordinador.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
+                    <img src="<?= base_url('images/ordinador.png') ?>" alt="Logo"
+                        style="max-height: 300px; max-width:250px;">
                 </div>
-            <?php elseif ($ticket['device_type_id'] == 2) : ?>
+            <?php elseif ($ticket['device_type_id'] == 2): ?>
                 <div class="mb-2 text-center mt-0">
-                    <img src="<?= base_url('images/projector.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
+                    <img src="<?= base_url('images/projector.png') ?>" alt="Logo"
+                        style="max-height: 300px; max-width:250px;">
                 </div>
-            <?php elseif ($ticket['device_type_id'] == 3) : ?>
+            <?php elseif ($ticket['device_type_id'] == 3): ?>
                 <div class="mb-3 text-center">
-                    <img src="<?= base_url('images/pantalla.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
+                    <img src="<?= base_url('images/pantalla.png') ?>" alt="Logo"
+                        style="max-height: 300px; max-width:250px;">
                 </div>
             <?php endif ?>
 
@@ -37,7 +40,7 @@
             <div class="row border rounded-3 mb-4 pt-2">
 
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Descripció</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.description') ?></h5>
                     <br>
                     <p class="text-justify"><?php echo $ticket['fault_description'] ?></p>
                     <br>
@@ -54,7 +57,7 @@
                 <!-- <hr/> -->
 
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Centre emissor</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.issuing_center') ?></h5>
                     <br>
                     <p class="text-justify"><?php echo $ticket['email_person_center_g'] ?></p>
                     <br>
@@ -67,14 +70,14 @@
                 <!-- <hr/> -->
 
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Data creació</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.creation_data') ?></h5>
                     <br>
                     <p class="text-justify"><?php echo $ticket['created_at'] ?></p>
                     <br>
                 </div>
                 <!-- <hr/> -->
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Ultima modificació</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.last_modification') ?></h5>
                     <br>
                     <p class="text-justify"><?php echo $ticket['updated_at'] ?></p>
                     <br>
@@ -83,13 +86,11 @@
                 <!-- <hr/> -->
 
                 <div class="col-12">
-                    <h5 style="font-weight: bold;">Estat</h5>
+                    <h5 style="font-weight: bold;"><?= lang('ticketsLang.state') ?></h5>
                     <br>
                     <p class="text-justify"><?= $status ?></p>
                     <br>
                 </div>
-
-
 
                 <!-- </div> -->
             </div>
@@ -99,17 +100,17 @@
 
             <div class="col-12 mb-3 ">
 
-                <h3 style="font-weight: bold;"> Intervencions </h3>
+                <h3 style="font-weight: bold;"> <?= lang('ticketsLang.intervention') ?> </h3>
 
             </div>
-            <!-- <div class="d-flex justify-content-end mb-2"> -->
-            <!-- <a class="btn" style="background-color: #0DCAF0;"  href="<? base_url('/addIntervention/' . $ticket['ticket_id']) ?>"><i class="fa fa-plus" aria-hidden="true"></i> Afegeix</a> -->
-            <!-- </div> -->
+            <div class="d-flex justify-content-end mb-2">
+                <a class="btn" style="background-color: #0DCAF0;"
+                    href="<?= base_url('/addIntervention/' . $ticket['ticket_id']) ?>"><i class="fa fa-plus"
+                        aria-hidden="true"></i> <?= lang('ticketsLang.add') ?></a>
+            </div>
             <?= $output ?>
         </div>
     </div>
-
-
 
 
     <?= $this->endSection(); ?>

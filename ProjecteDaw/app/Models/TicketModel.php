@@ -50,6 +50,7 @@ class TicketModel extends Model
         $name_person_center_g,
         $status_id
     ) {
+        
         $data = [
             'ticket_id' => $ticket_id,
             'device_type_id' => $device_type_id,

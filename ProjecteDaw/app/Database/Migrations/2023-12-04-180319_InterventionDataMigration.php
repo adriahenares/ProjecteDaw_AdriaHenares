@@ -29,7 +29,7 @@ class InterventionDataMigration extends Migration
         $this->forge->addField([
             'intervention_id'       => [
                 'type'       => 'VARCHAR',
-                'constraint' => '16',
+                'constraint' => '36',
                 null => false
             ],
             'ticket_id'          => [
@@ -64,10 +64,6 @@ class InterventionDataMigration extends Migration
             'student_studies' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '32',
-                'null' => false,
-            ],
-            'intervention_date' => [
-                'type'       => 'date',
                 'null' => false,
             ],
             'created_at timestamp default current_timestamp',//SSTT: Ficar-ho a 0

@@ -38,5 +38,7 @@ class RolesModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    
+    public function getRoleById($id) {
+        return $this->where('idRole', $id)->first();
+    }
 }

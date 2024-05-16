@@ -21,7 +21,8 @@ class SSTTSeeder extends Seeder
                     'name'  => $filedata[1],
                     'address'  => $filedata[2],
                     'phone'  => $filedata[3],
-                    'email'  => $filedata[4]
+                    'email'  => $filedata[4],
+                    'language' => "ca"
                 ];
                 $model->insert($data);
             }

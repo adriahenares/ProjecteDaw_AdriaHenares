@@ -9,8 +9,9 @@ use App\Models\CenterModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 use App\Models\LoginsModel;
 use App\Models\ProfessorModel;
+use App\Models\SSTTModel;
 use App\Models\StudentModel;
-use Google\Service\Classroom\Student;
+// use Google\Service\Classroom\Student;
 
 $session = \Config\Services::session();  // Config és opcional
 
@@ -19,7 +20,8 @@ $session = \Config\Services::session();  // Config és opcional
 class SessionController extends BaseController
 {
     //funcionalitat de registre sstt
-    public function redirectToLogin() {
+    public function redirectToLogin()
+    {
         return redirect()->to('loginAuth');
     }
 
@@ -51,16 +53,30 @@ class SessionController extends BaseController
 
         if ($this->validate($validationRules)) {
             $instance = new LoginsModel();
-            
-            $email = $this->request->getPost('mail');
+
+            $email = (string) $this->request->getPost('mail');
             $password = $this->request->getPost('pass');
-            
-            $user = $instance->getUserByMail($email);
-            if ($user == true) {
+            if ($instance->userExists($email)) {
+                $user = $instance->getUserByMail($email);
+                $role = $instance->getRoleByEmail($email);
                 if (password_verify((string)$password, $user['password'])) {
-                    // sessions
+                    //sstt
                     session()->set('mail', $email);
-                    session()->set('idSessionUser', 1);
+                    session()->set('role', $instance->getRoleByEmail($email));
+                    // session()->set('idSessionUser', 1);
+                    $pos = strpos($email, '@');
+                    $mailType = substr($email, $pos);
+                    if ($mailType == 'gmail.com') {
+                        $studentsModel = new StudentModel();
+                        $studentInfo = $studentsModel->obtainStByMail($email);
+                        session()->set('id', $studentInfo['student_id']);
+                        session()->set('idCenter', $studentInfo['student_center_id']);
+                        session()->set('lang', $studentInfo['language']);
+                    } else {
+                        $ssttModel = new SSTTModel();
+                        $ssttInfo = $ssttModel->getSSTTByEmail($email);
+                        session()->set('id', $ssttInfo['SSTT_id']);
+                    }
                     return redirect()->to('/viewTickets');
                 }
             } else {
@@ -94,7 +110,7 @@ class SessionController extends BaseController
         //$client->addScope('profile');
         $client->setAccessType('offline');
         //variariable per trobar si alumne o professor
-        $userVerification = false;
+        $professorTrue = false;
         //$data['titol'] = "GSuite login";
         $client->addScope('email');
         if (isset($_GET["code"])) {
@@ -109,27 +125,33 @@ class SessionController extends BaseController
 
                 $userInfo = $oauth2->userinfo->get();
                 $data['mail'] = $userInfo->getEmail();
-                // sessions
                 session()->set('mail', $data['mail']);
-                //validacions
                 $pos = strpos($data['mail'], '@');
                 $mailLast = substr($data['mail'], $pos);
-                if ($mailLast == '@xtec.cat' || $instanceSt->verify_mail($data['mail']) == true) {
-                    //dades
+                if ($mailLast == '@xtec.cat') {
                     $data['nom'] = $userInfo->getGivenName();
                     $data['nomComplet'] = $userInfo->getName();
-                    //comprovem quin tipus d'usuari es
-                    $valueSession = $instanceProfessor->checkIfProfessorOrStudent($data['mail']);
-                    session()->set('idSessionUser', $valueSession);
-                    //comprovem la extensio del correu per veure si es alumne o professor
-                    if ($mailLast == '@xtec.cat') {
-                        // verifiquem que el professor a estat no ja a la plataforma
+                    //diverses comrprovacions
+                    //verificacio que es o centre o professor
+                    // si el email esta a la taula centre es un centre
+                    if ($instanceC->verifyCenter($data['mail']) == true) {
+                        $center = $instanceC->obtainCenterByEmail($data['mail']);
+                        session()->set('role', 'Center');
+                        session()->set('idCenter', $center['center_id']);
+                        //obtenim el codi del centre
+                    } else {
+                        session()->set('role', 'Professor');
+                        // si no esta el email a centre es un professor i  veriquem si esta el email a la taula professors, si no esta s'afegeix
                         if ($instanceProfessor->verifyProfessor($data['mail']) == false) {
-                            $userVerification = true;
+                            $professorTrue = true;
+                        } else {
+                            $prof = $instanceProfessor->obtainProfessor($data['mail']);
+                            session()->set('idCenter', $prof['repair_center_id']);
                         }
                     }
+
                     //l'usuari es un professor 
-                    if ($userVerification == true ) {
+                    if ($professorTrue == true) {
                         // creacio de les variables per professor 
                         $pos = strpos($data['nomComplet'], ' ');
                         $surnames = substr($data['nomComplet'], $pos);
@@ -143,7 +165,6 @@ class SessionController extends BaseController
                         ];
                         $instanceProfessor->insert($dataProf);
                     }
-
                 } else {
                     $this->logOut_function();
                     session()->setFlashdata('error', 'error, conta no valida');
@@ -161,24 +182,25 @@ class SessionController extends BaseController
             $data['login_button'] = $login_button;
             return view("authentication/login/login", $data);
         } else {
-            if ($userVerification == true) {
+            if ($professorTrue == true) {
                 session()->setFlashdata('id', $uuid);
                 $dataView['center'] =  $instanceC->getAllCentersId();
                 return view('authentication/register/validateCenter', $dataView);
             } else {
                 return redirect()->to(base_url('/viewTickets'));
             }
-            //redirect a la pagina que vols si esta autenticat
         }
     }
 
-    public function validateCenter() {
+    public function validateCenter()
+    {
         $instanceProfessor = new ProfessorModel();
         $center = $this->request->getPost('center_r');
+        session()->set('idCenter', $center);
         $data = [
             'repair_center_id' => $center,
         ];
-        $instanceProfessor->update(session()->getFlashdata('id'),$data);
+        $instanceProfessor->update(session()->getFlashdata('id'), $data);
         return redirect()->to('/viewTickets');
     }
 
@@ -194,6 +216,7 @@ class SessionController extends BaseController
                 'name' => 'email',
             ],
         ]);
+        $crud->setConfig('ssttView');
         $data['output'] = $crud->render();
         return view('authentication/register/validateStudents', $data);
     }
@@ -216,6 +239,8 @@ class SessionController extends BaseController
             $data = [
                 'student_id' => UUID::v4(),
                 'email' => $this->request->getPost('mail'),
+                'center_id' => session()->idCenter,
+
             ];
             $instanceSt->insert($data);
             return redirect()->to(base_url('validateStudents'));
@@ -246,4 +271,31 @@ class SessionController extends BaseController
             session()->destroy();
         }
     }
+
+    public function changeLang($lang){
+
+        // $lang = session()->get('lang');
+        // dd($lang);
+
+        if(session()->get('role') == 'Student'){
+            $model = new StudentModel();
+            $model->updateLang($lang);
+        }else if(session()->get('role') == 'Center'){
+            $model = new CenterModel();
+            $model->updateLang($lang);
+        }else if(session()->get('role') == 'SSTT'){
+            $model = new SSTTModel();
+            $model->updateLang($lang);
+        }else if(session()->get('role') == 'Professor'){
+            $model = new ProfessorModel();
+            $model->updateLang($lang);
+        }
+
+        session()->set('lang', $lang);
+        $this->request->setlocale($lang);
+        // d($this->request->getlocale());
+        return redirect()->to('viewTickets');
+
+    }
+
 }

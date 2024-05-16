@@ -1,25 +1,13 @@
-<style>
-    #header {
-        height: 110px;
-        /* width:  100vw; */
-    }
-
-    .text-danger{
-        color: red !important;
-    }
-
-</style>
-
-<?= $this->extend('layouts/mainLayout'); ?>
-
-
-<?= $this->section("main_content"); ?>
-
-    <?php if ($add):?>
+<?php
+$this->extend('layouts/mainLayout');
+$testUser = 2;
+echo $this->section("main_content");
+?>
+<?php if ($badd):?>
         <script>
             addEventListener("DOMContentLoaded", (event) => {
                 let btn = document.createElement('a');
-                btn.href = "<?= base_url('/addTickets') ?>";
+                btn.href = "<?= base_url('/addStock') ?>";
                 btn.classList.add('btn', 'btn-info');
                 btn.id = 'list-btn-print';
                 btn.style.marginLeft = '5px';
@@ -35,4 +23,4 @@
     <?php endif ?>
 
     <?= $output ?>
-<?= $this->endSection(); ?>
+<?php echo $this->endSection(); ?>

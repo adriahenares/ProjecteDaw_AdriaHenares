@@ -1,8 +1,5 @@
-<?php
-echo $this->extend('layouts/default/default');
 
-echo $this->section("main_content");
-?>
+<?= $this->section("main_content");?>
 
 <div class="container-fluid p-0">
     <div class="row">
@@ -14,24 +11,24 @@ echo $this->section("main_content");
                 </div>
             </div>
         </div>
-        <?= $this->include("layouts/partials/menu") ?>
+        <?= $this->include("layouts/mainLayout") ?>
         <div id="centres" class="col-10">
             <form action="<?php base_url("/addTickets") ?>" method="POST">
                 <?= csrf_field() ?>
                 <div class="form-group">
-                    <label for="person_contact_center" class="">Persona contacte centre:</label>
+                    <label for="person_contact_center" class=""><?= lang('ticketsLang.center_contact')?>:</label>
                     <input type="text" class="form-control" name="person_contact_center" id="person_contact_center">
                 </div>
                 <div class="form-group">
-                    <label for="email_person_contact">Correu persona contacte:</label>
+                    <label for="email_person_contact"><?= lang('ticketsLang.center_contact_email')?>:</label>
                     <input type="text" class="form-control" name="email_person_contact" id="email_person_contact">
                 </div>
                 <div class="form-group">
-                    <label for="description">Descripció</label>
+                    <label for="description"><?= lang('ticketsLang.description')?></label>
                     <textarea class="form-control" name="description" id="description" cols="30" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="device">Dispositiu</label>
+                    <label for="device"><?= lang('ticketsLang.device')?></label>
                     <select class="form-control" name="device" id="device">
                         <?php
                         $valueN = 1;
@@ -56,8 +53,8 @@ echo $this->section("main_content");
                     </select>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="<?= base_url("/viewTickets") ?>" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-primary"><?= lang('ticketsLang.save')?></button>
+                    <a href="<?= base_url("/viewTickets") ?>" class="btn btn-secondary"><?= lang('ticketsLang.cancel')?></a>
                 </div>
             </form>
         </div>

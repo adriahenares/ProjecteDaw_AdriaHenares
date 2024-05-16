@@ -49,7 +49,7 @@ class InterventionModel extends Model
         $description,
         $student_course,
         $student_studies,
-        $intervention_date
+        
     ) {
         $data = [
             'intervention_id' => $intervention_id,
@@ -60,7 +60,6 @@ class InterventionModel extends Model
             'description' => $description,
             'student_course' => $student_course,
             'student_studies' => $student_studies,
-            'intervention_date' => $intervention_date,
         ];
         $this->insert($data);
     }

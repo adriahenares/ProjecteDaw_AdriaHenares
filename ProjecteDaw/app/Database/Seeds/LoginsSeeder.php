@@ -16,8 +16,8 @@ class LoginsSeeder extends Seeder
         $instanceUR =  new UsersInRoleModel();
         //inserts
         //roles
-        $roles = ['administrador', 'SSTT'];
-        for ($i = 0; $i < 2; $i++) {
+        $roles = ['Admin', 'SSTT', 'Center', 'Professor', 'Student'];
+        for ($i = 0; $i < count($roles); $i++) {
             $data = [
                 'role' => $roles[$i],
             ];
@@ -25,12 +25,23 @@ class LoginsSeeder extends Seeder
         }
         //users
         $dataUsers = [
-                'email' => 'sstt@gencat.cat',
-                'password' => password_hash('123456', PASSWORD_DEFAULT),
+            'email' => 'st_lleida.educacio@gencat.cat',
+            'password' => password_hash('123456', PASSWORD_DEFAULT),
         ];
+
         $isntanceL->insert($dataUsers);
         //userInRole
 
+        $dataInRole = [
+            'email' => $dataUsers['email'],
+            'idRole' => 2
+        ];
+        $instanceUR->insert($dataInRole);
+        $dataUsers = [
+            'email' => 'admin@gmail.com',
+            'password' => password_hash('123456', PASSWORD_DEFAULT),
+        ];
+        $isntanceL->insert($dataUsers);
         $dataInRole = [
             'email' => $dataUsers['email'],
             'idRole' => 1

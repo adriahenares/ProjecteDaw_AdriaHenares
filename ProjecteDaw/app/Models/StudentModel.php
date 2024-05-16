@@ -12,7 +12,7 @@ class StudentModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["student_id","email"];
+    protected $allowedFields    = ["student_id","email","student_center_id","language"];
 
     // Dates
     protected $useTimestamps = false;
@@ -46,4 +46,18 @@ class StudentModel extends Model
             return false;
         }
     }
+
+    public function obtainStByMail($email) {
+        return $this->where("email", $email)->first();
+    }
+
+    public function updateLang($lang){
+        $data = [
+            'language' => $lang
+        ];
+
+        // return $this->update(session()->get('mail'), ['language'->$lang]);
+        return $this->where('email', session()->get('mail'))->set($data)->update();
+    }
+
 }
