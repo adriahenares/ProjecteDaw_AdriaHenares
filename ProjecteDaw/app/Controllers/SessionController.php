@@ -62,6 +62,7 @@ class SessionController extends BaseController
                     // sessions
                     session()->set('mail', $email);
                     session()->set('idSessionUser', 1);
+                    session()->set('idCenter', null);
                     return redirect()->to('/viewTickets');
                 }
             } else {
@@ -142,7 +143,7 @@ class SessionController extends BaseController
                         //estudiant ja previament verificat
                         $st = $instanceSt->obtainStByMail($data['mail']);
                         session()->set('idSessionUser', 4);
-                        session()->set('idCenter', $st['center_id']);
+                        session()->set('idCenter', $st['student_center_id']);
                     }
                     //l'usuari es un professor 
                     if ($professorTrue == true) {

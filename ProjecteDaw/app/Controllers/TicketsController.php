@@ -112,13 +112,10 @@ class TicketsController extends BaseController
                 'name' => 'Estat',
             ]
         ]);
-
+        //sessions links
         $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
         $crud->addItemLink('assgin', 'fa-solid fa-school', base_url('/assignTicket'), 'Assignar');
         $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar ticket');
-        if (session()->idsessionUser == 2 || session()->idsessionUser == 3 || session()->idsessionUser == 4) {
-            $crud->addWhere ("r_center_code", session()->idCenter);
-        }
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
         $crud->setConfig('ssttView');
         $data['output'] = $crud->render();
