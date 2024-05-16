@@ -239,8 +239,8 @@ class SessionController extends BaseController
             $data = [
                 'student_id' => UUID::v4(),
                 'email' => $this->request->getPost('mail'),
-                'center_id' => session()->idCenter,
-
+                'student_center_id' => session()->idCenter,
+                'language' => 'ca'
             ];
             $instanceSt->insert($data);
             return redirect()->to(base_url('validateStudents'));
