@@ -33,5 +33,6 @@ return [
     'last_modification' => 'Ultima modificació',
     'state' => 'Estat',
     'intervention' => 'Intervenció',
-    'add_intervention' => "Agregar Intervenció"
+    'add_intervention' => "Agregar Intervenció",
+    'stock' => "Inventari"
 ];

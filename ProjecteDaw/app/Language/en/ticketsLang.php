@@ -33,4 +33,5 @@ return [
     'state' => 'State',
     'intervention' => 'Intervention',
     'add_intervention' => "Add Intervention",
+    'stock' => "Stock"
 ];
