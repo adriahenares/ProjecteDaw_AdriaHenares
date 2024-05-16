@@ -23,7 +23,7 @@ return [
     'export' => 'Exportar',
     'print' => 'Imprimir',
     'teacher' => 'Professor',
-    'student' => 'Estudiant',
+    'student' => 'Alumne',
     'intervention_type' => 'Tipus intervenció',
     'FP' => 'Cicle Formatiu',
     'course' => 'Curs',
