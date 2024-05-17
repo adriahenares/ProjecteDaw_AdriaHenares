@@ -11,6 +11,7 @@ use App\Models\LoginsModel;
 use App\Models\ProfessorModel;
 use App\Models\SSTTModel;
 use App\Models\StudentModel;
+
 // use Google\Service\Classroom\Student;
 
 $session = \Config\Services::session();  // Config és opcional
@@ -29,16 +30,16 @@ class SessionController extends BaseController
     {
         $validationRules = [
             'mail' => [
-                'label'  => 'eMail usuari',
-                'rules'  => 'required|valid_email',
+                'label' => 'eMail usuari',
+                'rules' => 'required|valid_email',
                 'errors' => [
                     'required' => 'eMail es un camp obligatori',
                     'valid_email' => 'No és un mail valid',
                 ],
             ],
             'pass' => [
-                'label'  => 'Contrasenya usuari',
-                'rules'  => 'required',
+                'label' => 'Contrasenya usuari',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'La clau és un camp obligatori',
                 ],
@@ -53,7 +54,7 @@ class SessionController extends BaseController
             if ($instance->userExists($email)) {
                 $user = $instance->getUserByMail($email);
                 $role = $instance->getRoleByEmail($email);
-                if (password_verify((string)$password, $user['password'])) {
+                if (password_verify((string) $password, $user['password'])) {
                     //sstt
                     session()->set('mail', $email);
                     session()->set('role', $instance->getRoleByEmail($email));
@@ -124,7 +125,8 @@ class SessionController extends BaseController
                 session()->set('mail', $data['mail']);
                 $pos = strpos($data['mail'], '@');
                 $mailLast = substr($data['mail'], $pos);
-                if ($mailLast == '@gmail.com') {
+                // dd($mailLast);
+                if ($mailLast == '@xtec.cat') {
                     $data['nom'] = $userInfo->getGivenName();
                     $data['nomComplet'] = $userInfo->getName();
                     //diverses comrprovacions
@@ -166,7 +168,10 @@ class SessionController extends BaseController
                     $this->logOut_function();
                     session()->setFlashdata('error', 'error, conta no valida');
                     $login_button = '';
-                    $login_button = '<a href="' . $client->createAuthUrl() . '" class="btn btn-primary text-center" >LOGIN WITH GOOGLE</a>';
+                    $login_button = '<a href="' . $client->createAuthUrl() . '" class="btn w-100 position-relative" 
+                    style="  border: 2px solid blue; background-color: white;">
+                    <img src="' . base_url("images/google.jpg") . '" style=" left: 8px; width: 22px; height: 22px;">
+                    LOGIN WITH GOOGLE</a>';
                     $data['login_button'] = $login_button;
                     return view("authentication/login/login", $data);
                 }
@@ -184,7 +189,7 @@ class SessionController extends BaseController
         } else {
             if ($professorTrue == true) {
                 session()->setFlashdata('id', $uuid);
-                $dataView['center'] =  $instanceC->getAllCentersId();
+                $dataView['center'] = $instanceC->getAllCentersId();
                 return view('authentication/register/validateCenter', $dataView);
             } else {
                 return redirect()->to(base_url('/viewTickets'));
@@ -225,8 +230,8 @@ class SessionController extends BaseController
     {
         $validationRules = [
             'mail' => [
-                'label'  => 'eMail usuari',
-                'rules'  => 'required|valid_email',
+                'label' => 'eMail usuari',
+                'rules' => 'required|valid_email',
                 'errors' => [
                     'required' => 'eMail es un camp obligatori',
                     'valid_email' => 'No és un mail valid',
