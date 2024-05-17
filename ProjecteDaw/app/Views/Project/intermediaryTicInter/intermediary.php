@@ -103,11 +103,13 @@
                 <h3 style="font-weight: bold;"> <?= lang('ticketsLang.intervention') ?> </h3>
 
             </div>
-            <div class="d-flex justify-content-end mb-2">
-                <a class="btn" style="background-color: #0DCAF0;"
-                    href="<?= base_url('/addIntervention/' . $ticket['ticket_id']) ?>"><i class="fa fa-plus"
-                        aria-hidden="true"></i> <?= lang('ticketsLang.add') ?></a>
-            </div>
+            <?php if(session()->get('role') != 'SSTT' && session()->get('role') != 'Center'): ?>
+                <div class="d-flex justify-content-end mb-2">
+                    <a class="btn" style="background-color: #0DCAF0;"
+                        href="<?= base_url('/addIntervention/' . $ticket['ticket_id']) ?>"><i class="fa fa-plus"
+                            aria-hidden="true"></i> <?= lang('ticketsLang.add') ?></a>
+                </div>
+            <?php endif ?>
             <?= $output ?>
         </div>
     </div>
