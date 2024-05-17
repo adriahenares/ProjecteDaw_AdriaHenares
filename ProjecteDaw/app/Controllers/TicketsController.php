@@ -125,6 +125,7 @@ class TicketsController extends BaseController
         if ($role == 'Student' || $role == 'Professor' || $role == 'Center') {
             $crud->addWhere("r_center_code", session()->idCenter);
         }
+        $crud->addWhere('deleted_at');
         // document.querySelector("#item-1 > td:nth-child(4) > a:nth-child(3)") meter text-danger y borrar text-primary
         $data['output'] = $crud->render();
         // $data['title'] = lang('ticketsLang.titleG');
