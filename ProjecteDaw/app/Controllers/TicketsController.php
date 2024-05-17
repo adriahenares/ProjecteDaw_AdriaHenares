@@ -236,7 +236,7 @@ class TicketsController extends BaseController
     public function assignTicket($id)
     {
         $instanceC = new CenterModel();
-        $centerId = $instanceC->getAllCentersId();
+        $centerId = $instanceC->getAllRepairingCenters();
         $data['id'] = $id;
         $data['centerId'] = $centerId;
         return view('Project/Tickets/assignTicketsTrue', $data);

@@ -30,7 +30,7 @@
                         <?php
                         echo "<option value=''  default hidden>".  lang('ticketsLang.choose_center') ."</option>";
                         foreach ($centerId as $value) {
-                            echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
+                            echo "<option value='" . $value->center_id . "'>" . $value->name . "</option>";
                         }
                         ?>
                     </select>
