@@ -44,5 +44,7 @@ return [
     'UpdatedAt' => 'Updated at',
     'DeletedAt' => 'Deleted at',
     'Status' => 'Status',
-    'stock' => "Stock"
+    'stock' => "Stock",
+    'confirm' => 'Are you sure you want to delete the ticket?',
+    'accept' => 'Yes, delete'
 ];

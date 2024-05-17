@@ -166,7 +166,7 @@
                 <!-- <a style="text-decoration: none; ">
                     <i class="fa-regular fa-circle-user c-5 fa-xl me-4"></i>
                 </a> -->
-                <a href="<?= base_url('/logout') ?>" style="text-decoration: none; ">
+                <a href="<?= base_url('/logout') ?>" style="text-decoration: none; " class="me-2 ms-3">
                     <i class="fa-solid fa-right-from-bracket c-5 fa-xl me-3"></i>
                 </a>
             </div>
