@@ -12,6 +12,9 @@ use App\Models\DeviceTypeModel;
 use App\Models\InterventionModel;
 use App\Models\ProfessorModel;
 
+// llibreria per fer un windows confirm
+use SweetAlert\SweetAlert;
+
 class TicketsController extends BaseController
 {
     /** 
@@ -52,6 +55,7 @@ class TicketsController extends BaseController
         $crud->setRelation('g_center_code', 'centers', 'center_id', 'name');
         $crud->setRelation('r_center_code', 'centers2', 'center_id', 'name');
         $crud->setColumns(['ticket_id', 'deviceType__device_type', 'fault_description', 'centers__name', 'centers2__name', 'created_at', 'status__status']);
+        $crud->addWhere ("deleted_at", null, false);
         $crud->setColumnsInfo([
             'ticket_id' => [
                 'name' => lang('ticketsLang.ID'),
@@ -110,7 +114,8 @@ class TicketsController extends BaseController
         $data['add'] = true;
         $role = session()->get('role');
         if ($role == 'Admin' || $role == 'SSTT' || $role == 'Center') {
-            $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/delTicket'), 'Eliminar ticket');
+            $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/confirmDel'), 'Eliminar ticket');
+            // $crud->addItemLink('delTicket', 'fa fa-trash-o', base_url('/confirmDel'), 'Eliminar ticket');
             if ($role != 'Center') {
                 $crud->addItemLink('assign', 'fa-solid fa-school', base_url('/assignTicket'), 'Assignar');
             }
@@ -245,23 +250,40 @@ class TicketsController extends BaseController
         return redirect()->to(base_url('assign'));
     }
 
+
+    public function confirmDelete($id){
+        $data = [
+            'id' => $id,
+        ];
+
+        return view('/Project/confirm', $data);
+    }
+
+
     //deleteTicket
     public function deleteTicket($ticket)
     {
-        // fet i validat 
-        $instanceI = new InterventionModel();
-        $Interventions = $instanceI->getSpecificInterventions($ticket);
-        if ($Interventions != null) {
-            session()->setFlashdata('error', 'no es pot borrar el ticket');
-            return redirect()->back();
-        }
-        $instanceT = new TicketModel();
-        // dd($ticket);
-        $instanceT->deleteTicket($ticket);
-        
-        // dd($arr);
-        // dd($interventionModel->getSpecificInterventions($ticket));
+   
+            // dd($ticket);
+            // fet i validat 
+            $instanceI = new InterventionModel();
 
-        return redirect()->back()->withInput();
-    }
+            $Interventions = $instanceI->getSpecificInterventions($ticket);
+
+            if ($Interventions != null) {
+                session()->setFlashdata('error', 'no es pot borrar el ticket');
+                // return redirect()->back();
+                return redirect()->to('viewTickets');
+            }
+            $instanceT = new TicketModel();
+            $instanceT->deleteTicket($ticket);
+            
+            // dd($arr);
+            // dd($interventionModel->getSpecificInterventions($ticket));
+
+            // return redirect()->back()->withInput();
+            return redirect()->to('viewTickets');
+
+}
+
 }

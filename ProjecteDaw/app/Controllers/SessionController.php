@@ -71,6 +71,7 @@ class SessionController extends BaseController
                         $ssttModel = new SSTTModel();
                         $ssttInfo = $ssttModel->getSSTTByEmail($email);
                         session()->set('id', $ssttInfo['SSTT_id']);
+                        session()->set('lang', $ssttInfo['language']);
                     }
                     return redirect()->to('/viewTickets');
                 }

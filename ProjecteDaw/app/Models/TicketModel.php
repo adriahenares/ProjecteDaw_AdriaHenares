@@ -11,13 +11,13 @@ class TicketModel extends Model
     protected $primaryKey = 'ticket_id';
     protected $useAutoIncrement = false;
     protected $returnType = 'array';
-    protected $useSoftDeletes = false;
+    protected $useSoftDeletes = true;
     protected $protectFields = true;
-    protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'status_id', 'deleted_at'];
+    protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'status_id'];
     // protected $allowedFields = ['ticket_id', 'device_type_id', 'fault_description', 'g_center_code', 'r_center_code', 'email_person_center_g', 'name_person_center_g', 'date_last_modification', 'registration_data', 'status_id'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
@@ -83,13 +83,20 @@ class TicketModel extends Model
     }
     public function deleteTicket($id)
     {
-        helper('date');
+        // helper('date');
+
+        // dd($id);
+
+        if ($id != null) {
+            $this->where('ticket_id', $id);
+            $this->delete();
+        }
         
         // $data = [
         //     'deleted_at' => 
         // ];
-        $this->where('ticket_id', $id);
-        $this->set('deleted_at', date('Y-m-d H:i:s', now('GMT+2')));
-        $this->update();
+        // $this->where('ticket_id', $id);
+        // $this->set('deleted_at', date('Y-m-d H:i:s', now('GMT+2')));
+        // $this->update();
     }
 }
