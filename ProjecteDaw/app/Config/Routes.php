@@ -18,8 +18,14 @@ $routes->get('/changeLang/(:segment)', 'SessionController::changeLang/$1');
 $routes->get('/addTickets', 'TicketsController::addTicket');
 $routes->post('/addTickets', 'TicketsController::addTicketPost');
 
+
 //eliminar Tickets
 $routes->get('/delTicket/(:segment)', 'TicketsController::deleteTicket/$1');
+
+// confirm delete ticket
+$routes->get('/confirmDel/(:segment)', 'TicketsController::confirmDelete/$1');
+
+
 
 //Iniciar seesio SSTT
 // $routes->get('/loginAuth', 'SessionController::loginNormal');
