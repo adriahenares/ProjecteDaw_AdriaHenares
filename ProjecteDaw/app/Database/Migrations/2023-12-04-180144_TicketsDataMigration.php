@@ -58,7 +58,7 @@ class TiquetsDataMigration extends Migration
             'g_center_code' => [
                 'type' => 'INT',
                 'constraint' => '8',
-                'null' => false,
+                'null' => true,
             ],
             'r_center_code' => [
                 'type' => 'INT',

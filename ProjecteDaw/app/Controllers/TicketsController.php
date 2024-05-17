@@ -196,11 +196,19 @@ class TicketsController extends BaseController
             // name email gCenter es sessio si ets professor
             $testUser = 1; //canvia per seesion
             //SSTT sessions !!
-            if ($testUser == 1) {
+            if (session()->get('role') == 'SSTT') {
                 $centerG =  $this->request->getPost('center_g');
                 $centerR =  $this->request->getPost('center_r');
-            } else if ($testUser == 2) {
-                $centerG = 1; //sessio (flash)
+            } else {
+                $centerG = session()->get('idCenter'); //sessio (flash)
+                $centerR = null;
+            }
+            d($centerG);
+            d($centerR);
+            if ($centerG == '') {
+                $centerG = null;
+            }
+            if ($centerR == '') {
                 $centerR = null;
             }
             $data = [
