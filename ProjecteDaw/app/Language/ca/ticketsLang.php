@@ -45,5 +45,7 @@ return [
     'CreatedAt' => 'Data de creació',
     'UpdatedAt' => 'Data ultima modificació',
     'DeletedAt' => 'Data d\'eliminaciò',
-    'Status' => 'Estat'
+    'Status' => 'Estat',
+    'confirm' => 'Estàs segur que vols eliminar el tiquet?',
+    'accept' => 'Sí, eliminar'
 ];

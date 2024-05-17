@@ -13,4 +13,4 @@
     <a href="<? base_url('assignTicket') ?>" class="btn btn-primary">Assigna</a>
 </div> -->
 <?= $output ?>
-<?= $this->endSection(); ?>
+    <?= $this->endSection(); ?>

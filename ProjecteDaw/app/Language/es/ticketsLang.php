@@ -45,5 +45,8 @@ return [
     'UpdatedAt' => 'Data ultima modificación',
     'DeletedAt' => 'Data d\'eliminación',
     'Status' => 'Estat',
-    'stock' => "Inventario"
+    'stock' => "Inventario",
+    'confirm' => '¿Estás seguro de que quieres eliminar el ticket?',
+    'accept' => 'Si, eliminar'
+
 ];
