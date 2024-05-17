@@ -53,62 +53,116 @@ class TicketsController extends BaseController
         //$crud->setRelation('email_person_center_g', 'professors', 'email', 'email');
         //$crud->setRelation('name_person_center_g', 'professors2', 'name', 'name');
         $crud->setRelation('g_center_code', 'centers', 'center_id', 'name');
-        $crud->setRelation('r_center_code', 'centers2', 'center_id', 'name');
-        $crud->setColumns(['ticket_id', 'deviceType__device_type', 'fault_description', 'centers__name', 'centers2__name', 'created_at', 'status__status']);
-        $crud->addWhere ("deleted_at", null, false);
-        $crud->setColumnsInfo([
-            'ticket_id' => [
-                'name' => lang('ticketsLang.ID'),
-                'type' => KpaCrud::READONLY_FIELD_TYPE,
-                'default' => UUID::v4(),
-                'html_atts' => [
-                    'disabled'
+        if (session()->get('role') != 'Professor') {
+            $crud->setRelation('r_center_code', 'centers2', 'center_id', 'name');
+            $crud->setColumns(['ticket_id', 'deviceType__device_type', 'fault_description', 'centers__name', 'centers2__name', 'created_at', 'status__status']);
+            $crud->setColumnsInfo([
+                'ticket_id' => [
+                    'name' => lang('ticketsLang.ID'),
+                    'type' => KpaCrud::READONLY_FIELD_TYPE,
+                    'default' => UUID::v4(),
+                    'html_atts' => [
+                        'disabled'
+                    ]
+                ],
+                'deviceType__device_type' => [
+                    'name' => lang('ticketsLang.DeviceType')
+                ],
+                'fault_description' => [
+                    'name' => lang('ticketsLang.Description')
+                ],
+                'centers__name' => [
+                    'name' => lang('ticketsLang.EmitterCenter'),
+                ],
+                'centers2__name' => [
+                    'name' => lang('ticketsLang.RepairCenter'),
+                ],
+                'email_person_center_g' => [
+                    'name' => lang('ticketsLang.GeneratorMail'),
+                ],
+                'name_person_center_g' => [
+                    'name' => lang('ticketsLang.GeneratorName'),
+                ],
+                'created_at' => [
+                    'name' => lang('ticketsLang.CreatedAt'),
+                    'default' => date('Y-m-d h:m:s'),
+                    'html_atts' => [
+                        'disabled'
+                    ]
+                    // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                    // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+                ],
+                'updated_at' => [
+                    'name' => lang('ticketsLang.UpdatedAt'),
+                    'default' => date('Y-m-d h:m:s'),
+                    'html_atts' => [
+                        'disabled'
+                    ]
+                ],
+                'deleted_at' => [
+                    'name' => lang('ticketsLang.UpdatedAt'),
+                    'html_atts' => [
+                        'disabled'
+                    ]
+                ],
+                'status__status' => [
+                    'name' => 'Estat',
                 ]
-            ],
-            'deviceType__device_type' => [
-                'name' => lang('ticketsLang.DeviceType')
-            ],
-            'fault_description' => [
-                'name' => lang('ticketsLang.Description')
-            ],
-            'centers__name' => [
-                'name' => lang('ticketsLang.EmitterCenter'),
-            ],
-            'centers2__name' => [
-                'name' => lang('ticketsLang.RepairCenter'),
-            ],
-            'email_person_center_g' => [
-                'name' => lang('ticketsLang.GeneratorMail'),
-            ],
-            'name_person_center_g' => [
-                'name' => lang('ticketsLang.GeneratorName'),
-            ],
-            'created_at' => [
-                'name' => lang('ticketsLang.CreatedAt'),
-                'default' => date('Y-m-d h:m:s'),
-                'html_atts' => [
-                    'disabled'
+            ]);
+        } else {
+            $crud->setColumns(['ticket_id', 'deviceType__device_type', 'fault_description', 'centers__name', 'created_at', 'status__status']);
+            $crud->setColumnsInfo([
+                'ticket_id' => [
+                    'name' => lang('ticketsLang.ID'),
+                    'type' => KpaCrud::READONLY_FIELD_TYPE,
+                    'default' => UUID::v4(),
+                    'html_atts' => [
+                        'disabled'
+                    ]
+                ],
+                'deviceType__device_type' => [
+                    'name' => lang('ticketsLang.DeviceType')
+                ],
+                'fault_description' => [
+                    'name' => lang('ticketsLang.Description')
+                ],
+                'centers__name' => [
+                    'name' => lang('ticketsLang.EmitterCenter'),
+                ],
+                'email_person_center_g' => [
+                    'name' => lang('ticketsLang.GeneratorMail'),
+                ],
+                'name_person_center_g' => [
+                    'name' => lang('ticketsLang.GeneratorName'),
+                ],
+                'created_at' => [
+                    'name' => lang('ticketsLang.CreatedAt'),
+                    'default' => date('Y-m-d h:m:s'),
+                    'html_atts' => [
+                        'disabled'
+                    ]
+                    // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
+                    // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
+                ],
+                'updated_at' => [
+                    'name' => lang('ticketsLang.UpdatedAt'),
+                    'default' => date('Y-m-d h:m:s'),
+                    'html_atts' => [
+                        'disabled'
+                    ]
+                ],
+                'deleted_at' => [
+                    'name' => lang('ticketsLang.UpdatedAt'),
+                    'html_atts' => [
+                        'disabled'
+                    ]
+                ],
+                'status__status' => [
+                    'name' => 'Estat',
                 ]
-                // 'type' => KpaCrud::DATETIME_FIELD_TYPE,
-                // 'type' => KpaCrud::INVISIBLE_FIELD_TYPE
-            ],
-            'updated_at' => [
-                'name' => lang('ticketsLang.UpdatedAt'),
-                'default' => date('Y-m-d h:m:s'),
-                'html_atts' => [
-                    'disabled'
-                ]
-            ],
-            'deleted_at' => [
-                'name' => lang('ticketsLang.UpdatedAt'),
-                'html_atts' => [
-                    'disabled'
-                ]
-            ],
-            'status__status' => [
-                'name' => 'Estat',
-            ]
-        ]);
+            ]);
+        }
+        $crud->addWhere("deleted_at", null, false);
         $crud->setConfig('ssttView');        //sessions links
         $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
         $data['add'] = true;
@@ -126,7 +180,7 @@ class TicketsController extends BaseController
                 $crud->addWhere("r_center_code", session()->idCenter);
             }
         }
-        
+
         if ($role == 'Student' || $role == 'Professor' || $role == 'Center') {
             $crud->addWhere("r_center_code", session()->idCenter);
         }
@@ -259,7 +313,8 @@ class TicketsController extends BaseController
     }
 
 
-    public function confirmDelete($id){
+    public function confirmDelete($id)
+    {
         $data = [
             'id' => $id,
         ];
@@ -271,27 +326,25 @@ class TicketsController extends BaseController
     //deleteTicket
     public function deleteTicket($ticket)
     {
-   
-            // dd($ticket);
-            // fet i validat 
-            $instanceI = new InterventionModel();
 
-            $Interventions = $instanceI->getSpecificInterventions($ticket);
+        // dd($ticket);
+        // fet i validat 
+        $instanceI = new InterventionModel();
 
-            if ($Interventions != null) {
-                session()->setFlashdata('error', 'no es pot borrar el ticket');
-                // return redirect()->back();
-                return redirect()->to('viewTickets');
-            }
-            $instanceT = new TicketModel();
-            $instanceT->deleteTicket($ticket);
-            
-            // dd($arr);
-            // dd($interventionModel->getSpecificInterventions($ticket));
+        $Interventions = $instanceI->getSpecificInterventions($ticket);
 
-            // return redirect()->back()->withInput();
+        if ($Interventions != null) {
+            session()->setFlashdata('error', 'no es pot borrar el ticket');
+            // return redirect()->back();
             return redirect()->to('viewTickets');
+        }
+        $instanceT = new TicketModel();
+        $instanceT->deleteTicket($ticket);
 
-}
+        // dd($arr);
+        // dd($interventionModel->getSpecificInterventions($ticket));
 
+        // return redirect()->back()->withInput();
+        return redirect()->to('viewTickets');
+    }
 }
