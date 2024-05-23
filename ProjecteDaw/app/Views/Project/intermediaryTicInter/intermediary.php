@@ -107,25 +107,37 @@
                             aria-hidden="true"></i> <?= lang('ticketsLang.add') ?></a>
                 </div>
             <?php endif ?> -->
-        <?php
-        //https://codeigniter4-datatables.hermawan.dev/usage/multi_column_search/
-        $headers = ['ID', 'Descripció', 'Alumne', 'Data de creació'];
-        echo '<table class="table table-striped">';
-        echo '<tr>';
-        for ($i = 0; $i < count($headers); $i++) {
-            echo '<th>' . $headers[$i] . '</th>';
-        }
-        echo '</tr>';
-        foreach ($interventions as $intervention) {
-            echo '<tr>';
-            echo '<td>' . $intervention['intervention_id'] . '</td>';
-            echo '<td>' . $intervention['description'] . '</td>';
-            echo '<td>' . $intervention['student_id'] . '</td>';
-            echo '<td>' . $intervention['created_at'] . '</td>';
-            echo '</tr>';
-        }
-        echo '</table>';
-        ?>
+        <!-- https://codeigniter4-datatables.hermawan.dev/usage/multi_column_search/ -->
+        <script>
+            $(document).ready(function () {
+                $('#table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: '/interventionsById/' + <?= $id ?>
+                });
+            });
+        </script>
+        <table id="table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Cust. No</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Postal Code</th>
+                </tr>
+                <tr>
+                    <th class="filterhead"></th>
+                    <th class="filterhead"></th>
+                    <th class="filterhead"></th>
+                    <th class="filterhead"></th>
+                    <th class="filterhead"></th>
+                    <th class="filterhead"></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
         <!-- <script>
             function sortTable(n) {
                 var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

@@ -23,7 +23,7 @@ $routes->get('/confirmDel/(:segment)', 'TicketsController::confirmDelete/$1');
 
 //Interventions
 $routes->match(['GET', 'POST'], '/Ticket/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
-
+$routes->get('/interventionsById/(:segment)', 'TicketsInterventionsController::loadTableData/$1')
 
 
 
