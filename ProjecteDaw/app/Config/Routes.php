@@ -32,7 +32,7 @@ $routes->get('/confirmDel/(:segment)', 'TicketsController::confirmDelete/$1');
 
 //iniciar sessio profe, alum
 $routes->get('/login', 'SessionController::google_login');
-$routes->post('/loginAuth', 'SessionController::login_post_Normal');
+$routes->post('/login', 'SessionController::login_post_Normal');
 
 
 //validar el centre

@@ -2,7 +2,7 @@
 
 <?php echo $this->section("auth"); ?>
 <div class="container-fluid">
-    <form action="<?= base_url('/loginAuth') ?>" method="post">
+    <form action="<?= base_url('/login') ?>" method="post">
         <?= csrf_field(); ?>
         <div class="m-2">
             <label for="mail" class="form-label"> <?= lang('loginLang.email') ?></label>
