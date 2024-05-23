@@ -6,24 +6,60 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+//Sessions
+$routes->get('/login', 'SessionController::google_login');
+$routes->post('/login', 'SessionController::login_post_Normal');
+$routes->get('/logout', 'SessionController::logout');
+
+//Langs
+$routes->get('/changeLang/(:segment)', 'SessionController::changeLang/$1');
+
+//Tickets
+$routes->match(['GET', 'POST'], '/viewTickets', 'TicketsController::viewTickets');
+$routes->get('/addTickets', 'TicketsController::addTicket');
+$routes->post('/addTickets', 'TicketsController::addTicketPost');
+$routes->get('/delTicket/(:segment)', 'TicketsController::deleteTicket/$1');
+$routes->get('/confirmDel/(:segment)', 'TicketsController::confirmDelete/$1');
+
+//Interventions
+$routes->match(['GET', 'POST'], '/Ticket/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //get per defecte tickets
 //tickets
-$routes->match(['GET','POST'], '/viewTickets', 'TicketsController::viewTickets');
 
 // change Language
-$routes->get('/changeLang/(:segment)', 'SessionController::changeLang/$1');
 
 
 // addTickets 
-$routes->get('/addTickets', 'TicketsController::addTicket');
-$routes->post('/addTickets', 'TicketsController::addTicketPost');
+
 
 
 //eliminar Tickets
-$routes->get('/delTicket/(:segment)', 'TicketsController::deleteTicket/$1');
 
 // confirm delete ticket
-$routes->get('/confirmDel/(:segment)', 'TicketsController::confirmDelete/$1');
 
 
 
@@ -31,21 +67,18 @@ $routes->get('/confirmDel/(:segment)', 'TicketsController::confirmDelete/$1');
 // $routes->get('/loginAuth', 'SessionController::loginNormal');
 
 //iniciar sessio profe, alum
-$routes->get('/login', 'SessionController::google_login');
-$routes->post('/login', 'SessionController::login_post_Normal');
 
 
-//validar el centre
+
+//validar el centre 
 $routes->post('/validateCenter', 'SessionController::validateCenter');
 //register de alumnes
 $routes->get('/validateStudents', 'SessionController::validateStudents');
 $routes->post('/validateStudents', 'SessionController::validateStudents_post');
 
 //logOut
-$routes->get('/logout', 'SessionController::logout');
 
 //pagina intermitja entre tickets i intervencio
-$routes->match(['GET','POST'], '/interventionsOfTicket/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
 
 //iintervencio en concret
 $routes->get('/intervention/(:segment)/', 'InterventionsController::viewInterventions');
@@ -65,7 +98,7 @@ $routes->post('/updateIntervention/(:segment)', 'InterventionsController::update
 $route['default_controller'] = 'TicketsController::viewTickets';
 
 //stock
-$routes->MATCH(['GET','POST'], '/viewStock', 'StockController::viewStock');
+$routes->MATCH(['GET', 'POST'], '/viewStock', 'StockController::viewStock');
 //add
 $routes->get('/addStock', 'StockController::addStock');
 $routes->post('/addStock', 'StockController::addStock_post');

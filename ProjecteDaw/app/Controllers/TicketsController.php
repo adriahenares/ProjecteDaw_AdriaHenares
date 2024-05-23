@@ -164,7 +164,7 @@ class TicketsController extends BaseController
         }
         $crud->addWhere("deleted_at", null, false);
         $crud->setConfig('ssttView');        //sessions links
-        $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/interventionsOfTicket'), 'Intervencions');
+        $crud->addItemLink('view', 'fa-solid fa-eye', base_url('/Ticket'), 'Intervencions');
         $data['add'] = true;
         $role = session()->get('role');
         if ($role == 'Admin' || $role == 'SSTT' || $role == 'Center') {

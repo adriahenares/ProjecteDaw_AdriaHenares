@@ -60,7 +60,7 @@ echo $this->section("main_content");
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary"><?= lang('ticketsLang.save')?></button>
-                    <a href="<?= base_url("/interventionsOfTicket/" . session()->getFlashdata("idTicket")) ?>" class="btn btn-secondary"><?= lang('ticketsLang.cancel')?></a>
+                    <a href="<?= base_url("/Ticket/" . session()->getFlashdata("idTicket")) ?>" class="btn btn-secondary"><?= lang('ticketsLang.cancel')?></a>
                 </div>
             </form>
         </div>
