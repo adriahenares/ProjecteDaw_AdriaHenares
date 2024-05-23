@@ -33,6 +33,7 @@ class TicketsInterventionsController extends BaseController
     public function loadTableData($id) {
         $db = db_connect();
         $builder = $db->table('interventions')->select('intervention_id');
+        d( DataTable::of($builder)->toJson());
         return DataTable::of($builder)->toJson();
     }
 }

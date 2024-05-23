@@ -120,7 +120,7 @@
         <table id="table" class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Cust. No</th>
+                    <th>intervention_id</th>
                     <th>Name</th>
                     <th>Phone</th>
                     <th>City</th>
