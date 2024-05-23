@@ -69,8 +69,8 @@ class InterventionModel extends Model
         return $this->findAll();
     }
 
-    public function getSpecificInterventions($id)
-    {
+    public function getInterventionsByTicketId($id)
+    {   
         return $this->where('ticket_id', $id)->findAll();
     }
 
