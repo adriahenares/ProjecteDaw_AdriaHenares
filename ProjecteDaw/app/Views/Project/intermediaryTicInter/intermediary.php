@@ -109,48 +109,22 @@
             <?php endif ?> -->
         <?php
         //https://codeigniter4-datatables.hermawan.dev/usage/multi_column_search/
-        $table = new \CodeIgniter\View\Table();
-        $template = [
-            'table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-striped">',
-
-            'thead_open' => '<thead>',
-            'thead_close' => '</thead>',
-
-            'heading_row_start' => '<tr>',
-            'heading_row_end' => '</tr>',
-            'heading_cell_start' => '<th>',
-            'heading_cell_end' => '</th>',
-
-            'tfoot_open' => '<tfoot>',
-            'tfoot_close' => '</tfoot>',
-
-            'footing_row_start' => '<tr>',
-            'footing_row_end' => '</tr>',
-            'footing_cell_start' => '<td>',
-            'footing_cell_end' => '</td>',
-
-            'tbody_open' => '<tbody>',
-            'tbody_close' => '</tbody>',
-
-            'row_start' => '<tr>',
-            'row_end' => '</tr>',
-            'cell_start' => '<td>',
-            'cell_end' => '</td>',
-
-            'row_alt_start' => '<tr>',
-            'row_alt_end' => '</tr>',
-            'cell_alt_start' => '<td>',
-            'cell_alt_end' => '</td>',
-
-            'table_close' => '</table>',
-        ];
-        $table->setTemplate($template);
-        $table->setHeading(['ID', 'Descripció', 'Alumne', 'Data de creació']);
-        d($interventions);
-        foreach ($interventions as $intervention) {
-            $table->addRow($intervention['intervention_id'], $intervention['description'], $intervention['student_id'], $intervention['created_at']);
+        $headers = ['ID', 'Descripció', 'Alumne', 'Data de creació'];
+        echo '<table class="table table-striped">';
+        echo '<tr>';
+        for ($i = 0; $i < count($headers); $i++) {
+            echo '<th>' . $headers[$i] . '</th>';
         }
-        echo $table->generate();
+        echo '</tr>';
+        foreach ($interventions as $intervention) {
+            echo '<tr>';
+            echo '<td>' . $intervention['intervention_id'] . '</td>';
+            echo '<td>' . $intervention['description'] . '</td>';
+            echo '<td>' . $intervention['student_id'] . '</td>';
+            echo '<td>' . $intervention['created_at'] . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
         ?>
         <!-- <script>
             function sortTable(n) {
