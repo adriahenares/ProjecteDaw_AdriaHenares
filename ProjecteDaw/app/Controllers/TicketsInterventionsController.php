@@ -21,19 +21,34 @@ class TicketsInterventionsController extends BaseController
      */
     public function viewIntermediary($id)
     {
-        $ticketModel = new TicketModel();
-        $statusModel = new StatusModel();
-        $interventionsModel = new InterventionModel();
-        $data['id'] = $id;
-        $data['ticket'] = $ticketModel->retrieveSpecificData($id);
-        $data['status'] = $statusModel->getStatus($data['ticket']['status_id']);
-        $data['interventions'] = $interventionsModel->getInterventionsByTicketId($id);
-        return view('Project/intermediaryTicInter/intermediary', $data);
+        if (session()->get('role') == 'SSTT') {
+            $ticketModel = new TicketModel();
+            $statusModel = new StatusModel();
+            $interventionsModel = new InterventionModel();
+            $data['id'] = $id;
+            $data['ticket'] = $ticketModel->retrieveSpecificData($id);
+            $data['status'] = $statusModel->getStatus($data['ticket']['status_id']);
+            $data['interventions'] = $interventionsModel->getInterventionsByTicketId($id);
+            return view('Project/intermediaryTicInter/intermediary', $data);
+        } else {
+            echo '<alert>No tens permisos</alert>';
+            return redirect()->to('login');
+        }
     }
-    public function loadTableData($id) {
-        $db = db_connect();
-        $builder = $db->table('interventions')->select('intervention_id');
-        d( DataTable::of($builder)->toJson());
-        return DataTable::of($builder)->toJson();
+    public function loadTableData($id)
+    {   
+        if (session()->get('role') == 'SSTT') {
+            $db = db_connect();
+            $builder = $db->table('interventions')->select('intervention_id, description, student_id, created_at')->where('ticket_id', $id);
+            return DataTable::of($builder)
+                ->add('action', function ($row) {
+                    return '<button type="button" class="btn btn-primary btn-sm" onclick="alert(\'edit customer: ' . $row->intervention_id . '\')" ><i class="fas fa-edit"></i></button>';
+                }, 'last')
+                ->toJson();
+        } else {
+            echo '<alert>No tens permisos</alert>';
+            return redirect()->to('login');
+        }
+        
     }
 }

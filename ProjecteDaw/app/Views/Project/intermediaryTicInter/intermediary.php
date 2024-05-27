@@ -14,15 +14,15 @@
 
     <div class="col-3">
 
-        <?php if ($ticket['device_type_id'] == 1): ?>
+        <?php if ($ticket['device_type_id'] == 1) : ?>
             <div class="mb-5 mt-2 text-center">
                 <img src="<?= base_url('images/ordinador.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
             </div>
-        <?php elseif ($ticket['device_type_id'] == 2): ?>
+        <?php elseif ($ticket['device_type_id'] == 2) : ?>
             <div class="mb-2 text-center mt-0">
                 <img src="<?= base_url('images/projector.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
             </div>
-        <?php elseif ($ticket['device_type_id'] == 3): ?>
+        <?php elseif ($ticket['device_type_id'] == 3) : ?>
             <div class="mb-3 text-center">
                 <img src="<?= base_url('images/pantalla.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
             </div>
@@ -100,7 +100,7 @@
             <h3 style="font-weight: bold;"> <?= lang('ticketsLang.intervention') ?> </h3>
 
         </div>
-        <!-- <?php if (session()->get('role') != 'SSTT' && session()->get('role') != 'Center'): ?>
+        <!-- <?php if (session()->get('role') != 'SSTT' && session()->get('role') != 'Center') : ?>
                 <div class="d-flex justify-content-end mb-2">
                     <a class="btn" style="background-color: #0DCAF0;"
                         href="<?= base_url('/addIntervention/' . $ticket['ticket_id']) ?>"><i class="fa fa-plus"
@@ -108,27 +108,59 @@
                 </div>
             <?php endif ?> -->
         <!-- https://codeigniter4-datatables.hermawan.dev/usage/multi_column_search/ -->
+        <!-- https://github.com/Xiiivpiexzo/inv-databarang/blob/main/app/Config/Routes.php -->
+        <!-- https://datatables.net/reference/api/i18n() -->
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#table').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '/interventionsById/' + <?= $id ?>
+                    orderCellsTop: true,
+                    ajax: '<?= base_url('interventionsById/' . $id) ?>',
+                    columnDefs: [{
+                        targets: -1,
+                        orderable: false
+                    }],
+                    layout: {
+                        topStart: {
+                            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                        }
+                    },
+                    initComplete: function(settings, json) {
+
+                        var indexColumn = 0;
+                        var length = this.api().columns()[0].length - 1;
+                        this.api().columns().every(function() {
+
+                            var column = this;
+                            console.log(column[0][0]);
+                            if (column[0][0] != length) {
+                                var input = document.createElement("input");
+
+                                $(input).attr('placeholder', 'Search')
+                                    .addClass('form-control form-control-sm')
+                                    .appendTo($('.filterhead:eq(' + indexColumn + ')').empty())
+                                    .on('keyup', function() {
+                                        column.search($(this).val(), false, false, true).draw();
+                                    });
+
+                                indexColumn++;
+                            }
+                        });
+                    }
                 });
             });
         </script>
         <table id="table" class="table table-bordered">
             <thead>
                 <tr>
-                    <th>intervention_id</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>City</th>
-                    <th>Country</th>
-                    <th>Postal Code</th>
+                    <th>ID</th>
+                    <th>Descripcio</th>
+                    <th>Alumne</th>
+                    <th>Data de creaciò</th>
+                    <th>Accions</th>
                 </tr>
                 <tr>
-                    <th class="filterhead"></th>
                     <th class="filterhead"></th>
                     <th class="filterhead"></th>
                     <th class="filterhead"></th>

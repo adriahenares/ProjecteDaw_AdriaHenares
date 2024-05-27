@@ -10,12 +10,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-    
-    <script type="text/javascript" src="/jquery/jquery.js"></script>
-    <link href="/dataTables/datatables.css" rel="stylesheet">
-    <script src="/dataTables/datatables.js"></script>
 
-    <title> <?= lang('ticketsLang.Tickets')?></title>
+    <script type="text/javascript" src="/jquery/jquery.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/v/bs4-4.6.0/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs4-4.6.0/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+    <title> <?= lang('ticketsLang.Tickets') ?></title>
     <style>
         * {
             font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -158,16 +163,16 @@
             <img class="ms-4 mt-4" src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
             <div class="mr-4" style="float: right; height: 100%; vertical-align: middle; display: flex; align-content: center; gap: 15px; align-items: center;">
-            
-            <!--  TODO: fer ifs -->
-            
-            <a class="m-0" style="text-decoration: none;<?php if(session()->get('lang') == 'es') echo 'border:  5px solid white; border-radius: 35px;'; ?>" class="me-2"  href="<?= base_url('changeLang/es')?>"><img style="border-radius: 10px; width: 26px;"  src="<?= base_url('images/spain.png') ?>"  /></a>
-                <h3 class="me-2" style="color: white;" >|</h3>
-                <a class="m-0" style="text-decoration: none;<?php if(session()->get('lang') == 'ca') echo 'border: 5px solid white; border-radius: 35px;'; ?>" class="me-3" href="<?= base_url('changeLang/ca')?>"><img style="border-radius: 10px; width: 26px;"src="<?= base_url('images/catalunya.png') ?>" /></a>
-                
-                <h3 class="me-2" style="color: white;" >|</h3>
-                <a class="m-0" style="text-decoration: none;<?php if(session()->get('lang') == 'en') echo 'border: 5px solid white; border-radius: 25px;'; ?>" class="me-3" href="<?= base_url('changeLang/en')?>"><img style="border-radius: 15px; width: 26px;" class="m-0" src="<?= base_url('images/uk.png') ?>" /></a>
-                
+
+                <!--  TODO: fer ifs -->
+
+                <a class="m-0" style="text-decoration: none;<?php if (session()->get('lang') == 'es') echo 'border:  5px solid white; border-radius: 35px;'; ?>" class="me-2" href="<?= base_url('changeLang/es') ?>"><img style="border-radius: 10px; width: 26px;" src="<?= base_url('images/spain.png') ?>" /></a>
+                <h3 class="me-2" style="color: white;">|</h3>
+                <a class="m-0" style="text-decoration: none;<?php if (session()->get('lang') == 'ca') echo 'border: 5px solid white; border-radius: 35px;'; ?>" class="me-3" href="<?= base_url('changeLang/ca') ?>"><img style="border-radius: 10px; width: 26px;" src="<?= base_url('images/catalunya.png') ?>" /></a>
+
+                <h3 class="me-2" style="color: white;">|</h3>
+                <a class="m-0" style="text-decoration: none;<?php if (session()->get('lang') == 'en') echo 'border: 5px solid white; border-radius: 25px;'; ?>" class="me-3" href="<?= base_url('changeLang/en') ?>"><img style="border-radius: 15px; width: 26px;" class="m-0" src="<?= base_url('images/uk.png') ?>" /></a>
+
                 <!-- <a style="text-decoration: none; ">
                     <i class="fa-regular fa-circle-user c-5 fa-xl me-4"></i>
                 </a> -->
@@ -185,35 +190,35 @@
                 <div class="menuButton mt-5 mb-3">
                     <a href="<?= base_url('/viewTickets') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
-                        <?= lang('ticketsLang.Tickets')?>
+                        <?= lang('ticketsLang.Tickets') ?>
                     </a>
                 </div>
-                
-                <?php if (session()->get('role') == 'Professor' || session()->get('role') == 'Center') :?>
+
+                <?php if (session()->get('role') == 'Professor' || session()->get('role') == 'Center') : ?>
                     <div class="menuButton mt-2 mb-3 ">
                         <a href="<?= base_url('/viewStock') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
                             <i class="fa-solid fa-boxes-stacked ms-4 me-2"></i>
-                            <?= lang('ticketsLang.stock')?>
+                            <?= lang('ticketsLang.stock') ?>
                         </a>
                     </div>
                     <div class="menuButton mt-2 mb-3 ">
                         <a href="<?= base_url('/validateStudents') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
                             <i class="fa-solid fa-user ms-4 me-2"></i>
-                            <?= lang('ticketsLang.student')?>
+                            <?= lang('ticketsLang.student') ?>
                         </a>
                     </div>
                 <?php endif; ?>
-                <?php if (session()->get('role') == 'SSTT') :?>
+                <?php if (session()->get('role') == 'SSTT') : ?>
                     <div class="menuButton mt-2 mb-3">
                         <a href="" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
                             <i class="fa-solid fa-building-columns ms-4 me-2"></i>
-                            
-                            <?= lang('ticketsLang.centers')?>
+
+                            <?= lang('ticketsLang.centers') ?>
                         </a>
                     </div>
                 <?php endif; ?>
 
-                
+
                 <!-- <div class="menuButton mt-1 mb-3 w-100">
                     <a href="<? base_url('/loginAuth') ?>" class="py-1 ms-1 c-5 fs-5 w-100" style="text-decoration: none; ">
                         <i class="fa-solid fa-ticket-simple ms-4 me-2"></i>
