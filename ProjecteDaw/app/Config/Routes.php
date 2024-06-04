@@ -23,10 +23,18 @@ $routes->get('/confirmDel/(:segment)', 'TicketsController::confirmDelete/$1');
 
 //Interventions
 $routes->match(['GET', 'POST'], '/Ticket/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
-$routes->get('/interventionsById/(:segment)', 'TicketsInterventionsController::loadTableData/$1');
+$routes->get('/interventionsByTicketId/(:segment)', 'TicketsInterventionsController::loadTableData/$1');
+
+//Stock
+$routes->get('/viewStock', 'StockController::viewStock');
+$routes->get('/stockByCenterId/(:segment)', 'StockController::loadTableData/$1');
+$routes->post('/addStock', 'StockController::addStock_post');
 
 
-
+//Students
+$routes->get('/students', 'StudentsController::validateStudents');
+$routes->post('/students', 'StudentsController::validateStudents_post');
+$routes->get('/studentsByCenterId/(:segment)', 'StudentsController::loadTableData/$1');
 
 
 
@@ -73,8 +81,6 @@ $routes->get('/interventionsById/(:segment)', 'TicketsInterventionsController::l
 //validar el centre 
 $routes->post('/validateCenter', 'SessionController::validateCenter');
 //register de alumnes
-$routes->get('/validateStudents', 'SessionController::validateStudents');
-$routes->post('/validateStudents', 'SessionController::validateStudents_post');
 
 //logOut
 
@@ -98,10 +104,8 @@ $routes->post('/updateIntervention/(:segment)', 'InterventionsController::update
 $route['default_controller'] = 'TicketsController::viewTickets';
 
 //stock
-$routes->MATCH(['GET', 'POST'], '/viewStock', 'StockController::viewStock');
 //add
 $routes->get('/addStock', 'StockController::addStock');
-$routes->post('/addStock', 'StockController::addStock_post');
 //update
 $routes->get('/updateStock/(:segment)', 'StockController::updateStock/$1');
 $routes->post('/updateStock/(:segment)', 'StockController::updateStock_post/$1');

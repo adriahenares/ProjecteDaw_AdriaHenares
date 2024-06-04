@@ -9,7 +9,11 @@
     }
 
 </style>
-
+<?= $this->section("title"); ?>
+<title>
+    <?= lang('ticketsLang.Tickets')?>
+</title>
+<?php echo $this->endSection(); ?>
 <?= $this->extend('layouts/mainLayout'); ?>
 
 

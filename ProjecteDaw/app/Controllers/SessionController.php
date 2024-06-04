@@ -126,7 +126,7 @@ class SessionController extends BaseController
                 $pos = strpos($data['mail'], '@');
                 $mailLast = substr($data['mail'], $pos);
                 // dd($mailLast);
-                if ($mailLast == '@xtec.cat') {
+                if ($mailLast == '@gmail.com') {
                     $data['nom'] = $userInfo->getGivenName();
                     $data['nomComplet'] = $userInfo->getName();
                     //diverses comrprovacions
@@ -207,52 +207,6 @@ class SessionController extends BaseController
         ];
         $instanceProfessor->update(session()->getFlashdata('id'), $data);
         return redirect()->to('/viewTickets');
-    }
-
-    //register de alumnes 
-    public function validateStudents()
-    {
-        $crud = new KpaCrud();
-        $crud->setTable('students');
-        $crud->setPrimaryKey('student_id');
-        $crud->setColumns(['email']);
-        $crud->setColumnsInfo([
-            'email' => [
-                'name' => 'email',
-            ],
-        ]);
-        $crud->setConfig('ssttView');
-        $data['output'] = $crud->render();
-        return view('authentication/register/validateStudents', $data);
-    }
-
-    public function validateStudents_post()
-    {
-        $validationRules = [
-            'mail' => [
-                'label' => 'eMail usuari',
-                'rules' => 'required|valid_email',
-                'errors' => [
-                    'required' => 'eMail es un camp obligatori',
-                    'valid_email' => 'No és un mail valid',
-                ],
-            ],
-        ];
-
-        if ($this->validate($validationRules)) {
-            $instanceSt = new StudentModel();
-            $data = [
-                'student_id' => UUID::v4(),
-                'email' => $this->request->getPost('mail'),
-                'student_center_id' => session()->idCenter,
-                'language' => 'ca'
-            ];
-            $instanceSt->insert($data);
-            return redirect()->to(base_url('validateStudents'));
-        } else {
-            session()->setFlashdata('error', 'Failed');
-            return redirect()->back()->withInput();
-        }
     }
 
     // link -> al fer click cridar funcio per deslogejar

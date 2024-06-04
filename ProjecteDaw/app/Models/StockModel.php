@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Libraries\UUID;
 use CodeIgniter\Model;
+use \Hermawan\DataTables\DataTable;
 
 class StockModel extends Model
 {
@@ -39,16 +40,16 @@ class StockModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addStock($description, $stock_type_id, $center_id, $price)
+    public function addStock($stockType, $description, $price,  $date, $centerId)
     {
         $data = [
             'stock_id' => UUID::v4(),
-            'stock_type_id' => $stock_type_id,
+            'stock_type_id' => $stockType,
             'description' => $description,
             'intervention_id' => null,
-            'center_id' => $center_id,
-            'purchase_date' => date('Y-m-d'),
-            'price' => $price
+            'price' => $price,
+            'purchase_date' => $date,
+            'center_id' => $centerId,
         ];
         $this->insert($data);
     }
@@ -74,4 +75,13 @@ class StockModel extends Model
         }
         return $assigned;
     }
+
+    public function stockByCenterId($id) {
+        return $this->select('stock.stock_id, stock.stock_type_id, stocktype.name, stock.description, stock.purchase_date, stock.price')
+        ->join('stocktype', 'stocktype.stock_type_id = stock.stock_type_id')
+        ->where('stock.center_id', $id)
+        ->where('stock.intervention_id');
+    }
+
+    public function editStock($id, $type, $description, $date, $price)
 }

@@ -49,7 +49,7 @@ class InterventionModel extends Model
         $description,
         $student_course,
         $student_studies,
-        
+
     ) {
         $data = [
             'intervention_id' => $intervention_id,
@@ -70,7 +70,7 @@ class InterventionModel extends Model
     }
 
     public function getInterventionsByTicketId($id)
-    {   
+    {
         return $this->where('ticket_id', $id)->findAll();
     }
 
@@ -80,5 +80,12 @@ class InterventionModel extends Model
         $this->where('ticket_id', $id);
         $this->set('deleted_at', date('Y-m-d H:i:s', now('GMT+2')));
         $this->update();
+    }
+
+    public function interventionsByTicket($id)
+    {
+        return $this->select('interventions.intervention_id, interventions.description, students.email, interventions.created_at')
+        ->join('students', 'students.student_id = interventions.student_id')
+        ->where('interventions.ticket_id', $id);
     }
 }

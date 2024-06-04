@@ -4,6 +4,7 @@ return [
     'titleA' => 'TICKETS ASSIGMENT',
     'tickets' => 'tickets',
     'Tickets' => 'Tickets',
+    'Ticket' => 'Ticket',
     'assign' => 'Assign',
     'assign_ticket' => 'Assign Ticket',
     'assign_center' => 'Center to be assigned',

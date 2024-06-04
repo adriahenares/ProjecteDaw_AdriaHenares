@@ -19,8 +19,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/v/bs4-4.6.0/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <?php echo $this->renderSection("title") ?>
 
-    <title> <?= lang('ticketsLang.Tickets') ?></title>
+
+    <!-- <title> <? //lang('ticketsLang.Tickets') ?></title> -->
     <style>
         * {
             font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -166,10 +168,9 @@
 
                 <!--  TODO: fer ifs -->
 
-                <a class="m-0" style="text-decoration: none;<?php if (session()->get('lang') == 'es') echo 'border:  5px solid white; border-radius: 35px;'; ?>" class="me-2" href="<?= base_url('changeLang/es') ?>"><img style="border-radius: 10px; width: 26px;" src="<?= base_url('images/spain.png') ?>" /></a>
-                <h3 class="me-2" style="color: white;">|</h3>
                 <a class="m-0" style="text-decoration: none;<?php if (session()->get('lang') == 'ca') echo 'border: 5px solid white; border-radius: 35px;'; ?>" class="me-3" href="<?= base_url('changeLang/ca') ?>"><img style="border-radius: 10px; width: 26px;" src="<?= base_url('images/catalunya.png') ?>" /></a>
-
+                <h3 class="me-2" style="color: white;">|</h3>
+                <a class="m-0" style="text-decoration: none;<?php if (session()->get('lang') == 'es') echo 'border:  5px solid white; border-radius: 35px;'; ?>" class="me-2" href="<?= base_url('changeLang/es') ?>"><img style="border-radius: 10px; width: 26px;" src="<?= base_url('images/spain.png') ?>" /></a>
                 <h3 class="me-2" style="color: white;">|</h3>
                 <a class="m-0" style="text-decoration: none;<?php if (session()->get('lang') == 'en') echo 'border: 5px solid white; border-radius: 25px;'; ?>" class="me-3" href="<?= base_url('changeLang/en') ?>"><img style="border-radius: 15px; width: 26px;" class="m-0" src="<?= base_url('images/uk.png') ?>" /></a>
 
@@ -202,7 +203,7 @@
                         </a>
                     </div>
                     <div class="menuButton mt-2 mb-3 ">
-                        <a href="<?= base_url('/validateStudents') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
+                        <a href="<?= base_url('/students') ?>" class="py-2 ms-1 c-5 fs-5" style="text-decoration: none;">
                             <i class="fa-solid fa-user ms-4 me-2"></i>
                             <?= lang('ticketsLang.student') ?>
                         </a>

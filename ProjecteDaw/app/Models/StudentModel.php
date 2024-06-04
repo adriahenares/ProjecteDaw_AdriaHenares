@@ -59,5 +59,10 @@ class StudentModel extends Model
         // return $this->update(session()->get('mail'), ['language'->$lang]);
         return $this->where('email', session()->get('mail'))->set($data)->update();
     }
+    public function studentsByCenterId($id)
+    {
+        return $this->select('student_id, email')
+        ->where('student_center_id', $id);
+    }
 
 }

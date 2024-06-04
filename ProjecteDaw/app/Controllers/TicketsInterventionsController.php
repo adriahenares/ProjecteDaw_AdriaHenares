@@ -21,14 +21,12 @@ class TicketsInterventionsController extends BaseController
      */
     public function viewIntermediary($id)
     {
-        if (session()->get('role') == 'SSTT') {
+        if (session()->get('role') == 'Admin' || session()->get('role') == 'SSTT' || session()->get('role') == 'Professor' || session()->get('role') == 'Student') {
             $ticketModel = new TicketModel();
             $statusModel = new StatusModel();
-            $interventionsModel = new InterventionModel();
             $data['id'] = $id;
             $data['ticket'] = $ticketModel->retrieveSpecificData($id);
             $data['status'] = $statusModel->getStatus($data['ticket']['status_id']);
-            $data['interventions'] = $interventionsModel->getInterventionsByTicketId($id);
             return view('Project/intermediaryTicInter/intermediary', $data);
         } else {
             echo '<alert>No tens permisos</alert>';
@@ -36,10 +34,10 @@ class TicketsInterventionsController extends BaseController
         }
     }
     public function loadTableData($id)
-    {   
-        if (session()->get('role') == 'SSTT') {
-            $db = db_connect();
-            $builder = $db->table('interventions')->select('intervention_id, description, student_id, created_at')->where('ticket_id', $id);
+    {
+        if (session()->get('role') == 'Admin' || session()->get('role') == 'SSTT' || session()->get('role') == 'Professor' || session()->get('role') == 'Student') {
+            $interventionsModel = new InterventionModel();
+            $builder = $interventionsModel->interventionsByTicket($id);
             return DataTable::of($builder)
                 ->add('action', function ($row) {
                     return '<button type="button" class="btn btn-primary btn-sm" onclick="alert(\'edit customer: ' . $row->intervention_id . '\')" ><i class="fas fa-edit"></i></button>';
@@ -49,6 +47,5 @@ class TicketsInterventionsController extends BaseController
             echo '<alert>No tens permisos</alert>';
             return redirect()->to('login');
         }
-        
     }
 }

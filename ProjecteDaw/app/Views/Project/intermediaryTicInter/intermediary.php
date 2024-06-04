@@ -4,10 +4,14 @@
         /* width:  100vw; */
     }
 </style>
-
+<?= $this->section("title"); ?>
+<title>
+    <?= lang('ticketsLang.Ticket') . ': ' . $id ?>
+</title>
+<?php echo $this->endSection(); ?>
 <?= $this->extend('layouts/mainLayout'); ?>
 
-<?= $this->section("main_content"); ?> <!-- overflow -->
+<?= $this->section("main_content"); ?>
 
 <div class="row m-0 p-0">
 
@@ -116,7 +120,7 @@
                     processing: true,
                     serverSide: true,
                     orderCellsTop: true,
-                    ajax: '<?= base_url('interventionsById/' . $id) ?>',
+                    ajax: '<?= base_url('interventionsByTicketId/' . $id) ?>',
                     columnDefs: [{
                         targets: -1,
                         orderable: false
