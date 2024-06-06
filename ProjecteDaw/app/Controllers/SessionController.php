@@ -199,14 +199,29 @@ class SessionController extends BaseController
 
     public function validateCenter()
     {
-        $instanceProfessor = new ProfessorModel();
-        $center = $this->request->getPost('center_r');
-        session()->set('idCenter', $center);
-        $data = [
-            'repair_center_id' => $center,
+        $validationRules = [
+            'center_r' => [
+                'label' => 'centre',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Selecciona un centre',
+                ],
+            ],
         ];
-        $instanceProfessor->update(session()->getFlashdata('id'), $data);
-        return redirect()->to('/viewTickets');
+
+        if ($this->validate($validationRules)) {
+            $instanceProfessor = new ProfessorModel();
+            $center = $this->request->getPost('center_r');
+            session()->set('idCenter', $center);
+            $data = [
+                'repair_center_id' => $center,
+            ];
+            $instanceProfessor->update(session()->getFlashdata('id'), $data);
+            return redirect()->to('/viewTickets');
+        } else {
+            session()->setFlashdata('error', 'Selecciona un centre'); //TODO: Traduir
+            return redirect()->back()->withInput();
+        }
     }
 
     // link -> al fer click cridar funcio per deslogejar
