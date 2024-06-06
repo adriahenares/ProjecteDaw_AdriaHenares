@@ -30,7 +30,6 @@ $routes->get('/viewStock', 'StockController::viewStock');
 $routes->get('/stockByCenterId/(:segment)', 'StockController::loadTableData/$1');
 $routes->post('/addStock', 'StockController::addStock_post');
 
-
 //Students
 $routes->get('/students', 'StudentsController::validateStudents');
 $routes->post('/students', 'StudentsController::validateStudents_post');

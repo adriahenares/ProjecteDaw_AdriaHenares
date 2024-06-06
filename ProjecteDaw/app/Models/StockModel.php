@@ -83,5 +83,13 @@ class StockModel extends Model
         ->where('stock.intervention_id');
     }
 
-    public function editStock($id, $type, $description, $date, $price)
+    public function editStock($id, $type, $description, $date, $price) {
+        $data = [
+            'stock_type_id' => $type,
+            'description' => $description,
+            'purchase_date' => $date,
+            'price' => $price,
+        ];
+        
+    }
 }

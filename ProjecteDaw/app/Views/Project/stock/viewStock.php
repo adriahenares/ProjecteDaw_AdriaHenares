@@ -68,6 +68,7 @@
         document.getElementById('amountLabel').hidden = false;
         document.getElementById('amount').hidden = false;
 
+        document.getElementById('stockId').value = '';
         document.getElementById('type').value = '';
         document.getElementById('description').value = '';
         document.getElementById('date').value = '';
@@ -80,6 +81,7 @@
         document.getElementById('amountLabel').hidden = true;
         document.getElementById('amount').hidden = true;
 
+        document.getElementById('stockId').value = '';
         document.getElementById('type').value = type;
         document.getElementById('description').value = description;
         document.getElementById('date').value = date;
@@ -96,6 +98,7 @@
                 <option value="<?= $type['stock_type_id'] ?>"><?= $type['name'] ?></option>
             <?php endforeach; ?>
         </select>
+        <input type="text" id="stockId" hidden>
         <label for="description">Descripció</label>
         <input type="text" name="description" id="description"/>
         <label for="date">Data de compra</label>

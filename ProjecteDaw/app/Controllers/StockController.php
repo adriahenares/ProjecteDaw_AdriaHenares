@@ -86,7 +86,7 @@ class StockController extends BaseController
             } else {
                 dd('edit');
                 $stockModel = new StockModel();
-                $stockModel->editStock($this->request->getPost('type'), $this->request->getPost('description'), $this->request->getPost('date'), $this->request->getPost('price'));
+                $stockModel->editStock($this->request->getPost('stockId'), $this->request->getPost('type'), $this->request->getPost('description'), $this->request->getPost('date'), $this->request->getPost('price'));
             }
             return redirect()->to(base_url('/viewStock'));
         } else {
