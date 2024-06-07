@@ -16,7 +16,6 @@ use App\Models\StudentModel;
 
 $session = \Config\Services::session();  // Config és opcional
 
-// user login aleix@gmail.com 12345 con
 
 class SessionController extends BaseController
 {

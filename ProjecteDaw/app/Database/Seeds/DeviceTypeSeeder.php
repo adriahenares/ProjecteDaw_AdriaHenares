@@ -12,13 +12,19 @@ class DeviceTypeSeeder extends Seeder
         $model = new DeviceTypeModel();
 
         $model->insert([
-            'device_type' => 'Ordinador'
+            'device_type' => 'Sobretaula'
+        ]);
+        $model->insert([
+            'device_type' => 'Portatil'
+        ]);
+        $model->insert([
+            'device_type' => 'Pantalla'
         ]);
         $model->insert([
             'device_type' => 'Projector'
         ]);
         $model->insert([
-            'device_type' => 'Pantalla'
+            'device_type' => 'Impressora'
         ]);
     }
 }

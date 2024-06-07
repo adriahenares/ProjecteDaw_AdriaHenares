@@ -26,7 +26,8 @@ class StockController extends BaseController
             $builder = $stockModel->stockByCenterId($id);
             return DataTable::of($builder)
                 ->add('action', function ($row) {
-                    return '<button type="button" class="btn btn-primary btn-sm" onclick=edit("' . $row->stock_id . '","' . $row->stock_type_id . '","' . $row->description . '","' . $row->purchase_date . '","' . $row->price . '") ><i class="fas fa-edit"></i></button>'; // 
+                    return '<button type="button" class="btn btn-primary btn-sm" onclick=edit("' . $row->stock_id . '","' . $row->stock_type_id . '","' . str_replace(" ", "¬", $row->description) . '","' . $row->purchase_date . '","' . $row->price . '") ><i class="fas fa-edit"></i></button>
+                    <a href="'. base_url('delStock/'. $row->stock_id) . '"><button type="button" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button></a>';
                 }, 'last')
                 ->hide('stock_id')
                 ->hide('stock_type_id')
@@ -74,7 +75,6 @@ class StockController extends BaseController
         if ($this->validate($validationRules)) {
             d($this->request->getPost());
             if ($this->request->getPost('addButton') !== null) {
-                dd();
                 $stockModel = new StockModel();
                 $amount = $this->request->getPost('amount');
                 if ($amount <= 0) {
@@ -84,7 +84,6 @@ class StockController extends BaseController
                     $stockModel->addStock($this->request->getPost('type'), $this->request->getPost('description'), $this->request->getPost('price'), $this->request->getPost('date'), session()->get('idCenter'));
                 }
             } else {
-                dd('edit');
                 $stockModel = new StockModel();
                 $stockModel->editStock($this->request->getPost('stockId'), $this->request->getPost('type'), $this->request->getPost('description'), $this->request->getPost('date'), $this->request->getPost('price'));
             }
@@ -92,6 +91,18 @@ class StockController extends BaseController
         } else {
             session()->setFlashdata('error', 'dades insuficients');
             return redirect()->back()->withInput();
+        }
+    }
+    public function deleteStock($id) {
+        $stockModel = new StockModel();
+        $item = $stockModel->retrieveItem($id);
+        if (!$item['intervention_id']) {
+            if (session()->get('role') == 'Professor' && session()->get('idCenter') == $item['center_id']) {
+                $stockModel->deleteStock($id);
+                return redirect()->to('viewStock');
+            } else {
+                return redirect()->to('login');
+            }
         }
     }
     // public function viewStock()
@@ -165,7 +176,7 @@ class StockController extends BaseController
         $instanceC = new CenterModel();
         $updateLevel = $instance->checkIfInterventionAssigned($id);
         //el stock en especific
-        $data['stock'] = $instance->retrieveSpecificItem($id);
+        $data['stock'] = $instance->retrieveItem($id);
         // types
         $data['types'] = $instanceST->retrieveAllTypes();
         //center
@@ -239,16 +250,16 @@ class StockController extends BaseController
         return redirect()->back()->withInput();
     }
 
-    public function deleteStock($stock)
-    {
-        $instanceS = new StockModel();
-        $item = $instanceS->retrieveSpecificItem($stock);
-        if ($item['intervention_id'] != null) {
-            session()->setFlashdata('error', 'no es pot eliminar un ticket assignat');
-            redirect()->back();
-        }
-        //fe soft delete
-        $instanceS->delete($stock);
-        return redirect()->back();
-    }
+    // public function deleteStock($stock)
+    // {
+    //     $instanceS = new StockModel();
+    //     $item = $instanceS->retrieveSpecificItem($stock);
+    //     if ($item['intervention_id'] != null) {
+    //         session()->setFlashdata('error', 'no es pot eliminar un ticket assignat');
+    //         redirect()->back();
+    //     }
+    //     //fe soft delete
+    //     $instanceS->delete($stock);
+    //     return redirect()->back();
+    // }
 }

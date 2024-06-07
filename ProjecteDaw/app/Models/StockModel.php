@@ -54,17 +54,14 @@ class StockModel extends Model
         $this->insert($data);
     }
 
-    //Aleix
     public function retrieveData()
     {
         return $this->findAll();
     }
-    //Aleix
-    public function retrieveSpecificItem($stock) {
-        return $this->where('stock_id', $stock)->first();
+    public function retrieveItem($id) {
+        return $this->where('stock_id', $id)->first();
     }
 
-    //Aleix
     public function checkIfInterventionAssigned($id) {
         $stock = $this->where("stock_id", $id)->first();
         $assigned = false;
@@ -90,6 +87,11 @@ class StockModel extends Model
             'purchase_date' => $date,
             'price' => $price,
         ];
-        
+        return $this->where('stock_id', $id)->set($data)->update();
+    }
+    
+    public function deleteStock($id) {
+        $this->where('stock_id', $id);
+        $this->delete();
     }
 }

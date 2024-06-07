@@ -29,6 +29,7 @@ $routes->get('/interventionsByTicketId/(:segment)', 'TicketsInterventionsControl
 $routes->get('/viewStock', 'StockController::viewStock');
 $routes->get('/stockByCenterId/(:segment)', 'StockController::loadTableData/$1');
 $routes->post('/addStock', 'StockController::addStock_post');
+$routes->get('/delStock/(:segment)', 'StockController::deleteStock/$1');
 
 //Students
 $routes->get('/students', 'StudentsController::validateStudents');
@@ -109,7 +110,6 @@ $routes->get('/addStock', 'StockController::addStock');
 $routes->get('/updateStock/(:segment)', 'StockController::updateStock/$1');
 $routes->post('/updateStock/(:segment)', 'StockController::updateStock_post/$1');
 //del
-$routes->get('/delStock/(:segment)', 'StockController::deleteStock/$1');
 
 $routes->get('/', 'SessionController::redirectToLogin');
 //AJAX

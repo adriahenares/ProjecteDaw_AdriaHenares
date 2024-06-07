@@ -38,7 +38,6 @@ class ProfessorModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    // Aleix
     // obtenir el codi de centre reparador amb la id 
     public function getGeneratingCodeById ($id) {
         return $this->where('professor_id', $id)->first();

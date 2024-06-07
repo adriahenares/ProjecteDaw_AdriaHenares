@@ -19,9 +19,31 @@
             }],
             layout: {
                 topStart: {
-                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                    buttons: [
+                        {
+                            extend: 'copy',
+                            text: '<i class="fa-solid fa-copy"></i>'
+                        },
+                        {
+                            extend: 'csv',
+                            text: '<i class="fa-solid fa-file-csv"></i>'
+                        },
+                        {
+                            extend: 'excel',
+                            text: '<i class="fa-solid fa-file-excel"></i>'
+                        },
+                        {
+                            extend: 'pdf',
+                            text: '<i class="fa-solid fa-file-pdf"></i>'
+                        },
+                        {
+                            extend: 'print',
+                            text: '<i class="fa-solid fa-print"></i>'
+                        }
+                    ]
                 }
             },
+            select: true,
             initComplete: function(settings, json) {
 
                 var indexColumn = 0;
@@ -58,11 +80,15 @@
         document.getElementById('table_wrapper').childNodes[0].childNodes[1].classList.add("mr-auto");
         document.getElementById('table_wrapper').childNodes[0].appendChild(div);
         let addDiv = document.getElementById('addContainer');
-        document.getElementById('table_wrapper').insertBefore(addDiv, document.getElementById('table_wrapper').childNodes[1])   ;
+        document.getElementById('table_wrapper').insertBefore(addDiv, document.getElementById('table_wrapper').childNodes[1]);
+        document.getElementById('cancelButton').addEventListener('click', () => {
+            close();
+        });
     });
 
     function showAddDiv() {
         document.getElementById('addContainer').style.display = 'block';
+        document.getElementById('addTitle').innerHTML = 'Afegir inventari';
         document.getElementById('addButton').hidden = false;
         document.getElementById('editButton').hidden = true;
         document.getElementById('amountLabel').hidden = false;
@@ -74,33 +100,44 @@
         document.getElementById('date').value = '';
         document.getElementById('price').value = '';
     }
+
     function edit(id, type, description, date, price) {
         document.getElementById('addContainer').style.display = 'block';
+        document.getElementById('addTitle').innerHTML = 'Editar inventari';
         document.getElementById('addButton').hidden = true;
         document.getElementById('editButton').hidden = false;
         document.getElementById('amountLabel').hidden = true;
         document.getElementById('amount').hidden = true;
 
-        document.getElementById('stockId').value = '';
+        document.getElementById('stockId').value = id;
         document.getElementById('type').value = type;
-        document.getElementById('description').value = description;
+        document.getElementById('description').value = description.replace('¬', ' ');
         document.getElementById('date').value = date;
         document.getElementById('price').value = price;
     }
+
+    function close() {
+        document.getElementById('addContainer').style.display = 'none';
+        document.getElementById('stockId').value = '';
+        document.getElementById('type').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('date').value = '';
+        document.getElementById('price').value = '';
+    }
 </script>
 <div id="addContainer" style="display: none; border: 1px solid black; border-radius: 5px; margin-bottom: 8px">
-    <h3 style="font-weight: bold;"> <?= 'Afegir inventari (traduir)' ?></h3>
+    <h3 style="font-weight: bold;" id="addTitle"> <?= 'Afegir inventari (traduir)' ?></h3>
     <form action="<?= base_url('addStock') ?>" method="POST">
         <?= csrf_field(); ?>
-        <label for="type">Descripció</label>
+        <label for="type">Tipus</label>
         <select name="type" id="type">
             <?php foreach ($types as $type) : ?>
                 <option value="<?= $type['stock_type_id'] ?>"><?= $type['name'] ?></option>
             <?php endforeach; ?>
         </select>
-        <input type="text" id="stockId" hidden>
+        <input type="text" name="stockId" id="stockId" hidden>
         <label for="description">Descripció</label>
-        <input type="text" name="description" id="description"/>
+        <input type="text" name="description" id="description" />
         <label for="date">Data de compra</label>
         <input type="date" name="date" id="date"><br>
         <label for="price">Preu</label>
@@ -110,7 +147,7 @@
         <br>
         <button id="addButton" class="btn btn-success" name="addButton">Afegir</button>
         <button id="editButton" class="btn btn-success" name="editButton" hidden>Modificar</button>
-        <button class="btn btn-danger">Cancelar</button>
+        <button id="cancelButton" class="btn btn-danger" type="button">Cancelar</button>
     </form>
 </div>
 <h3 style="font-weight: bold;"> <?= lang('stockLang.inventory') ?></h3>

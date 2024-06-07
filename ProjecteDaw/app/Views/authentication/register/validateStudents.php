@@ -7,49 +7,111 @@
 
 <?= $this->extend('layouts/mainLayout'); ?>
 <?= $this->section("main_content"); ?>
-<div class="row p-2 pb-0">
-  <div class="col-6">
-    <script>
-      $(document).ready(function() {
-        $('#table').DataTable({
-          processing: true,
-          serverSide: true,
-          orderCellsTop: true,
-          ajax: '<?= base_url('studentsByCenterId/' . session()->get('idCenter')) ?>',
-          columnDefs: [{
-            targets: -1,
-            orderable: false
-          }],
-          layout: {
-            topStart: {
-              buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+<script>
+  $(document).ready(function() {
+    $('#table').DataTable({
+      processing: true,
+      serverSide: true,
+      orderCellsTop: true,
+      ajax: '<?= base_url('studentsByCenterId/' . session()->get('idCenter')) ?>',
+      columnDefs: [{
+        targets: -1,
+        orderable: false,
+        className: 'noExport'
+      }],
+      layout: {
+        topStart: {
+          buttons: [{
+              extend: 'copy',
+              text: '<i class="fa-solid fa-copy"></i>'
+            },
+            {
+              extend: 'csv',
+              text: '<i class="fa-solid fa-file-csv"></i>'
+            },
+            {
+              extend: 'excel',
+              text: '<i class="fa-solid fa-file-excel"></i>'
+            },
+            {
+              extend: 'pdf',
+              text: '<i class="fa-solid fa-file-pdf"></i>'
+            },
+            {
+              extend: 'print',
+              text: '<i class="fa-solid fa-print"></i>'
             }
-          },
-          initComplete: function(settings, json) {
+          ]
+        }
+      },
+      select: true,
+      initComplete: function(settings, json) {
 
-            var indexColumn = 0;
-            var length = this.api().columns()[0].length - 1;
-            this.api().columns().every(function() {
+        var indexColumn = 0;
+        var length = this.api().columns()[0].length - 1;
+        this.api().columns().every(function() {
 
-              var column = this;
-              console.log(column[0][0]);
-              if (column[0][0] != length) {
-                var input = document.createElement("input");
+          var column = this;
+          console.log(column[0][0]);
+          if (column[0][0] != length) {
+            var input = document.createElement("input");
 
-                $(input).attr('placeholder', 'Search')
-                  .addClass('form-control form-control-sm')
-                  .appendTo($('.filterhead:eq(' + indexColumn + ')').empty())
-                  .on('keyup', function() {
-                    column.search($(this).val(), false, false, true).draw();
-                  });
+            $(input).attr('placeholder', 'Search')
+              .addClass('form-control form-control-sm')
+              .appendTo($('.filterhead:eq(' + indexColumn + ')').empty())
+              .on('keyup', function() {
+                column.search($(this).val(), false, false, true).draw();
+              });
 
-                indexColumn++;
-              }
-            });
+            indexColumn++;
           }
         });
-      });
-    </script>
+      }
+    });
+    let div = document.createElement('div');
+    div.classList.add('col-md-auto', 'ml-auto');
+    let button = document.createElement('button');
+    button.classList.add('btn', 'btn-primary');
+    button.innerHTML = 'Afegir';
+    button.addEventListener('click', () => {
+      showAddDiv();
+    });
+    div.appendChild(button);
+    console.log(document.getElementById('table_wrapper').childNodes[0].childNodes[1]);
+    document.getElementById('table_wrapper').childNodes[0].childNodes[1].classList.add("mr-auto");
+    document.getElementById('table_wrapper').childNodes[0].appendChild(div);
+    let addDiv = document.getElementById('addContainer');
+    document.getElementById('table_wrapper').insertBefore(addDiv, document.getElementById('table_wrapper').childNodes[1]);
+    document.getElementById('cancelButton').addEventListener('click', () => {
+      close();
+    });
+  });
+
+  function showAddDiv() {
+    document.getElementById('addContainer').style.display = 'block';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+  }
+
+  function close() {
+    document.getElementById('addContainer').style.display = 'none';
+  }
+</script>
+<div class="row p-2 pb-0">
+  <div class="col-12">
+    <div id="addContainer" style="display: none; border: 1px solid black; border-radius: 5px; margin-bottom: 8px">
+      <h3 style="font-weight: bold;" id="addTitle"> <?= 'Afegir inventari (traduir)' ?></h3>
+      <form action="<?= base_url('addStock') ?>" method="POST">
+        <?= csrf_field(); ?>
+        <label for="email">Correu</label>
+        <input type="mail" name="email" id="email" hidden>
+        <label for="password">Contrasenya</label>
+        <input type="password" name="password" id="password" />
+        <br>
+        <button id="addButton" class="btn btn-success" name="addButton">Afegir</button>
+        <button id="cancelButton" class="btn btn-danger" type="button">Cancelar</button>
+      </form>
+    </div>    <h3 style="font-weight: bold;"> <?= lang('stockLang.inventory') ?></h3>
     <!-- Ficar recompte de tickets d'aquest curs i intervencions d'aquest curs i dades com el ultim curs agafat de la ultima intervencio -->
     <table id="table" class="table table-bordered">
       <thead>
@@ -67,21 +129,5 @@
       <tbody></tbody>
     </table>
   </div>
-  <div class="col-6">
-    <form action="<?= base_url("/students") ?>" method="post" class="formAdd">
-      <?= csrf_field(); ?>
-      <div class="form-group my-4 ">
-        <label for="mail"></label>
-        <input class="form-control" type="text" placeholder="email.." name="mail" id="mail">
-      </div>
-      <div>
-        <?= session()->getFlashdata('error') ?>
-      </div>
-      <div class="bottom-center pe-0 ">
-        <input type="submit" class="btn btn-primary m-2">
-      </div>
-  </div>
-  </form>
-</div>
 </div>
 <?= $this->endSection(); ?>
