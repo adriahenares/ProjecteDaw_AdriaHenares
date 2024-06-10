@@ -8,7 +8,7 @@ echo $this->section("main_content");
     <div id="centres" class="border">
 
         <div>
-            <h3 class="titleForm mt-0"><?= lang('ticketsLang.add_ticket') ?></h3>
+            <h3 class="titleForm mt-0">Editar tiquet</h3>
         </div>
 
         <form action="<?php base_url("/editTicket/" . $ticket['ticket_id']) ?>" method="POST" class="formAdd p-2 pb-0">
@@ -32,26 +32,23 @@ echo $this->section("main_content");
                             } else {
                                 echo "<option value='" . $valueN . "'>" . $value . "</option>";
                             }
-                            echo "<option value='" . $valueN . "'>" . $value . " </option>";
                             $valueN++;
                         }
                         ?>
                     </select>
                 </div>
                 <!--Començament de les variables-->
-                <?php if ($role == 'SSTT'): ?>
                     <div class="col-6 mt-4 mb-5">
                         <label for="center_g" class=" bold fs-5"><?= lang('ticketsLang.issuing_center') ?></label>
-                        <select name="center_g" id="center_g">
+                        <select class="form-control form-select" name="center_g" id="center_g">
                             <?php
                             echo "<option value='' default hidden>Escull centre...</option>";
                             foreach ($center as $value) {
                                 if ($ticket['g_center_code'] == $value['center_id']) {
-                                    echo "<option value='" . $value['center_id'] . "'selected>" . $value['name'] . "</option>";
+                                    echo "<option value='" . $value['center_id'] . "' selected>" . $value['name'] . "</option>";
                                 } else {
                                     echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                                 }
-                                echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                             }
                             ?>
                         </select>
@@ -61,17 +58,23 @@ echo $this->section("main_content");
                         <select class="form-control form-select" name="center_r" id="center_r">
                             <?php
                             echo "<option value='' default hidden>Escull centre...</option>";
-                            foreach ($repairCenters as $value) {
-                                if ($ticket['r_center_code'] == $value->center_id) {
-                                    echo "<option value='" . $value->center_id . "' selected>" . $value->name . "</option>";
+                            foreach ($center as $value) {
+                                if ($ticket['g_center_code'] == $value['center_id']) {
+                                    echo "<option value='" . $value['center_id'] . "' selected>" . $value['name'] . "</option>";
                                 } else {
-                                    echo "<option value='" . $value->center_id . "'>" . $value->name . "</option>";
+                                    echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
                                 }
                             }
+                            // foreach ($repairCenters as $value) {
+                            //     if ($ticket['r_center_code'] == $value->center_id) {
+                            //         echo "<option value='" . $value->center_id . "' selected>" . $value->name . "</option>";
+                            //     } else {
+                            //         echo "<option value='" . $value->center_id . "'>" . $value->name . "</option>";
+                            //     }
+                            // }
                             ?>
                         </select>
                     </div>
-                <?php endif; ?>
                 <div class="form-group col-6 my-4 ">
                     <label for="email" class=" bold fs-5"><?= lang('ticketsLang.teacher_email') ?> </label>
                     <input type="text" class="form-control" name="email" id="email"

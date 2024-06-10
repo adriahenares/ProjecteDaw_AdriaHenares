@@ -38,7 +38,8 @@ class TicketsController extends BaseController
             $builder = $ticketsModel->getAllTickets();
             return DataTable::of($builder)
                 ->add('action', function ($row) {
-                    return '<a href="' . base_url('assignTicket/' . $row->ticket_id) . '"><button type="button" class="btn btn-primary btn-sm"><i class="fa-solid fa-school"></i></button></a>
+                    return '<a href="' . base_url('Ticket/' . $row->ticket_id) . '"><button type="button" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></button></a>
+                    <a href="' . base_url('assignTicket/' . $row->ticket_id) . '"><button type="button" class="btn btn-primary btn-sm"><i class="fa-solid fa-school"></i></button></a>
                     <a href="' . base_url('editTicket/' . $row->ticket_id) . '"><button type="button" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen"></i></button></a>
                     <a href="' . base_url('confirmDel/' . $row->ticket_id) . '"><button type="button" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button></a>';
                 }, 'last')
@@ -149,8 +150,6 @@ class TicketsController extends BaseController
                 $centerG = session()->get('idCenter'); //sessio (flash)
                 $centerR = null;
             }
-            d($centerG);
-            d($centerR);
             if ($centerG == '') {
                 $centerG = null;
             }
@@ -189,16 +188,30 @@ class TicketsController extends BaseController
         //especific de cada vista
         $role = session()->get('role');
         $data['role'] = $role;
-        if ($role == 'SSTT') {
             $data['center'] = $centerModel->getAllCentersId();
             $data['repairCenters'] = $centerModel->getAllRepairingCenters();
             // dd($data['repairCenters']);
-        }
         return view('Project/Tickets/editTickets', $data);
     }
+
     public function editTicketPost($id)
     {
-
+        $ticketModel = new TicketModel();
+        $data = [
+            'fault_description' => $this->request->getPost('description'),
+            'device_type_id' => $this->request->getPost('device'),
+            'email_person_center_g' => $this->request->getPost('email'),
+            'name' => $this->request->getPost('name'),
+        ];
+        if ($this->request->getPost('center_g') !== null) {
+            $data['g_center_code'] = $this->request->getPost('center_g');
+        }
+        if ($this->request->getPost('center_r') !== null) {
+            $data['r_center_code'] = $this->request->getPost('center_r');
+        }
+        $ticketModel->updateTicketById($id, $data);
+        // $instanceS->addStock($description, $typePiece, $center, $price);
+        return redirect()->to(base_url('viewTickets'));
     }
 
     //assignacio ticket

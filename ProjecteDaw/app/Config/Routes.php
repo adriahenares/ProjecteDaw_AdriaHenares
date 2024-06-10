@@ -20,6 +20,7 @@ $routes->get('/loadInfoTickets', 'TicketsController::loadInfoTickets');
 $routes->get('/addTickets', 'TicketsController::addTicket');
 $routes->post('/addTickets', 'TicketsController::addTicketPost');
 $routes->get('/editTicket/(:segment)', 'TicketsController::editTicket/$1');
+$routes->post('/editTicket/(:segment)', 'TicketsController::editTicketPost/$1');
 $routes->get('/delTicket/(:segment)', 'TicketsController::deleteTicket/$1');
 $routes->get('/confirmDel/(:segment)', 'TicketsController::confirmDelete/$1');
 

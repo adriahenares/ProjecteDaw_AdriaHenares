@@ -100,7 +100,7 @@
 <div class="row p-2 pb-0">
   <div class="col-12">
     <div id="addContainer" style="display: none; border: 1px solid black; border-radius: 5px; margin-bottom: 8px">
-      <h3 style="font-weight: bold;" id="addTitle"> <?= 'Afegir inventari' ?></h3>
+      <h3 style="font-weight: bold;" id="addTitle">Afegir alumnes</h3>
       <form action="<?= base_url('students') ?>" method="POST">
         <?= csrf_field(); ?>
         <label for="mail">Correu</label>

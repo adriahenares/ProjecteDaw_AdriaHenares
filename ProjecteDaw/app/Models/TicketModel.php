@@ -128,24 +128,7 @@ class TicketModel extends Model
             ->where('tickets.deleted_at', null)
             ->where('tickets.r_center_code = "' . $id . '"');
     }
-    public function updateTicketById(
-        $ticket_id,
-        $device_type_id,
-        $fault_description,
-        $g_center_code,
-        $r_center_code,
-        $email_person_center_g,
-        $name_person_center_g,
-        $status_id
-    ) {
-        $data = [
-            'ticket_id' => $ticket_id,
-            'device_type_id' => $device_type_id,
-            'fault_description' => $fault_description,
-            'email_person_center_g' => $email_person_center_g,
-            'name_person_center_g' => $name_person_center_g,
-            'status_id' => $status_id
-        ];
-        $this->where('ticket_id', $ticket_id)->update($data);
+    public function updateTicketById($ticket_id, $data) {
+        $this->update($ticket_id, $data);
     }
 }

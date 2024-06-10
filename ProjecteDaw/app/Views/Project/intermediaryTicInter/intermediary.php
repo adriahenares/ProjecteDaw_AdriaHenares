@@ -18,17 +18,25 @@
 
     <div class="col-3">
 
-        <?php if ($ticket['device_type_id'] == 1): ?>
+        <?php if ($ticket['device_type_id'] == 1) : ?>
             <div class="mb-5 mt-2 text-center">
                 <img src="<?= base_url('images/ordinador.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
             </div>
-        <?php elseif ($ticket['device_type_id'] == 2): ?>
+        <?php elseif ($ticket['device_type_id'] == 2) : ?>
+            <div class="mb-3 text-center">
+                <img src="<?= base_url('images/portatil.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
+            </div>
+        <?php elseif ($ticket['device_type_id'] == 3) : ?>
+            <div class="mb-3 text-center">
+                <img src="<?= base_url('images/pantalla.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
+            </div>
+        <?php elseif ($ticket['device_type_id'] == 4) : ?>
             <div class="mb-2 text-center mt-0">
                 <img src="<?= base_url('images/projector.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
             </div>
-        <?php elseif ($ticket['device_type_id'] == 3): ?>
+        <?php elseif ($ticket['device_type_id'] == 5) : ?>
             <div class="mb-3 text-center">
-                <img src="<?= base_url('images/pantalla.png') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
+                <img src="<?= base_url('images/impressora.webp') ?>" alt="Logo" style="max-height: 300px; max-width:250px;">
             </div>
         <?php endif ?>
 
@@ -104,7 +112,7 @@
             <h3 style="font-weight: bold;"> <?= lang('ticketsLang.intervention') ?> </h3>
 
         </div>
-        <!-- <?php if (session()->get('role') != 'SSTT' && session()->get('role') != 'Center'): ?>
+        <!-- <?php if (session()->get('role') != 'SSTT' && session()->get('role') != 'Center') : ?>
                 <div class="d-flex justify-content-end mb-2">
                     <a class="btn" style="background-color: #0DCAF0;"
                         href="<?= base_url('/addIntervention/' . $ticket['ticket_id']) ?>"><i class="fa fa-plus"
@@ -115,27 +123,26 @@
         <!-- https://github.com/Xiiivpiexzo/inv-databarang/blob/main/app/Config/Routes.php -->
         <!-- https://datatables.net/reference/api/i18n() -->
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#table').DataTable({
                     processing: true,
                     serverSide: true,
                     orderCellsTop: true,
                     ajax: '<?= base_url('interventionsByTicketId/' . $id) ?>',
-                    columnDefs: [
-                        {
+                    columnDefs: [{
                             targets: -1,
                             orderable: false,
                             className: 'noExport'
                         },
                         {
                             targets: 0,
-                            render: function (data, type) {
+                            render: function(data, type) {
                                 return data.slice(24, 36);
                             }
                         },
                         {
                             targets: 1,
-                            render: function (data, type) {
+                            render: function(data, type) {
                                 console.log(data);
                                 if (data.length > 30) {
                                     return data.slice(0, 26) + '...';
@@ -146,8 +153,7 @@
                     ],
                     layout: {
                         topStart: {
-                            buttons: [
-                                {
+                            buttons: [{
                                     extend: 'copy',
                                     text: '<i class="fa-solid fa-copy"></i>'
                                 },
@@ -171,10 +177,10 @@
                         }
                     },
                     select: true,
-                    initComplete: function (settings, json) {
+                    initComplete: function(settings, json) {
                         var indexColumn = 0;
                         var length = this.api().columns()[0].length - 1;
-                        this.api().columns().every(function () {
+                        this.api().columns().every(function() {
 
                             var column = this;
                             console.log(column[0][0]);
@@ -184,7 +190,7 @@
                                 $(input).attr('placeholder', 'Search')
                                     .addClass('form-control form-control-sm')
                                     .appendTo($('.filterhead:eq(' + indexColumn + ')').empty())
-                                    .on('keyup', function () {
+                                    .on('keyup', function() {
                                         column.search($(this).val(), false, false, true).draw();
                                     });
 
@@ -214,7 +220,7 @@
 
             function showAddDiv() {
                 document.getElementById('addContainer').style.display = 'block';
-                document.getElementById('addTitle').innerHTML = 'Afegir inventari';
+                document.getElementById('addTitle').innerHTML = 'Afegir intervenció';
                 document.getElementById('addButton').hidden = false;
                 document.getElementById('editButton').hidden = true;
 
@@ -231,15 +237,15 @@
             }
         </script>
         <div id="addContainer" style="display: none; border: 1px solid black; border-radius: 5px; margin-bottom: 8px">
-            <h3 style="font-weight: bold;" id="addTitle"> <?= 'Afegir intervenció' ?></h3>
+            <h3 style="font-weight: bold;" id="addTitle">Afegir intervenció</h3>
             <form action="<?= base_url('addIntervention/' . $id) ?>" method="POST">
                 <?= csrf_field(); ?>
                 <label for="stock">Peça utilitzada:</label>
                 <select name="stock" id="stock">
-                    <?php if (count($stock) == 0): ?>
+                    <?php if (count($stock) == 0) : ?>
                         <option disabled>No hi ha inventari</option>
                     <?php endif; ?>
-                    <?php foreach ($stock as $item): ?>
+                    <?php foreach ($stock as $item) : ?>
                         <option value="<?= $item->stock_id ?>"><?= $item->name ?>: <?= $item->description ?>
                             (<?= $item->price ?>€)</option>
                     <?php endforeach; ?>

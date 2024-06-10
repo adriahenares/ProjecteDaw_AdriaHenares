@@ -18,7 +18,7 @@
 
 <?= $this->section("main_content"); ?>
 
-<? php// if ($add): ?>
+<?// if ($add): ?>
 <!-- <script>
             addEventListener("DOMContentLoaded", (event) => {
                 let btn = document.createElement('a');

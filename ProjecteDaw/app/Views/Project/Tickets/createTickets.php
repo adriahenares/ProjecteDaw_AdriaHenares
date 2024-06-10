@@ -34,37 +34,43 @@ echo $this->section("main_content");
                     </select>
                 </div>
                 <!--Començament de les variables-->
-                <?php if($role == 'SSTT'): ?>
-                <div class="col-6 mt-4 mb-5">
-                    <label for="center_g" class=" bold fs-5"><?= lang('ticketsLang.issuing_center') ?></label>
-                    <select name="center_g" id="center_g">
-                        <?php
-                        echo "<option value='' default hidden>Escull centre...</option>";
-                        foreach ($center as $value) {
-                            echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="col-6 mt-4 mb-5">
-                    <label for="center_r" class=" bold fs-5"><?= lang('ticketsLang.repair_center') ?></label>
-                    <select class="form-control form-select" name="center_r" id="center_r">
-                        <?php
-                        echo "<option value='' default hidden>Escull centre...</option>";
-                        foreach ($repairCenters as $value) {
-                            echo "<option value='" . $value->center_id . "'>" . $value->name . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
+                <?php if ($role == 'SSTT') : ?>
+                    <div class="col-6 mt-4 mb-5">
+                        <label for="center_g" class="bold fs-5"><?= lang('ticketsLang.issuing_center') ?></label>
+                        <select class="form-control form-select" name="center_g" id="center_g">
+                            <?php
+                            echo "<option value='' default hidden>Escull centre...</option>";
+                            foreach ($center as $value) {
+                                echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-6 mt-4 mb-5">
+                        <label for="center_r" class="bold fs-5"><?= lang('ticketsLang.repair_center') ?></label>
+                        <select class="form-control form-select" name="center_r" id="center_r">
+                            <?php
+                            echo "<option value='' default hidden>Escull centre...</option>";
+                            foreach ($center as $value) {
+                                echo "<option value='" . $value['center_id'] . "'>" . $value['name'] . "</option>";
+                            }
+                            // echo "<option value='' default hidden>Escull centre...</option>";
+                            // foreach ($repairCenters as $value) {
+                            //     echo "<option value='" . $value->center_id . "'>" . $value->name . "</option>";
+                            // }
+                            ?>
+                        </select>
+                    </div>
                 <?php endif; ?>
                 <div class="form-group col-6 my-4 ">
                     <label for="email" class=" bold fs-5"><?= lang('ticketsLang.teacher_email') ?> </label>
-                    <input type="text" class="form-control" name="email" id="email" value="<?php if(session()->get('role') == 'Professor') {echo session()->get('mail');} ?>"></input> <!--Correu per sessio-->
+                    <input type="text" class="form-control" name="email" id="email" value="<?php if (session()->get('role') == 'Professor') {
+                                                                                                echo session()->get('mail');
+                                                                                            } ?>"></input> <!--Correu per sessio-->
                 </div>
                 <div class="form-group col-6 my-4 ">
                     <label for="name" class=" bold fs-5"><?= lang('ticketsLang.teacher_name') ?></label> <!--Nom per sessio-->
-                    <input type="text" class="form-control"  name="name" id="name"></input> 
+                    <input type="text" class="form-control" name="name" id="name"></input>
                 </div>
                 <!--Professor-->
                 <!--Fi variables-->
@@ -84,35 +90,35 @@ echo $this->section("main_content");
         });
     });
 </script>
-<?php if(session()->get('role') == 'SSTT'): ?>
-<script>
-    $(document).ready(function() {
-        const selectGen = $('#center_g')[0].selectize;
-        const name = document.getElementById('name');
-        const email = document.getElementById('email');
-        name.disabled = false;
-        email.disabled = false;
-        selectGen.on('change', function(value) {
-            console.log(value);
-            if (value != '') {
+<?php if (session()->get('role') == 'SSTT') : ?>
+    <script>
+        $(document).ready(function() {
+            const selectGen = $('#center_g')[0].selectize;
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            name.disabled = false;
+            email.disabled = false;
+            selectGen.on('change', function(value) {
                 console.log(value);
-                const xhttp = new XMLHttpRequest();
-                xhttp.onload = function() {
-                    if (xhttp.readyState == 4 && xhttp.status == 200) {
-                        const response = JSON.parse(xhttp.responseText);
-                        console.log(response);
-                        email.value = response.email;
-                    } else {
-                        console.log('error');
+                if (value != '') {
+                    console.log(value);
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                        if (xhttp.readyState == 4 && xhttp.status == 200) {
+                            const response = JSON.parse(xhttp.responseText);
+                            console.log(response);
+                            email.value = response.email;
+                        } else {
+                            console.log('error');
+                        }
                     }
+                    xhttp.open("GET", '/emailCenter/' + value);
+                    xhttp.send();
+                } else {
+                    console.log('del');
                 }
-                xhttp.open("GET", '/emailCenter/' + value);
-                xhttp.send();
-            } else {
-                console.log('del');
-            }
+            });
         });
-    });
-</script>
+    </script>
 <?php endif; ?>
 <?php echo $this->endSection(); ?>
