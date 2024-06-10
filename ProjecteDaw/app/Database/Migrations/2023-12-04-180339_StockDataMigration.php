@@ -56,7 +56,7 @@ class StockDataMigration extends Migration
                         'null'           => false,
                 ],
                 'price'          => [
-                        'type'           => 'INT',
+                        'type'           => 'FLOAT',
                         'constraint'     => '8',
                         'null'           => false,
                 ],

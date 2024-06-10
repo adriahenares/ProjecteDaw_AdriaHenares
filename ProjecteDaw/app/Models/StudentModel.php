@@ -3,42 +3,44 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Libraries\UUID;
 
 class StudentModel extends Model
 {
-    protected $table            = 'students';
-    protected $primaryKey       = 'student_id';
+    protected $table = 'students';
+    protected $primaryKey = 'student_id';
     protected $useAutoIncrement = false;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = ["student_id","email","student_center_id","language"];
+    protected $returnType = 'array';
+    protected $useSoftDeletes = false;
+    protected $protectFields = true;
+    protected $allowedFields = ["student_id", "email", "student_center_id", "language"];
 
     // Dates
     protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $dateFormat = 'datetime';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
+    protected $deletedField = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
+    protected $validationRules = [];
+    protected $validationMessages = [];
+    protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    protected $beforeInsert = [];
+    protected $afterInsert = [];
+    protected $beforeUpdate = [];
+    protected $afterUpdate = [];
+    protected $beforeFind = [];
+    protected $afterFind = [];
+    protected $beforeDelete = [];
+    protected $afterDelete = [];
 
-    public function verify_mail($mail) {
+    public function verify_mail($mail)
+    {
         $query = $this->where('email', $mail)->first();
         if ($query != null) {
             return true;
@@ -47,11 +49,13 @@ class StudentModel extends Model
         }
     }
 
-    public function obtainStByMail($email) {
+    public function obtainStByMail($email)
+    {
         return $this->where("email", $email)->first();
     }
 
-    public function updateLang($lang){
+    public function updateLang($lang)
+    {
         $data = [
             'language' => $lang
         ];
@@ -62,7 +66,20 @@ class StudentModel extends Model
     public function studentsByCenterId($id)
     {
         return $this->select('student_id, email')
-        ->where('student_center_id', $id);
+            ->where('student_center_id', $id);
     }
-
+    public function addStudent($id, $email)
+    {
+        $data = [
+            'student_id' => $id,
+            'email' => $email,
+            'student_center_id' => session()->idCenter,
+            'language' => 'ca'
+        ];
+        $this->insert($data);
+    }
+    public function deleteStudent($email)
+    {
+        $this->where('email', $email)->delete();
+    }
 }

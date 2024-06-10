@@ -160,7 +160,7 @@
 <body>
     <div class="contain-fluid ">
 
-        <div class="col-12 bgc-1" style="height: 8vh;">
+        <div class="col-12 bgc-1" style="height: 8vh; position: fixed;">
             <!-- <div class="col-12 ps-3 pe-5 bgc-1 py-3 " style="height: 8vh;"> -->
             <img class="ms-4 mt-4" src="<?= base_url('images/gencat_cat_blanc.png') ?>" alt="Logo" style="height: 24px">
             <!-- <img src="<? base_url('Logo.png') ?>" alt="Logo" style="max-width: 60px"> -->
@@ -237,7 +237,7 @@
 
             </div>
 
-            <div class="mx-4 my-2 p-3 " style="height:91vh; position: fixed; left: 11vw; overflow-y: auto; width: 87vw;">
+            <div class="mx-4 my-2 p-3 " style="height:91vh; position: fixed; left: 11vw; overflow-y: auto; width: 87vw; top: 8vh;">
                 <?php echo $this->renderSection("main_content") ?>
             </div>
         </div>

@@ -12,7 +12,7 @@ class StudentSeeder extends Seeder
         $model = new StudentModel();
 
         $model->insert([
-            'student_id' => '679612ce-5c27-43',
+            'student_id' => '7446b5b8-6dea-4cfa-a5f9-18178e0437cb',
             'email' => "faixala@inscaparrella.cat",
             'student_center_id' => "8000712",
             'language' => 'ca'

@@ -89,7 +89,7 @@
 
   function showAddDiv() {
     document.getElementById('addContainer').style.display = 'block';
-    document.getElementById('email').value = '';
+    document.getElementById('mail').value = '';
     document.getElementById('password').value = '';
   }
 
@@ -100,18 +100,18 @@
 <div class="row p-2 pb-0">
   <div class="col-12">
     <div id="addContainer" style="display: none; border: 1px solid black; border-radius: 5px; margin-bottom: 8px">
-      <h3 style="font-weight: bold;" id="addTitle"> <?= 'Afegir inventari (traduir)' ?></h3>
-      <form action="<?= base_url('addStock') ?>" method="POST">
+      <h3 style="font-weight: bold;" id="addTitle"> <?= 'Afegir inventari' ?></h3>
+      <form action="<?= base_url('students') ?>" method="POST">
         <?= csrf_field(); ?>
-        <label for="email">Correu</label>
-        <input type="mail" name="email" id="email" hidden>
+        <label for="mail">Correu</label>
+        <input type="mail" name="mail" id="mail" />
         <label for="password">Contrasenya</label>
         <input type="password" name="password" id="password" />
         <br>
         <button id="addButton" class="btn btn-success" name="addButton">Afegir</button>
         <button id="cancelButton" class="btn btn-danger" type="button">Cancelar</button>
       </form>
-    </div>    <h3 style="font-weight: bold;"> <?= lang('stockLang.inventory') ?></h3>
+    </div>    <h3 style="font-weight: bold;">Alumnes</h3>
     <!-- Ficar recompte de tickets d'aquest curs i intervencions d'aquest curs i dades com el ultim curs agafat de la ultima intervencio -->
     <table id="table" class="table table-bordered">
       <thead>

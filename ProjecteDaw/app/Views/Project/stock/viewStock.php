@@ -126,7 +126,7 @@
     }
 </script>
 <div id="addContainer" style="display: none; border: 1px solid black; border-radius: 5px; margin-bottom: 8px">
-    <h3 style="font-weight: bold;" id="addTitle"> <?= 'Afegir inventari (traduir)' ?></h3>
+    <h3 style="font-weight: bold;" id="addTitle"> <?= 'Afegir inventari' ?></h3>
     <form action="<?= base_url('addStock') ?>" method="POST">
         <?= csrf_field(); ?>
         <label for="type">Tipus</label>
@@ -141,7 +141,7 @@
         <label for="date">Data de compra</label>
         <input type="date" name="date" id="date"><br>
         <label for="price">Preu</label>
-        <input type="number" name="price" id="price" min='1'>
+        <input type="number" name="price" id="price" min='1' step="0.01">
         <label for="amount" id="amountLabel">Quantitat</label>
         <input type="number" name="amount" id="amount" value="1" min='1'>
         <br>

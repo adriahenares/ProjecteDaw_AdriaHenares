@@ -82,10 +82,15 @@ class InterventionModel extends Model
         $this->update();
     }
 
-    public function interventionsByTicket($id)
+    public function interventionsByTicketId($id)
     {
-        return $this->select('interventions.intervention_id, interventions.description, students.email, interventions.created_at')
-        ->join('students', 'students.student_id = interventions.student_id')
-        ->where('interventions.ticket_id', $id);
+        return $this->select('interventions.intervention_id, interventions.description, students.email, interventions.student_course, interventions.student_studies, interventions.created_at')
+        ->join('students', 'interventions.student_id = students.student_id', 'left')
+        ->where('interventions.deleted_at', null)
+        ->where('interventions.ticket_id = "' . $id . '"');
+    }
+
+    public function deleteIntervention($id) {
+        $this->where('intervention_id', $id)->delete();
     }
 }

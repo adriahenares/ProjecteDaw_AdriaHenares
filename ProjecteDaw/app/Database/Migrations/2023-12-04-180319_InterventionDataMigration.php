@@ -40,12 +40,12 @@ class InterventionDataMigration extends Migration
             'professor_id' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '36',
-                'null' => false,
+                'null' => true,
             ],
             'student_id' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '16',
-                'null' => false,
+                'constraint' => '36',
+                'null' => true,
             ],
             'intervention_type_id' => [
                 'type'       => 'INT',
@@ -59,12 +59,12 @@ class InterventionDataMigration extends Migration
             'student_course' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '32',
-                'null' => false,
+                'null' => true,
             ],
             'student_studies' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '32',
-                'null' => false,
+                'null' => true,
             ],
             'created_at timestamp default current_timestamp',//SSTT: Ficar-ho a 0
             'deleted_at timestamp null default null',
@@ -72,8 +72,8 @@ class InterventionDataMigration extends Migration
         ]);
         $this->forge->addKey('intervention_id', true);
         $this->forge->addForeignKey('ticket_id', 'tickets', 'ticket_id', true);
-        $this->forge->addForeignKey('student_id', 'students', 'student_id', true);
-        $this->forge->addForeignKey('professor_id', 'professors', 'professor_id', true);
+        // $this->forge->addForeignKey('student_id', 'students', 'student_id', true);
+        // $this->forge->addForeignKey('professor_id', 'professors', 'professor_id', true);
         $this->forge->addForeignKey('intervention_type_id', 'interventionType', 'intervention_type_id', true);
         $this->forge->createTable('interventions');
     }

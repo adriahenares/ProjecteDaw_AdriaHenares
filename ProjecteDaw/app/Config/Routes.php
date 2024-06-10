@@ -15,15 +15,19 @@ $routes->get('/logout', 'SessionController::logout');
 $routes->get('/changeLang/(:segment)', 'SessionController::changeLang/$1');
 
 //Tickets
-$routes->match(['GET', 'POST'], '/viewTickets', 'TicketsController::viewTickets');
+$routes->get('/viewTickets', 'TicketsController::viewTickets');
+$routes->get('/loadInfoTickets', 'TicketsController::loadInfoTickets');
 $routes->get('/addTickets', 'TicketsController::addTicket');
 $routes->post('/addTickets', 'TicketsController::addTicketPost');
+$routes->get('/editTicket/(:segment)', 'TicketsController::editTicket/$1');
 $routes->get('/delTicket/(:segment)', 'TicketsController::deleteTicket/$1');
 $routes->get('/confirmDel/(:segment)', 'TicketsController::confirmDelete/$1');
 
 //Interventions
-$routes->match(['GET', 'POST'], '/Ticket/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
+$routes->get('/Ticket/(:segment)', 'TicketsInterventionsController::viewIntermediary/$1');
+$routes->post('/addIntervention/(:segment)', 'TicketsInterventionsController::addIntervention/$1');
 $routes->get('/interventionsByTicketId/(:segment)', 'TicketsInterventionsController::loadTableData/$1');
+$routes->get('/deleteIntervention/(:segment)', 'TicketsInterventionsController::deleteIntervention/$1');
 
 //Stock
 $routes->get('/viewStock', 'StockController::viewStock');
@@ -35,6 +39,7 @@ $routes->get('/delStock/(:segment)', 'StockController::deleteStock/$1');
 $routes->get('/students', 'StudentsController::validateStudents');
 $routes->post('/students', 'StudentsController::validateStudents_post');
 $routes->get('/studentsByCenterId/(:segment)', 'StudentsController::loadTableData/$1');
+$routes->get('/delStudent/(:segment)', 'StudentsController::deleteStudent/$1');
 
 
 

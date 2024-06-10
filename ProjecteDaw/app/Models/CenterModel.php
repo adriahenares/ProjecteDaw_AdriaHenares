@@ -92,5 +92,8 @@ class CenterModel extends Model
         // return $this->update(session()->get('mail'), ['language'->$lang]);
         return $this->where('email', session()->get('mail'))->set($data)->update();
     }
-
+//     public function isCenterActive($id) {
+//         $this->where('center_id', $id);
+//         $this->get();
+//     }
 }
