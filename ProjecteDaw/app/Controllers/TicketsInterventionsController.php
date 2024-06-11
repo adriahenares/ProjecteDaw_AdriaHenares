@@ -54,12 +54,6 @@ class TicketsInterventionsController extends BaseController
     public function addIntervention($id)
     {
         $validationRules = [
-            'stock' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Falten camps',
-                ],
-            ],
             'description' => [
                 'rules' => 'required',
                 'errors' => [
@@ -72,17 +66,21 @@ class TicketsInterventionsController extends BaseController
                 $interventionId = UUID::v4();
                 $interventionModel = new InterventionModel();
                 $stockModel = new StockModel();
-                $item = $stockModel->retrieveItem($this->request->getPost('stock'));
                 $interventionType = 1;
-                if ($item['stock_type_id'] == 6) {
-                    $interventionType = 2;
+                if ($this->request->getPost('stock') !== null) {
+                    $item = $stockModel->retrieveItem($this->request->getPost('stock'));
+                    if ($item['stock_type_id'] == 6) {
+                        $interventionType = 2;
+                    }
                 }
                 if (session()->get('role') == 'Professor' || session()->get('role') == 'Center') {
                     $interventionModel->addIntervention($interventionId, $id, session()->get('id'), null, $interventionType, $this->request->getPost('description'), $this->request->getPost('course'), $this->request->getPost('studies'));
                 } else if (session()->get('role') == 'Student') {
                     $interventionModel->addIntervention($interventionId, $id, null, session()->get('id'), $interventionType, $this->request->getPost('description'), $this->request->getPost('course'), $this->request->getPost('studies'));
                 }
-                $stockModel->addItemToIntervention($this->request->getPost('stock'), $interventionId);
+                if ($this->request->getPost('stock') !== null) {
+                    $stockModel->addItemToIntervention($this->request->getPost('stock'), $interventionId);
+                }
                 return redirect()->back();
             }
         } else {

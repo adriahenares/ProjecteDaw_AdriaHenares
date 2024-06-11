@@ -33,8 +33,8 @@ class TicketsController extends BaseController
     public function loadInfoTickets()
     {
         $role = session()->get('role');
+        $ticketsModel = new TicketModel();
         if ($role == 'SSTT' || $role == 'Admin') {
-            $ticketsModel = new TicketModel();
             $builder = $ticketsModel->getAllTickets();
             return DataTable::of($builder)
                 ->add('action', function ($row) {
@@ -45,7 +45,6 @@ class TicketsController extends BaseController
                 }, 'last')
                 ->toJson();
         } else if ($role == 'Professor' || $role == 'Center') {
-            $ticketsModel = new TicketModel();
             $builder = $ticketsModel->getTicketsByCenterId(session()->get('idCenter'));
             return DataTable::of($builder)
                 ->add('action', function ($row) {
@@ -55,7 +54,6 @@ class TicketsController extends BaseController
                 }, 'last')
                 ->toJson();
         } else if ($role == 'Student') {
-            $ticketsModel = new TicketModel();
             $builder = $ticketsModel->getTicketsByRepairCenterId(session()->get('idCenter'));
             return DataTable::of($builder)
                 ->add('action', function ($row) {

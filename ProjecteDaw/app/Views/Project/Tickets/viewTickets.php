@@ -115,19 +115,21 @@
                 });
             }
         });
-        let div = document.createElement('div');
-        div.classList.add('col-md-auto', 'ml-auto');
-        let button = document.createElement('button');
-        button.classList.add('btn', 'btn-primary');
-        button.innerHTML = 'Afegir';
-        button.addEventListener('click', () => {
-            window.location.href='<?= base_url('addTickets'); ?>';
-        });
-        div.appendChild(button);
-        document.getElementById('table_wrapper').childNodes[0].childNodes[1].classList.add("mr-auto");
-        document.getElementById('table_wrapper').childNodes[0].appendChild(div);
+        if (<?=session()->get('role')?> == 'Student') {
+            let div = document.createElement('div');
+            div.classList.add('col-md-auto', 'ml-auto');
+            let button = document.createElement('button');
+            button.classList.add('btn', 'btn-primary');
+            button.innerHTML = 'Afegir';
+            button.addEventListener('click', () => {
+                window.location.href = '<?= base_url('addTickets'); ?>';
+            });
+            div.appendChild(button);
+            document.getElementById('table_wrapper').childNodes[0].childNodes[1].classList.add("mr-auto");
+            document.getElementById('table_wrapper').childNodes[0].appendChild(div);
+        }
     });
-    
+
 </script>
 <table id="table" class="table table-bordered">
     <thead>
